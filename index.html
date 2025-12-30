@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FE2C55">
+    <title>SampleReminder - TikTok Shop Affiliate Tracker</title>
+    <style>
+        :root {
+            /* TikTok Brand Colors */
+            --primary: #FE2C55; /* TikTok Red/Pink */
+            --secondary: #25F4EE; /* TikTok Cyan */
+            --dark: #121212;
+            --bg: #F8F9FA;
+            --surface: #FFFFFF;
+            --green: #00C853;
+            --yellow: #FFB300;
+            --red: #FF3B30;
+            --border: #E0E0E0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.5;
+            padding-bottom: 100px; /* Space for FAB */
+        }
+
+        /* --- Header --- */
+        .header {
+            background: var(--surface);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+        
+        .header h1 span { color: var(--primary); }
+
+        /* --- Dashboard Stats --- */
+        .container {
+            max-width: 800px; /* Mobile-first optimization */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            padding: 15px 10px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .stat-overdue { color: var(--red); }
+        .stat-urgent { color: var(--yellow); }
+        .stat-good { color: var(--green); }
+
+        /* --- Filters --- */
+        .filter-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .filter-scroll::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--dark);
+            color: white;
+            border-color: var(--dark);
+        }
+
+        /* --- Sample Cards --- */
+        .sample-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .sample-card {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .status-strip {
+            height: 6px;
+            width: 100%;
+        }
+        .sample-card.overdue .status-strip { background: var(--red); }
+        .sample-card.urgent .status-strip { background: var(--yellow); }
+        .sample-card.good .status-strip { background: var(--green); }
+        .sample-card.completed .status-strip { background: #E0E0E0; }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .brand-name {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 2px;
+        }
+
+        .days-left-badge {
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #555;
+        }
+        
+        .sample-card.overdue .days-left-badge { background: #FFEBEE; color: var(--red); }
+        .sample-card.urgent .days-left-badge { background: #FFF8E1; color: var(--yellow); }
+        .sample-card.good .days-left-badge { background: #E8F5E9; color: var(--green); }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            background: #FAFAFA;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .meta-label { color: #888; font-size: 0.75rem; display: block; }
+        .meta-value { font-weight: 600; color: var(--dark); }
+
+        .action-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-post { background: var(--primary); color: white; }
+        .btn-edit { background: white; border: 1px solid #ddd; color: var(--dark); }
+        .btn-link { background: #F1F1F1; color: var(--dark); width: 40px; flex: none; }
+
+        /* --- Floating Action Button
