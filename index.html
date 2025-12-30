@@ -202,7 +202,7 @@
                             ${!s.done ? `<button class="row-btn btn-full-width" onclick="markDone('${s.id}')">Mark Video Posted</button>` : `<div class="row-btn btn-completed">Posted Successfully ✅</div>`}
                             
                             <div class="btn-row-2">
-                                ${s.link ? `<button class="row-btn btn-secondary" onclick="window.open('${s.link}', '_blank')">🛍️ Shop</button>` : '<span></span>'}
+                                ${s.link ? `<a href="${s.link}" target="_blank" rel="noopener noreferrer" class="row-btn btn-secondary">🛍️ Shop</a>` : '<span></span>'}
                                 <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
                             </div>
                         </div>
