@@ -9,151 +9,238 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="SampleTrack">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
-
-    <link rel="manifest" href='data:application/manifest+json,{"name":"SampleTracker","short_name":"SampleTrack","description":"TikTok Shop Sample Tracker","start_url":"/","display":"standalone","orientation":"portrait","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"SampleTracker","short_name":"SampleTrack","display":"standalone","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png"}]}'>
 
     <title>SampleReminder - TikTok Shop Tracker</title>
     
     <style>
         :root { --primary: #FE2C55; --secondary: #25F4EE; --dark: #121212; --bg: #F8F9FA; --surface: #FFFFFF; --green: #00C853; --yellow: #FFB300; --red: #FF3B30; --border: #E0E0E0; --shadow: 0 4px 12px rgba(0,0,0,0.08); }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--dark); padding-bottom: 100px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--dark); padding-bottom: 100px; overflow-x: hidden; }
+        
         .header { background: var(--surface); padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); text-align: center; }
         .header h1 { font-size: 1.3rem; font-weight: 800; }
         .header h1 span { color: var(--primary); }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        
+        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .stat-card { background: var(--surface); padding: 12px 5px; border-radius: 12px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); }
         .stat-number { font-size: 1.4rem; font-weight: 800; }
-        .stat-label { font-size: 0.7rem; color: #666; font-weight: 600; text-transform: uppercase; }
+        .stat-label { font-size: 0.65rem; color: #666; font-weight: 700; text-transform: uppercase; }
         .stat-overdue { color: var(--red); }
         .stat-urgent { color: var(--yellow); }
         .stat-good { color: var(--green); }
-        .filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
+
+        .filter-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-btn { padding: 8px 16px; border: 1px solid var(--border); background: var(--surface); border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #666; white-space: nowrap; cursor: pointer; }
+        .filter-btn { padding: 8px 14px; border: 1px solid var(--border); background: var(--surface); border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: #666; white-space: nowrap; cursor: pointer; flex-shrink: 0; }
         .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+
         .sample-grid { display: grid; gap: 15px; }
-        .sample-card { background: var(--surface); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); position: relative; }
-        .status-strip { height: 6px; width: 100%; }
-        .sample-card.overdue .status-strip { background: var(--red); }
-        .sample-card.urgent .status-strip { background: var(--yellow); }
-        .sample-card.good .status-strip { background: var(--green); }
-        .sample-card.completed .status-strip { background: #E0E0E0; }
+        .sample-card { background: var(--surface); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); position: relative; width: 100%; }
         .card-body { padding: 15px; }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .brand-name { font-size: 0.75rem; color: #888; font-weight: 700; text-transform: uppercase; }
-        .product-name { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
-        .days-badge { background: #f0f0f0; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
-        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; background: #FAFAFA; padding: 10px; border-radius: 8px; font-size: 0.85rem; }
-        .meta-label { color: #888; font-size: 0.7rem; display: block; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        .brand-name { font-size: 0.7rem; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .product-name { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
+        .days-badge { background: #f0f0f0; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; }
+        
+        .progress-container { width: 100%; height: 6px; background: #eee; border-radius: 3px; margin-top: 15px; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.3s ease; }
+
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; background: #FAFAFA; padding: 10px; border-radius: 8px; font-size: 0.8rem; }
+        .meta-label { color: #888; font-size: 0.65rem; display: block; margin-bottom: 2px; }
         .meta-value { font-weight: 600; }
-        .action-row { display: flex; gap: 8px; margin-top: 15px; }
-        .btn { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-outline { background: white; border: 1px solid #ddd; color: var(--dark); }
-        .fab { position: fixed; bottom: 30px; right: 20px; width: 56px; height: 56px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 15px rgba(254, 44, 85, 0.4); border: none; z-index: 999; }
-        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center; }
+
+        .action-row { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+        .btn { flex: 1; padding: 10px 12px; border-radius: 10px; border: none; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; min-height: 44px; }
+        .btn-primary { background: var(--primary); color: white; flex-grow: 2; }
+        .btn-outline { background: white; border: 1.5px solid #ddd; color: var(--dark); }
+        .btn-icon { flex: 0 0 44px; }
+
+        .fab { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 6px 20px rgba(254, 44, 85, 0.4); border: none; z-index: 999; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 15px; }
         .modal.active { display: flex; }
-        .modal-content { background: white; width: 90%; max-width: 450px; border-radius: 20px; padding: 25px; }
+        .modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 25px; max-height: 90vh; overflow-y: auto; }
+
         .form-group { margin-bottom: 15px; }
-        .form-label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; }
-        .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; background: #fdfdfd; }
-        .empty-state { text-align: center; padding: 40px; color: #999; }
+        .form-label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; }
+        .form-input { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; font-size: 1rem; background: #F9F9F9; }
+        .due-preview { font-size: 0.75rem; color: var(--primary); font-weight: 700; margin-top: 5px; display: block; }
+        
+        .empty-state { text-align: center; padding: 50px 20px; color: #BBB; }
     </style>
 </head>
 <body>
     <div class="header"><h1><span>TikTok</span> Shop Tracker</h1></div>
+    
     <div class="container">
         <div class="stats-grid">
-            <div class="stat-card"><div class="stat-number stat-overdue" id="statOverdue">0</div><div class="stat-label">Overdue</div></div>
-            <div class="stat-card"><div class="stat-number stat-urgent" id="statUrgent">0</div><div class="stat-label">Due Soon</div></div>
-            <div class="stat-card"><div class="stat-number stat-good" id="statGood">0</div><div class="stat-label">On Track</div></div>
+            <div class="stat-card" onclick="setFilter('overdue')">
+                <div class="stat-number stat-overdue" id="statOverdue">0</div>
+                <div class="stat-label">Overdue</div>
+            </div>
+            <div class="stat-card" onclick="setFilter('urgent')">
+                <div class="stat-number stat-urgent" id="statUrgent">0</div>
+                <div class="stat-label">Due Soon</div>
+            </div>
+            <div class="stat-card" onclick="setFilter('good')">
+                <div class="stat-number stat-good" id="statGood">0</div>
+                <div class="stat-label">On Track</div>
+            </div>
         </div>
+
         <div class="filter-scroll">
-            <button class="filter-btn active" onclick="setFilter('all')">All</button>
-            <button class="filter-btn" onclick="setFilter('urgent')">⚠️ Due Soon</button>
-            <button class="filter-btn" onclick="setFilter('overdue')">🔥 Overdue</button>
-            <button class="filter-btn" onclick="setFilter('completed')">✅ Completed</button>
+            <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
+            <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
+            <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
+            <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
+            <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Completed</button>
         </div>
+
         <div id="sampleGrid" class="sample-grid"></div>
     </div>
+
     <button class="fab" onclick="openModal()">+</button>
+
     <div id="sampleModal" class="modal">
         <div class="modal-content">
-            <h2 id="modalTitle" style="margin-bottom:20px;">New Sample</h2>
+            <h2 id="modalTitle" style="margin-bottom:20px; font-weight: 800;">Add Sample</h2>
             <form id="sampleForm" onsubmit="handleSave(event)">
-                <div class="form-group"><label class="form-label">Product Name</label><input type="text" id="productName" class="form-input" required></div>
-                <div class="form-group"><label class="form-label">Brand</label><input type="text" id="brandName" class="form-input" required></div>
-                <div class="form-group" style="display:flex; gap:10px;">
-                    <div style="flex:1;"><label class="form-label">Received Date</label><input type="date" id="dateReceived" class="form-input" required></div>
-                    <div style="flex:1;"><label class="form-label">Days to Post</label><input type="number" id="daysLimit" class="form-input" value="14"></div>
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" id="productName" class="form-input" required placeholder="e.g. Ring Light">
                 </div>
-                <div class="form-group"><label class="form-label">Shop Link (URL)</label><input type="url" id="shopLink" class="form-input" placeholder="https://..."></div>
-                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px; padding:15px;">Save Sample</button>
-                <button type="button" class="btn btn-outline" onclick="closeModal()" style="width:100%; margin-top:10px;">Cancel</button>
+                <div class="form-group">
+                    <label class="form-label">Brand</label>
+                    <input type="text" id="brandName" class="form-input" required placeholder="e.g. Anker">
+                </div>
+                <div class="form-group" style="display:flex; gap:12px;">
+                    <div style="flex:1;">
+                        <label class="form-label">Received Date</label>
+                        <input type="date" id="dateReceived" class="form-input" required onchange="updateDuePreview()">
+                    </div>
+                    <div style="flex:0.8;">
+                        <label class="form-label">Days to Post</label>
+                        <input type="number" id="daysLimit" class="form-input" value="14" oninput="updateDuePreview()">
+                    </div>
+                </div>
+                <span id="duePreview" class="due-preview"></span>
+
+                <div class="form-group" style="margin-top:15px;">
+                    <label class="form-label">Shop Product Link</label>
+                    <input type="url" id="shopLink" class="form-input" placeholder="Paste link from TikTok Share button">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px; font-size: 1rem;">Save Product</button>
+                <button type="button" class="btn btn-outline" onclick="closeModal()" style="width:100%; margin-top:8px;">Cancel</button>
                 <div id="deleteZone"></div>
             </form>
         </div>
     </div>
+
     <script>
-        let samples = []; let filter = 'all'; let editId = null;
+        let samples = []; let currentFilter = 'all'; let editId = null;
+
         window.onload = () => {
             try { const data = localStorage.getItem('tiktok_samples'); samples = data ? JSON.parse(data) : []; } catch(e) { samples = []; }
             render();
         };
-        function getStatus(s) {
-            if (s.done) return 'completed';
-            const due = new Date(new Date(s.date).getTime() + (s.limit * 86400000));
-            const diff = Math.ceil((due - new Date()) / 86400000);
-            return diff < 0 ? 'overdue' : (diff <= 3 ? 'urgent' : 'good');
+
+        function getStatusInfo(s) {
+            if (s.done) return { status: 'completed', days: 0, percent: 100, color: '#E0E0E0' };
+            const start = new Date(s.date + 'T00:00:00').getTime();
+            const now = new Date();
+            now.setHours(0,0,0,0);
+            const nowTime = now.getTime();
+            const limitMs = s.limit * 86400000;
+            const dueTime = start + limitMs;
+            
+            const diff = Math.ceil((dueTime - nowTime) / 86400000);
+            const elapsed = nowTime - start;
+            let percent = Math.min(Math.max((elapsed / limitMs) * 100, 0), 100);
+            
+            let status = 'good';
+            let color = '#00C853';
+            if (diff < 0) { status = 'overdue'; color = '#FF3B30'; percent = 100; }
+            else if (diff <= 3) { status = 'urgent'; color = '#FFB300'; }
+            
+            return { status, days: diff, percent, color };
         }
-        function getDaysText(s) {
-            if (s.done) return 'Posted ✅';
-            const due = new Date(new Date(s.date).getTime() + (s.limit * 86400000));
-            const diff = Math.ceil((due - new Date()) / 86400000);
-            if (diff < 0) return Math.abs(diff) + 'd overdue';
-            if (diff === 0) return 'Due Today!';
-            return diff + 'd left';
+
+        function updateDuePreview() {
+            const dateVal = document.getElementById('dateReceived').value;
+            const limitVal = document.getElementById('daysLimit').value;
+            const preview = document.getElementById('duePreview');
+            if (dateVal && limitVal) {
+                const d = new Date(dateVal + 'T00:00:00');
+                d.setDate(d.getDate() + parseInt(limitVal));
+                preview.innerText = "Calculated Due Date: " + d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+            } else { preview.innerText = ""; }
         }
+
         function render() {
             const grid = document.getElementById('sampleGrid');
-            const activeSamples = samples.filter(s => !s.done);
-            document.getElementById('statOverdue').innerText = activeSamples.filter(s => getStatus(s) === 'overdue').length;
-            document.getElementById('statUrgent').innerText = activeSamples.filter(s => getStatus(s) === 'urgent').length;
-            document.getElementById('statGood').innerText = activeSamples.filter(s => getStatus(s) === 'good').length;
+            const active = samples.filter(s => !s.done);
+            
+            document.getElementById('statOverdue').innerText = active.filter(s => getStatusInfo(s).status === 'overdue').length;
+            document.getElementById('statUrgent').innerText = active.filter(s => getStatusInfo(s).status === 'urgent').length;
+            document.getElementById('statGood').innerText = active.filter(s => getStatusInfo(s).status === 'good').length;
+
             let filtered = samples;
-            if (filter !== 'all') filtered = samples.filter(s => getStatus(s) === filter);
-            if (filtered.length === 0) { grid.innerHTML = `<div class="empty-state">No samples found.</div>`; return; }
-            grid.innerHTML = filtered.map(s => `
-                <div class="sample-card ${getStatus(s)}">
-                    <div class="status-strip"></div>
+            if (currentFilter !== 'all') filtered = samples.filter(s => getStatusInfo(s).status === currentFilter);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="empty-state"><h3>Nothing found</h3><p>Try a different filter or add a sample.</p></div>`;
+                return;
+            }
+
+            // Sorting: Overdue first, then Urgent, then Good
+            filtered.sort((a,b) => {
+                if(a.done !== b.done) return a.done ? 1 : -1;
+                return getStatusInfo(a).days - getStatusInfo(b).days;
+            });
+
+            grid.innerHTML = filtered.map(s => {
+                const info = getStatusInfo(s);
+                const dueDate = new Date(new Date(s.date + 'T00:00:00').getTime() + (s.limit * 86400000)).toLocaleDateString();
+                return `
+                <div class="sample-card">
                     <div class="card-body">
-                        <div class="card-header"><div><div class="brand-name">${s.brand}</div><div class="product-name">${s.product}</div></div><div class="days-badge">${getDaysText(s)}</div></div>
-                        <div class="meta-grid">
-                            <div><span class="meta-label">Received</span><span class="meta-value">${s.date}</span></div>
-                            <div><span class="meta-label">Due</span><span class="meta-value">${new Date(new Date(s.date).getTime() + (s.limit * 86400000)).toISOString().split('T')[0]}</span></div>
+                        <div class="card-header">
+                            <div><div class="brand-name">${s.brand}</div><div class="product-name">${s.product}</div></div>
+                            <div class="days-badge" style="color:${info.color}">${s.done ? 'Posted ✅' : (info.days < 0 ? Math.abs(info.days)+'d overdue' : info.days+'d left')}</div>
                         </div>
+                        <div class="meta-grid">
+                            <div><span class="meta-label">Received</span><span class="meta-value">${new Date(s.date + 'T00:00:00').toLocaleDateString()}</span></div>
+                            <div><span class="meta-label">Final Due Date</span><span class="meta-value">${dueDate}</span></div>
+                        </div>
+                        <div class="progress-container"><div class="progress-fill" style="width:${info.percent}%; background-color:${info.color}"></div></div>
                         <div class="action-row">
-                            ${s.link ? `<button class="btn btn-outline" style="flex:0.3" onclick="window.open('${s.link}')">🔗</button>` : ''}
-                            ${!s.done ? `<button class="btn btn-primary" onclick="markDone('${s.id}')">Post Done</button>` : ''}
+                            ${s.link ? `<button class="btn btn-outline btn-icon" onclick="window.open('${s.link}', '_blank')">🛍️</button>` : ''}
+                            ${!s.done ? `<button class="btn btn-primary" onclick="markDone('${s.id}')">Mark Done</button>` : ''}
                             <button class="btn btn-outline" onclick="openModal('${s.id}')">Edit</button>
                         </div>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
         }
+
         function openModal(id = null) {
-            editId = id; const form = document.getElementById('sampleForm'); const delZone = document.getElementById('deleteZone'); form.reset();
-            document.getElementById('dateReceived').valueAsDate = new Date();
+            editId = id; const form = document.getElementById('sampleForm'); const delZone = document.getElementById('deleteZone');
+            form.reset(); document.getElementById('dateReceived').valueAsDate = new Date();
             if (id) {
-                const s = samples.find(x => x.id === id); document.getElementById('modalTitle').innerText = "Edit Sample";
+                const s = samples.find(x => x.id === id); document.getElementById('modalTitle').innerText = "Edit Product";
                 document.getElementById('productName').value = s.product; document.getElementById('brandName').value = s.brand;
                 document.getElementById('dateReceived').value = s.date; document.getElementById('daysLimit').value = s.limit;
                 document.getElementById('shopLink').value = s.link || '';
-                delZone.innerHTML = `<button type="button" class="btn" style="color:red; margin-top:10px;" onclick="deleteSample('${id}')">Delete Permanently</button>`;
-            } else { document.getElementById('modalTitle').innerText = "New Sample"; delZone.innerHTML = ''; }
+                delZone.innerHTML = `<button type="button" class="btn" style="color:red; margin-top:12px; font-weight:700;" onclick="deleteSample('${id}')">Delete Sample</button>`;
+            } else { document.getElementById('modalTitle').innerText = "Add New Product"; delZone.innerHTML = ''; }
+            updateDuePreview();
             document.getElementById('sampleModal').classList.add('active');
         }
+
         function closeModal() { document.getElementById('sampleModal').classList.remove('active'); }
         function handleSave(e) {
             e.preventDefault();
@@ -162,11 +249,18 @@
             localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal();
         }
         function markDone(id) { samples = samples.map(s => s.id === id ? {...s, done: true} : s); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); }
-        function deleteSample(id) { if (confirm("Delete this?")) { samples = samples.filter(s => s.id !== id); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal(); } }
-        function setFilter(f) { filter = f; document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.innerText.toLowerCase().includes(f) || (f==='all' && btn.innerText==='All'))); render(); }
+        function deleteSample(id) { if (confirm("Remove this sample?")) { samples = samples.filter(s => s.id !== id); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal(); } }
+        
+        function setFilter(f) {
+            currentFilter = f;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('f-' + f).classList.add('active');
+            render();
+        }
     </script>
 </body>
 </html>
+
 
 
 
