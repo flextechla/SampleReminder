@@ -15,7 +15,7 @@
     <style>
         :root { --primary: #FE2C55; --dark: #121212; --bg: #F8F9FA; --surface: #FFFFFF; --green: #00C853; --yellow: #FFB300; --red: #FF3B30; --border: #E0E0E0; --shadow: 0 4px 12px rgba(0,0,0,0.08); }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--dark); padding-bottom: 120px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--dark); padding-bottom: 120px; overflow-x: hidden; }
         
         .header { background: var(--surface); padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); text-align: center; }
         .header h1 { font-size: 1.3rem; font-weight: 800; }
@@ -23,16 +23,19 @@
         
         .container { max-width: 600px; margin: 0 auto; padding: 12px; }
 
+        /* Dashboard Stats */
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .stat-card { background: var(--surface); padding: 12px 5px; border-radius: 12px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); }
+        .stat-card { background: var(--surface); padding: 12px 5px; border-radius: 12px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); cursor: pointer; }
         .stat-number { font-size: 1.4rem; font-weight: 800; }
         .stat-label { font-size: 0.65rem; color: #666; font-weight: 700; text-transform: uppercase; }
 
+        /* Filter Row - Same order as Dashboard */
         .filter-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
         .filter-btn { padding: 8px 16px; border: 1px solid var(--border); background: var(--surface); border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: #666; white-space: nowrap; cursor: pointer; }
         .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
 
+        /* Card Styles */
         .sample-card { background: var(--surface); border-radius: 16px; margin-bottom: 15px; box-shadow: var(--shadow); border: 1px solid var(--border); }
         .card-body { padding: 16px; }
         
@@ -46,26 +49,26 @@
         .progress-container { width: 100%; height: 8px; background: #eee; border-radius: 4px; margin: 15px 0; overflow: hidden; }
         .progress-fill { height: 100%; transition: width 0.4s ease; }
 
-        /* BUTTONS RE-DESIGNED TO 2 ROWS */
-        .action-container { display: flex; flex-direction: column; gap: 8px; }
-        .btn { width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        /* TWO ROW BUTTON LAYOUT */
+        .action-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .row-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; }
         
-        .row-1 { display: flex; width: 100%; }
-        .row-2 { display: flex; gap: 8px; width: 100%; }
+        .btn-full-width { background: var(--primary); color: white; }
+        .btn-completed { background: #E8F5E9; color: var(--green); border: 1.5px solid var(--green); pointer-events: none; }
         
-        .btn-post { background: var(--primary); color: white; }
-        .btn-link { background: #f0f0f0; color: var(--dark); border: 1px solid #ddd; }
-        .btn-edit { background: white; color: #666; border: 1px solid #ddd; }
-        .btn-done-check { background: #E8F5E9; color: var(--green); border: 1px solid var(--green); pointer-events: none; }
+        .btn-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .btn-secondary { background: white; color: var(--dark); border: 1.5px solid var(--border); }
 
         .fab { position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(254, 44, 85, 0.4); border: none; z-index: 999; }
 
+        /* Modal Styles */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
-        .modal-content { background: white; width: 100%; max-width: 400px; border-radius: 24px; padding: 24px; }
+        .modal-content { background: white; width: 100%; max-width: 400px; border-radius: 24px; padding: 24px; max-height: 90vh; overflow-y: auto; }
         .form-group { margin-bottom: 16px; }
         .form-label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; }
         .form-input { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 12px; font-size: 1rem; background: #F9F9F9; }
+        .due-calc-text { font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-top: 5px; display: block; }
         
         .empty-state { text-align: center; padding: 60px 20px; color: #BBB; }
     </style>
@@ -90,7 +93,7 @@
         </div>
 
         <div class="filter-scroll">
-            <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
+            <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All Samples</button>
             <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
             <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
             <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
@@ -109,12 +112,24 @@
                 <div class="form-group"><label class="form-label">Product Name</label><input type="text" id="productName" class="form-input" required></div>
                 <div class="form-group"><label class="form-label">Brand</label><input type="text" id="brandName" class="form-input" required></div>
                 <div class="form-group" style="display:flex; gap:12px;">
-                    <div style="flex:1;"><label class="form-label">Received Date</label><input type="date" id="dateReceived" class="form-input" required></div>
-                    <div style="flex:0.8;"><label class="form-label">Days to Post</label><input type="number" id="daysLimit" class="form-input" value="14"></div>
+                    <div style="flex:1;">
+                        <label class="form-label">Received Date</label>
+                        <input type="date" id="dateReceived" class="form-input" required onchange="calcDuePreview()">
+                    </div>
+                    <div style="flex:0.8;">
+                        <label class="form-label">Days Left</label>
+                        <input type="number" id="daysLimit" class="form-input" value="14" oninput="calcDuePreview()">
+                    </div>
                 </div>
-                <div class="form-group"><label class="form-label">TikTok Shop Link</label><input type="url" id="shopLink" class="form-input" placeholder="Paste link here"></div>
-                <button type="submit" class="btn btn-post">Save Product</button>
-                <button type="button" onclick="closeModal()" style="margin-top:10px; background:none; border:none; width:100%; color:#999; font-weight:600;">Cancel</button>
+                <span id="dueCalcDisplay" class="due-calc-text"></span>
+
+                <div class="form-group" style="margin-top:10px;">
+                    <label class="form-label">TikTok Shop Link</label>
+                    <input type="url" id="shopLink" class="form-input" placeholder="Paste link here">
+                </div>
+                
+                <button type="submit" class="row-btn btn-full-width">Save Product</button>
+                <button type="button" onclick="closeModal()" style="margin-top:12px; background:none; border:none; width:100%; color:#999; font-weight:700;">Cancel</button>
                 <div id="deleteZone"></div>
             </form>
         </div>
@@ -131,14 +146,30 @@
         function getStatusInfo(s) {
             if (s.done) return { status: 'completed', days: 0, percent: 100, color: '#E0E0E0' };
             const start = new Date(s.date + 'T00:00:00').getTime();
-            const now = new Date().setHours(0,0,0,0);
-            const due = start + (s.limit * 86400000);
-            const diff = Math.ceil((due - now) / 86400000);
-            let percent = Math.min(Math.max(((now - start) / (s.limit * 86400000)) * 100, 0), 100);
+            const now = new Date();
+            now.setHours(0,0,0,0);
+            const nowTime = now.getTime();
+            const limitMs = s.limit * 86400000;
+            const dueTime = start + limitMs;
+            
+            const diff = Math.ceil((dueTime - nowTime) / 86400000);
+            const elapsed = nowTime - start;
+            let percent = Math.min(Math.max((elapsed / limitMs) * 100, 0), 100);
             
             if (diff < 0) return { status: 'overdue', days: diff, percent: 100, color: '#FF3B30' };
             if (diff <= 3) return { status: 'urgent', days: diff, percent, color: '#FFB300' };
             return { status: 'good', days: diff, percent, color: '#00C853' };
+        }
+
+        function calcDuePreview() {
+            const dInput = document.getElementById('dateReceived').value;
+            const lInput = document.getElementById('daysLimit').value;
+            const display = document.getElementById('dueCalcDisplay');
+            if (dInput && lInput) {
+                const target = new Date(dInput + 'T00:00:00');
+                target.setDate(target.getDate() + parseInt(lInput));
+                display.innerText = "Due Date: " + target.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+            } else { display.innerText = ""; }
         }
 
         function render() {
@@ -151,11 +182,11 @@
             let filtered = currentFilter === 'all' ? samples : samples.filter(s => getStatusInfo(s).status === currentFilter);
             filtered.sort((a,b) => (a.done === b.done) ? getStatusInfo(a).days - getStatusInfo(b).days : (a.done ? 1 : -1));
 
-            if (!filtered.length) { grid.innerHTML = `<div class="empty-state"><h3>No items found</h3></div>`; return; }
+            if (!filtered.length) { grid.innerHTML = `<div class="empty-state"><h3>Nothing here</h3><p>Try another filter.</p></div>`; return; }
 
             grid.innerHTML = filtered.map(s => {
                 const info = getStatusInfo(s);
-                const due = new Date(new Date(s.date + 'T00:00:00').getTime() + (s.limit * 86400000)).toLocaleDateString();
+                const dueDateString = new Date(new Date(s.date + 'T00:00:00').getTime() + (s.limit * 86400000)).toLocaleDateString();
                 return `
                 <div class="sample-card">
                     <div class="card-body">
@@ -163,16 +194,16 @@
                         <div class="product-name">${s.product}</div>
                         <div class="meta-grid">
                             <div><span class="meta-label">Received</span><span class="meta-value">${new Date(s.date + 'T00:00:00').toLocaleDateString()}</span></div>
-                            <div><span class="meta-label">Due Date</span><span class="meta-value">${due}</span></div>
+                            <div><span class="meta-label">Deadline</span><span class="meta-value">${dueDateString}</span></div>
                         </div>
                         <div class="progress-container"><div class="progress-fill" style="width:${info.percent}%; background-color:${info.color}"></div></div>
+                        
                         <div class="action-container">
-                            <div class="row-1">
-                                ${!s.done ? `<button class="btn btn-post" onclick="markDone('${s.id}')">Mark Video Posted</button>` : `<button class="btn btn-done-check">Video Posted ✅</button>`}
-                            </div>
-                            <div class="row-2">
-                                ${s.link ? `<button class="btn btn-link" onclick="window.open('${s.link}', '_blank')">🛍️ Open Shop</button>` : ''}
-                                <button class="btn btn-edit" onclick="openModal('${s.id}')">Edit</button>
+                            ${!s.done ? `<button class="row-btn btn-full-width" onclick="markDone('${s.id}')">Mark Video Posted</button>` : `<div class="row-btn btn-completed">Posted Successfully ✅</div>`}
+                            
+                            <div class="btn-row-2">
+                                ${s.link ? `<button class="row-btn btn-secondary" onclick="window.open('${s.link}', '_blank')">🛍️ Shop</button>` : '<span></span>'}
+                                <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
                             </div>
                         </div>
                     </div>
@@ -190,8 +221,9 @@
                 document.getElementById('dateReceived').value = s.date;
                 document.getElementById('daysLimit').value = s.limit;
                 document.getElementById('shopLink').value = s.link || '';
-                document.getElementById('deleteZone').innerHTML = `<button type="button" onclick="deleteSample('${id}')" style="color:red; margin-top:15px; background:none; border:none; width:100%; font-weight:bold;">Delete Sample</button>`;
+                document.getElementById('deleteZone').innerHTML = `<button type="button" onclick="deleteSample('${id}')" style="color:red; margin-top:20px; background:none; border:none; width:100%; font-weight:bold; cursor:pointer;">Delete Permanently</button>`;
             } else { document.getElementById('deleteZone').innerHTML = ''; }
+            calcDuePreview();
             document.getElementById('sampleModal').classList.add('active');
         }
 
@@ -203,7 +235,7 @@
             localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal();
         }
         function markDone(id) { samples = samples.map(s => s.id === id ? {...s, done: true} : s); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); }
-        function deleteSample(id) { if (confirm("Delete permanently?")) { samples = samples.filter(s => s.id !== id); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal(); } }
+        function deleteSample(id) { if (confirm("Delete this sample?")) { samples = samples.filter(s => s.id !== id); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal(); } }
         function setFilter(f) { currentFilter = f; document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.id === 'f-'+f)); render(); }
     </script>
 </body>
