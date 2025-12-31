@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
-    <link rel="manifest" href='data:application/manifest+json,{"name":"SampleTracker","short_name":"SampleTrack","display":"standalone","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"SampleTracker","short_name":"Samples","display":"standalone","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png"}]}'>
 
-    <title>TikTok Shop Tracker Pro</title>
+    <title>Sample Tracker Pro</title>
     
     <style>
         :root { --primary: #FE2C55; --dark: #121212; --bg: #F8F9FA; --surface: #FFFFFF; --green: #00C853; --yellow: #FFB300; --red: #FF3B30; --blue: #2196F3; --purple: #9C27B0; --border: #E0E0E0; --shadow: 0 4px 12px rgba(0,0,0,0.08); }
@@ -184,7 +184,7 @@
 <body>
     <div class="header">
         <div class="header-top">
-            <h1><span>TikTok</span> Shop Tracker</h1>
+            <h1><span>Sample</span> Tracker</h1>
             <div class="header-actions">
                 <button class="icon-btn" onclick="openAnalytics()" title="Analytics">📊</button>
                 <button class="icon-btn" onclick="toggleMenu()" title="Menu">⋮</button>
@@ -328,8 +328,8 @@
                 <span id="dueCalcDisplay" class="due-calc-text"></span>
 
                 <div class="form-group">
-                    <label class="form-label">TikTok Shop Link</label>
-                    <input type="url" id="shopLink" class="form-input" placeholder="Paste link here">
+                    <label class="form-label">Product Link (Optional)</label>
+                    <input type="url" id="shopLink" class="form-input" placeholder="Paste product link here">
                 </div>
                 
                 <div class="form-group">
@@ -480,7 +480,7 @@
     <div id="browserOverlay" class="browser-overlay">
         <div class="browser-header">
             <button class="browser-close" onclick="closeBrowser()">×</button>
-            <div class="browser-title">TikTok Shop</div>
+            <div class="browser-title">Product Link</div>
             <div style="width:40px;"></div>
         </div>
         <iframe id="browserFrame" class="browser-frame" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
@@ -1349,7 +1349,17 @@
         // Browser
         function openInAppBrowser(link) {
             document.getElementById('browserFrame').src = link;
-            document.getElementById('browserOverlay').classList.add('active
+            document.getElementById('browserOverlay').classList.add('active');
+        }
+
+        function closeBrowser() {
+            document.getElementById('browserOverlay').classList.remove('active');
+            document.getElementById('browserFrame').src = '';
+        }
+    </script>
+</body>
+</html>
+
 
 
 
