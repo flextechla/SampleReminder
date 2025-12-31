@@ -2748,23 +2748,16 @@
                     }
                 };
                 reader.readAsText(file);
+            };
+            input.click();
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        function toggleFiltered() {
+            const content = document.getElementById('filteredContent');
+            const arrow = document.getElementById('filteredArrow');
+            content.classList.toggle('active');
+            arrow.innerText = content.classList.contains('active') ? '▲' : '▼';
+        }
+    </script>
+</body>
+</html>
