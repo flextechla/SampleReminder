@@ -37,15 +37,20 @@
         .stat-label { font-size: 0.65rem; color: #666; font-weight: 700; text-transform: uppercase; }
 
         /* View Toggle */
-        .view-toggle { display: flex; gap: 8px; margin-bottom: 15px; justify-content: center; }
-        .view-btn { padding: 8px 20px; border: 1.5px solid var(--border); background: var(--surface); border-radius: 20px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
-        .view-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+        .view-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+        .view-btn { flex: 1; padding: 12px 20px; border: 2px solid var(--border); background: var(--surface); border-radius: 25px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s; color: #666; }
+        .view-btn:active { transform: scale(0.95); }
+        .view-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* Filter and Sort Row */
+        /* Filter and Sort Sections */
+        .control-section { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .section-title { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #999; margin-bottom: 10px; letter-spacing: 0.5px; }
+        
         .filter-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-btn { padding: 8px 16px; border: 1px solid var(--border); background: var(--surface); border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: #666; white-space: nowrap; cursor: pointer; }
-        .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+        .filter-btn { padding: 10px 18px; border: 2px solid var(--border); background: var(--surface); border-radius: 25px; font-size: 0.85rem; font-weight: 700; color: #666; white-space: nowrap; cursor: pointer; transition: all 0.2s; }
+        .filter-btn:active { transform: scale(0.95); }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
         /* Batch Actions Bar */
         .batch-bar { position: fixed; bottom: 80px; left: 0; right: 0; background: var(--dark); color: white; padding: 15px; display: none; justify-content: space-between; align-items: center; z-index: 99; box-shadow: 0 -4px 12px rgba(0,0,0,0.2); }
@@ -216,33 +221,35 @@
 
         <!-- View Toggle -->
         <div class="view-toggle">
-            <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List</button>
-            <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar</button>
+            <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List View</button>
+            <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
         </div>
 
         <!-- List View -->
         <div id="listView">
-        <!-- Filters and Sort - Compact Layout -->
-        <div style="margin-bottom: 15px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
-                <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
-                <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
+            <!-- Filter Section -->
+            <div class="control-section">
+                <div class="section-title">Filter Samples</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                    <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
+                    <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
+                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
+                    <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted</button>
+                </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
-                <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted</button>
-            </div>
-        </div>
 
-        <!-- Sort Dropdown -->
-        <div class="form-group" style="margin-bottom: 15px;">
-            <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 10px;">
-                <option value="dueDate">Sort by: Due Date</option>
-                <option value="brand">Sort by: Brand</option>
-                <option value="received">Sort by: Received Date</option>
-            </select>
-        </div>
+            <!-- Sort Section -->
+            <div class="control-section">
+                <div class="section-title">Sort By</div>
+                <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 12px; border: 2px solid var(--border); font-weight: 600;">
+                    <option value="dueDate">📅 Due Date</option>
+                    <option value="brand">🏷️ Brand Name</option>
+                    <option value="received">📦 Received Date</option>
+                </select>
+            </div>
 
             <!-- Completed Section (Collapsible) -->
             <div class="collapsible-section" id="completedSection" style="display:none;">
@@ -371,6 +378,12 @@
                 <h2 class="modal-title">⚙️ Settings</h2>
                 <button class="modal-close" onclick="closeSettings()">×</button>
             </div>
+            
+            <div class="form-group">
+                <button class="row-btn btn-secondary" onclick="openPrivacy()" style="margin-bottom: 10px;">🔒 Privacy Policy</button>
+                <button class="row-btn btn-secondary" onclick="openHelp()" style="margin-bottom: 20px;">❓ Help & Support</button>
+            </div>
+            
             <div class="form-group">
                 <label class="form-label">Notification Settings (Coming Soon)</label>
                 <div style="padding: 20px; background: #F5F5F5; border-radius: 12px; text-align: center; color: #666;">
@@ -385,6 +398,80 @@
             </div>
             <div class="form-group">
                 <button class="row-btn btn-secondary" onclick="importData()">📁 Import Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🔒 Privacy Policy</h2>
+                <button class="modal-close" onclick="closePrivacy()">×</button>
+            </div>
+            <div style="line-height: 1.6; color: #666;">
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Data Storage</h3>
+                <p style="margin-bottom: 15px;">All your data is stored locally on your device using browser localStorage. We do not collect, store, or transmit any of your information to external servers.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">What We Store</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px;">
+                    <li>Product and brand information</li>
+                    <li>Dates and deadlines</li>
+                    <li>Notes and tags you create</li>
+                    <li>Photos you upload (stored as base64 in your browser)</li>
+                    <li>Your app settings and preferences</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Your Control</h3>
+                <p style="margin-bottom: 15px;">You have full control over your data. You can export it as CSV, delete individual items, or clear all data by clearing your browser's localStorage.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Third-Party Links</h3>
+                <p style="margin-bottom: 15px;">This app may contain links to TikTok Shop and other external websites. We are not responsible for the privacy practices of these sites.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Updates</h3>
+                <p>This privacy policy may be updated from time to time. Continued use of the app constitutes acceptance of any changes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">❓ Help & Support</h2>
+                <button class="modal-close" onclick="closeHelp()">×</button>
+            </div>
+            <div style="line-height: 1.6;">
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📋 Getting Started</h3>
+                <p style="margin-bottom: 15px; color: #666;">Tap the <strong>+</strong> button to add a new sample. Fill in the product details, received date, and deadline.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🎯 Quick Actions</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px; color: #666;">
+                    <li><strong>Swipe Right:</strong> Mark sample as posted ✓</li>
+                    <li><strong>Swipe Left:</strong> Delete sample 🗑️</li>
+                    <li><strong>Checkbox:</strong> Select multiple samples for batch actions</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🔍 Filtering & Sorting</h3>
+                <p style="margin-bottom: 15px; color: #666;">Use the filter buttons to view specific categories (Overdue, Due Soon, etc.). Sort samples by due date, brand, or received date using the dropdown.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">✅ Video Checklist</h3>
+                <p style="margin-bottom: 15px; color: #666;">Track your progress with the Filmed → Edited → Posted checklist on each sample card.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📅 Calendar View</h3>
+                <p style="margin-bottom: 15px; color: #666;">Switch to calendar view to see all your deadlines in a monthly layout. Tap any day to see samples due that day.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📊 Analytics</h3>
+                <p style="margin-bottom: 15px; color: #666;">Tap the chart icon in the header to view your completion stats and top brands.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">💾 Export & Backup</h3>
+                <p style="margin-bottom: 15px; color: #666;">Export your data as CSV from the + menu. You can also import previously exported data from Settings.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📱 Install as App</h3>
+                <p style="margin-bottom: 15px; color: #666;">On iOS: Tap Share → Add to Home Screen<br>On Android: Tap Menu → Install App</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Need More Help?</h3>
+                <p style="color: #666;">Contact support or report issues through your TikTok Shop creator dashboard.</p>
             </div>
         </div>
     </div>
@@ -600,11 +687,15 @@
         let swipingCard = null;
 
         function handleTouchStart(e, id) {
+            const sample = samples.find(s => s.id === id);
+            if (sample && sample.done) return; // Disable swipe on completed items
             touchStartX = e.touches[0].clientX;
             swipingCard = id;
         }
 
         function handleTouchMove(e, id) {
+            const sample = samples.find(s => s.id === id);
+            if (sample && sample.done) return; // Disable swipe on completed items
             if (swipingCard !== id) return;
             touchCurrentX = e.touches[0].clientX;
             const diff = touchCurrentX - touchStartX;
@@ -620,6 +711,8 @@
         }
 
         function handleTouchEnd(e, id) {
+            const sample = samples.find(s => s.id === id);
+            if (sample && sample.done) return; // Disable swipe on completed items
             if (swipingCard !== id) return;
             const diff = touchCurrentX - touchStartX;
             const card = document.getElementById(`card-${id}`);
@@ -1063,6 +1156,24 @@
             document.getElementById('settingsModal').classList.remove('active');
         }
 
+        function openPrivacy() {
+            closeSettings();
+            document.getElementById('privacyModal').classList.add('active');
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacyModal').classList.remove('active');
+        }
+
+        function openHelp() {
+            closeSettings();
+            document.getElementById('helpModal').classList.add('active');
+        }
+
+        function closeHelp() {
+            document.getElementById('helpModal').classList.remove('active');
+        }
+
         function saveSettings() {
             settings.defaultDays = parseInt(document.getElementById('defaultDays').value);
             localStorage.setItem('tiktok_settings', JSON.stringify(settings));
@@ -1156,6 +1267,7 @@
     </script>
 </body>
 </html>
+
 
 
 
