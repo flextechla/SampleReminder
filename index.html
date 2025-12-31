@@ -613,31 +613,30 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         let useCloud = false;
 
         // Initialize Supabase
-        function initSupabase() {
+        async function initSupabase() {
             try {
                 // Check if config has been updated from defaults
                 if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY') {
                     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                     
                     // Check for existing session
-                    supabase.auth.getSession().then(({ data: { session } }) => {
-                        if (session) {
-                            currentUser = session.user;
-                            useCloud = true;
-                            loadFromCloud();
-                        } else {
-                            // Sign in anonymously
-                            signInAnonymously();
-                        }
-                    });
+                    const { data: { session } } = await supabase.auth.getSession();
+                    if (session) {
+                        currentUser = session.user;
+                        useCloud = true;
+                        await loadFromCloud();
+                    } else {
+                        // Sign in anonymously
+                        await signInAnonymously();
+                    }
                     
                     // Listen for auth changes
-                    supabase.auth.onAuthStateChange((event, session) => {
+                    supabase.auth.onAuthStateChange(async (event, session) => {
                         if (session) {
                             currentUser = session.user;
                             useCloud = true;
                             if (event === 'SIGNED_IN') {
-                                migrateToCloud();
+                                await migrateToCloud();
                             }
                         }
                     });
@@ -648,6 +647,7 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
             } catch (e) {
                 console.error('Supabase initialization error:', e);
                 useCloud = false;
+                // App will continue working with localStorage
             }
         }
 
@@ -788,10 +788,8 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
             localStorage.setItem('tiktok_samples', JSON.stringify(samples));
         }
 
-        window.onload = () => {
-            initSupabase();
-            
-            // Load from localStorage as fallback while waiting for Supabase
+        window.onload = async () => {
+            // Load from localStorage first for immediate display
             try { 
                 samples = JSON.parse(localStorage.getItem('tiktok_samples')) || []; 
                 settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
@@ -801,6 +799,9 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
             }
             render();
             renderCalendar();
+            
+            // Then initialize Supabase in background
+            await initSupabase();
         };
 
         function getStatusInfo(s) {
@@ -1309,18 +1310,18 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
             render();
         }
 
-        function saveSamples() {
+        async function saveSamples() {
             if (useCloud) {
-                saveToCloud();
+                await saveToCloud();
             } else {
                 localStorage.setItem('tiktok_samples', JSON.stringify(samples));
             }
         }
 
-        function saveSettings() {
+        async function saveSettings() {
             settings.defaultDays = parseInt(document.getElementById('defaultDays').value);
             if (useCloud) {
-                saveToCloud();
+                await saveToCloud();
             } else {
                 localStorage.setItem('tiktok_settings', JSON.stringify(settings));
             }
@@ -1696,6 +1697,7 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
     </script>
 </body>
 </html>
+
 
 
 
