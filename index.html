@@ -6,9 +6,10 @@
     <meta name="theme-color" content="#FE2C55">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
-    <link rel="manifest" href='data:application/manifest+json,{"name":"SampleTracker","short_name":"Samples","display":"standalone","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Sample Tracker Pro","short_name":"Samples","display":"standalone","start_url":"/","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
 
     <title>Sample Tracker Pro</title>
     
@@ -321,6 +322,19 @@
                 <span id="dueCalcDisplay" class="due-calc-text"></span>
 
                 <div class="form-group">
+                    <label class="form-label">Reminder Settings</label>
+                    <select id="sampleReminderDays" class="form-input">
+                        <option value="">Use default reminder (from Settings)</option>
+                        <option value="0">Remind me on due date</option>
+                        <option value="1">Remind me 1 day before</option>
+                        <option value="2">Remind me 2 days before</option>
+                        <option value="3">Remind me 3 days before</option>
+                        <option value="5">Remind me 5 days before</option>
+                        <option value="7">Remind me 7 days before</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">Product Link (Optional)</label>
                     <input type="url" id="shopLink" class="form-input" placeholder="Paste product link here">
                 </div>
@@ -396,7 +410,19 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <p style="font-size: 0.8rem; color: #666;">Get reminders when samples are due soon</p>
+                    <p style="font-size: 0.8rem; color: #666; margin-bottom: 12px;">Get reminders when samples are due soon</p>
+                    
+                    <div id="reminderSettings" style="display: none;">
+                        <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Remind me when samples are:</label>
+                        <select id="reminderDays" class="form-input" onchange="saveReminderSettings()" style="padding: 8px; font-size: 0.85rem;">
+                            <option value="0">Due today</option>
+                            <option value="1" selected>Due in 1 day</option>
+                            <option value="2">Due in 2 days</option>
+                            <option value="3">Due in 3 days</option>
+                            <option value="5">Due in 5 days</option>
+                            <option value="7">Due in 7 days</option>
+                        </select>
+                    </div>
                 </div>
                 <div id="notificationStatus" style="font-size: 0.75rem; color: #666; padding: 10px; background: #FFF8E1; border-radius: 8px; display: none;">
                     Click "Allow" when your browser asks for permission
@@ -624,9 +650,16 @@
                         console.log('✓ Auto-signed in');
                         await loadFromCloud();
                         return;
+                    } else {
+                        // Auto-login failed, clear bad credentials
+                        console.log('Auto-sign in failed, clearing credentials');
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
                     }
                 } catch (e) {
-                    console.log('Auto-sign in failed, showing login');
+                    console.log('Auto-sign in error, clearing credentials');
+                    localStorage.removeItem('user_email');
+                    localStorage.removeItem('user_password');
                 }
             }
             
@@ -760,16 +793,22 @@
             }
         }
         
-        function signOut() {
+        async function signOut() {
             if (confirm('Sign out? Your data will remain in the cloud.')) {
-                sb_client.auth.signOut();
+                // Sign out from Supabase
+                await sb_client.auth.signOut();
+                
+                // Clear all stored credentials and session data
                 localStorage.removeItem('user_email');
                 localStorage.removeItem('user_password');
+                
+                // Clear variables
                 currentUser = null;
                 useCloud = false;
                 samples = [];
-                render();
-                location.reload();
+                
+                // Force reload to show login screen
+                window.location.reload();
             }
         }
 
@@ -874,10 +913,17 @@
                 settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
                 document.getElementById('defaultDays').value = settings.defaultDays;
                 
+                // Load reminder preference
+                const savedReminderDays = localStorage.getItem('reminder_days');
+                if (savedReminderDays) {
+                    document.getElementById('reminderDays').value = savedReminderDays;
+                }
+                
                 // Check notification permission and update toggle
                 const notifToggle = document.getElementById('notificationsToggle');
                 if (Notification.permission === 'granted') {
                     notifToggle.checked = true;
+                    document.getElementById('reminderSettings').style.display = 'block';
                     scheduleNotifications();
                 }
             } catch(e) { 
@@ -892,6 +938,8 @@
         
         // Notification Functions
         async function toggleNotifications(enabled) {
+            const reminderSettings = document.getElementById('reminderSettings');
+            
             if (enabled) {
                 if (!('Notification' in window)) {
                     alert('Your browser doesn\'t support notifications');
@@ -900,6 +948,7 @@
                 }
                 
                 if (Notification.permission === 'granted') {
+                    reminderSettings.style.display = 'block';
                     scheduleNotifications();
                     showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
                 } else if (Notification.permission !== 'denied') {
@@ -908,6 +957,7 @@
                     document.getElementById('notificationStatus').style.display = 'none';
                     
                     if (permission === 'granted') {
+                        reminderSettings.style.display = 'block';
                         scheduleNotifications();
                         showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
                     } else {
@@ -920,8 +970,15 @@
                 }
             } else {
                 // Disable notifications
+                reminderSettings.style.display = 'none';
                 clearNotifications();
             }
+        }
+        
+        function saveReminderSettings() {
+            const reminderDays = document.getElementById('reminderDays').value;
+            localStorage.setItem('reminder_days', reminderDays);
+            scheduleNotifications(); // Restart with new settings
         }
         
         function showNotification(title, body) {
@@ -955,19 +1012,27 @@
         }
         
         function checkDueSamples() {
+            const globalReminderDays = parseInt(localStorage.getItem('reminder_days') || '1');
             const activeSamples = samples.filter(s => !s.done);
             const overdue = activeSamples.filter(s => getStatusInfo(s).status === 'overdue');
-            const urgent = activeSamples.filter(s => getStatusInfo(s).status === 'urgent');
+            
+            // Get samples due within their individual reminder timeframe
+            const dueWithinTimeframe = activeSamples.filter(s => {
+                const info = getStatusInfo(s);
+                // Use sample-specific reminder if set, otherwise use global setting
+                const reminderDays = s.reminderDays !== undefined ? s.reminderDays : globalReminderDays;
+                return info.days >= 0 && info.days <= reminderDays;
+            });
             
             if (overdue.length > 0) {
                 showNotification(
                     `⚠️ ${overdue.length} Overdue Sample${overdue.length > 1 ? 's' : ''}!`,
                     `You have ${overdue.length} sample${overdue.length > 1 ? 's' : ''} past the deadline. Open the app to check.`
                 );
-            } else if (urgent.length > 0) {
+            } else if (dueWithinTimeframe.length > 0) {
                 showNotification(
-                    `📅 ${urgent.length} Sample${urgent.length > 1 ? 's' : ''} Due Soon`,
-                    `${urgent.length} sample${urgent.length > 1 ? 's are' : ' is'} due within the next 3 days.`
+                    `📅 ${dueWithinTimeframe.length} Sample${dueWithinTimeframe.length > 1 ? 's' : ''} Due Soon`,
+                    `${dueWithinTimeframe.length} sample${dueWithinTimeframe.length > 1 ? 's are' : ' is'} due soon.`
                 );
             }
         }
@@ -1387,6 +1452,7 @@
             form.reset();
             document.getElementById('dateReceived').valueAsDate = new Date();
             document.getElementById('daysLimit').value = settings.defaultDays;
+            document.getElementById('sampleReminderDays').value = ''; // Default to global setting
             
             if (id) {
                 const s = samples.find(x => x.id === id);
@@ -1397,6 +1463,7 @@
                 document.getElementById('daysLimit').value = s.limit;
                 document.getElementById('shopLink').value = s.link || '';
                 document.getElementById('notes').value = s.notes || '';
+                document.getElementById('sampleReminderDays').value = s.reminderDays !== undefined ? s.reminderDays : '';
                 tempTags = s.tags || [];
                 tempPhotos = s.photos || [];
                 renderTags();
@@ -1417,6 +1484,7 @@
 
         async function handleSave(e) {
             e.preventDefault();
+            const reminderDaysValue = document.getElementById('sampleReminderDays').value;
             const newItem = {
                 id: editId || Date.now().toString(),
                 product: document.getElementById('productName').value,
@@ -1427,6 +1495,7 @@
                 notes: document.getElementById('notes').value,
                 tags: tempTags,
                 photos: tempPhotos,
+                reminderDays: reminderDaysValue === '' ? undefined : parseInt(reminderDaysValue),
                 checklist: editId ? samples.find(x => x.id === editId).checklist : { filmed: false, edited: false, posted: false },
                 done: editId ? samples.find(x => x.id === editId).done : false
             };
@@ -1871,6 +1940,7 @@
     </script>
 </body>
 </html>
+
 
 
 
