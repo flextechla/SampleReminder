@@ -197,32 +197,24 @@
             <span style="font-size: 1.2rem;">+</span>
             <span>Add New Sample</span>
         </button>
-        <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
-    </div>
-    
-    <div class="container">
-        <!-- Stats Dashboard -->
-        <div class="stats-grid">
-            <div class="stat-card" onclick="setFilterAndAnalytics('overdue')">
-                <div class="stat-number" style="color:var(--red)" id="statOverdue">0</div>
-                <div class="stat-label">Overdue</div>
-            </div>
-            <div class="stat-card" onclick="setFilterAndAnalytics('urgent')">
-                <div class="stat-number" style="color:var(--yellow)" id="statUrgent">0</div>
-                <div class="stat-label">Due Soon</div>
-            </div>
-            <div class="stat-card" onclick="setFilterAndAnalytics('good')">
-                <div class="stat-number" style="color:var(--green)" id="statGood">0</div>
-                <div class="stat-label">On Track</div>
-            </div>
-        </div>
-
+        
         <!-- View Toggle -->
-        <div class="view-toggle">
+        <div class="view-toggle" style="margin-bottom: 10px;">
             <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List View</button>
             <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
         </div>
-
+        
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()" style="margin-bottom: 10px;">
+        
+        <!-- Sort By -->
+        <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 12px; border: 2px solid var(--border); font-weight: 600; width: 100%; border-radius: 25px;">
+            <option value="dueDate">📅 Sort by: Due Date</option>
+            <option value="brand">🏷️ Sort by: Brand Name</option>
+            <option value="received">📦 Sort by: Received Date</option>
+        </select>
+    </div>
+    
+    <div class="container">
         <!-- List View -->
         <div id="listView">
             <!-- Filter Section -->
@@ -230,23 +222,13 @@
                 <div class="section-title">Filter Samples</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
                     <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
-                    <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
-                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
+                    <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
+                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
+                    <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
                     <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted</button>
                 </div>
-            </div>
-
-            <!-- Sort Section -->
-            <div class="control-section">
-                <div class="section-title">Sort By</div>
-                <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 12px; border: 2px solid var(--border); font-weight: 600;">
-                    <option value="dueDate">📅 Due Date</option>
-                    <option value="brand">🏷️ Brand Name</option>
-                    <option value="received">📦 Received Date</option>
-                </select>
             </div>
 
             <!-- Dynamic Filtered Section (Collapsible) -->
@@ -605,8 +587,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
         let analyticsFilter = 'all';
         
         // Supabase Configuration - REPLACE WITH YOUR SUPABASE PROJECT DETAILS
-        const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // e.g., https://xxxxx.supabase.co
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Your public anon key
+        const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
         
         let sb_client = null;
         let currentUser = null;
@@ -615,29 +597,34 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
         // Initialize Supabase
         async function initSupabase() {
             try {
-                // Check if Supabase SDK is loaded
+                // For now, just use localStorage until Supabase is fully configured
+                // The user needs to:
+                // 1. Enable Email auth in Supabase (Authentication -> Providers -> Email)
+                // 2. Create the database table using the SQL in the setup instructions
+                
+                console.log('Supabase configured but using localStorage - see Settings for setup instructions');
+                useCloud = false;
+                
+                /* Uncomment this section after completing Supabase setup:
+                
                 if (typeof window.supabase === 'undefined') {
                     console.log('Supabase SDK not loaded - using localStorage only');
                     useCloud = false;
                     return;
                 }
                 
-                // Check if config has been updated from defaults
-                if (SUPABASE_URL !== 'https://eiigbmrjtwndanywrcqp.supabase.co' && SUPABASE_ANON_KEY !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s') {
+                if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY') {
                     sb_client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                     
-                    // Check for existing session
                     const { data: { session } } = await sb_client.auth.getSession();
                     if (session) {
                         currentUser = session.user;
                         useCloud = true;
                         await loadFromCloud();
                     } else {
-                        // Sign in anonymously
                         await signInAnonymously();
                     }
                     
-                    // Listen for auth changes
                     sb_client.auth.onAuthStateChange(async (event, session) => {
                         if (session) {
                             currentUser = session.user;
@@ -651,10 +638,10 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
                     console.log('Supabase not configured - using localStorage only');
                     useCloud = false;
                 }
+                */
             } catch (e) {
                 console.error('Supabase initialization error:', e);
                 useCloud = false;
-                // App will continue working with localStorage
             }
         }
 
@@ -1599,10 +1586,11 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
                 statusDiv.style.background = '#E8F5E9';
             } else {
                 statusDiv.innerHTML = `
-                    <p style="margin-bottom: 5px; font-weight: 700;">⚠️ Cloud Storage Not Configured</p>
-                    <p style="font-size: 0.85rem;">Data only saved locally - may be lost on updates</p>
+                    <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
+                    <p style="font-size: 0.85rem;">Your data is saved in your browser</p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Cloud sync disabled - complete setup below to enable</p>
                 `;
-                statusDiv.style.background = '#FFF8E1';
+                statusDiv.style.background = '#E3F2FD';
             }
         }
 
@@ -1704,13 +1692,6 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
