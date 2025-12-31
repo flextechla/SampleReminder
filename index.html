@@ -222,21 +222,27 @@
 
         <!-- List View -->
         <div id="listView">
-            <!-- Filters -->
-            <div class="filter-scroll">
-                <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All Samples</button>
+        <!-- Filters and Sort - Compact Layout -->
+        <div style="margin-bottom: 15px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
                 <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
                 <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                 <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
                 <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted</button>
             </div>
+        </div>
 
-            <!-- Sort -->
-            <div class="filter-scroll">
-                <button class="filter-btn active" id="sort-due" onclick="setSort('dueDate')">Sort: Due Date</button>
-                <button class="filter-btn" id="sort-brand" onclick="setSort('brand')">Sort: Brand</button>
-                <button class="filter-btn" id="sort-received" onclick="setSort('received')">Sort: Received</button>
-            </div>
+        <!-- Sort Dropdown -->
+        <div class="form-group" style="margin-bottom: 15px;">
+            <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 10px;">
+                <option value="dueDate">Sort by: Due Date</option>
+                <option value="brand">Sort by: Brand</option>
+                <option value="received">Sort by: Received Date</option>
+            </select>
+        </div>
 
             <!-- Completed Section (Collapsible) -->
             <div class="collapsible-section" id="completedSection" style="display:none;">
@@ -576,12 +582,12 @@
                     <div class="progress-container"><div class="progress-fill" style="width:${info.percent}%; background-color:${info.color}"></div></div>
                     
                     <div class="action-container">
-                        ${!s.done ? `<button class="row-btn btn-full-width" onclick="markDone('${s.id}')">✓ Mark Video Posted</button>` : `<div class="row-btn btn-completed">Posted Successfully ✅</div>`}
+                        ${!s.done ? `<button class="row-btn btn-full-width" onclick="event.stopPropagation(); markDone('${s.id}')">✓ Mark Video Posted</button>` : `<div class="row-btn btn-completed">Posted Successfully ✅</div>`}
                         
                         <div class="btn-row-3">
-                            ${s.link ? `<button class="row-btn btn-secondary" onclick="openInAppBrowser('${s.link}')">🛍️ Shop</button>` : '<span></span>'}
-                            <button class="row-btn btn-secondary" onclick="duplicateSample('${s.id}')">📋 Copy</button>
-                            <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
+                            ${s.link ? `<button class="row-btn btn-secondary" onclick="event.stopPropagation(); openInAppBrowser('${s.link}')">🛍️ Shop</button>` : '<span></span>'}
+                            <button class="row-btn btn-secondary" onclick="event.stopPropagation(); duplicateSample('${s.id}')">📋 Copy</button>
+                            <button class="row-btn btn-secondary" onclick="event.stopPropagation(); openModal('${s.id}')">✏️ Edit</button>
                         </div>
                     </div>
                 </div>
@@ -881,11 +887,7 @@
 
         function setSort(sort) {
             currentSort = sort;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                if (btn.id.startsWith('sort-')) {
-                    btn.classList.toggle('active', btn.id === 'sort-'+sort);
-                }
-            });
+            document.getElementById('sortSelect').value = sort;
             render();
         }
 
@@ -1154,6 +1156,7 @@
     </script>
 </body>
 </html>
+
 
 
 
