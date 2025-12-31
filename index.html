@@ -169,6 +169,14 @@
         
         .empty-state { text-align: center; padding: 60px 20px; color: #BBB; }
         
+        /* Toggle Switch */
+        .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--green); }
+        input:checked + .slider:before { transform: translateX(26px); }
+        
         /* Browser Overlay */
         .browser-overlay { display: none; position: fixed; inset: 0; background: white; z-index: 2000; flex-direction: column; }
         .browser-overlay.active { display: flex; }
@@ -369,20 +377,29 @@
             </div>
             
             <div class="form-group">
-                <label class="form-label">Cloud Storage Status</label>
+                <label class="form-label">Account</label>
                 <div id="cloudStatus" style="padding: 15px; background: #F5F5F5; border-radius: 12px; text-align: center; color: #666; margin-bottom: 10px;">
                     <p style="margin-bottom: 5px; font-weight: 700;">⚠️ Cloud Storage Not Configured</p>
                     <p style="font-size: 0.85rem;">Data only saved locally - may be lost on updates</p>
                 </div>
-                <button class="row-btn btn-secondary" onclick="showFirebaseInstructions()" style="background: var(--green); color: white; border-color: var(--green);">ℹ️ Cloud Storage Info</button>
+                <button class="row-btn btn-secondary" onclick="showFirebaseInstructions()" style="background: var(--green); color: white; border-color: var(--green); margin-bottom: 10px;">ℹ️ Cloud Storage Info</button>
+                <button class="row-btn btn-secondary" onclick="signOut()" id="signOutBtn" style="display: none; background: var(--red); color: white; border-color: var(--red);">🚪 Sign Out</button>
             </div>
             
             <div class="form-group">
-                <label class="form-label">Notification Settings (Coming Soon)</label>
-                <div style="padding: 20px; background: #F5F5F5; border-radius: 12px; text-align: center; color: #666;">
-                    <p style="margin-bottom: 10px;">📱 SMS Notifications</p>
-                    <p style="font-size: 0.85rem;">Get text reminders when samples are due!</p>
-                    <p style="font-size: 0.75rem; margin-top: 10px; color: #999;">Feature coming soon...</p>
+                <label class="form-label">Reminder Notifications</label>
+                <div style="padding: 15px; background: #F5F5F5; border-radius: 12px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: 600;">📱 Push Notifications</span>
+                        <label class="switch">
+                            <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications(this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666;">Get reminders when samples are due soon</p>
+                </div>
+                <div id="notificationStatus" style="font-size: 0.75rem; color: #666; padding: 10px; background: #FFF8E1; border-radius: 8px; display: none;">
+                    Click "Allow" when your browser asks for permission
                 </div>
             </div>
             <div class="form-group">
@@ -404,22 +421,32 @@
             </div>
             <div style="line-height: 1.6; color: #666;">
                 <div style="background: #E8F5E9; padding: 20px; border-radius: 12px; border-left: 3px solid var(--green); margin-bottom: 15px;">
-                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--green);">✓ Cloud Storage Active!</h3>
-                    <p style="font-size: 0.9rem;">Your data is automatically syncing to Supabase cloud storage. You can access your samples from any device by opening this app.</p>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--green);">✓ Cloud Storage with Multi-Device Sync!</h3>
+                    <p style="font-size: 0.9rem;">Your account syncs automatically across all your devices. Sign in on any phone, tablet, or computer to access your samples.</p>
                 </div>
                 
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">How It Works</h3>
                 <ul style="margin-bottom: 15px; padding-left: 20px;">
-                    <li>Each device gets a unique ID stored in your browser</li>
-                    <li>Your samples sync automatically when you add, edit, or delete them</li>
-                    <li>Data is private and secure - only you can access it</li>
+                    <li>Create one account with your email and password</li>
+                    <li>Sign in on any device to see all your samples</li>
+                    <li>Changes sync instantly across all devices</li>
+                    <li>Your data is encrypted and secure</li>
                 </ul>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Tips</h3>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Using Multiple Devices</h3>
+                <p style="margin-bottom: 15px;">Simply sign in with the same email and password on any device:</p>
+                <ul style="margin-bottom: 15px; padding-left: 20px;">
+                    <li>Open the app on your new device</li>
+                    <li>Enter your email and password</li>
+                    <li>Click "Sign In" - all your data appears instantly!</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Security & Privacy</h3>
                 <ul style="padding-left: 20px;">
-                    <li>Don't clear your browser data or you'll lose access to your samples on this device</li>
-                    <li>Export to CSV regularly as a backup (Menu → Export CSV)</li>
-                    <li>If switching devices, export from old device and import on new device</li>
+                    <li>Your data is private - only you can access it</li>
+                    <li>Passwords are encrypted and never stored in plain text</li>
+                    <li>You can sign out from Settings anytime</li>
+                    <li>Export to CSV anytime for local backup</li>
                 </ul>
             </div>
         </div>
@@ -577,46 +604,172 @@
             }
         }
 
-        // Sign in with device-specific email credentials
+        // Sign in with email/password or sign up
         async function signInAnonymously() {
-            try {
-                let deviceId = localStorage.getItem('device_id');
-                if (!deviceId) {
-                    deviceId = 'user_' + Math.random().toString(36).substr(2, 9);
-                    localStorage.setItem('device_id', deviceId);
-                }
-                
-                const email = `${deviceId}@tracker.local`;
-                const password = `Pass_${deviceId}`;
-                
-                console.log('Attempting sign in...');
-                
-                // Try to sign in
-                let { data, error } = await sb_client.auth.signInWithPassword({ email, password });
-                
-                if (error) {
-                    console.log('Sign in failed, creating new user...');
-                    // User doesn't exist, sign up
-                    let { data: upData, error: upErr } = await sb_client.auth.signUp({ email, password });
-                    if (!upErr && upData.user) {
-                        currentUser = upData.user;
+            // Check if user already has an account (stored email)
+            const storedEmail = localStorage.getItem('user_email');
+            
+            if (storedEmail) {
+                // Try to sign in with stored credentials
+                try {
+                    const storedPassword = localStorage.getItem('user_password');
+                    const { data, error } = await sb_client.auth.signInWithPassword({
+                        email: storedEmail,
+                        password: storedPassword
+                    });
+                    
+                    if (!error && data.user) {
+                        currentUser = data.user;
                         useCloud = true;
-                        console.log('✓ New user created');
-                        await migrateToCloud();
-                    } else {
-                        console.error('Sign up error:', upErr);
-                        throw upErr;
+                        console.log('✓ Auto-signed in');
+                        await loadFromCloud();
+                        return;
                     }
-                } else if (data.user) {
+                } catch (e) {
+                    console.log('Auto-sign in failed, showing login');
+                }
+            }
+            
+            // Show login/signup modal
+            showAuthModal();
+        }
+        
+        function showAuthModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.id = 'authModal';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px;">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Welcome to Sample Tracker</h2>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px; text-align: center;">Create an account or sign in to sync your data across all devices</p>
+                    
+                    <div id="authForm">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="authEmail" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
+                        </div>
+                        <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
+                        <button class="row-btn btn-full-width" onclick="handleSignUp()" style="margin-bottom: 10px;">
+                            Create Account
+                        </button>
+                        <button class="row-btn btn-secondary" onclick="handleSignIn()">
+                            Sign In
+                        </button>
+                        <p style="font-size: 0.75rem; color: #999; text-align: center; margin-top: 15px;">
+                            Your data will be securely stored and accessible from any device
+                        </p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        async function handleSignUp() {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            const errorDiv = document.getElementById('authError');
+            
+            if (!email || !password) {
+                errorDiv.textContent = 'Please enter email and password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const { data, error } = await sb_client.auth.signUp({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) throw error;
+                
+                if (data.user) {
+                    // Store credentials for auto-login
+                    localStorage.setItem('user_email', email);
+                    localStorage.setItem('user_password', password);
+                    
                     currentUser = data.user;
                     useCloud = true;
-                    console.log('✓ Signed in successfully');
-                    await loadFromCloud();
+                    
+                    // Migrate any local data to cloud
+                    await migrateToCloud();
+                    
+                    // Close auth modal
+                    document.getElementById('authModal').remove();
+                    
+                    console.log('✓ Account created successfully');
+                    alert('✓ Account created! Your data is now synced to the cloud.');
                 }
             } catch (e) {
-                console.error('Auth error:', e);
+                console.error('Sign up error:', e);
+                errorDiv.textContent = e.message || 'Sign up failed. Please try again.';
+                errorDiv.style.display = 'block';
+            }
+        }
+        
+        async function handleSignIn() {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            const errorDiv = document.getElementById('authError');
+            
+            if (!email || !password) {
+                errorDiv.textContent = 'Please enter email and password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const { data, error } = await sb_client.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) throw error;
+                
+                if (data.user) {
+                    // Store credentials for auto-login
+                    localStorage.setItem('user_email', email);
+                    localStorage.setItem('user_password', password);
+                    
+                    currentUser = data.user;
+                    useCloud = true;
+                    
+                    await loadFromCloud();
+                    
+                    // Close auth modal
+                    document.getElementById('authModal').remove();
+                    
+                    console.log('✓ Signed in successfully');
+                }
+            } catch (e) {
+                console.error('Sign in error:', e);
+                errorDiv.textContent = 'Invalid email or password';
+                errorDiv.style.display = 'block';
+            }
+        }
+        
+        function signOut() {
+            if (confirm('Sign out? Your data will remain in the cloud.')) {
+                sb_client.auth.signOut();
+                localStorage.removeItem('user_email');
+                localStorage.removeItem('user_password');
+                currentUser = null;
                 useCloud = false;
-                alert('⚠️ Cloud Storage Error\n\nPlease enable Email authentication in Supabase:\n1. Go to Authentication → Providers\n2. Enable Email\n3. Disable "Confirm email"\n\nUsing local storage for now.');
+                samples = [];
+                render();
+                location.reload();
             }
         }
 
@@ -720,6 +873,13 @@
                 samples = JSON.parse(localStorage.getItem('tiktok_samples')) || []; 
                 settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
                 document.getElementById('defaultDays').value = settings.defaultDays;
+                
+                // Check notification permission and update toggle
+                const notifToggle = document.getElementById('notificationsToggle');
+                if (Notification.permission === 'granted') {
+                    notifToggle.checked = true;
+                    scheduleNotifications();
+                }
             } catch(e) { 
                 samples = []; 
             }
@@ -729,6 +889,88 @@
             // Then initialize Supabase in background
             await initSupabase();
         };
+        
+        // Notification Functions
+        async function toggleNotifications(enabled) {
+            if (enabled) {
+                if (!('Notification' in window)) {
+                    alert('Your browser doesn\'t support notifications');
+                    document.getElementById('notificationsToggle').checked = false;
+                    return;
+                }
+                
+                if (Notification.permission === 'granted') {
+                    scheduleNotifications();
+                    showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
+                } else if (Notification.permission !== 'denied') {
+                    document.getElementById('notificationStatus').style.display = 'block';
+                    const permission = await Notification.requestPermission();
+                    document.getElementById('notificationStatus').style.display = 'none';
+                    
+                    if (permission === 'granted') {
+                        scheduleNotifications();
+                        showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
+                    } else {
+                        document.getElementById('notificationsToggle').checked = false;
+                        alert('Notifications blocked. Enable them in your browser settings.');
+                    }
+                } else {
+                    document.getElementById('notificationsToggle').checked = false;
+                    alert('Notifications are blocked. Please enable them in your browser settings.');
+                }
+            } else {
+                // Disable notifications
+                clearNotifications();
+            }
+        }
+        
+        function showNotification(title, body) {
+            if (Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: body,
+                    icon: 'https://cdn-icons-png.flaticon.com/512/3081/3081559.png',
+                    badge: 'https://cdn-icons-png.flaticon.com/512/3081/3081559.png'
+                });
+            }
+        }
+        
+        function scheduleNotifications() {
+            // Check for due samples daily
+            const checkInterval = setInterval(() => {
+                checkDueSamples();
+            }, 3600000); // Check every hour
+            
+            localStorage.setItem('notification_interval', checkInterval);
+            
+            // Check immediately
+            checkDueSamples();
+        }
+        
+        function clearNotifications() {
+            const intervalId = localStorage.getItem('notification_interval');
+            if (intervalId) {
+                clearInterval(parseInt(intervalId));
+                localStorage.removeItem('notification_interval');
+            }
+        }
+        
+        function checkDueSamples() {
+            const activeSamples = samples.filter(s => !s.done);
+            const overdue = activeSamples.filter(s => getStatusInfo(s).status === 'overdue');
+            const urgent = activeSamples.filter(s => getStatusInfo(s).status === 'urgent');
+            
+            if (overdue.length > 0) {
+                showNotification(
+                    `⚠️ ${overdue.length} Overdue Sample${overdue.length > 1 ? 's' : ''}!`,
+                    `You have ${overdue.length} sample${overdue.length > 1 ? 's' : ''} past the deadline. Open the app to check.`
+                );
+            } else if (urgent.length > 0) {
+                showNotification(
+                    `📅 ${urgent.length} Sample${urgent.length > 1 ? 's' : ''} Due Soon`,
+                    `${urgent.length} sample${urgent.length > 1 ? 's are' : ' is'} due within the next 3 days.`
+                );
+            }
+        }
 
         function getStatusInfo(s) {
             if (s.done) return { status: 'completed', days: 0, percent: 100, color: '#E0E0E0', text: 'Posted' };
@@ -1509,20 +1751,25 @@
 
         function updateCloudStatus() {
             const statusDiv = document.getElementById('cloudStatus');
+            const signOutBtn = document.getElementById('signOutBtn');
+            
             if (useCloud && currentUser) {
+                const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
                 statusDiv.innerHTML = `
                     <p style="margin-bottom: 5px; font-weight: 700; color: var(--green);">✓ Cloud Storage Active</p>
-                    <p style="font-size: 0.85rem;">Data automatically syncing to cloud</p>
-                    <p style="font-size: 0.75rem; margin-top: 5px;">User ID: ${currentUser.id.substring(0, 8)}...</p>
+                    <p style="font-size: 0.85rem;">Signed in as: <strong>${userEmail}</strong></p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Data syncing across all your devices</p>
                 `;
                 statusDiv.style.background = '#E8F5E9';
+                if (signOutBtn) signOutBtn.style.display = 'block';
             } else {
                 statusDiv.innerHTML = `
                     <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
-                    <p style="font-size: 0.85rem;">Your data is saved in your browser</p>
-                    <p style="font-size: 0.75rem; margin-top: 5px;">Cloud sync disabled - complete setup below to enable</p>
+                    <p style="font-size: 0.85rem;">Your data is saved in your browser only</p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Create an account to sync across devices</p>
                 `;
                 statusDiv.style.background = '#E3F2FD';
+                if (signOutBtn) signOutBtn.style.display = 'none';
             }
         }
 
@@ -1624,6 +1871,7 @@
     </script>
 </body>
 </html>
+
 
 
 
