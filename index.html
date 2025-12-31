@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
     <link rel="manifest" href='data:application/manifest+json,{"name":"SampleTracker","short_name":"SampleTrack","display":"standalone","background_color":"#FE2C55","theme_color":"#FE2C55","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3081/3081559.png","sizes":"512x512","type":"image/png"}]}'>
 
-    <title>SampleReminder - TikTok Shop Test</title>
+    <title>SampleReminder - TikTok Ship Tracker</title>
     
     <style>
         :root { --primary: #FE2C55; --dark: #121212; --bg: #F8F9FA; --surface: #FFFFFF; --green: #00C853; --yellow: #FFB300; --red: #FF3B30; --border: #E0E0E0; --shadow: 0 4px 12px rgba(0,0,0,0.08); }
@@ -74,7 +74,7 @@
     </style>
 </head>
 <body>
-    <div class="header"><h1><span>TikTok</span> Shop Test</h1></div>
+    <div class="header"><h1><span>TikTok</span> Ship Tracker</h1></div>
     
     <div class="container">
         <div class="stats-grid">
@@ -202,7 +202,7 @@
                             ${!s.done ? `<button class="row-btn btn-full-width" onclick="markDone('${s.id}')">Mark Video Posted</button>` : `<div class="row-btn btn-completed">Posted Successfully ✅</div>`}
                             
                             <div class="btn-row-2">
-                                ${s.link ? `<a href="${s.link}" target="_blank" rel="noopener noreferrer" class="row-btn btn-secondary">🛍️ Shop</a>` : '<span></span>'}
+                                ${s.link ? `<button class="row-btn btn-secondary" onclick="openInTikTok('${s.link}')">📱 Open in TikTok</button>` : '<span></span>'}
                                 <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
                             </div>
                         </div>
@@ -237,9 +237,31 @@
         function markDone(id) { samples = samples.map(s => s.id === id ? {...s, done: true} : s); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); }
         function deleteSample(id) { if (confirm("Delete this sample?")) { samples = samples.filter(s => s.id !== id); localStorage.setItem('tiktok_samples', JSON.stringify(samples)); render(); closeModal(); } }
         function setFilter(f) { currentFilter = f; document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.id === 'f-'+f)); render(); }
+        
+        function openInTikTok(link) {
+            // Try to open in TikTok app first
+            // Extract the path from the URL to construct a TikTok deep link
+            try {
+                const url = new URL(link);
+                const path = url.pathname + url.search;
+                const deepLink = 'snssdk1233://aweme/detail' + path;
+                
+                // Try to open in TikTok app
+                window.location.href = deepLink;
+                
+                // Fallback to web browser after a short delay if app doesn't open
+                setTimeout(() => {
+                    window.open(link, '_blank', 'noopener,noreferrer');
+                }, 1500);
+            } catch (e) {
+                // If URL parsing fails, just open in browser
+                window.open(link, '_blank', 'noopener,noreferrer');
+            }
+        }
     </script>
 </body>
 </html>
+
 
 
 
