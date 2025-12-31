@@ -200,15 +200,15 @@
     <div class="container">
         <!-- Stats Dashboard -->
         <div class="stats-grid">
-            <div class="stat-card" onclick="setFilter('overdue'); analyticsFilter='overdue';">
+            <div class="stat-card" onclick="setFilterAndAnalytics('overdue')">
                 <div class="stat-number" style="color:var(--red)" id="statOverdue">0</div>
                 <div class="stat-label">Overdue</div>
             </div>
-            <div class="stat-card" onclick="setFilter('urgent'); analyticsFilter='urgent';">
+            <div class="stat-card" onclick="setFilterAndAnalytics('urgent')">
                 <div class="stat-number" style="color:var(--yellow)" id="statUrgent">0</div>
                 <div class="stat-label">Due Soon</div>
             </div>
-            <div class="stat-card" onclick="setFilter('good'); analyticsFilter='good';">
+            <div class="stat-card" onclick="setFilterAndAnalytics('good')">
                 <div class="stat-number" style="color:var(--green)" id="statGood">0</div>
                 <div class="stat-label">On Track</div>
             </div>
@@ -1023,6 +1023,11 @@
             render();
         }
 
+        function setFilterAndAnalytics(f) {
+            analyticsFilter = f;
+            setFilter(f);
+        }
+
         function setSort(sort) {
             currentSort = sort;
             document.getElementById('sortSelect').value = sort;
@@ -1345,6 +1350,7 @@
         function openInAppBrowser(link) {
             document.getElementById('browserFrame').src = link;
             document.getElementById('browserOverlay').classList.add('active
+
 
 
 
