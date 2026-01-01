@@ -15,7 +15,6 @@
     <title>Sample Tracker Pro</title>
     
     <script>
-        // Generate manifest dynamically with proper icon
         const manifestData = {
             "name": "Sample Tracker Pro",
             "short_name": "Samples",
@@ -36,8 +35,6 @@
         document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
     </script>
     
-    <title>Sample Tracker Pro</title>
-    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -52,7 +49,21 @@
             --blue: #2196F3; 
             --purple: #9C27B0; 
             --border: #E0E0E0; 
+            --text-main: #121212;
+            --text-secondary: #666666;
             --shadow: 0 4px 12px rgba(0,0,0,0.08); 
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --primary: #FF4066; 
+            --dark: #FFFFFF; 
+            --bg: #121212; 
+            --surface: #1E1E1E; 
+            --border: #333333; 
+            --text-main: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         
         * { 
@@ -65,10 +76,20 @@
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
             background: var(--bg); 
-            color: var(--dark); 
+            color: var(--text-main); 
             overflow-x: hidden;
             overscroll-behavior-y: contain;
+            transition: background 0.3s, color 0.3s;
         }
+
+        /* Compact Mode Overrides */
+        body.compact-mode .sample-card { padding: 8px; margin-bottom: 10px; }
+        body.compact-mode .photo-row, body.compact-mode .notes-section { display: none; }
+        body.compact-mode .days-badge { margin-bottom: 5px; font-size: 0.65rem; padding: 2px 8px; }
+        body.compact-mode .product-name { font-size: 0.95rem; margin: 2px 0 4px 0; }
+        body.compact-mode .checklist-item { font-size: 0.75rem; margin-bottom: 2px; }
+        body.compact-mode .row-btn { padding: 8px; font-size: 0.85rem; }
+        body.compact-mode .action-container { gap: 6px; margin-top: 6px; }
         
         /* Landing Page Styles */
         #landingPage {
@@ -76,7 +97,7 @@
             background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%);
             display: none;
             flex-direction: column;
-            padding: 20px 20px 140px 20px; /* Added padding for sticky footer */
+            padding: 20px 20px 180px 20px; /* Padding for sticky footer */
         }
         
         #landingPage.active {
@@ -88,25 +109,25 @@
             width: 100%;
             text-align: center;
             color: white;
-            margin: auto; /* Center content vertically */
+            margin: auto;
         }
-        
-        /* Sticky Footer for Landing Page */
+
+        /* Sticky Footer Bar */
         .landing-sticky-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
-            padding: 20px;
+            background: var(--surface);
+            padding: 25px 20px;
             border-radius: 30px 30px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
-
+        
         .app-icon {
             width: 120px;
             height: 120px;
@@ -173,7 +194,6 @@
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s;
-            margin-bottom: 5px; /* Reduced margin since we are in flex gap */
         }
         
         .landing-btn:active {
@@ -186,13 +206,13 @@
         }
         
         .btn-secondary {
-            background: #F0F0F0;
-            color: var(--dark);
+            background: var(--bg);
+            color: var(--text-main);
             border: 1px solid var(--border);
         }
         
         .landing-links {
-            margin-top: 10px;
+            margin-top: 5px;
             display: flex;
             justify-content: center;
             gap: 20px;
@@ -200,7 +220,7 @@
         }
         
         .landing-link {
-            color: #666;
+            color: var(--text-secondary);
             text-decoration: none;
             opacity: 0.9;
             border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -237,6 +257,7 @@
         .header h1 { 
             font-size: 1.3rem; 
             font-weight: 800; 
+            color: var(--text-main);
         }
         
         .header h1 span { 
@@ -254,6 +275,7 @@
             font-size: 1.3rem; 
             cursor: pointer; 
             padding: 5px; 
+            color: var(--text-main);
         }
         
         .add-sample-btn { 
@@ -285,7 +307,8 @@
             border: 1.5px solid var(--border); 
             border-radius: 25px; 
             font-size: 0.9rem; 
-            background: #F9F9F9; 
+            background: var(--bg); 
+            color: var(--text-main);
             margin-bottom: 10px;
         }
         
@@ -311,7 +334,7 @@
             font-weight: 700; 
             cursor: pointer; 
             transition: all 0.2s; 
-            color: #666; 
+            color: var(--text-secondary); 
         }
         
         .view-btn:active { 
@@ -325,7 +348,7 @@
         }
         
         .control-section { 
-            background: white; 
+            background: var(--surface); 
             border-radius: 12px; 
             padding: 15px; 
             margin-bottom: 12px;
@@ -338,7 +361,7 @@
             font-size: 0.75rem; 
             font-weight: 800; 
             text-transform: uppercase; 
-            color: #999; 
+            color: var(--text-secondary); 
             margin-bottom: 10px; 
             letter-spacing: 0.5px; 
         }
@@ -350,7 +373,7 @@
             border-radius: 25px; 
             font-size: 0.85rem; 
             font-weight: 700; 
-            color: #666; 
+            color: var(--text-secondary); 
             white-space: nowrap; 
             cursor: pointer; 
             transition: all 0.2s; 
@@ -371,14 +394,15 @@
             bottom: 0; 
             left: 0; 
             right: 0; 
-            background: var(--dark); 
-            color: white; 
+            background: var(--surface); 
+            color: var(--text-main); 
             padding: 15px; 
             display: none; 
             justify-content: space-between; 
             align-items: center; 
             z-index: 99; 
             box-shadow: 0 -4px 12px rgba(0,0,0,0.2); 
+            border-top: 1px solid var(--border);
         }
         
         .batch-bar.active { 
@@ -433,7 +457,7 @@
         
         .brand-name { 
             font-size: 0.75rem; 
-            color: #888; 
+            color: var(--text-secondary); 
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
@@ -442,7 +466,7 @@
         .product-name { 
             font-size: 1.1rem; 
             font-weight: 700; 
-            color: var(--dark); 
+            color: var(--text-main); 
             margin: 4px 0 8px 0; 
             line-height: 1.2; 
         }
@@ -476,6 +500,12 @@
             color: #666; 
         }
         
+        /* Dark mode overrides for badges */
+        [data-theme="dark"] .days-badge.overdue { background: rgba(255, 59, 48, 0.2); color: #FF6B6B; }
+        [data-theme="dark"] .days-badge.urgent { background: rgba(255, 179, 0, 0.2); color: #FFCA28; }
+        [data-theme="dark"] .days-badge.good { background: rgba(0, 200, 83, 0.2); color: #69F0AE; }
+        [data-theme="dark"] .days-badge.completed { background: #333; color: #aaa; }
+
         .tags-row { 
             display: flex; 
             gap: 6px; 
@@ -491,6 +521,7 @@
             background: #E3F2FD; 
             color: #1976D2; 
         }
+        [data-theme="dark"] .tag { background: rgba(33, 150, 243, 0.2); color: #64B5F6; }
         
         .photo-row { 
             display: flex; 
@@ -514,10 +545,12 @@
             font-size: 0.85rem; 
             margin-bottom: 10px; 
             border-left: 3px solid var(--yellow); 
+            color: #333;
         }
+        [data-theme="dark"] .notes-section { background: rgba(255, 255, 255, 0.05); color: #ddd; border-left-color: var(--yellow); }
         
         .checklist { 
-            background: #F5F5F5; 
+            background: var(--bg); 
             padding: 12px; 
             border-radius: 10px; 
             margin-bottom: 10px; 
@@ -529,6 +562,7 @@
             gap: 8px; 
             margin-bottom: 6px; 
             font-size: 0.85rem; 
+            color: var(--text-main);
         }
         
         .checklist-item:last-child { 
@@ -545,7 +579,7 @@
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 10px; 
-            background: #FAFAFA; 
+            background: var(--bg); 
             padding: 12px; 
             border-radius: 10px; 
             font-size: 0.85rem; 
@@ -553,7 +587,7 @@
         }
         
         .meta-label { 
-            color: #888; 
+            color: var(--text-secondary); 
             font-size: 0.7rem; 
             display: block; 
             margin-bottom: 2px; 
@@ -562,13 +596,13 @@
         
         .meta-value { 
             font-weight: 700; 
-            color: #333; 
+            color: var(--text-main); 
         }
         
         .progress-container { 
             width: 100%; 
             height: 8px; 
-            background: #eee; 
+            background: var(--border); 
             border-radius: 4px; 
             margin: 10px 0; 
             overflow: hidden; 
@@ -616,6 +650,7 @@
             border: 1.5px solid var(--green); 
             pointer-events: none; 
         }
+        [data-theme="dark"] .btn-completed { background: rgba(0, 200, 83, 0.2); }
         
         .btn-row-2 { 
             display: grid; 
@@ -630,8 +665,8 @@
         }
         
         .btn-secondary { 
-            background: white; 
-            color: var(--dark); 
+            background: var(--surface); 
+            color: var(--text-main); 
             border: 1.5px solid var(--border); 
         }
         
@@ -653,7 +688,7 @@
         }
         
         .modal-content { 
-            background: white; 
+            background: var(--surface); 
             width: 100%; 
             max-width: 500px; 
             border-radius: 24px; 
@@ -661,6 +696,7 @@
             max-height: 90vh; 
             overflow-y: auto; 
             margin: auto; 
+            color: var(--text-main);
         }
         
         .modal-header { 
@@ -680,7 +716,7 @@
             border: none; 
             font-size: 1.8rem; 
             cursor: pointer; 
-            color: #999; 
+            color: var(--text-secondary); 
         }
         
         .form-group { 
@@ -692,16 +728,18 @@
             font-weight: 700; 
             font-size: 0.85rem; 
             margin-bottom: 6px; 
+            color: var(--text-main);
         }
         
         .form-input, .form-textarea, .form-select { 
             width: 100%; 
             padding: 12px; 
-            border: 1.5px solid #eee; 
+            border: 1.5px solid var(--border); 
             border-radius: 12px; 
             font-size: 1rem; 
-            background: #F9F9F9; 
+            background: var(--bg); 
             font-family: inherit; 
+            color: var(--text-main);
         }
         
         .form-textarea { 
@@ -723,9 +761,9 @@
             flex-wrap: wrap; 
             gap: 6px; 
             padding: 8px; 
-            border: 1.5px solid #eee; 
+            border: 1.5px solid var(--border); 
             border-radius: 12px; 
-            background: #F9F9F9; 
+            background: var(--bg); 
             min-height: 45px; 
         }
         
@@ -753,6 +791,7 @@
             flex: 1; 
             min-width: 100px; 
             font-size: 0.9rem; 
+            color: var(--text-main);
         }
         
         .photo-upload-grid { 
@@ -812,7 +851,7 @@
             text-align: center; 
             font-weight: 700; 
             font-size: 0.7rem; 
-            color: #666; 
+            color: var(--text-secondary); 
             padding: 8px 0; 
         }
         
@@ -826,23 +865,27 @@
             justify-content: center; 
             font-size: 0.75rem; 
             cursor: pointer; 
-            background: white; 
+            background: var(--surface); 
             position: relative; 
+            color: var(--text-main);
         }
         
         .calendar-day.other-month { 
             color: #CCC; 
         }
+        [data-theme="dark"] .calendar-day.other-month { color: #555; }
         
         .calendar-day.has-items { 
             background: #FFF3E0; 
             border-color: var(--yellow); 
         }
+        [data-theme="dark"] .calendar-day.has-items { background: rgba(255, 179, 0, 0.1); }
         
         .calendar-day.has-items.overdue { 
             background: #FFEBEE; 
             border-color: var(--red); 
         }
+        [data-theme="dark"] .calendar-day.has-items.overdue { background: rgba(255, 59, 48, 0.1); }
         
         .calendar-day-number { 
             font-weight: 700; 
@@ -883,7 +926,7 @@
         .analytics-card { 
             text-align: center; 
             padding: 15px; 
-            background: #FAFAFA; 
+            background: var(--bg); 
             border-radius: 12px; 
         }
         
@@ -895,7 +938,7 @@
         
         .analytics-label { 
             font-size: 0.75rem; 
-            color: #666; 
+            color: var(--text-secondary); 
             font-weight: 600; 
             margin-top: 5px; 
         }
@@ -1072,8 +1115,7 @@
                     <div>Calendar view and analytics</div>
                 </div>
             </div>
-            
-            </div>
+        </div>
 
         <div class="landing-sticky-bar">
             <button class="landing-btn btn-primary" onclick="showAuth('signup')">Create Free Account</button>
@@ -1277,30 +1319,50 @@
             
             <div class="form-group">
                 <label class="form-label">Account</label>
-                <div id="cloudStatus" style="padding: 15px; background: #F5F5F5; border-radius: 12px; text-align: center; color: #666; margin-bottom: 10px;">
+                <div id="cloudStatus" style="padding: 15px; background: var(--bg); border-radius: 12px; text-align: center; color: var(--text-secondary); margin-bottom: 10px;">
                     <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
                     <p style="font-size: 0.85rem;">Your data is saved in your browser</p>
                 </div>
                 <button class="row-btn btn-secondary" onclick="showCloudInfo()" style="background: var(--green); color: white; border-color: var(--green); margin-bottom: 10px;">ℹ️ Cloud Storage Info</button>
-                <button class="row-btn btn-secondary" onclick="signOut()" id="signOutBtn" style="display: none; background: var(--red); color: white; border-color: var(--red);">🚪 Sign Out</button>
             </div>
             
             <div class="form-group">
-                <button class="row-btn btn-secondary" onclick="openPrivacy(); closeSettings()" style="margin-bottom: 10px;">🔒 Privacy Policy</button>
-                <button class="row-btn btn-secondary" onclick="openHelp(); closeSettings()">❓ Help</button>
+                <div style="padding: 15px; background: var(--bg); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-weight: 600;">🌙 Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle" onchange="toggleTheme(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div style="padding: 15px; background: var(--bg); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-weight: 600;">📳 Haptic Feedback</span>
+                    <label class="switch">
+                        <input type="checkbox" id="hapticToggle" onchange="toggleHaptic(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div style="padding: 15px; background: var(--bg); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">📱 Compact Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="compactToggle" onchange="toggleCompact(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
             
             <div class="form-group">
                 <label class="form-label">Reminder Notifications</label>
-                <div style="padding: 15px; background: #F5F5F5; border-radius: 12px; margin-bottom: 10px;">
+                <div style="padding: 15px; background: var(--bg); border-radius: 12px; margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="font-weight: 600;">📱 Push Notifications</span>
+                        <span style="font-weight: 600;">🔔 Push Notifications</span>
                         <label class="switch">
                             <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications(this.checked)">
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <p style="font-size: 0.8rem; color: #666; margin-bottom: 12px;">Get reminders when samples are due soon</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 12px;">Get reminders when samples are due soon</p>
                     
                     <div id="reminderSettings" style="display: none;">
                         <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Remind me when samples are:</label>
@@ -1314,7 +1376,7 @@
                         </select>
                     </div>
                 </div>
-                <div id="notificationStatus" style="font-size: 0.75rem; color: #666; padding: 10px; background: #FFF8E1; border-radius: 8px; display: none;">
+                <div id="notificationStatus" style="font-size: 0.75rem; color: var(--text-secondary); padding: 10px; background: #FFF8E1; border-radius: 8px; display: none;">
                     Click "Allow" when your browser asks for permission
                 </div>
             </div>
@@ -1323,6 +1385,24 @@
                 <label class="form-label">Default Days to Post</label>
                 <input type="number" id="defaultDays" class="form-input" value="14" onchange="saveSettings()">
             </div>
+
+            <div class="form-group" style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
+                <label class="form-label" style="color: var(--red);">Danger Zone</label>
+                <button class="row-btn btn-secondary" onclick="openResetModal()" style="color: var(--red); border-color: var(--red);">⚠️ Reset App</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="resetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" style="color: var(--red);">⚠️ Reset App?</h2>
+                <button class="modal-close" onclick="closeResetModal()">×</button>
+            </div>
+            <p style="margin-bottom: 20px;">This will <strong>delete all local data</strong> and reset your settings. If you are logged in, your cloud data will remain safe, but you will be signed out.</p>
+            <p style="margin-bottom: 20px; font-weight: bold;">This action cannot be undone.</p>
+            <button class="row-btn btn-full-width" style="background: var(--red); margin-bottom: 10px;" onclick="confirmReset()">Yes, Reset Everything</button>
+            <button class="row-btn btn-secondary" onclick="closeResetModal()">Cancel</button>
         </div>
     </div>
 
@@ -1332,34 +1412,18 @@
                 <h2 class="modal-title">📦 Cloud Storage Info</h2>
                 <button class="modal-close" onclick="closeCloudInfo()">×</button>
             </div>
-            <div style="line-height: 1.6; color: #666;">
+            <div style="line-height: 1.6; color: var(--text-secondary);">
                 <div style="background: #E8F5E9; padding: 20px; border-radius: 12px; border-left: 3px solid var(--green); margin-bottom: 15px;">
                     <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--green);">✓ Cloud Storage with Multi-Device Sync!</h3>
-                    <p style="font-size: 0.9rem;">Your account syncs automatically across all your devices. Sign in on any phone, tablet, or computer to access your samples.</p>
+                    <p style="font-size: 0.9rem; color: #333;">Your account syncs automatically across all your devices. Sign in on any phone, tablet, or computer to access your samples.</p>
                 </div>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">How It Works</h3>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">How It Works</h3>
                 <ul style="margin-bottom: 15px; padding-left: 20px;">
                     <li>Create one account with your email and password</li>
                     <li>Sign in on any device to see all your samples</li>
                     <li>Changes sync instantly across all devices</li>
                     <li>Your data is encrypted and secure</li>
-                </ul>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Using Multiple Devices</h3>
-                <p style="margin-bottom: 15px;">Simply sign in with the same email and password on any device:</p>
-                <ul style="margin-bottom: 15px; padding-left: 20px;">
-                    <li>Open the app on your new device</li>
-                    <li>Enter your email and password</li>
-                    <li>Click "Sign In" - all your data appears instantly!</li>
-                </ul>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Security & Privacy</h3>
-                <ul style="padding-left: 20px;">
-                    <li>Your data is private - only you can access it</li>
-                    <li>Passwords are encrypted and never stored in plain text</li>
-                    <li>You can sign out from Settings anytime</li>
-                    <li>Export to CSV anytime for local backup</li>
                 </ul>
             </div>
         </div>
@@ -1371,11 +1435,11 @@
                 <h2 class="modal-title">🔒 Privacy Policy</h2>
                 <button class="modal-close" onclick="closePrivacy()">×</button>
             </div>
-            <div style="line-height: 1.6; color: #666;">
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Data Storage</h3>
+            <div style="line-height: 1.6; color: var(--text-secondary);">
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">Data Storage</h3>
                 <p style="margin-bottom: 15px;">Your data is stored securely in the cloud using Supabase. We do not share your information with third parties.</p>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">What We Store</h3>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">What We Store</h3>
                 <ul style="margin-bottom: 15px; padding-left: 20px;">
                     <li>Product and brand information</li>
                     <li>Dates and deadlines</li>
@@ -1384,14 +1448,8 @@
                     <li>Your app settings and preferences</li>
                 </ul>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Your Control</h3>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">Your Control</h3>
                 <p style="margin-bottom: 15px;">You have full control over your data. You can export it as CSV, delete individual items, or delete your entire account.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Third-Party Links</h3>
-                <p style="margin-bottom: 15px;">This app may contain links to external websites. We are not responsible for the privacy practices of these sites.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Updates</h3>
-                <p>This privacy policy may be updated from time to time. Continued use of the app constitutes acceptance of any changes.</p>
             </div>
         </div>
     </div>
@@ -1435,31 +1493,31 @@
                 <button class="modal-close" onclick="closeHelp()">×</button>
             </div>
             <div style="line-height: 1.6;">
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📋 Getting Started</h3>
-                <p style="margin-bottom: 15px; color: #666;">Click <strong>Add New Sample</strong> at the top to add a product. Fill in the product details, received date, and deadline.</p>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">📋 Getting Started</h3>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Click <strong>Add New Sample</strong> at the top to add a product. Fill in the product details, received date, and deadline.</p>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🎯 Quick Actions</h3>
-                <ul style="margin-bottom: 15px; padding-left: 20px; color: #666;">
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">🎯 Quick Actions</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px; color: var(--text-secondary);">
                     <li><strong>Edit:</strong> Update sample details</li>
                     <li><strong>Delete:</strong> Remove a sample</li>
                     <li><strong>Checkbox:</strong> Select multiple samples for batch actions</li>
                     <li><strong>Mark Posted:</strong> Mark video as completed</li>
                 </ul>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🔍 Filtering & Sorting</h3>
-                <p style="margin-bottom: 15px; color: #666;">Use the filter buttons to view specific categories. Sort samples by due date, brand, or received date.</p>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">🔍 Filtering & Sorting</h3>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Use the filter buttons to view specific categories. Sort samples by due date, brand, or received date.</p>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">✅ Video Checklist</h3>
-                <p style="margin-bottom: 15px; color: #666;">Track your progress with the Filmed → Edited → Posted checklist on each sample card.</p>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">✅ Video Checklist</h3>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Track your progress with the Filmed → Edited → Posted checklist on each sample card.</p>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📅 Calendar View</h3>
-                <p style="margin-bottom: 15px; color: #666;">Switch to calendar view to see all your deadlines in a monthly layout.</p>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">📅 Calendar View</h3>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Switch to calendar view to see all your deadlines in a monthly layout.</p>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📊 Analytics</h3>
-                <p style="margin-bottom: 15px; color: #666;">Tap the chart icon in the header to view your completion stats.</p>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">📊 Analytics</h3>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Tap the chart icon in the header to view your completion stats.</p>
                 
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">💾 Export & Backup</h3>
-                <p style="margin-bottom: 15px; color: #666;">Export your data as CSV from the menu.</p>
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">💾 Export & Backup</h3>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Export your data as CSV from the menu.</p>
             </div>
         </div>
     </div>
@@ -1467,12 +1525,12 @@
     <div id="installModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">📲 Install as an App</h2>
+                <h2 class="modal-title">📲 Install as App</h2>
                 <button class="modal-close" onclick="closeInstall()">×</button>
             </div>
             <div style="line-height: 1.6;">
                 <div style="background: #FFF8E1; padding: 15px; border-radius: 12px; border-left: 4px solid var(--yellow); margin-bottom: 20px;">
-                    <p style="font-size: 0.95rem; margin-bottom: 10px;">For the best experience, add Sample Tracker to your home screen:</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 10px; color: #444;">For the best experience, add Sample Tracker to your home screen:</p>
                     <p style="margin-bottom: 10px; color: #444;"><strong>iOS (iPhone/iPad):</strong> Tap the <span style="font-size: 1.2rem;">⎋</span> (Share) button in Safari, then scroll down and tap <strong>"Add to Home Screen"</strong>.</p>
                     <p style="color: #444;"><strong>Android:</strong> Tap the <span style="font-size: 1.2rem;">⋮</span> menu in Chrome and select <strong>"Install App"</strong> or <strong>"Add to Home Screen"</strong>.</p>
                 </div>
@@ -1517,6 +1575,8 @@
         let tempTags = [];
         let tempPhotos = [];
         let calendarDate = new Date();
+        let hapticEnabled = false;
+        let compactMode = false;
 
         // ==================== INITIALIZATION ====================
         async function initSupabase() {
@@ -1595,7 +1655,7 @@
                         ` : ''}
                         <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
                             <input type="checkbox" id="rememberMe" checked style="width: 18px; height: 18px; cursor: pointer;">
-                            <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem;">Keep me logged in</label>
+                            <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem; color: var(--text-main);">Keep me logged in</label>
                         </div>
                         <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
                         <button class="row-btn btn-full-width" onclick="handleAuth('${mode}')" style="margin-bottom: 10px;">
@@ -1769,6 +1829,51 @@
             setTimeout(() => checkAndShowInstallPrompt(), 2000);
         }
 
+        // ==================== THEME HANDLING ====================
+        function toggleTheme(isDark) {
+            triggerHaptic();
+            const html = document.documentElement;
+            if (isDark) {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('darkModeToggle').checked = true;
+            }
+        }
+
+        // ==================== HAPTIC & COMPACT ====================
+        function toggleHaptic(enabled) {
+            hapticEnabled = enabled;
+            localStorage.setItem('haptic', enabled);
+            if (enabled) triggerHaptic();
+        }
+
+        function triggerHaptic() {
+            if (hapticEnabled && navigator.vibrate) {
+                navigator.vibrate(15);
+            }
+        }
+
+        function toggleCompact(enabled) {
+            triggerHaptic();
+            compactMode = enabled;
+            localStorage.setItem('compact', enabled);
+            if (enabled) {
+                document.body.classList.add('compact-mode');
+            } else {
+                document.body.classList.remove('compact-mode');
+            }
+        }
+
         // ==================== PWA INSTALL ====================
         let deferredPrompt;
         
@@ -1805,7 +1910,8 @@
                 await deferredPrompt.userChoice;
                 deferredPrompt = null;
             } else {
-                openInstall(); // Opens the instruction modal if prompt not available
+                // If deferredPrompt is null, show the instructions in the install modal
+                openInstall();
             }
             const modal = document.getElementById('installModal');
             if (modal) modal.remove();
@@ -1851,8 +1957,33 @@
             }
         }
 
+        // ==================== RESET ====================
+        function openResetModal() {
+            document.getElementById('resetModal').classList.add('active');
+        }
+
+        function closeResetModal() {
+            document.getElementById('resetModal').classList.remove('active');
+        }
+
+        function confirmReset() {
+            localStorage.clear();
+            samples = [];
+            window.location.reload();
+        }
+
         // ==================== WINDOW LOAD ====================
         window.onload = async () => {
+            loadTheme();
+            
+            const savedHaptic = localStorage.getItem('haptic') === 'true';
+            hapticEnabled = savedHaptic;
+            document.getElementById('hapticToggle').checked = savedHaptic;
+
+            const savedCompact = localStorage.getItem('compact') === 'true';
+            toggleCompact(savedCompact);
+            document.getElementById('compactToggle').checked = savedCompact;
+
             try { 
                 samples = JSON.parse(localStorage.getItem('tiktok_samples')) || []; 
                 settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
@@ -1909,6 +2040,7 @@
 
         // ==================== FILTERING & SORTING ====================
         function setFilter(f) {
+            triggerHaptic();
             currentFilter = f;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('f-' + f).classList.add('active');
@@ -1956,6 +2088,7 @@
 
         // ==================== SELECTION & BATCH ====================
         function toggleSelection(id) {
+            triggerHaptic();
             if (selectedSamples.has(id)) {
                 selectedSamples.delete(id);
             } else {
@@ -1983,6 +2116,7 @@
         }
 
         async function batchMarkDone() {
+            triggerHaptic();
             selectedSamples.forEach(id => {
                 samples = samples.map(s => s.id === id ? {...s, done: true} : s);
             });
@@ -1993,6 +2127,7 @@
         }
 
         async function batchDelete() {
+            triggerHaptic();
             if (confirm(`Delete ${selectedSamples.size} samples?`)) {
                 samples = samples.filter(s => !selectedSamples.has(s.id));
                 selectedSamples.clear();
@@ -2090,12 +2225,14 @@
 
         // ==================== SAMPLE ACTIONS ====================
         async function markDone(id) {
+            triggerHaptic();
             samples = samples.map(s => s.id === id ? {...s, done: true} : s);
             await saveSamples();
             render();
         }
 
         async function deleteSample(id) {
+            triggerHaptic();
             if (confirm('Delete this sample?')) {
                 samples = samples.filter(s => s.id !== id);
                 await saveSamples();
@@ -2105,6 +2242,7 @@
         }
 
         async function toggleCheckbox(id, field) {
+            triggerHaptic();
             samples = samples.map(s => {
                 if (s.id === id) {
                     return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
@@ -2265,6 +2403,7 @@
 
         // ==================== CALENDAR ====================
         function setView(v) {
+            triggerHaptic();
             currentView = v;
             document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('view-' + v).classList.add('active');
