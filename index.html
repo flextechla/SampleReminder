@@ -285,7 +285,8 @@
             background: white; 
             border-radius: 12px; 
             padding: 15px; 
-            margin-bottom: 12px; 
+            margin-bottom: 12px;
+            margin-top: 12px;
             box-shadow: var(--shadow); 
             border: 1px solid var(--border); 
         }
@@ -986,7 +987,7 @@
 </head>
 <body>
     <!-- Landing Page -->
-    <div id="landingPage" style="min-height: 100vh; background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div id="landingPage">
         <div class="landing-content">
             <div class="app-icon">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -1132,8 +1133,11 @@
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <button class="row-btn btn-secondary" onclick="goToLanding(); closeMenu()">🏠 Home</button>
                 <button class="row-btn btn-secondary" onclick="openSettings(); closeMenu()">⚙️ Settings</button>
+                <button class="row-btn btn-secondary" onclick="openSupport(); closeMenu()">💬 Support</button>
+                <button class="row-btn btn-secondary" onclick="openPrivacy(); closeMenu()">🔒 Privacy Policy</button>
                 <button class="row-btn btn-secondary" onclick="exportCSV(); closeMenu()">📥 Export CSV</button>
                 <button class="row-btn btn-secondary" onclick="clearCompleted(); closeMenu()">🧹 Clear Completed</button>
+                <button class="row-btn btn-secondary" id="menuSignOutBtn" onclick="signOut(); closeMenu()" style="display: none; background: var(--red); color: white; border-color: var(--red); margin-top: 10px;">🚪 Sign Out</button>
             </div>
         </div>
     </div>
@@ -1359,6 +1363,53 @@
         </div>
     </div>
 
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">💬 Support</h2>
+                <button class="modal-close" onclick="closeSupport()">×</button>
+            </div>
+            <div style="line-height: 1.6; text-align: center;">
+                <div style="background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); padding: 30px; border-radius: 16px; margin-bottom: 25px; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📧</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; font-size: 1.2rem;">Need Help?</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px;">We're here to help you!</p>
+                    <a href="mailto:support@flextechla.com" style="display: inline-block; background: white; color: var(--primary); padding: 12px 24px; border-radius: 25px; font-weight: 700; text-decoration: none; font-size: 1rem;">
+                        📧 Email Support
+                    </a>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">support@flextechla.com</p>
+                </div>
+                
+                <div style="text-align: left;">
+                    <h3 style="font-weight: 700; margin-bottom: 15px; color: var(--dark);">📋 Quick Help</h3>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Can't log in?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using the same email and password you signed up with.</p>
+                    </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Lost your data?</p>
+                        <p style="font-size: 0.85rem; color: #666;">If you're signed in, your data is safely stored in the cloud. Try refreshing the page.</p>
+                    </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">App not installing?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using Chrome (Android) or Safari (iPhone). Check our install guide for help.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button class="row-btn btn-secondary" onclick="closeSupport(); openHelp()">📖 View Full Help Guide</button>
+                </div>
+                
+                <div style="background: #E3F2FD; padding: 15px; border-radius: 12px; margin-top: 20px; text-align: left;">
+                    <p style="font-size: 0.85rem; color: #666;">
+                        <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Help Modal -->
     <div id="helpModal" class="modal">
         <div class="modal-content">
@@ -1508,6 +1559,10 @@
                             <label class="form-label">Password</label>
                             <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
                         </div>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="rememberMe" checked style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem;">Keep me logged in</label>
+                        </div>
                         <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
                         <button class="row-btn btn-full-width" onclick="handleAuth('${mode}')" style="margin-bottom: 10px;">
                             ${mode === 'signup' ? 'Create Account' : 'Sign In'}
@@ -1524,6 +1579,7 @@
         async function handleAuth(mode) {
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
             const errorDiv = document.getElementById('authError');
             
             if (!email || !password) {
@@ -1554,8 +1610,15 @@
                 if (error) throw error;
                 
                 if (data.user) {
-                    localStorage.setItem('user_email', email);
-                    localStorage.setItem('user_password', password);
+                    // Only save credentials if "Keep me logged in" is checked
+                    if (rememberMe) {
+                        localStorage.setItem('user_email', email);
+                        localStorage.setItem('user_password', password);
+                    } else {
+                        // Clear any old credentials if they unchecked it
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
+                    }
                     
                     currentUser = data.user;
                     useCloud = true;
@@ -1660,52 +1723,6 @@
             document.getElementById('appContainer').classList.add('active');
             render();
             renderCalendar();
-        }
-
-        // ==================== PWA INSTALL ====================
-        let deferredPrompt;
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-
-        function checkAndShowInstallPrompt() {
-            if (window.matchMedia('(display-mode: standalone)').matches) return;
-            if (localStorage.getItem('install_dismissed')) return;
-            showInstallModal();
-        }
-
-        function showInstallModal() {
-            const modal = document.createElement('div');
-            modal.className = 'modal active';
-            modal.id = 'installModal';
-            modal.innerHTML = `
-                <div class="modal-content" style="max-width: 400px; text-align: center;">
-                    <div style="font-size: 4rem; margin-bottom: 15px;">📱</div>
-                    <h2 style="font-weight: 800; font-size: 1.5rem; margin-bottom: 10px;">Install Sample Tracker</h2>
-                    <p style="color: #666; margin-bottom: 25px;">Add to your home screen for quick access!</p>
-                    <button class="row-btn btn-full-width" onclick="installApp()" style="margin-bottom: 10px;">⬇️ Install Now</button>
-                    <button class="row-btn btn-secondary" onclick="dismissInstall()">Maybe Later</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-
-        async function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                await deferredPrompt.userChoice;
-                deferredPrompt = null;
-            }
-            const modal = document.getElementById('installModal');
-            if (modal) modal.remove();
-        }
-
-        function dismissInstall() {
-            localStorage.setItem('install_dismissed', 'true');
-            const modal = document.getElementById('installModal');
-            if (modal) modal.remove();
         }
 
         function goToLanding() {
@@ -1935,15 +1952,15 @@
                         
                         <div class="checklist">
                             <div class="checklist-item">
-                                <input type="checkbox" class="checklist-checkbox" ${s.checklist && s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
                                 <span>🎥 Filmed</span>
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" class="checklist-checkbox" ${s.checklist && s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
                                 <span>✂️ Edited</span>
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" class="checklist-checkbox" ${s.checklist && s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
                                 <span>📱 Posted</span>
                             </div>
                         </div>
@@ -1998,8 +2015,7 @@
         async function toggleCheckbox(id, field) {
             samples = samples.map(s => {
                 if (s.id === id) {
-                    const checklist = s.checklist || { filmed: false, edited: false, posted: false };
-                    return {...s, checklist: {...checklist, [field]: !checklist[field]}};
+                    return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
                 }
                 return s;
             });
@@ -2303,6 +2319,7 @@
         function updateCloudStatus() {
             const statusDiv = document.getElementById('cloudStatus');
             const signOutBtn = document.getElementById('signOutBtn');
+            const menuSignOutBtn = document.getElementById('menuSignOutBtn');
             
             if (useCloud && currentUser) {
                 const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
@@ -2313,6 +2330,7 @@
                 `;
                 statusDiv.style.background = '#E8F5E9';
                 if (signOutBtn) signOutBtn.style.display = 'block';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'block';
             } else {
                 statusDiv.innerHTML = `
                     <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
@@ -2321,6 +2339,7 @@
                 `;
                 statusDiv.style.background = '#E3F2FD';
                 if (signOutBtn) signOutBtn.style.display = 'none';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'none';
             }
         }
 
@@ -2451,6 +2470,14 @@
             document.getElementById('helpModal').classList.remove('active');
         }
 
+        function openSupport() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function closeSupport() {
+            document.getElementById('supportModal').classList.remove('active');
+        }
+
         // ==================== UTILITIES ====================
         function openBrowser(url) {
             document.getElementById('browserFrame').src = url;
@@ -2477,9 +2504,9 @@
                     s.link || '',
                     s.notes || '',
                     (s.tags || []).join('; '),
-                    s.checklist && s.checklist.filmed ? 'Yes' : 'No',
-                    s.checklist && s.checklist.edited ? 'Yes' : 'No',
-                    s.checklist && s.checklist.posted ? 'Yes' : 'No'
+                    s.checklist.filmed ? 'Yes' : 'No',
+                    s.checklist.edited ? 'Yes' : 'No',
+                    s.checklist.posted ? 'Yes' : 'No'
                 ].map(v => `"${v}"`).join(',');
             });
             
