@@ -1672,7 +1672,6 @@
                     
                     console.log(`✓ ${mode === 'signup' ? 'Account created' : 'Signed in'}`);
                 }
-                }
             } catch (e) {
                 console.error('Auth error:', e);
                 errorDiv.textContent = mode === 'signup' ? 'Sign up failed. Email may already be in use.' : 'Invalid email or password';
