@@ -44,6 +44,7 @@
         document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
     </script>
     
+    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -1019,20 +1020,25 @@
     </style>
 </head>
 <body>
+    <!-- Landing Page -->
     <div id="landingPage">
         <div class="landing-content">
             <div class="app-icon">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <rect x="10" y="15" width="80" height="75" rx="5" fill="#FE2C55" opacity="0.1"/>
                     <rect x="15" y="5" width="70" height="10" rx="3" fill="#FE2C55"/>
+                    <!-- Checkboxes -->
                     <rect x="20" y="25" width="10" height="10" rx="2" fill="#00C853"/>
                     <path d="M 22 30 L 25 33 L 28 27" stroke="white" stroke-width="2" fill="none"/>
                     <rect x="35" y="26" width="45" height="3" rx="1.5" fill="#E0E0E0"/>
+                    
                     <rect x="20" y="42" width="10" height="10" rx="2" fill="#00C853"/>
                     <path d="M 22 47 L 25 50 L 28 44" stroke="white" stroke-width="2" fill="none"/>
                     <rect x="35" y="43" width="40" height="3" rx="1.5" fill="#E0E0E0"/>
+                    
                     <rect x="20" y="59" width="10" height="10" rx="2" fill="white" stroke="#E0E0E0" stroke-width="1"/>
                     <rect x="35" y="60" width="50" height="3" rx="1.5" fill="#E0E0E0"/>
+                    
                     <rect x="20" y="76" width="10" height="10" rx="2" fill="white" stroke="#E0E0E0" stroke-width="1"/>
                     <rect x="35" y="77" width="35" height="3" rx="1.5" fill="#E0E0E0"/>
                 </svg>
@@ -1070,6 +1076,7 @@
         </div>
     </div>
 
+    <!-- App Container -->
     <div id="appContainer">
         <div class="header">
             <div class="header-top">
@@ -1099,6 +1106,7 @@
         </div>
         
         <div class="container">
+            <!-- List View -->
             <div id="listView">
                 <div class="control-section">
                     <div class="section-title">Filter Samples</div>
@@ -1124,6 +1132,7 @@
                 <div id="sampleGrid"></div>
             </div>
 
+            <!-- Calendar View -->
             <div id="calendarView" style="display:none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <button class="icon-btn" onclick="changeMonth(-1)">◀</button>
@@ -1136,6 +1145,7 @@
         </div>
     </div>
 
+    <!-- Batch Actions Bar -->
     <div class="batch-bar" id="batchBar">
         <div>
             <strong><span id="selectedCount">0</span> selected</strong>
@@ -1147,6 +1157,7 @@
         </div>
     </div>
 
+    <!-- Menu Modal -->
     <div id="menuModal" class="modal">
         <div class="modal-content" style="max-width: 300px;">
             <div class="modal-header">
@@ -1164,6 +1175,7 @@
         </div>
     </div>
 
+    <!-- Sample Modal -->
     <div id="sampleModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1238,6 +1250,7 @@
         </div>
     </div>
 
+    <!-- Analytics Modal -->
     <div id="analyticsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1248,6 +1261,7 @@
         </div>
     </div>
 
+    <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1305,6 +1319,7 @@
         </div>
     </div>
 
+    <!-- Cloud Info Modal -->
     <div id="cloudInfoModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1344,6 +1359,7 @@
         </div>
     </div>
 
+    <!-- Privacy Modal -->
     <div id="privacyModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1375,6 +1391,7 @@
         </div>
     </div>
 
+    <!-- Support Modal -->
     <div id="supportModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1386,9 +1403,10 @@
                     <div style="font-size: 3rem; margin-bottom: 10px;">📧</div>
                     <h3 style="font-weight: 700; margin-bottom: 10px; font-size: 1.2rem;">Need Help?</h3>
                     <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px;">We're here to help you!</p>
-                    <a href="mailto:support@flextechla.com" style="display: inline-block; background: white; color: var(--primary); padding: 12px 24px; border-radius: 25px; font-weight: 700; text-decoration: none; font-size: 1rem;">
+                    <a href="/cdn-cgi/l/email-protection#b6c5c3c6c6d9c4c2f6d0dad3cec2d3d5dedad798d5d9db" style="display: inline-block; background: white; color: var(--primary); padding: 12px 24px; border-radius: 25px; font-weight: 700; text-decoration: none; font-size: 1rem;">
                         📧 Email Support
                     </a>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6a5a3a6a6b9a4a296b0bab3aea2b3b5bebab7f8b5b9bb">[email&#160;protected]</a></p>
                 </div>
                 
                 <div style="text-align: left;">
@@ -1401,35 +1419,85 @@
                         <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Lost your data?</p>
                         <p style="font-size: 0.85rem; color: #666;">If you're signed in, your data is safely stored in the cloud. Try refreshing the page.</p>
                     </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">App not installing?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using Chrome (Android) or Safari (iPhone). Check our install guide for help.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button class="row-btn btn-secondary" onclick="closeSupport(); openHelp()">📖 View Full Help Guide</button>
+                </div>
+                
+                <div style="background: #E3F2FD; padding: 15px; border-radius: 12px; margin-top: 20px; text-align: left;">
+                    <p style="font-size: 0.85rem; color: #666;">
+                        <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Help Modal -->
     <div id="helpModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">❓ Help Guide</h2>
+                <h2 class="modal-title">❓ Help & Support</h2>
                 <button class="modal-close" onclick="closeHelp()">×</button>
             </div>
             <div style="line-height: 1.6;">
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📋 Getting Started</h3>
                 <p style="margin-bottom: 15px; color: #666;">Click <strong>Add New Sample</strong> at the top to add a product. Fill in the product details, received date, and deadline.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🎯 Quick Actions</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px; color: #666;">
+                    <li><strong>Edit:</strong> Update sample details</li>
+                    <li><strong>Delete:</strong> Remove a sample</li>
+                    <li><strong>Checkbox:</strong> Select multiple samples for batch actions</li>
+                    <li><strong>Mark Posted:</strong> Mark video as completed</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🔍 Filtering & Sorting</h3>
+                <p style="margin-bottom: 15px; color: #666;">Use the filter buttons to view specific categories. Sort samples by due date, brand, or received date.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">✅ Video Checklist</h3>
+                <p style="margin-bottom: 15px; color: #666;">Track your progress with the Filmed → Edited → Posted checklist on each sample card.</p>
+                
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📅 Calendar View</h3>
                 <p style="margin-bottom: 15px; color: #666;">Switch to calendar view to see all your deadlines in a monthly layout.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📊 Analytics</h3>
+                <p style="margin-bottom: 15px; color: #666;">Tap the chart icon in the header to view your completion stats.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">💾 Export & Backup</h3>
+                <p style="margin-bottom: 15px; color: #666;">Export your data as CSV from the menu.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📱 Install as App</h3>
+                <p style="margin-bottom: 15px; color: #666;">On iOS: Tap Share → Add to Home Screen<br>On Android: Tap Menu → Install App</p>
+                
+                <div style="background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); padding: 20px; border-radius: 12px; margin-top: 25px; color: white; text-align: center;">
+                    <p style="font-size: 0.9rem; margin-bottom: 10px; opacity: 0.9;">Need more help?</p>
+                    <p style="font-weight: 700; font-size: 1.1rem;">Contact Support</p>
+                    <a href="/cdn-cgi/l/email-protection#582b2d2828372a2c183e343d202c3d3b303439763b3735" style="display: inline-block; background: white; color: var(--primary); padding: 10px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; margin-top: 10px; font-size: 0.9rem;">
+                        📧 Email Support
+                    </a>
+                    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.9;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02717772726d707642646e677a7667616a6e632c616d6f">[email&#160;protected]</a></p>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Browser Overlay -->
     <div id="browserOverlay" class="browser-overlay">
         <div class="browser-header">
             <button class="browser-close" onclick="closeBrowser()">×</button>
             <div class="browser-title">Product Link</div>
             <div style="width:40px;"></div>
         </div>
-        <iframe id="browserFrame" class="browser-frame"></iframe>
+        <iframe id="browserFrame" class="browser-frame" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
     </div>
 
+    <!-- Photo Viewer Modal -->
     <div id="photoViewerModal" class="modal" onclick="closePhotoViewer()">
         <div class="modal-content" style="max-width: 90%; max-height: 90vh; padding: 0; background: transparent; box-shadow: none;" onclick="event.stopPropagation()">
             <button class="browser-close" onclick="closePhotoViewer()" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; border-radius: 50%; width: 50px; height: 50px; font-size: 2rem; z-index: 10;">×</button>
@@ -1474,6 +1542,7 @@
         // ==================== AUTHENTICATION ====================
         async function signInAnonymously() {
             const storedEmail = localStorage.getItem('user_email');
+            
             if (storedEmail) {
                 try {
                     const storedPassword = localStorage.getItem('user_password');
@@ -1481,18 +1550,26 @@
                         email: storedEmail,
                         password: storedPassword
                     });
+                    
                     if (!error && data.user) {
                         currentUser = data.user;
                         useCloud = true;
+                        console.log('✓ Auto-signed in');
                         await loadFromCloud();
                         showApp();
                         return;
+                    } else {
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
                     }
                 } catch (e) {
+                    console.log('Auto-sign in error, clearing credentials');
                     localStorage.removeItem('user_email');
                     localStorage.removeItem('user_password');
                 }
             }
+            
+            // No credentials or auto-login failed - show landing page
             showLanding();
         }
 
@@ -1506,102 +1583,444 @@
                         <h2 class="modal-title">${mode === 'signup' ? 'Create Account' : 'Sign In'}</h2>
                         <button class="modal-close" onclick="closeAuthModal()">×</button>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="authEmail" class="form-input" placeholder="your@email.com" required>
+                    <p style="color: #666; margin-bottom: 20px; text-align: center;">
+                        ${mode === 'signup' ? 'Create a free account to sync your data across all devices' : 'Sign in to access your samples'}
+                    </p>
+                    
+                    <div id="authForm">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="authEmail" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="rememberMe" checked style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem;">Keep me logged in</label>
+                        </div>
+                        <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
+                        <button class="row-btn btn-full-width" onclick="handleAuth('${mode}')" style="margin-bottom: 10px;">
+                            ${mode === 'signup' ? 'Create Account' : 'Sign In'}
+                        </button>
+                        <button class="row-btn btn-secondary" onclick="closeAuthModal(); showAuth('${mode === 'signup' ? 'signin' : 'signup'}')">
+                            ${mode === 'signup' ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
-                    </div>
-                    <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
-                    <button class="row-btn btn-full-width" onclick="handleAuth('${mode}')">${mode === 'signup' ? 'Create Account' : 'Sign In'}</button>
-                </div>`;
+                </div>
+            `;
             document.body.appendChild(modal);
         }
 
         async function handleAuth(mode) {
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const errorDiv = document.getElementById('authError');
+            
+            if (!email || !password) {
+                errorDiv.textContent = 'Please enter email and password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
             try {
-                let result;
-                if (mode === 'signup') result = await sb_client.auth.signUp({ email, password });
-                else result = await sb_client.auth.signInWithPassword({ email, password });
-                if (result.error) throw result.error;
-                if (result.data.user) {
-                    localStorage.setItem('user_email', email);
-                    localStorage.setItem('user_password', password);
-                    currentUser = result.data.user;
+                let data, error;
+                
+                if (mode === 'signup') {
+                    const result = await sb_client.auth.signUp({ email, password });
+                    data = result.data;
+                    error = result.error;
+                } else {
+                    const result = await sb_client.auth.signInWithPassword({ email, password });
+                    data = result.data;
+                    error = result.error;
+                }
+                
+                if (error) throw error;
+                
+                if (data.user) {
+                    // Only save credentials if "Keep me logged in" is checked
+                    if (rememberMe) {
+                        localStorage.setItem('user_email', email);
+                        localStorage.setItem('user_password', password);
+                    } else {
+                        // Clear any old credentials if they unchecked it
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
+                    }
+                    
+                    currentUser = data.user;
                     useCloud = true;
-                    await loadFromCloud();
+                    
+                    if (mode === 'signup') {
+                        await migrateToCloud();
+                    } else {
+                        await loadFromCloud();
+                    }
+                    
                     closeAuthModal();
                     showApp();
+                    
+                    console.log(`✓ ${mode === 'signup' ? 'Account created' : 'Signed in'}`);
                 }
             } catch (e) {
-                document.getElementById('authError').innerText = e.message;
-                document.getElementById('authError').style.display = 'block';
+                console.error('Auth error:', e);
+                errorDiv.textContent = mode === 'signup' ? 'Sign up failed. Email may already be in use.' : 'Invalid email or password';
+                errorDiv.style.display = 'block';
             }
         }
 
-        function closeAuthModal() { const m = document.getElementById('authModal'); if (m) m.remove(); }
+        function closeAuthModal() {
+            const modal = document.getElementById('authModal');
+            if (modal) modal.remove();
+        }
 
         async function signOut() {
-            if (confirm('Sign out?')) {
+            if (confirm('Sign out? Your data will remain safely in the cloud.')) {
                 await sb_client.auth.signOut();
                 localStorage.removeItem('user_email');
                 localStorage.removeItem('user_password');
+                currentUser = null;
+                useCloud = false;
+                samples = [];
                 window.location.reload();
             }
         }
 
         // ==================== CLOUD SYNC ====================
-        async function saveToCloud() {
+        async function migrateToCloud() {
             if (!useCloud || !currentUser) return;
-            await sb_client.from('sample_tracker_data').upsert({
-                user_id: currentUser.id,
-                samples: samples,
-                settings: settings,
-                updated_at: new Date().toISOString()
-            });
+            
+            const localSamples = JSON.parse(localStorage.getItem('tiktok_samples') || '[]');
+            const localSettings = JSON.parse(localStorage.getItem('tiktok_settings') || '{}');
+            
+            if (localSamples.length > 0 || Object.keys(localSettings).length > 0) {
+                samples = localSamples;
+                settings = { ...settings, ...localSettings };
+                await saveToCloud();
+            }
+        }
+
+        async function saveToCloud() {
+            if (!useCloud || !currentUser || !sb_client) return;
+            
+            try {
+                const { error } = await sb_client
+                    .from('sample_tracker_data')
+                    .upsert({
+                        user_id: currentUser.id,
+                        samples: samples,
+                        settings: settings,
+                        updated_at: new Date().toISOString()
+                    });
+                
+                if (error) throw error;
+            } catch (e) {
+                console.error('Save to cloud failed:', e);
+            }
         }
 
         async function loadFromCloud() {
-            if (!useCloud || !currentUser) return;
-            const { data } = await sb_client.from('sample_tracker_data').select('*').eq('user_id', currentUser.id).single();
-            if (data) { samples = data.samples || []; settings = data.settings || settings; }
+            if (!useCloud || !currentUser || !sb_client) return;
+            
+            try {
+                const { data, error } = await sb_client
+                    .from('sample_tracker_data')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .single();
+                
+                if (error && error.code !== 'PGRST116') throw error;
+                
+                if (data) {
+                    samples = data.samples || [];
+                    settings = data.settings || { defaultDays: 14 };
+                }
+            } catch (e) {
+                console.error('Load from cloud failed:', e);
+            }
         }
 
         // ==================== UI STATE ====================
-        function showLanding() { document.getElementById('landingPage').classList.add('active'); document.getElementById('appContainer').classList.remove('active'); }
-        function showApp() { document.getElementById('landingPage').classList.remove('active'); document.getElementById('appContainer').classList.add('active'); render(); }
+        function showLanding() {
+            document.getElementById('landingPage').classList.add('active');
+            document.getElementById('appContainer').classList.remove('active');
+        }
 
-        // ==================== STORAGE & CORE ====================
-        async function saveSamples() { if (useCloud) await saveToCloud(); else localStorage.setItem('tiktok_samples', JSON.stringify(samples)); }
-        async function saveSettings() { settings.defaultDays = parseInt(document.getElementById('defaultDays').value); if (useCloud) await saveToCloud(); else localStorage.setItem('tiktok_settings', JSON.stringify(settings)); }
+        function showApp() {
+            document.getElementById('landingPage').classList.remove('active');
+            document.getElementById('appContainer').classList.add('active');
+            render();
+            renderCalendar();
+            
+            // Show install prompt if not already installed
+            setTimeout(() => {
+                checkAndShowInstallPrompt();
+            }, 2000);
+        }
 
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function checkAndShowInstallPrompt() {
+            // Check if already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                return; // Already installed
+            }
+            
+            // Check if user dismissed before
+            if (localStorage.getItem('install_dismissed')) {
+                return;
+            }
+            
+            // Show custom install prompt
+            showInstallModal();
+        }
+
+        function showInstallModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.id = 'installModal';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px; text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 15px;">📱</div>
+                    <h2 style="font-weight: 800; font-size: 1.5rem; margin-bottom: 10px;">Install Sample Tracker</h2>
+                    <p style="color: #666; margin-bottom: 25px; line-height: 1.5;">
+                        Add this app to your home screen for quick access and offline use. It works just like a native app!
+                    </p>
+                    <button class="row-btn btn-full-width" onclick="installApp()" style="margin-bottom: 10px;">
+                        ⬇️ Install Now
+                    </button>
+                    <button class="row-btn btn-secondary" onclick="dismissInstall()">
+                        Maybe Later
+                    </button>
+                    <p style="font-size: 0.75rem; color: #999; margin-top: 15px;">
+                        You can always install later from your browser menu
+                    </p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+            } else {
+                // Show manual install instructions
+                showManualInstallInstructions();
+            }
+            
+            const modal = document.getElementById('installModal');
+            if (modal) modal.remove();
+        }
+
+        function dismissInstall() {
+            localStorage.setItem('install_dismissed', 'true');
+            const modal = document.getElementById('installModal');
+            if (modal) modal.remove();
+        }
+
+        function showManualInstallInstructions() {
+            const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            
+            let instructions = '';
+            
+            if (isIOS) {
+                instructions = `
+                    <div style="background: #FFF3E0; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 3px solid var(--yellow);">
+                        <p style="font-weight: 700; color: var(--dark); margin-bottom: 8px;">⚠️ Important: Use Safari's Share Button</p>
+                        <p style="font-size: 0.85rem;">Look for the share button at the BOTTOM of your Safari browser (square with arrow pointing up).</p>
+                    </div>
+                    <h3 style="font-weight: 700; margin-bottom: 15px;">Install on iPhone/iPad</h3>
+                    <ol style="text-align: left; padding-left: 20px; line-height: 1.8;">
+                        <li>Look at the <strong>bottom</strong> of your screen in <strong>Safari</strong></li>
+                        <li>Tap the <strong>Share</strong> button<br><span style="font-size: 2rem;">⬆️</span> (square with arrow)</li>
+                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                        <li>Tap <strong>"Add"</strong> in the top right</li>
+                        <li>Done! Check your home screen 🎉</li>
+                    </ol>
+                `;
+            } else if (isAndroid) {
+                instructions = `
+                    <div style="background: #FFF3E0; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 3px solid var(--yellow);">
+                        <p style="font-weight: 700; color: var(--dark); margin-bottom: 8px;">⚠️ Important: Use Chrome's Browser Menu</p>
+                        <p style="font-size: 0.85rem;">Look for the three dots at the TOP RIGHT of your Chrome browser window (NOT in this app).</p>
+                    </div>
+                    <h3 style="font-weight: 700; margin-bottom: 15px;">Install on Android</h3>
+                    <ol style="text-align: left; padding-left: 20px; line-height: 1.8;">
+                        <li>Look at the <strong>top right</strong> of your <strong>Chrome browser</strong></li>
+                        <li>Tap the <strong>⋮</strong> (three vertical dots)</li>
+                        <li>Look for <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
+                        <li>Tap <strong>"Add"</strong> or <strong>"Install"</strong></li>
+                        <li>Done! Check your home screen 🎉</li>
+                    </ol>
+                    <div style="background: #E3F2FD; padding: 12px; border-radius: 8px; margin-top: 15px;">
+                        <p style="font-size: 0.8rem; font-weight: 600;">💡 Pro Tip:</p>
+                        <p style="font-size: 0.8rem;">If you don't see "Install app", try closing this popup first, then open your browser menu.</p>
+                    </div>
+                `;
+            } else {
+                instructions = `
+                    <h3 style="font-weight: 700; margin-bottom: 15px;">Install on Desktop</h3>
+                    <ol style="text-align: left; padding-left: 20px; line-height: 1.8;">
+                        <li>Look for the install icon (⊕ or ⬇️) in your browser's address bar</li>
+                        <li>Or open your browser menu (⋮ three dots)</li>
+                        <li>Select <strong>"Install Sample Tracker"</strong></li>
+                    </ol>
+                `;
+            }
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 450px;">
+                    <div class="modal-header">
+                        <h2 class="modal-title">📱 How to Install</h2>
+                        <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+                    </div>
+                    <div style="color: #666;">
+                        ${instructions}
+                        <div style="background: #E8F5E9; padding: 15px; border-radius: 12px; margin-top: 20px; border-left: 3px solid var(--green);">
+                            <p style="font-size: 0.9rem; font-weight: 600; color: var(--dark);">✓ Why Install?</p>
+                            <ul style="font-size: 0.85rem; margin-top: 10px; padding-left: 20px;">
+                                <li>Quick access from your home screen</li>
+                                <li>Works offline</li>
+                                <li>No browser bars - fullscreen!</li>
+                                <li>Loads instantly</li>
+                            </ul>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <p style="font-size: 0.8rem; color: #999;">Need help? Contact us:</p>
+                            <p style="font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-top: 5px;">support@flextechla.com</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Add install button to menu
+        function addInstallToMenu() {
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                // Not installed, show install option in menu
+                const menuContent = document.querySelector('#menuModal .modal-content > div');
+                if (menuContent && !document.getElementById('installMenuItem')) {
+                    const installBtn = document.createElement('button');
+                    installBtn.id = 'installMenuItem';
+                    installBtn.className = 'row-btn btn-secondary';
+                    installBtn.innerHTML = '📱 Install App';
+                    installBtn.onclick = () => {
+                        closeMenu();
+                        showManualInstallInstructions();
+                    };
+                    menuContent.insertBefore(installBtn, menuContent.firstChild);
+                }
+            }
+        }
+
+        function goToLanding() {
+            showLanding();
+        }
+
+        function showPrivacyFromLanding() {
+            document.getElementById('privacyModal').classList.add('active');
+        }
+
+        function showHelpFromLanding() {
+            document.getElementById('helpModal').classList.add('active');
+        }
+
+        // ==================== STORAGE ====================
+        function saveSamplesLocal() {
+            localStorage.setItem('tiktok_samples', JSON.stringify(samples));
+        }
+
+        async function saveSamples() {
+            if (useCloud) {
+                await saveToCloud();
+            } else {
+                localStorage.setItem('tiktok_samples', JSON.stringify(samples));
+            }
+        }
+
+        async function saveSettings() {
+            settings.defaultDays = parseInt(document.getElementById('defaultDays').value);
+            if (useCloud) {
+                await saveToCloud();
+            } else {
+                localStorage.setItem('tiktok_settings', JSON.stringify(settings));
+            }
+        }
+
+        // ==================== WINDOW LOAD ====================
         window.onload = async () => {
-            samples = JSON.parse(localStorage.getItem('tiktok_samples')) || [];
-            settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
-            document.getElementById('defaultDays').value = settings.defaultDays;
-            await initSupabase();
+            try { 
+                samples = JSON.parse(localStorage.getItem('tiktok_samples')) || []; 
+                settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
+                document.getElementById('defaultDays').value = settings.defaultDays;
+                
+                const savedReminderDays = localStorage.getItem('reminder_days');
+                if (savedReminderDays) {
+                    document.getElementById('reminderDays').value = savedReminderDays;
+                }
+                
+                const notifToggle = document.getElementById('notificationsToggle');
+                if (Notification.permission === 'granted') {
+                    notifToggle.checked = true;
+                    document.getElementById('reminderSettings').style.display = 'block';
+                    scheduleNotifications();
+                }
+            } catch(e) { 
+                samples = []; 
+            }
+            
+            try {
+                await initSupabase();
+            } catch (e) {
+                console.error('Failed to initialize:', e);
+                // Failsafe: Always show landing page if everything else fails
+                showLanding();
+            }
         };
 
+        // ==================== STATUS INFO ====================
         function getStatusInfo(s) {
             if (s.done) return { status: 'completed', days: 0, percent: 100, color: '#E0E0E0', text: 'Posted' };
             const start = new Date(s.date + 'T00:00:00').getTime();
-            const now = new Date(); now.setHours(0,0,0,0);
+            const now = new Date();
+            now.setHours(0,0,0,0);
+            const end = new Date(start + s.limit * 86400000);
             const total = s.limit;
             const elapsed = Math.floor((now.getTime() - start) / 86400000);
             const remaining = total - elapsed;
             const percent = Math.min(100, Math.max(0, (elapsed / total) * 100));
+            
             if (remaining < 0) return { status: 'overdue', days: remaining, percent, color: '#FF3B30', text: `${Math.abs(remaining)}d overdue` };
             if (remaining <= 3) return { status: 'urgent', days: remaining, percent, color: '#FFB300', text: `${remaining}d left` };
             return { status: 'good', days: remaining, percent, color: '#00C853', text: `${remaining}d left` };
         }
 
         function updateStats() {
+            const activeSamples = samples.filter(s => !s.done);
             const stats = { overdue: 0, urgent: 0, good: 0 };
-            samples.filter(s => !s.done).forEach(s => {
+            activeSamples.forEach(s => {
                 const info = getStatusInfo(s);
                 if (info.status === 'overdue') stats.overdue++;
                 else if (info.status === 'urgent') stats.urgent++;
@@ -1612,55 +2031,256 @@
             document.getElementById('statGood').innerText = stats.good;
         }
 
+        // ==================== FILTERING & SORTING ====================
+        function setFilter(f) {
+            currentFilter = f;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('f-' + f).classList.add('active');
+            render();
+        }
+
+        function setSort(s) {
+            currentSort = s;
+            render();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            render();
+        }
+
+        function getFilteredSamples() {
+            let filtered = samples.filter(s => {
+                const matchSearch = !searchQuery || 
+                    s.product.toLowerCase().includes(searchQuery) || 
+                    s.brand.toLowerCase().includes(searchQuery);
+                if (!matchSearch) return false;
+                
+                const info = getStatusInfo(s);
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'completed') return s.done;
+                if (currentFilter === 'overdue') return !s.done && info.status === 'overdue';
+                if (currentFilter === 'urgent') return !s.done && info.status === 'urgent';
+                if (currentFilter === 'good') return !s.done && info.status === 'good';
+                return true;
+            });
+            
+            filtered.sort((a, b) => {
+                if (currentSort === 'brand') return a.brand.localeCompare(b.brand);
+                if (currentSort === 'received') return new Date(b.date) - new Date(a.date);
+                const aInfo = getStatusInfo(a);
+                const bInfo = getStatusInfo(b);
+                if (a.done && !b.done) return 1;
+                if (!a.done && b.done) return -1;
+                return aInfo.days - bInfo.days;
+            });
+            
+            return filtered;
+        }
+
+        // ==================== SELECTION & BATCH ====================
+        function toggleSelection(id) {
+            if (selectedSamples.has(id)) {
+                selectedSamples.delete(id);
+            } else {
+                selectedSamples.add(id);
+            }
+            updateBatchBar();
+            render();
+        }
+
+        function clearSelection() {
+            selectedSamples.clear();
+            updateBatchBar();
+            render();
+        }
+
+        function updateBatchBar() {
+            const bar = document.getElementById('batchBar');
+            const count = document.getElementById('selectedCount');
+            count.innerText = selectedSamples.size;
+            if (selectedSamples.size > 0) {
+                bar.classList.add('active');
+            } else {
+                bar.classList.remove('active');
+            }
+        }
+
+        async function batchMarkDone() {
+            selectedSamples.forEach(id => {
+                samples = samples.map(s => s.id === id ? {...s, done: true} : s);
+            });
+            selectedSamples.clear();
+            await saveSamples();
+            render();
+            updateBatchBar();
+        }
+
+        async function batchDelete() {
+            if (confirm(`Delete ${selectedSamples.size} samples?`)) {
+                samples = samples.filter(s => !selectedSamples.has(s.id));
+                selectedSamples.clear();
+                await saveSamples();
+                render();
+                renderCalendar();
+                updateBatchBar();
+            }
+        }
+
         // ==================== RENDER ====================
         function render() {
             updateStats();
+            updateCloudStatus();
+            const filtered = getFilteredSamples();
             const grid = document.getElementById('sampleGrid');
-            const filtered = samples.filter(s => {
-                if (currentFilter === 'all') return true;
-                if (currentFilter === 'completed') return s.done;
-                const info = getStatusInfo(s);
-                return !s.done && info.status === currentFilter;
-            });
-            if (!filtered.length) { grid.innerHTML = '<div class="empty-state">No samples found</div>'; return; }
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><p style="font-size: 3rem; margin-bottom: 10px;">📦</p><p>No samples yet!</p><p style="font-size: 0.9rem; margin-top: 5px;">Add your first sample to get started</p></div>';
+                return;
+            }
+            
             grid.innerHTML = filtered.map(s => renderSampleCard(s)).join('');
         }
 
         function renderSampleCard(s) {
             const info = getStatusInfo(s);
+            const isSelected = selectedSamples.has(s.id);
             const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+            
             return `
-                <div class="sample-card">
+                <div class="sample-card ${isSelected ? 'selecting' : ''}">
                     <div class="card-body">
                         <div class="card-header">
-                            <div><div class="brand-name">${s.brand}</div><div class="product-name">${s.product}</div></div>
+                            <div>
+                                <div class="brand-name">${s.brand}</div>
+                                <div class="product-name">${s.product}</div>
+                            </div>
+                            <input type="checkbox" class="card-checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelection('${s.id}')">
                         </div>
+                        
                         <div class="days-badge ${info.status}">${info.text}</div>
-                        <div class="progress-container"><div class="progress-fill" style="width: ${info.percent}%; background: ${info.color};"></div></div>
+                        
+                        ${s.tags && s.tags.length ? `<div class="tags-row">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+                        
+                        ${s.photos && s.photos.length ? `<div class="photo-row">${s.photos.map(p => `<img src="${p}" class="photo-thumb" onclick="viewPhoto('${p}')">`).join('')}</div>` : ''}
+                        
+                        ${s.notes ? `<div class="notes-section">${s.notes}</div>` : ''}
+                        
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
+                                <span>🎥 Filmed</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
+                                <span>✂️ Edited</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
+                                <span>📱 Posted</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-fill" style="width: ${info.percent}%; background: ${info.color};"></div>
+                        </div>
+                        
+                        <div class="meta-grid">
+                            <div>
+                                <span class="meta-label">Received</span>
+                                <span class="meta-value">${new Date(s.date).toLocaleDateString()}</span>
+                            </div>
+                            <div>
+                                <span class="meta-label">Due Date</span>
+                                <span class="meta-value">${dueDate.toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                        
                         <div class="action-container">
-                            ${s.done ? '<button class="row-btn btn-completed">Posted</button>' : `<button class="row-btn btn-full-width" onclick="markDone('${s.id}')">Mark as Posted</button>`}
-                            <button class="row-btn btn-secondary" onclick="deleteSample('${s.id}')">Delete</button>
+                            ${s.done ? 
+                                '<button class="row-btn btn-completed">✓ Posted</button>' :
+                                '<button class="row-btn btn-full-width" onclick="markDone(\''+s.id+'\')">✓ Mark as Posted</button>'
+                            }
+                            ${s.link ? `<button class="row-btn btn-secondary" onclick="openBrowser('${s.link}')">🔗 View Product</button>` : ''}
+                            <div class="btn-row-2">
+                                <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
+                                <button class="row-btn btn-secondary" onclick="deleteSample('${s.id}')">🗑 Delete</button>
+                            </div>
                         </div>
                     </div>
-                </div>`;
+                </div>
+            `;
         }
 
-        async function markDone(id) { samples = samples.map(s => s.id === id ? {...s, done: true} : s); await saveSamples(); render(); }
-        async function deleteSample(id) { if (confirm('Delete?')) { samples = samples.filter(s => s.id !== id); await saveSamples(); render(); } }
+        // ==================== SAMPLE ACTIONS ====================
+        async function markDone(id) {
+            samples = samples.map(s => s.id === id ? {...s, done: true} : s);
+            await saveSamples();
+            render();
+        }
 
-        function setFilter(f) { currentFilter = f; document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); document.getElementById('f-' + f).classList.add('active'); render(); }
+        async function deleteSample(id) {
+            if (confirm('Delete this sample?')) {
+                samples = samples.filter(s => s.id !== id);
+                await saveSamples();
+                render();
+                renderCalendar();
+            }
+        }
 
-        // ==================== MODAL ACTIONS ====================
+        async function toggleCheckbox(id, field) {
+            samples = samples.map(s => {
+                if (s.id === id) {
+                    return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
+                }
+                return s;
+            });
+            await saveSamples();
+            render();
+        }
+
+        // ==================== MODAL ====================
         function openModal(id = null) {
-            editId = id; tempTags = []; tempPhotos = [];
-            document.getElementById('sampleForm').reset();
+            editId = id;
+            tempTags = [];
+            tempPhotos = [];
+            const form = document.getElementById('sampleForm');
+            form.reset();
             document.getElementById('dateReceived').valueAsDate = new Date();
+            document.getElementById('daysLimit').value = settings.defaultDays;
+            document.getElementById('sampleReminderDays').value = '';
+            
+            if (id) {
+                const s = samples.find(x => x.id === id);
+                document.getElementById('modalTitle').innerText = 'Edit Sample';
+                document.getElementById('productName').value = s.product;
+                document.getElementById('brandName').value = s.brand;
+                document.getElementById('dateReceived').value = s.date;
+                document.getElementById('daysLimit').value = s.limit;
+                document.getElementById('shopLink').value = s.link || '';
+                document.getElementById('notes').value = s.notes || '';
+                document.getElementById('sampleReminderDays').value = s.reminderDays !== undefined ? s.reminderDays : '';
+                tempTags = s.tags || [];
+                tempPhotos = s.photos || [];
+                renderTags();
+                renderPhotoGrid();
+            } else {
+                document.getElementById('modalTitle').innerText = 'Add Sample';
+                renderTags();
+                renderPhotoGrid();
+            }
+            
+            calcDuePreview();
             document.getElementById('sampleModal').classList.add('active');
         }
-        function closeModal() { document.getElementById('sampleModal').classList.remove('active'); }
+
+        function closeModal() {
+            document.getElementById('sampleModal').classList.remove('active');
+        }
 
         async function handleSave(e) {
             e.preventDefault();
+            const reminderDaysValue = document.getElementById('sampleReminderDays').value;
             const newItem = {
                 id: editId || Date.now().toString(),
                 product: document.getElementById('productName').value,
@@ -1669,14 +2289,27 @@
                 limit: parseInt(document.getElementById('daysLimit').value),
                 link: document.getElementById('shopLink').value,
                 notes: document.getElementById('notes').value,
-                tags: tempTags, photos: tempPhotos,
-                checklist: { filmed: false, edited: false, posted: false }, done: false
+                tags: tempTags,
+                photos: tempPhotos,
+                reminderDays: reminderDaysValue === '' ? undefined : parseInt(reminderDaysValue),
+                checklist: editId ? samples.find(x => x.id === editId).checklist : { filmed: false, edited: false, posted: false },
+                done: editId ? samples.find(x => x.id === editId).done : false
             };
-            if (editId) samples = samples.map(x => x.id === editId ? newItem : x);
-            else samples.unshift(newItem);
+            
+            if (editId) {
+                samples = samples.map(x => x.id === editId ? newItem : x);
+            } else {
+                samples.unshift(newItem);
+            }
+            
             await saveSamples();
-            closeModal();
             render();
+            renderCalendar();
+            
+            // Force close modal
+            setTimeout(() => {
+                closeModal();
+            }, 100);
         }
 
         function calcDuePreview() {
@@ -1688,7 +2321,257 @@
             }
         }
 
-        // ==================== NOTIFICATIONS (FIXED) ====================
+        // ==================== TAGS ====================
+        function handleTagInput(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const val = e.target.value.trim();
+                if (val && !tempTags.includes(val)) {
+                    tempTags.push(val);
+                    e.target.value = '';
+                    renderTags();
+                }
+            }
+        }
+
+        function removeTag(tag) {
+            tempTags = tempTags.filter(t => t !== tag);
+            renderTags();
+        }
+
+        function renderTags() {
+            const container = document.getElementById('tagsContainer');
+            const input = document.getElementById('tagInput');
+            const existingTags = tempTags.map(t => 
+                `<span class="tag-input-item">${t}<span class="tag-remove" onclick="removeTag('${t}')">×</span></span>`
+            ).join('');
+            container.innerHTML = existingTags;
+            container.appendChild(input);
+        }
+
+        // ==================== PHOTOS ====================
+        function handlePhotoUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                tempPhotos.push(ev.target.result);
+                renderPhotoGrid();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removePhoto(index) {
+            tempPhotos.splice(index, 1);
+            renderPhotoGrid();
+        }
+
+        function renderPhotoGrid() {
+            const grid = document.getElementById('photoGrid');
+            const items = tempPhotos.map((p, i) => 
+                `<div class="photo-upload-item">
+                    <img src="${p}">
+                    <button class="photo-remove" onclick="removePhoto(${i})">×</button>
+                </div>`
+            ).join('');
+            grid.innerHTML = items + `
+                <label class="photo-upload-item">
+                    <input type="file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+                    <span style="font-size: 2rem;">+</span>
+                </label>
+            `;
+        }
+
+        function viewPhoto(src) {
+            document.getElementById('photoViewerImg').src = src;
+            document.getElementById('photoViewerModal').classList.add('active');
+        }
+
+        function closePhotoViewer() {
+            document.getElementById('photoViewerModal').classList.remove('active');
+        }
+
+        // ==================== CALENDAR ====================
+        function setView(v) {
+            currentView = v;
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('view-' + v).classList.add('active');
+            if (v === 'list') {
+                document.getElementById('listView').style.display = 'block';
+                document.getElementById('calendarView').style.display = 'none';
+            } else {
+                document.getElementById('listView').style.display = 'none';
+                document.getElementById('calendarView').style.display = 'block';
+                renderCalendar();
+            }
+        }
+
+        function changeMonth(delta) {
+            calendarDate.setMonth(calendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            document.getElementById('calendarMonth').innerText = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const prevMonthDays = new Date(year, month, 0).getDate();
+            
+            let html = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => `<div class="calendar-header">${d}</div>`).join('');
+            
+            for (let i = firstDay - 1; i >= 0; i--) {
+                html += `<div class="calendar-day other-month">${prevMonthDays - i}</div>`;
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dateStr = date.toISOString().split('T')[0];
+                const dueSamples = samples.filter(s => {
+                    const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                    return dueDate.toISOString().split('T')[0] === dateStr && !s.done;
+                });
+                
+                const hasOverdue = dueSamples.some(s => getStatusInfo(s).status === 'overdue');
+                const classes = dueSamples.length ? (hasOverdue ? 'has-items overdue' : 'has-items') : '';
+                
+                html += `<div class="calendar-day ${classes}" onclick="showDayDetails('${dateStr}')">
+                    <span class="calendar-day-number">${day}</span>
+                    ${dueSamples.length ? `<div class="calendar-day-dots">${dueSamples.slice(0, 3).map(() => '<div class="calendar-dot" style="background: var(--primary);"></div>').join('')}</div>` : ''}
+                </div>`;
+            }
+            
+            document.getElementById('calendarGrid').innerHTML = html;
+        }
+
+        function showDayDetails(dateStr) {
+            const dueSamples = samples.filter(s => {
+                const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                return dueDate.toISOString().split('T')[0] === dateStr && !s.done;
+            });
+            
+            const details = document.getElementById('calendarDayDetails');
+            if (dueSamples.length === 0) {
+                details.innerHTML = '';
+                return;
+            }
+            
+            details.innerHTML = `
+                <h3 style="font-weight: 700; margin-bottom: 15px;">Due on ${new Date(dateStr).toLocaleDateString()}</h3>
+                ${dueSamples.map(s => renderSampleCard(s)).join('')}
+            `;
+        }
+
+        // ==================== ANALYTICS ====================
+        function openAnalytics() {
+            const total = samples.length;
+            const completed = samples.filter(s => s.done).length;
+            const active = total - completed;
+            const stats = { overdue: 0, urgent: 0, good: 0 };
+            samples.filter(s => !s.done).forEach(s => {
+                const info = getStatusInfo(s);
+                if (info.status === 'overdue') stats.overdue++;
+                else if (info.status === 'urgent') stats.urgent++;
+                else stats.good++;
+            });
+            
+            const content = `
+                <div class="analytics-section">
+                    <div class="analytics-title">Overview</div>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="analytics-number">${total}</div>
+                            <div class="analytics-label">Total Samples</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number">${completed}</div>
+                            <div class="analytics-label">Completed</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number">${active}</div>
+                            <div class="analytics-label">Active</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number">${total ? Math.round(completed/total*100) : 0}%</div>
+                            <div class="analytics-label">Completion Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="analytics-section">
+                    <div class="analytics-title">Active Samples</div>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="analytics-number" style="color: var(--red);">${stats.overdue}</div>
+                            <div class="analytics-label">Overdue</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number" style="color: var(--yellow);">${stats.urgent}</div>
+                            <div class="analytics-label">Due Soon</div>
+                        </div>
+                        <div class="analytics-card" style="grid-column: span 2;">
+                            <div class="analytics-number" style="color: var(--green);">${stats.good}</div>
+                            <div class="analytics-label">On Track</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('analyticsContent').innerHTML = content;
+            document.getElementById('analyticsModal').classList.add('active');
+        }
+
+        function closeAnalytics() {
+            document.getElementById('analyticsModal').classList.remove('active');
+        }
+
+        // ==================== SETTINGS ====================
+        function openSettings() {
+            updateCloudStatus();
+            document.getElementById('settingsModal').classList.add('active');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+
+        function updateCloudStatus() {
+            const statusDiv = document.getElementById('cloudStatus');
+            const signOutBtn = document.getElementById('signOutBtn');
+            const menuSignOutBtn = document.getElementById('menuSignOutBtn');
+            
+            if (useCloud && currentUser) {
+                const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
+                statusDiv.innerHTML = `
+                    <p style="margin-bottom: 5px; font-weight: 700; color: var(--green);">✓ Cloud Storage Active</p>
+                    <p style="font-size: 0.85rem;">Signed in as: <strong>${userEmail}</strong></p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Data syncing across all your devices</p>
+                `;
+                statusDiv.style.background = '#E8F5E9';
+                if (signOutBtn) signOutBtn.style.display = 'block';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'block';
+            } else {
+                statusDiv.innerHTML = `
+                    <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
+                    <p style="font-size: 0.85rem;">Your data is saved in your browser only</p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Create an account to sync across devices</p>
+                `;
+                statusDiv.style.background = '#E3F2FD';
+                if (signOutBtn) signOutBtn.style.display = 'none';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'none';
+            }
+        }
+
+        function showCloudInfo() {
+            document.getElementById('cloudInfoModal').classList.add('active');
+        }
+
+        function closeCloudInfo() {
+            document.getElementById('cloudInfoModal').classList.remove('active');
+        }
+
+        // ==================== NOTIFICATIONS ====================
         async function toggleNotifications(enabled) {
             const reminderSettings = document.getElementById('reminderSettings');
             
@@ -1714,55 +2597,182 @@
                         showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
                     } else {
                         document.getElementById('notificationsToggle').checked = false;
-                        alert('Notifications were denied.');
-                    }
-                }
-            } else {
-                reminderSettings.style.display = 'none';
-                clearNotifications();
-            }
+                        al}
         }
 
         function saveReminderSettings() {
-            localStorage.setItem('reminder_days', document.getElementById('reminderDays').value);
+            const reminderDays = document.getElementById('reminderDays').value;
+            localStorage.setItem('reminder_days', reminderDays);
             scheduleNotifications();
         }
 
         function showNotification(title, body) {
             if (Notification.permission === 'granted') {
-                new Notification(title, { body: body });
+                new Notification(title, {
+                    body: body,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23FE2C55" width="100" height="100" rx="20"/><text x="50" y="70" font-size="60" text-anchor="middle" fill="white">📦</text></svg>'
+                });
             }
         }
 
         function scheduleNotifications() {
-            const checkInterval = setInterval(() => checkDueSamples(), 3600000);
+            const checkInterval = setInterval(() => {
+                checkDueSamples();
+            }, 3600000);
+            
             localStorage.setItem('notification_interval', checkInterval);
             checkDueSamples();
         }
 
         function clearNotifications() {
-            const id = localStorage.getItem('notification_interval');
-            if (id) clearInterval(parseInt(id));
+            const intervalId = localStorage.getItem('notification_interval');
+            if (intervalId) {
+                clearInterval(parseInt(intervalId));
+                localStorage.removeItem('notification_interval');
+            }
         }
 
         function checkDueSamples() {
-            const globalDays = parseInt(localStorage.getItem('reminder_days') || '1');
-            const active = samples.filter(s => !s.done);
-            const dueSoon = active.filter(s => {
+            const globalReminderDays = parseInt(localStorage.getItem('reminder_days') || '1');
+            const activeSamples = samples.filter(s => !s.done);
+            const overdue = activeSamples.filter(s => getStatusInfo(s).status === 'overdue');
+            
+            const dueWithinTimeframe = activeSamples.filter(s => {
                 const info = getStatusInfo(s);
-                return info.days >= 0 && info.days <= globalDays;
+                const reminderDays = s.reminderDays !== undefined ? s.reminderDays : globalReminderDays;
+                return info.days >= 0 && info.days <= reminderDays;
             });
-            if (dueSoon.length) showNotification(`${dueSoon.length} Samples Due Soon`, 'Check your tracker for deadlines!');
+            
+            if (overdue.length > 0) {
+                showNotification(
+                    `⚠️ ${overdue.length} Overdue Sample${overdue.length > 1 ? 's' : ''}!`,
+                    `You have ${overdue.length} sample${overdue.length > 1 ? 's' : ''} past the deadline. Open the app to check.`
+                );
+            } else if (dueWithinTimeframe.length > 0) {
+                showNotification(
+                    `📅 ${dueWithinTimeframe.length} Sample${dueWithinTimeframe.length > 1 ? 's' : ''} Due Soon`,
+                    `${dueWithinTimeframe.length} sample${dueWithinTimeframe.length > 1 ? 's are' : ' is'} due soon.`
+                );
+            }
         }
 
-        // ==================== MENU & UTILS ====================
-        function toggleMenu() { document.getElementById('menuModal').classList.add('active'); }
-        function closeMenu() { document.getElementById('menuModal').classList.remove('active'); }
-        function openSettings() { document.getElementById('settingsModal').classList.add('active'); }
-        function closeSettings() { document.getElementById('settingsModal').classList.remove('active'); }
-        function openSupport() { document.getElementById('supportModal').classList.add('active'); }
-        function closeSupport() { document.getElementById('supportModal').classList.remove('active'); }
-        function goToLanding() { showLanding(); }
+        // ==================== MENU ====================
+        function toggleMenu() {
+            document.getElementById('menuModal').classList.add('active');
+            addInstallToMenu();
+        }
+
+        function closeMenu() {
+            document.getElementById('menuModal').classList.remove('active');
+        }
+
+        function openPrivacy() {
+            document.getElementById('privacyModal').classList.add('active');
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacyModal').classList.remove('active');
+        }
+
+        function openHelp() {
+            document.getElementById('helpModal').classList.add('active');
+        }
+
+        function closeHelp() {
+            document.getElementById('helpModal').classList.remove('active');
+        }
+
+        function openSupport() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function closeSupport() {
+            document.getElementById('supportModal').classList.remove('active');
+        }
+
+        // ==================== UTILITIES ====================
+        function openBrowser(url) {
+            document.getElementById('browserFrame').src = url;
+            document.getElementById('browserOverlay').classList.add('active');
+        }
+
+        function closeBrowser() {
+            document.getElementById('browserOverlay').classList.remove('active');
+            document.getElementById('browserFrame').src = '';
+        }
+
+        function exportCSV() {
+            const headers = ['Brand', 'Product', 'Received Date', 'Days to Post', 'Due Date', 'Status', 'Link', 'Notes', 'Tags', 'Filmed', 'Edited', 'Posted'];
+            const rows = samples.map(s => {
+                const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                const info = getStatusInfo(s);
+                return [
+                    s.brand,
+                    s.product,
+                    s.date,
+                    s.limit,
+                    dueDate.toISOString().split('T')[0],
+                    s.done ? 'Completed' : info.text,
+                    s.link || '',
+                    s.notes || '',
+                    (s.tags || []).join('; '),
+                    s.checklist.filmed ? 'Yes' : 'No',
+                    s.checklist.edited ? 'Yes' : 'No',
+                    s.checklist.posted ? 'Yes' : 'No'
+                ].map(v => `"${v}"`).join(',');
+            });
+            
+            const csv = [headers.join(','), ...rows].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `samples_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        async function clearCompleted() {
+            if (confirm('Delete all completed samples?')) {
+                samples = samples.filter(s => !s.done);
+                await saveSamples();
+                render();
+                renderCalendar();
+            }
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = async (ev) => {
+                    try {
+                        const imported = JSON.parse(ev.target.result);
+                        if (confirm(`Import ${imported.length} samples? This will replace your current data.`)) {
+                            samples = imported;
+                            await saveSamples();
+                            render();
+                            renderCalendar();
+                            alert('Data imported successfully!');
+                        }
+                    } catch (e) {
+                        alert('Invalid file format');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function toggleFiltered() {
+            const content = document.getElementById('filteredContent');
+            const arrow = document.getElementById('filteredArrow');
+            content.classList.toggle('active');
+            arrow.innerText = content.classList.contains('active') ? '▲' : '▼';
+        }
     </script>
 </body>
 </html>
