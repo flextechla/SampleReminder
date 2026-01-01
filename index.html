@@ -8,13 +8,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="mobile-web-app-capable" content="yes">
     
-    <title>Sample Tracker Pro</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23FE2C55'/%3E%3Cg transform='translate(106,80)'%3E%3Crect x='20' y='40' width='260' height='340' rx='20' fill='white' opacity='0.95'/%3E%3Crect x='90' y='20' width='120' height='50' rx='12' fill='white' opacity='0.95'/%3E%3Crect x='100' y='30' width='100' height='30' rx='8' fill='%23FE2C55'/%3E%3Cg transform='translate(50,100)'%3E%3Crect width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 18 L 15 25 L 27 10' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='5' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='20' width='100' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='70' width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 88 L 15 95 L 27 80' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='75' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='90' width='110' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='140' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='145' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='160' width='90' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='210' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='215' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='230' width='120' height='6' rx='3' fill='%23F0F0F0'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='400' cy='112' r='45' fill='white'/%3E%3Ctext x='400' y='130' text-anchor='middle' font-size='50' font-weight='bold' fill='%23FE2C55' font-family='Arial,sans-serif'%3E3%3C/text%3E%3C/svg%3E">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23FE2C55'/%3E%3Cg transform='translate(106,80)'%3E%3Crect x='20' y='40' width='260' height='340' rx='20' fill='white' opacity='0.95'/%3E%3Crect x='90' y='20' width='120' height='50' rx='12' fill='white' opacity='0.95'/%3E%3Crect x='100' y='30' width='100' height='30' rx='8' fill='%23FE2C55'/%3E%3Cg transform='translate(50,100)'%3E%3Crect width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 18 L 15 25 L 27 10' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='5' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='20' width='100' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='70' width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 88 L 15 95 L 27 80' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='75' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='90' width='110' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='140' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='145' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='160' width='90' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='210' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='215' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='230' width='120' height='6' rx='3' fill='%23F0F0F0'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='400' cy='112' r='45' fill='white'/%3E%3Ctext x='400' y='130' text-anchor='middle' font-size='50' font-weight='bold' fill='%23FE2C55' font-family='Arial,sans-serif'%3E3%3C/text%3E%3C/svg%3E">
     <link rel="manifest" id="manifest-placeholder">
+    
+    <title>Sample Tracker Pro</title>
     
     <script>
         const manifestData = {
@@ -37,6 +35,8 @@
         document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
     </script>
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         :root { 
             --primary: #FE2C55; 
@@ -54,6 +54,7 @@
             --shadow: 0 4px 12px rgba(0,0,0,0.08); 
         }
 
+        /* Dark Mode Variables */
         [data-theme="dark"] {
             --primary: #FF4066; 
             --dark: #FFFFFF; 
@@ -65,126 +66,22 @@
             --shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
         
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: var(--bg); color: var(--text-main); 
-            overflow-x: hidden; overscroll-behavior-y: contain;
+            background: var(--bg); 
+            color: var(--text-main); 
+            overflow-x: hidden;
+            overscroll-behavior-y: contain;
             transition: background 0.3s, color 0.3s;
         }
 
-        /* Landing Page Styles */
-        #landingPage {
-            min-height: 100dvh; /* Dynamic viewport height for mobile fix */
-            background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%);
-            display: flex; /* Visible by default */
-            flex-direction: column;
-            padding: 20px 20px 180px 20px; 
-            overflow-y: auto;
-        }
-        
-        #landingPage.hidden { display: none !important; }
-        
-        .landing-content { max-width: 500px; width: 100%; text-align: center; color: white; margin: auto; }
-        
-        .landing-sticky-bar {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: var(--surface); padding: 25px 20px;
-            border-radius: 30px 30px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
-            z-index: 100; display: flex; flex-direction: column; gap: 12px;
-        }
-        
-        .app-icon { width: 120px; height: 120px; margin: 0 auto 20px; background: white; border-radius: 30px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .landing-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .landing-subtitle { font-size: 1.1rem; opacity: 0.95; margin-bottom: 40px; line-height: 1.5; }
-        
-        .landing-features { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px 20px; margin-bottom: 30px; text-align: left; }
-        .feature-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 1rem; }
-        .feature-icon { font-size: 1.8rem; width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        
-        .landing-btn { width: 100%; padding: 18px; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: transform 0.2s; }
-        .landing-btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-secondary { background: var(--bg); color: var(--text-main); border: 1px solid var(--border); }
-        
-        .landing-links { margin-top: 5px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem; }
-        .landing-link { color: var(--text-secondary); text-decoration: none; opacity: 0.9; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        
-        /* App Container */
-        #appContainer { display: none; min-height: 100dvh; padding-bottom: 40px; }
-        #appContainer.active { display: block; }
-        
-        .header { background: var(--surface); padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .header h1 { font-size: 1.3rem; font-weight: 800; color: var(--text-main); }
-        .header h1 span { color: var(--primary); }
-        .icon-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 5px; color: var(--text-main); }
-        
-        .add-sample-btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; width: 100%; justify-content: center; box-shadow: var(--shadow); transition: transform 0.2s; }
-        .add-sample-btn:active { transform: scale(0.95); }
-        
-        .search-bar { width: 100%; padding: 10px 15px; border: 1.5px solid var(--border); border-radius: 25px; font-size: 0.9rem; background: var(--bg); color: var(--text-main); margin-bottom: 10px; }
-        .view-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
-        .view-btn { flex: 1; padding: 12px 20px; border: 2px solid var(--border); background: var(--surface); border-radius: 25px; font-size: 0.9rem; font-weight: 700; cursor: pointer; color: var(--text-secondary); }
-        .view-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-        
-        .container { max-width: 600px; margin: 0 auto; padding: 12px; }
-        .control-section { background: var(--surface); border-radius: 12px; padding: 15px; margin-bottom: 12px; margin-top: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); }
-        .section-title { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 10px; letter-spacing: 0.5px; }
-        .filter-btn { padding: 10px 18px; border: 2px solid var(--border); background: var(--surface); border-radius: 25px; font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); white-space: nowrap; cursor: pointer; }
-        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-        /* Sample Cards */
-        .sample-card { background: var(--surface); border-radius: 16px; margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); position: relative; }
-        .card-body { padding: 16px; }
-        .brand-name { font-size: 0.75rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; }
-        .product-name { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 4px 0 8px 0; }
-        .days-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; margin-bottom: 10px; }
-        .days-badge.overdue { background: #FFEBEE; color: var(--red); }
-        .days-badge.urgent { background: #FFF8E1; color: var(--yellow); }
-        .days-badge.good { background: #E8F5E9; color: var(--green); }
-        .days-badge.completed { background: #E0E0E0; color: #666; }
-        
-        [data-theme="dark"] .days-badge.overdue { background: rgba(255, 59, 48, 0.2); color: #FF6B6B; }
-        [data-theme="dark"] .days-badge.urgent { background: rgba(255, 179, 0, 0.2); color: #FFCA28; }
-        [data-theme="dark"] .days-badge.good { background: rgba(0, 200, 83, 0.2); color: #69F0AE; }
-        [data-theme="dark"] .days-badge.completed { background: #333; color: #aaa; }
-
-        .tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-        .tag { padding: 3px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; background: #E3F2FD; color: #1976D2; }
-        [data-theme="dark"] .tag { background: rgba(33, 150, 243, 0.2); color: #64B5F6; }
-        
-        .photo-row { display: flex; gap: 8px; margin-bottom: 10px; overflow-x: auto; }
-        .photo-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; cursor: pointer; }
-        
-        .notes-section { background: #FFFDE7; padding: 10px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 10px; border-left: 3px solid var(--yellow); color: #333; }
-        [data-theme="dark"] .notes-section { background: rgba(255, 255, 255, 0.05); color: #ddd; border-left-color: var(--yellow); }
-        
-        .checklist { background: var(--bg); padding: 12px; border-radius: 10px; margin-bottom: 10px; }
-        .checklist-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-main); }
-        .checklist-item:last-child { margin-bottom: 0; }
-        .checklist-checkbox { width: 18px; height: 18px; cursor: pointer; }
-        
-        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: var(--bg); padding: 12px; border-radius: 10px; font-size: 0.85rem; margin-bottom: 10px; }
-        .meta-label { color: var(--text-secondary); font-size: 0.7rem; display: block; margin-bottom: 2px; font-weight: 600; }
-        .meta-value { font-weight: 700; color: var(--text-main); }
-        
-        .progress-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; margin: 10px 0; overflow: hidden; }
-        .progress-fill { height: 100%; transition: width 0.4s ease; }
-        
-        .action-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .row-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s; }
-        .row-btn:active { transform: scale(0.95); }
-        
-        .btn-full-width { background: var(--primary); color: white; }
-        .btn-completed { background: #E8F5E9; color: var(--green); border: 1.5px solid var(--green); pointer-events: none; }
-        [data-theme="dark"] .btn-completed { background: rgba(0, 200, 83, 0.2); }
-        
-        .btn-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .btn-secondary { background: var(--surface); color: var(--text-main); border: 1.5px solid var(--border); }
-        
         /* Compact Mode Overrides */
         body.compact-mode .sample-card { padding: 10px; margin-bottom: 12px; }
         body.compact-mode .photo-row, body.compact-mode .notes-section { display: none; }
@@ -193,393 +90,2207 @@
         body.compact-mode .checklist-item { font-size: 0.75rem; margin-bottom: 2px; }
         body.compact-mode .row-btn { padding: 10px; font-size: 0.85rem; }
         body.compact-mode .action-container { gap: 6px; margin-top: 6px; }
+        
+        /* Landing Page Styles */
+        #landingPage {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 20px 140px 20px; 
+        }
+        
+        #landingPage.hidden {
+            display: none !important;
+        }
+        
+        .landing-content {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            margin: auto;
+        }
+
+        /* Sticky Footer Bar */
+        .landing-sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 16px 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .landing-sticky-bar .primary-button {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .landing-sticky-bar .primary-button.signup {
+            background: var(--primary);
+            color: white;
+        }
+
+        .landing-sticky-bar .primary-button.signin {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .landing-sticky-bar .primary-button:active {
+            transform: scale(0.98);
+        }
+
+        .landing-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .landing-logo svg {
+            width: 80px;
+            height: 80px;
+        }
+
+        .landing-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .landing-content p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin: 40px 0;
+            display: grid;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 16px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .feature-text p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .auth-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--surface);
+            color: var(--text-main);
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .auth-button {
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .auth-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .auth-button:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .auth-divider {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .auth-switch {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-switch button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 4px;
+        }
+
+        .auth-error {
+            background: #FFE5E5;
+            color: #D32F2F;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        [data-theme="dark"] .auth-error {
+            background: #4A1F1F;
+            color: #FF6B6B;
+        }
+
+        .auth-error.active {
+            display: block;
+        }
+
+        .forgot-password-link {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .forgot-password-link button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Main App Container */
+        #app {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        #app.active {
+            display: block;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            padding: 12px 20px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+        }
+
+        .app-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .header-right {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            background: var(--bg);
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 16px 20px 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: var(--bg);
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Sample Cards */
+        .samples-container {
+            padding: 12px 20px 20px;
+        }
+
+        .sample-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .days-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .days-badge.urgent { background: var(--red); color: white; }
+        .days-badge.warning { background: var(--yellow); color: var(--dark); }
+        .days-badge.ok { background: var(--green); color: white; }
+        .days-badge.done { background: var(--blue); color: white; }
+
+        .delete-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 2px solid var(--red);
+            background: transparent;
+            color: var(--red);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:active {
+            transform: scale(0.95);
+            background: var(--red);
+            color: white;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .brand-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            background: var(--surface);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .checkbox.checked {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .photo-row {
+            display: flex;
+            gap: 8px;
+            margin: 12px 0;
+            overflow-x: auto;
+        }
+
+        .photo-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .add-photo-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .notes-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .notes-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .action-container {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .row-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .row-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .row-btn.secondary {
+            background: var(--bg);
+            color: var(--text-main);
+        }
+
+        .row-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            padding: 8px 0;
+            z-index: 99;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: 1.4rem;
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(254,44,85,0.4);
+            z-index: 98;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fab:active {
+            transform: scale(0.95);
+        }
 
         /* Modals */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
-        .modal.active { display: flex; }
-        .modal-content { background: var(--surface); width: 100%; max-width: 500px; border-radius: 24px; padding: 24px; max-height: 90vh; overflow-y: auto; margin: auto; color: var(--text-main); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .modal-title { font-weight: 800; font-size: 1.3rem; }
-        .modal-close { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-secondary); }
-        
-        .form-group { margin-bottom: 16px; }
-        .form-label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: var(--text-main); }
-        .form-input, .form-textarea, .form-select { width: 100%; padding: 12px; border: 1.5px solid var(--border); border-radius: 12px; font-size: 1rem; background: var(--bg); font-family: inherit; color: var(--text-main); }
-        .form-textarea { min-height: 80px; resize: vertical; }
-        .form-row { display: flex; gap: 12px; }
-        .form-row > div { flex: 1; }
-        
-        .tags-input-container { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--bg); min-height: 45px; }
-        .tag-input-field { border: none; background: none; outline: none; flex: 1; min-width: 100px; font-size: 0.9rem; color: var(--text-main); }
-        
-        .photo-upload-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .photo-upload-item { position: relative; aspect-ratio: 1; border: 2px dashed var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; }
-        .photo-upload-item img { width: 100%; height: 100%; object-fit: cover; }
-        .photo-remove { position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-weight: bold; }
-        
-        .due-calc-text { font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-top: 5px; display: block; }
-        
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
-        .calendar-header { text-align: center; font-weight: 700; font-size: 0.7rem; color: var(--text-secondary); padding: 8px 0; }
-        .calendar-day { aspect-ratio: 1; border: 1px solid var(--border); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.75rem; cursor: pointer; background: var(--surface); position: relative; color: var(--text-main); }
-        .calendar-day.has-items { background: #FFF3E0; border-color: var(--yellow); }
-        [data-theme="dark"] .calendar-day.has-items { background: rgba(255, 179, 0, 0.1); }
-        .calendar-day.has-items.overdue { background: #FFEBEE; border-color: var(--red); }
-        [data-theme="dark"] .calendar-day.has-items.overdue { background: rgba(255, 59, 48, 0.1); }
-        .calendar-day-number { font-weight: 700; }
-        .calendar-day-dots { display: flex; gap: 2px; margin-top: 2px; }
-        .calendar-dot { width: 4px; height: 4px; border-radius: 50%; }
-        
-        .analytics-section { background: var(--surface); border-radius: 16px; padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow); }
-        .analytics-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 15px; }
-        .analytics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .analytics-card { text-align: center; padding: 15px; background: var(--bg); border-radius: 12px; }
-        .analytics-number { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
-        .analytics-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; margin-top: 5px; }
-        
-        .empty-state { text-align: center; padding: 60px 20px; color: #BBB; }
-        
-        .browser-overlay { display: none; position: fixed; inset: 0; background: white; z-index: 2000; flex-direction: column; }
-        .browser-overlay.active { display: flex; }
-        .browser-header { background: var(--primary); color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
-        .browser-close { background: none; border: none; color: white; font-size: 1.5rem; font-weight: bold; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
-        .browser-title { font-size: 0.9rem; font-weight: 600; flex: 1; text-align: center; }
-        .browser-frame { flex: 1; border: none; width: 100%; }
-        
-        .collapsible-section { margin-bottom: 15px; }
-        .collapsible-header { background: var(--surface); padding: 15px; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; border: 1px solid var(--border); }
-        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
-        .collapsible-content.active { max-height: 5000px; }
-        
-        /* Toggle Switch */
-        .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--green); }
-        input:checked + .slider:before { transform: translateX(26px); }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-row {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--surface);
+            color: var(--text-main);
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Calendar View */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            padding: 20px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .calendar-day.has-samples {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .sample-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: white;
+            color: var(--primary);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Settings Page */
+        .settings-section {
+            padding: 20px;
+        }
+
+        .settings-item {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-label {
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 28px;
+            background: var(--border);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: var(--green);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+
+        .toggle-switch.active::after {
+            left: 24px;
+        }
+
+        .settings-button {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-button.danger {
+            color: var(--red);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state-text {
+            font-size: 1.1rem;
+        }
+
+        /* Photo viewer */
+        .photo-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-viewer.active {
+            display: flex;
+        }
+
+        .photo-viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .photo-viewer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Tag Pills */
+        .tags-container {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .tag-pill {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            background: var(--bg);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .tag-input-container {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .tag-input {
+            flex: 1;
+        }
+
+        .add-tag-btn {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 40px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 360px) {
+            .filter-tab {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+            
+            .product-name {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Landing Page -->
     <div id="landingPage">
         <div class="landing-content">
-            <div class="app-icon">
+            <div class="landing-logo">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="5" width="70" height="10" rx="3" fill="#FE2C55"/>
-                    <rect x="20" y="25" width="10" height="10" rx="2" fill="#00C853"/>
-                    <rect x="20" y="42" width="10" height="10" rx="2" fill="#00C853"/>
+                    <rect x="10" y="20" width="80" height="70" rx="8" fill="#FE2C55"/>
+                    <rect x="20" y="30" width="15" height="15" rx="3" fill="white"/>
+                    <path d="M 23 37.5 L 27 41.5 L 33 33.5" stroke="#FE2C55" stroke-width="2" fill="none"/>
+                    <rect x="40" y="32" width="40" height="4" rx="2" fill="white" opacity="0.7"/>
+                    <rect x="40" y="39" width="30" height="3" rx="1.5" fill="white" opacity="0.5"/>
+                    <rect x="20" y="52" width="15" height="15" rx="3" fill="white"/>
+                    <path d="M 23 59.5 L 27 63.5 L 33 55.5" stroke="#FE2C55" stroke-width="2" fill="none"/>
+                    <rect x="40" y="54" width="40" height="4" rx="2" fill="white" opacity="0.7"/>
+                    <rect x="40" y="61" width="35" height="3" rx="1.5" fill="white" opacity="0.5"/>
+                    <rect x="20" y="74" width="15" height="15" rx="3" fill="white" opacity="0.3"/>
+                    <rect x="40" y="76" width="40" height="4" rx="2" fill="white" opacity="0.4"/>
+                    <rect x="40" y="83" width="25" height="3" rx="1.5" fill="white" opacity="0.3"/>
                 </svg>
             </div>
-            <h1 class="landing-title">Sample Tracker Pro</h1>
-            <p class="landing-subtitle">Never miss a deadline. Track brand collaborations, get reminders, and stay organized.</p>
-            <div class="landing-features">
-                <div class="feature-item"><div class="feature-icon">📦</div><div>Track all your samples in one place</div></div>
-                <div class="feature-item"><div class="feature-icon">⏰</div><div>Get reminders before deadlines</div></div>
-                <div class="feature-item"><div class="feature-icon">☁️</div><div>Cloud sync across all your devices</div></div>
-                <div class="feature-item"><div class="feature-icon">📊</div><div>Calendar view and analytics</div></div>
-            </div>
-        </div>
-        <div class="landing-sticky-bar">
-            <button class="landing-btn btn-primary" onclick="showAuth('signup')">Create Free Account</button>
-            <button class="landing-btn btn-secondary" onclick="showAuth('signin')">Sign In</button>
-            <div class="landing-links">
-                <a href="#" class="landing-link" onclick="openPrivacy(); return false;">Privacy Policy</a>
-                <a href="#" class="landing-link" onclick="openHelp(); return false;">Help</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="appContainer">
-        <div class="header">
-            <div class="header-top">
-                <h1><span>Sample</span> Tracker</h1>
-                <div class="header-actions">
-                    <button class="icon-btn" onclick="openAnalytics()">📊</button>
-                    <button class="icon-btn" onclick="toggleMenu()">⋮</button>
+            
+            <h1>Sample Tracker Pro</h1>
+            <p>Track your product samples, manage deadlines, and never miss a posting date again.</p>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">📦</div>
+                    <div class="feature-text">
+                        <h3>Track All Samples</h3>
+                        <p>Organize samples with photos, notes, and custom tags</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">⏰</div>
+                    <div class="feature-text">
+                        <h3>Never Miss Deadlines</h3>
+                        <p>Smart reminders and visual countdown for posting dates</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">
+                        <h3>Workflow Tracking</h3>
+                        <p>Track filming, editing, and posting progress</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">☁️</div>
+                    <div class="feature-text">
+                        <h3>Cloud Sync</h3>
+                        <p>Access your samples from anywhere, anytime</p>
+                    </div>
                 </div>
             </div>
-            <button class="add-sample-btn" onclick="openModal()">+ Add New Sample</button>
-            <div class="view-toggle">
-                <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List View</button>
-                <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
-            </div>
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands..." oninput="handleSearch()">
         </div>
         
-        <div class="container">
-            <div id="listView">
-                <div class="control-section">
-                    <div class="section-title">Filter</div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                        <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
-                        <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue</button>
-                        <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon</button>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                        <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track</button>
-                        <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted</button>
-                    </div>
-                </div>
-                <div id="sampleGrid"></div>
-            </div>
-            <div id="calendarView" style="display:none;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <button class="icon-btn" onclick="changeMonth(-1)">◀</button>
-                    <h2 id="calendarMonth" style="font-weight: 800;"></h2>
-                    <button class="icon-btn" onclick="changeMonth(1)">▶</button>
-                </div>
-                <div class="calendar-grid" id="calendarGrid"></div>
-                <div id="calendarDayDetails" style="margin-top: 20px;"></div>
-            </div>
+        <div class="landing-sticky-bar">
+            <button class="primary-button signup" onclick="openSignUp()">Sign Up</button>
+            <button class="primary-button signin" onclick="openSignIn()">Sign In</button>
         </div>
     </div>
 
-    <div id="menuModal" class="modal">
-        <div class="modal-content" style="max-width: 300px;">
-            <div class="modal-header"><h2 class="modal-title">Menu</h2><button class="modal-close" onclick="closeMenu()">×</button></div>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button class="row-btn btn-secondary" onclick="goToLanding(); closeMenu()">🏠 Home</button>
-                <button class="row-btn btn-secondary" onclick="openSettings(); closeMenu()">⚙️ Settings</button>
-                <button class="row-btn btn-secondary" onclick="openInstall(); closeMenu()">📲 Install App</button>
-                <button class="row-btn btn-secondary" onclick="openSupport(); closeMenu()">💬 Support</button>
-                <button class="row-btn btn-secondary" onclick="openHelp(); closeMenu()">❓ Help</button>
-                <button class="row-btn btn-secondary" onclick="openPrivacy(); closeMenu()">🔒 Privacy</button>
-                <button class="row-btn btn-secondary" onclick="exportCSV(); closeMenu()">📥 Export Data</button>
-                <button class="row-btn btn-secondary" onclick="importData(); closeMenu()">📁 Import Data</button>
-                <button class="row-btn btn-secondary" onclick="clearCompleted(); closeMenu()">🧹 Clear Completed</button>
-                <button class="row-btn btn-secondary" id="menuSignOutBtn" onclick="signOut(); closeMenu()" style="display: none; background: var(--red); color: white; border-color: var(--red); margin-top: 10px;">🚪 Sign Out</button>
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Create Account</h2>
+                <p>Start tracking your samples today</p>
             </div>
-        </div>
-    </div>
-
-    <div id="authModal" class="modal">
-        <div class="modal-content" style="max-width: 400px;">
-            <div class="modal-header"><h2 class="modal-title" id="authTitle">Sign In</h2><button class="modal-close" onclick="closeAuthModal()">×</button></div>
-            <form onsubmit="handleAuth(event)">
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="authEmail" class="form-input" required></div>
-                <div class="form-group"><label class="form-label">Password</label><input type="password" id="authPassword" class="form-input" required></div>
-                <div id="confirmPassGroup" class="form-group" style="display:none;"><label class="form-label">Confirm Password</label><input type="password" id="authConfirm" class="form-input"></div>
-                <div class="form-group" style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="rememberMe" checked><label style="font-size:0.9rem">Keep me logged in</label></div>
-                <div id="authError" style="color:var(--red); font-size:0.85rem; margin-bottom:10px; display:none;"></div>
-                <button type="submit" class="row-btn btn-full-width">Submit</button>
-                <p style="text-align:center; margin-top:15px; font-size:0.9rem;"><a href="#" onclick="forgotPassword()">Forgot Password?</a></p>
+            
+            <div id="signUpError" class="auth-error"></div>
+            
+            <form class="auth-form" onsubmit="handleSignUp(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signUpEmail" required placeholder="you@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signUpPassword" required placeholder="At least 6 characters" minlength="6">
+                </div>
+                
+                <button type="submit" class="auth-button" id="signUpBtn">Sign Up</button>
             </form>
+            
+            <div class="auth-divider">or</div>
+            
+            <div class="auth-switch">
+                Already have an account?
+                <button onclick="switchToSignIn()">Sign In</button>
+            </div>
         </div>
     </div>
 
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to continue tracking</p>
+            </div>
+            
+            <div id="signInError" class="auth-error"></div>
+            
+            <form class="auth-form" onsubmit="handleSignIn(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signInEmail" required placeholder="you@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signInPassword" required placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="auth-button" id="signInBtn">Sign In</button>
+            </form>
+            
+            <div class="forgot-password-link">
+                <button onclick="openForgotPassword()">Forgot password?</button>
+            </div>
+            
+            <div class="auth-divider">or</div>
+            
+            <div class="auth-switch">
+                Don't have an account?
+                <button onclick="switchToSignUp()">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Reset Password</h2>
+                <p>We'll send you a reset link</p>
+            </div>
+            
+            <div id="forgotPasswordError" class="auth-error"></div>
+            <div id="forgotPasswordSuccess" class="auth-error" style="background: #E8F5E9; color: #2E7D32; display: none;"></div>
+            
+            <form class="auth-form" onsubmit="handleForgotPassword(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="forgotPasswordEmail" required placeholder="you@example.com">
+                </div>
+                
+                <button type="submit" class="auth-button" id="forgotPasswordBtn">Send Reset Link</button>
+            </form>
+            
+            <div class="auth-divider">or</div>
+            
+            <div class="auth-switch">
+                Remember your password?
+                <button onclick="backToSignIn()">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="20" width="80" height="70" rx="8" fill="#FE2C55"/>
+                    <rect x="20" y="30" width="15" height="15" rx="3" fill="white"/>
+                    <path d="M 23 37.5 L 27 41.5 L 33 33.5" stroke="#FE2C55" stroke-width="2" fill="none"/>
+                    <rect x="40" y="32" width="40" height="4" rx="2" fill="white" opacity="0.7"/>
+                </svg>
+                <span class="app-title">Samples</span>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn" onclick="toggleSearch()">🔍</button>
+                <button class="icon-btn" onclick="toggleMenu()">☰</button>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" onclick="setFilter('all')">All</button>
+            <button class="filter-tab" onclick="setFilter('urgent')">Urgent</button>
+            <button class="filter-tab" onclick="setFilter('today')">Today</button>
+            <button class="filter-tab" onclick="setFilter('week')">This Week</button>
+            <button class="filter-tab" onclick="setFilter('posted')">Posted</button>
+        </div>
+
+        <!-- Samples Container -->
+        <div class="samples-container" id="samplesContainer">
+            <!-- Samples will be rendered here -->
+        </div>
+
+        <!-- FAB -->
+        <button class="fab" onclick="openAddSample()">+</button>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <button class="nav-item active" onclick="switchTab('samples')">
+                <div class="nav-icon">📋</div>
+                <div class="nav-label">Samples</div>
+            </button>
+            <button class="nav-item" onclick="switchTab('calendar')">
+                <div class="nav-icon">📅</div>
+                <div class="nav-label">Calendar</div>
+            </button>
+            <button class="nav-item" onclick="switchTab('settings')">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-label">Settings</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Add/Edit Sample Modal -->
     <div id="sampleModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><h2 class="modal-title" id="modalTitle">Add Sample</h2><button class="modal-close" onclick="closeModal()">×</button></div>
-            <form id="sampleForm" onsubmit="handleSave(event)">
-                <div class="form-group"><label class="form-label">Product Name</label><input type="text" id="productName" class="form-input" required></div>
-                <div class="form-group"><label class="form-label">Brand</label><input type="text" id="brandName" class="form-input" required></div>
-                <div class="form-row">
-                    <div><label class="form-label">Received Date</label><input type="date" id="dateReceived" class="form-input" required onchange="calcDuePreview()"></div>
-                    <div><label class="form-label">Days to Post</label><input type="number" id="daysLimit" class="form-input" value="14" oninput="calcDuePreview()"></div>
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Add Sample</h3>
+                <button class="close-btn" onclick="closeSampleModal()">×</button>
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Brand Name</label>
+                <input type="text" class="form-input" id="brandInput" placeholder="e.g., Nike">
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Product Name</label>
+                <input type="text" class="form-input" id="productInput" placeholder="e.g., Air Max 90">
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Received Date</label>
+                <input type="date" class="form-input" id="dateInput">
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Days to Post</label>
+                <input type="number" class="form-input" id="limitInput" placeholder="e.g., 30" min="1">
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Link (optional)</label>
+                <input type="url" class="form-input" id="linkInput" placeholder="https://...">
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Notes (optional)</label>
+                <textarea class="form-textarea" id="notesInput" placeholder="Add any notes..."></textarea>
+            </div>
+            
+            <div class="form-row">
+                <label class="form-label">Tags (optional)</label>
+                <div class="tag-input-container">
+                    <input type="text" class="form-input tag-input" id="tagInput" placeholder="Add tag">
+                    <button class="add-tag-btn" onclick="addTag()">Add</button>
                 </div>
-                <span id="dueCalcDisplay" class="due-calc-text"></span>
-                <div class="form-group"><label class="form-label">Product Link</label><input type="url" id="shopLink" class="form-input" placeholder="Paste link here"></div>
-                <div class="form-group"><label class="form-label">Notes</label><textarea id="notes" class="form-textarea" placeholder="Add notes..."></textarea></div>
-                <div class="form-group"><label class="form-label">Photo</label><input type="file" accept="image/*" onchange="handlePhotoUpload(event)"></div>
-                <button type="submit" class="row-btn btn-full-width">Save Sample</button>
-            </form>
+                <div class="tags-container" id="tagsContainer"></div>
+            </div>
+            
+            <button class="submit-btn" onclick="saveSample()">Save Sample</button>
         </div>
     </div>
 
+    <!-- Menu Modal -->
+    <div id="menuModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Menu</h3>
+                <button class="close-btn" onclick="closeMenu()">×</button>
+            </div>
+            
+            <button class="settings-button" onclick="exportCSV(); closeMenu();">
+                Export CSV 📊
+            </button>
+            
+            <button class="settings-button" onclick="importData(); closeMenu();">
+                Import Data 📥
+            </button>
+            
+            <button class="settings-button" onclick="clearCompleted(); closeMenu();">
+                Clear Completed 🗑️
+            </button>
+            
+            <button class="settings-button" onclick="openPrivacy(); closeMenu();">
+                Privacy Policy 🔒
+            </button>
+            
+            <button class="settings-button" onclick="openHelp(); closeMenu();">
+                Help & Support 💬
+            </button>
+            
+            <button class="settings-button danger" onclick="handleSignOut()">
+                Sign Out 🚪
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><h2 class="modal-title">⚙️ Settings</h2><button class="modal-close" onclick="closeSettings()">×</button></div>
-            <div class="form-group"><div style="padding: 15px; background: var(--bg); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;"><span style="font-weight: 600;">🌙 Dark Mode</span><label class="switch"><input type="checkbox" id="darkModeToggle" onchange="toggleTheme(this.checked)"><span class="slider"></span></label></div></div>
-            <div class="form-group"><div style="padding: 15px; background: var(--bg); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;"><span style="font-weight: 600;">📳 Haptic Feedback</span><label class="switch"><input type="checkbox" id="hapticToggle" onchange="toggleHaptic(this.checked)"><span class="slider"></span></label></div></div>
-            <div class="form-group"><div style="padding: 15px; background: var(--bg); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;"><span style="font-weight: 600;">📱 Compact Mode</span><label class="switch"><input type="checkbox" id="compactToggle" onchange="toggleCompact(this.checked)"><span class="slider"></span></label></div></div>
-            <div class="form-group" style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
-                <label class="form-label" style="color: var(--red);">Danger Zone</label>
-                <button class="row-btn btn-secondary" onclick="openResetModal()" style="color: var(--red); border-color: var(--red); margin-bottom:10px;">⚠️ Reset App</button>
-                <button class="row-btn btn-secondary" onclick="openDeleteAccount()" style="color: var(--red); border-color: var(--red); background: #FFF0F0;">🗑 Delete Account</button>
+            <div class="modal-header">
+                <h3 class="modal-title">Settings</h3>
+                <button class="close-btn" onclick="closeSettings()">×</button>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-item">
+                    <span class="settings-label">Dark Mode</span>
+                    <div class="toggle-switch" id="darkModeToggle" onclick="toggleDarkMode()"></div>
+                </div>
+                
+                <div class="settings-item">
+                    <span class="settings-label">Compact View</span>
+                    <div class="toggle-switch" id="compactToggle" onclick="toggleCompactMode()"></div>
+                </div>
+                
+                <div class="settings-item">
+                    <span class="settings-label">Notifications</span>
+                    <div class="toggle-switch" id="notificationsToggle" onclick="toggleNotifications()"></div>
+                </div>
+            </div>
+            
+            <button class="settings-button" onclick="openInstall()">
+                Install App 📲
+            </button>
+            
+            <button class="settings-button" onclick="openSupport()">
+                Contact Support 💬
+            </button>
+            
+            <button class="settings-button danger" onclick="confirmDeleteAccount()">
+                Delete Account ⚠️
+            </button>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Privacy Policy</h3>
+                <button class="close-btn" onclick="closePrivacy()">×</button>
+            </div>
+            <div style="line-height: 1.6; color: var(--text-secondary);">
+                <p style="margin-bottom: 12px;"><strong>Last updated: January 2026</strong></p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Data Collection</h4>
+                <p style="margin-bottom: 12px;">We collect only the information you provide: sample details, photos, notes, and account credentials.</p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Data Usage</h4>
+                <p style="margin-bottom: 12px;">Your data is used solely to provide and improve the Sample Tracker Pro service. We never sell or share your data with third parties.</p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Data Storage</h4>
+                <p style="margin-bottom: 12px;">All data is securely stored using Supabase with encryption at rest and in transit.</p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Your Rights</h4>
+                <p style="margin-bottom: 12px;">You can export or delete your data at any time from the settings menu.</p>
             </div>
         </div>
     </div>
 
-    <div id="resetModal" class="modal"><div class="modal-content"><h2>⚠️ Reset?</h2><p>This wipes local data.</p><button class="row-btn btn-full-width" style="background:var(--red)" onclick="confirmReset()">Reset</button><button class="row-btn" onclick="closeResetModal()">Cancel</button></div></div>
-    <div id="deleteAccModal" class="modal"><div class="modal-content"><h2>🗑 Delete Account?</h2><p>This permanently deletes your cloud data and signs you out.</p><button class="row-btn btn-full-width" style="background:var(--red)" onclick="confirmDeleteAccount()">Yes, Delete</button><button class="row-btn" onclick="closeDeleteAccModal()">Cancel</button></div></div>
-    <div id="installModal" class="modal"><div class="modal-content"><h2>📲 Install</h2><p>iOS: Share > Add to Home Screen<br>Android: Menu > Install</p><button class="row-btn" onclick="document.getElementById('installModal').classList.remove('active')">Close</button></div></div>
-    <div id="helpModal" class="modal"><div class="modal-content"><h2>❓ Help</h2><p>Check "Posted" to finish sample.</p><button class="row-btn" onclick="document.getElementById('helpModal').classList.remove('active')">Close</button></div></div>
-    <div id="privacyModal" class="modal"><div class="modal-content"><h2>🔒 Privacy</h2><p>Data stored via Supabase.</p><button class="row-btn" onclick="document.getElementById('privacyModal').classList.remove('active')">Close</button></div></div>
-    <div id="analyticsModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>📊 Analytics</h2><button class="modal-close" onclick="document.getElementById('analyticsModal').classList.remove('active')">×</button></div><div id="analyticsContent"></div></div></div>
-    <div id="supportModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>💬 Support</h2><button class="modal-close" onclick="document.getElementById('supportModal').classList.remove('active')">×</button></div><p>Email: support@flextechla.com</p></div></div>
-    <div id="browserOverlay" class="browser-overlay"><div class="browser-header"><button class="browser-close" onclick="closeBrowser()">×</button><div class="browser-title">Link</div><div style="width:40px"></div></div><iframe id="browserFrame" class="browser-frame"></iframe></div>
-    <div id="photoViewerModal" class="modal" onclick="closePhotoViewer()"><div class="modal-content" style="max-width:90%; padding:0; background:transparent; box-shadow:none"><button class="browser-close" style="position:absolute; top:10px; right:10px">×</button><img id="photoViewerImg" style="width:100%; max-height:90vh; object-fit:contain; border-radius:12px"></div></div>
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Help & Support</h3>
+                <button class="close-btn" onclick="closeHelp()">×</button>
+            </div>
+            <div style="line-height: 1.6;">
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Getting Started</h4>
+                <p style="margin-bottom: 12px; color: var(--text-secondary);">Tap the + button to add your first sample. Fill in the brand, product name, received date, and posting deadline.</p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Tracking Progress</h4>
+                <p style="margin-bottom: 12px; color: var(--text-secondary);">Use the checkboxes to mark filming, editing, and posting status. When you mark "Posted", the sample moves to the Posted tab.</p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Filters</h4>
+                <p style="margin-bottom: 12px; color: var(--text-secondary);">Use the tabs at the top to filter samples by urgency or posting status.</p>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Need More Help?</h4>
+                <p style="margin-bottom: 12px; color: var(--text-secondary);">Contact us at support@sampletracker.app</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install Modal -->
+    <div id="installModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Install App</h3>
+                <button class="close-btn" onclick="closeInstall()">×</button>
+            </div>
+            <div style="line-height: 1.6;">
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">iOS (Safari)</h4>
+                <ol style="margin-bottom: 16px; padding-left: 20px; color: var(--text-secondary);">
+                    <li style="margin-bottom: 8px;">Tap the Share button (square with arrow)</li>
+                    <li style="margin-bottom: 8px;">Scroll down and tap "Add to Home Screen"</li>
+                    <li style="margin-bottom: 8px;">Tap "Add" in the top right</li>
+                </ol>
+                
+                <h4 style="margin: 16px 0 8px; color: var(--text-main);">Android (Chrome)</h4>
+                <ol style="margin-bottom: 16px; padding-left: 20px; color: var(--text-secondary);">
+                    <li style="margin-bottom: 8px;">Tap the menu button (three dots)</li>
+                    <li style="margin-bottom: 8px;">Tap "Add to Home screen"</li>
+                    <li style="margin-bottom: 8px;">Tap "Add"</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Contact Support</h3>
+                <button class="close-btn" onclick="closeSupport()">×</button>
+            </div>
+            <div style="line-height: 1.6; text-align: center; padding: 20px;">
+                <p style="margin-bottom: 20px; color: var(--text-secondary); font-size: 1.1rem;">We're here to help!</p>
+                <p style="margin-bottom: 12px; color: var(--text-main); font-size: 1.2rem; font-weight: 600;">support@sampletracker.app</p>
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">We typically respond within 24 hours</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Viewer -->
+    <div id="photoViewer" class="photo-viewer">
+        <button class="photo-viewer-close" onclick="closePhotoViewer()">×</button>
+        <img id="photoViewerImage" src="" alt="Sample photo">
+    </div>
 
     <script>
-        const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
-        let sb_client = null, currentUser = null, samples = [], authMode = 'signin', hapticEnabled = false, compactMode = false, editId = null, tempTags = [], tempPhotos = [], calendarDate = new Date();
+        // ==================== SUPABASE SETUP ====================
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function init() {
-            sb_client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            const storage = localStorage.getItem('user_email') ? localStorage : sessionStorage;
-            const email = storage.getItem('user_email'), pass = storage.getItem('user_password');
-            if (email && pass) {
-                const { data } = await sb_client.auth.signInWithPassword({ email: email, password: pass });
-                if (data.user) { currentUser = data.user; await loadData(); showApp(); return; }
-            }
-            document.getElementById('landingPage').classList.remove('hidden');
-        }
+        // ==================== STATE ====================
+        let samples = [];
+        let currentFilter = 'all';
+        let currentTab = 'samples';
+        let editingId = null;
+        let currentTags = [];
+        let currentUser = null;
 
-        async function loadData() {
-            const { data } = await sb_client.from('sample_tracker_data').select('*').eq('user_id', currentUser.id).single();
-            if (data) { samples = data.samples || []; settings = data.settings || { defaultDays: 14 }; }
-            render(); renderCalendar();
-        }
-
-        async function saveData() {
-            if (!currentUser) return;
-            await sb_client.from('sample_tracker_data').upsert({ user_id: currentUser.id, samples, settings, updated_at: new Date() });
-        }
-
-        // --- AUTH ---
-        function showAuth(mode) {
-            authMode = mode;
-            document.getElementById('authTitle').innerText = mode === 'signup' ? 'Create Account' : 'Sign In';
-            document.getElementById('confirmPassGroup').style.display = mode === 'signup' ? 'block' : 'none';
-            document.getElementById('authModal').classList.add('active');
-        }
-        function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); }
-
-        async function handleAuth(e) {
-            if(e) e.preventDefault();
-            const email = document.getElementById('authEmail').value, pass = document.getElementById('authPassword').value;
-            if (authMode === 'signup' && pass !== document.getElementById('authConfirm').value) { alert("Passwords don't match"); return; }
-            const { data, error } = authMode === 'signup' ? await sb_client.auth.signUp({ email, password: pass }) : await sb_client.auth.signInWithPassword({ email, password: pass });
-            if (error) { alert(error.message); return; }
-            const storage = document.getElementById('rememberMe').checked ? localStorage : sessionStorage;
-            storage.setItem('user_email', email); storage.setItem('user_password', pass);
-            location.reload();
-        }
-
-        async function forgotPassword() {
-            const email = prompt("Enter your email to reset password:");
-            if (email) {
-                const { error } = await sb_client.auth.resetPasswordForEmail(email);
-                alert(error ? error.message : "Password reset link sent!");
-            }
-        }
-
-        // --- APP LOGIC ---
-        async function handleSave(e) {
-            e.preventDefault();
+        // ==================== AUTHENTICATION ====================
+        
+        // Check authentication status on load
+        async function checkAuth() {
             try {
-                const newItem = {
-                    id: editId || Date.now().toString(),
-                    product: document.getElementById('productName').value,
-                    brand: document.getElementById('brandName').value,
-                    date: document.getElementById('dateReceived').value,
-                    limit: parseInt(document.getElementById('daysLimit').value),
-                    link: document.getElementById('shopLink').value,
-                    notes: document.getElementById('notes').value,
-                    photos: tempPhotos,
-                    checklist: editId ? samples.find(x => x.id === editId).checklist : { filmed: false, edited: false, posted: false },
-                    done: false
-                };
-                if (editId) samples = samples.map(x => x.id === editId ? newItem : x);
-                else samples.unshift(newItem);
-                await saveData(); render(); renderCalendar();
-            } catch(err) { console.error(err); alert("Error saving: " + err.message); } 
-            finally { closeModal(); }
-        }
-
-        function toggleCheckbox(id, field) {
-            triggerHaptic();
-            samples = samples.map(s => {
-                if (s.id == id) {
-                    s.checklist[field] = !s.checklist[field];
-                    if (field === 'posted') s.done = s.checklist.posted; // Posted = Done logic
+                const { data: { session } } = await supabase.auth.getSession();
+                
+                if (session) {
+                    currentUser = session.user;
+                    showApp();
+                    await loadSamples();
+                } else {
+                    showLanding();
                 }
-                return s;
-            });
-            saveData(); render();
+            } catch (error) {
+                console.error('Auth check error:', error);
+                showLanding();
+            }
         }
 
-        function render() {
-            const grid = document.getElementById('sampleGrid');
-            grid.innerHTML = samples.filter(s => !s.done).map(s => `
-                <div class="sample-card">
-                    <div class="card-body">
-                        <div class="brand-name">${s.brand}</div>
-                        <div class="product-name">${s.product}</div>
-                        ${s.photos && s.photos.length ? `<div class="photo-row">${s.photos.map(p => `<img src="${p}" class="photo-thumb" onclick="viewPhoto('${p}')">`).join('')}</div>` : ''}
-                        <div class="checklist">
-                            <label class="checklist-item"><input type="checkbox" ${s.checklist.filmed?'checked':''} onchange="toggleCheckbox('${s.id}','filmed')"> 🎥 Filmed</label>
-                            <label class="checklist-item"><input type="checkbox" ${s.checklist.edited?'checked':''} onchange="toggleCheckbox('${s.id}','edited')"> ✂️ Edited</label>
-                            <label class="checklist-item"><input type="checkbox" ${s.checklist.posted?'checked':''} onchange="toggleCheckbox('${s.id}','posted')"> 🏁 Posted (Done)</label>
-                        </div>
-                        <div class="meta-grid">
-                            <div><span class="meta-label">Received</span><span class="meta-value">${new Date(s.date).toLocaleDateString()}</span></div>
-                            <div><span class="meta-label">Due</span><span class="meta-value">${new Date(new Date(s.date).getTime() + s.limit*86400000).toLocaleDateString()}</span></div>
-                        </div>
-                        <div class="action-container">
-                            <div class="btn-row-2">
-                                <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
-                                <button class="row-btn btn-secondary" style="color:var(--red); border-color:var(--red)" onclick="deleteSample('${s.id}')">🗑 Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        // Listen for auth state changes
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN') {
+                currentUser = session.user;
+                showApp();
+                loadSamples();
+            } else if (event === 'SIGNED_OUT') {
+                currentUser = null;
+                showLanding();
+                samples = [];
+            }
+        });
+
+        function showApp() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('app').classList.add('active');
+        }
+
+        function showLanding() {
+            document.getElementById('landingPage').classList.remove('hidden');
+            document.getElementById('app').classList.remove('active');
+        }
+
+        // Sign Up
+        function openSignUp() {
+            document.getElementById('signUpModal').classList.add('active');
+            document.getElementById('signUpError').classList.remove('active');
+        }
+
+        function switchToSignIn() {
+            document.getElementById('signUpModal').classList.remove('active');
+            openSignIn();
+        }
+
+        async function handleSignUp(e) {
+            e.preventDefault();
+            const email = document.getElementById('signUpEmail').value;
+            const password = document.getElementById('signUpPassword').value;
+            const btn = document.getElementById('signUpBtn');
+            const errorDiv = document.getElementById('signUpError');
+            
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+            errorDiv.classList.remove('active');
+            
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                });
+                
+                if (error) throw error;
+                
+                if (data?.user) {
+                    // Check if email confirmation is required
+                    if (data.user.identities && data.user.identities.length === 0) {
+                        errorDiv.textContent = 'Please check your email to confirm your account.';
+                        errorDiv.classList.add('active');
+                        errorDiv.style.background = '#E8F5E9';
+                        errorDiv.style.color = '#2E7D32';
+                    } else {
+                        document.getElementById('signUpModal').classList.remove('active');
+                    }
+                }
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.classList.add('active');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Sign Up';
+            }
+        }
+
+        // Sign In
+        function openSignIn() {
+            document.getElementById('signInModal').classList.add('active');
+            document.getElementById('signInError').classList.remove('active');
+        }
+
+        function switchToSignUp() {
+            document.getElementById('signInModal').classList.remove('active');
+            openSignUp();
+        }
+
+        async function handleSignIn(e) {
+            e.preventDefault();
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+            const btn = document.getElementById('signInBtn');
+            const errorDiv = document.getElementById('signInError');
+            
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
+            errorDiv.classList.remove('active');
+            
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+                
+                if (error) throw error;
+                
+                document.getElementById('signInModal').classList.remove('active');
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.classList.add('active');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
+            }
+        }
+
+        // Forgot Password
+        function openForgotPassword() {
+            document.getElementById('signInModal').classList.remove('active');
+            document.getElementById('forgotPasswordModal').classList.add('active');
+            document.getElementById('forgotPasswordError').classList.remove('active');
+            document.getElementById('forgotPasswordSuccess').style.display = 'none';
+        }
+
+        function backToSignIn() {
+            document.getElementById('forgotPasswordModal').classList.remove('active');
+            openSignIn();
+        }
+
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotPasswordEmail').value;
+            const btn = document.getElementById('forgotPasswordBtn');
+            const errorDiv = document.getElementById('forgotPasswordError');
+            const successDiv = document.getElementById('forgotPasswordSuccess');
+            
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            errorDiv.classList.remove('active');
+            successDiv.style.display = 'none';
+            
+            try {
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin,
+                });
+                
+                if (error) throw error;
+                
+                successDiv.textContent = 'Password reset email sent! Check your inbox.';
+                successDiv.style.display = 'block';
+                document.getElementById('forgotPasswordEmail').value = '';
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.classList.add('active');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Send Reset Link';
+            }
+        }
+
+        // Sign Out
+        async function handleSignOut() {
+            try {
+                await supabase.auth.signOut();
+                closeMenu();
+            } catch (error) {
+                alert('Error signing out: ' + error.message);
+            }
+        }
+
+        // Delete Account
+        async function confirmDeleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone and will delete all your data.')) {
+                if (confirm('This is your final warning. Delete account and all data permanently?')) {
+                    try {
+                        // Delete all user's samples first
+                        const { error: deleteError } = await supabase
+                            .from('samples')
+                            .delete()
+                            .eq('user_id', currentUser.id);
+                        
+                        if (deleteError) throw deleteError;
+                        
+                        // Note: Actual user account deletion requires admin privileges
+                        // For now, we'll sign them out and they can contact support
+                        await supabase.auth.signOut();
+                        alert('Your data has been deleted. Please contact support@sampletracker.app to complete account deletion.');
+                    } catch (error) {
+                        alert('Error deleting account: ' + error.message);
+                    }
+                }
+            }
+        }
+
+        // ==================== DATABASE OPERATIONS ====================
+        
+        async function loadSamples() {
+            if (!currentUser) return;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('samples')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                
+                if (error) throw error;
+                
+                samples = data || [];
+                render();
+                renderCalendar();
+            } catch (error) {
+                console.error('Error loading samples:', error);
+            }
+        }
+
+        async function saveSamples() {
+            // Individual saves are handled in saveSample function
+            // This function is kept for compatibility
+            return;
+        }
+
+        // ==================== SAMPLE MANAGEMENT ====================
+        
+        function openAddSample() {
+            editingId = null;
+            currentTags = [];
+            document.getElementById('modalTitle').textContent = 'Add Sample';
+            document.getElementById('brandInput').value = '';
+            document.getElementById('productInput').value = '';
+            document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+            document.getElementById('limitInput').value = '30';
+            document.getElementById('linkInput').value = '';
+            document.getElementById('notesInput').value = '';
+            document.getElementById('tagsContainer').innerHTML = '';
+            document.getElementById('sampleModal').classList.add('active');
+        }
+
+        function editSample(id) {
+            const sample = samples.find(s => s.id === id);
+            if (!sample) return;
+            
+            editingId = id;
+            currentTags = sample.tags || [];
+            document.getElementById('modalTitle').textContent = 'Edit Sample';
+            document.getElementById('brandInput').value = sample.brand;
+            document.getElementById('productInput').value = sample.product;
+            document.getElementById('dateInput').value = sample.date;
+            document.getElementById('limitInput').value = sample.limit;
+            document.getElementById('linkInput').value = sample.link || '';
+            document.getElementById('notesInput').value = sample.notes || '';
+            renderTags();
+            document.getElementById('sampleModal').classList.add('active');
+        }
+
+        async function saveSample() {
+            const brand = document.getElementById('brandInput').value.trim();
+            const product = document.getElementById('productInput').value.trim();
+            const date = document.getElementById('dateInput').value;
+            const limit = parseInt(document.getElementById('limitInput').value);
+            const link = document.getElementById('linkInput').value.trim();
+            const notes = document.getElementById('notesInput').value.trim();
+            
+            if (!brand || !product || !date || !limit) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const sampleData = {
+                brand,
+                product,
+                date,
+                limit,
+                link: link || null,
+                notes: notes || null,
+                tags: currentTags,
+                user_id: currentUser.id
+            };
+            
+            try {
+                if (editingId) {
+                    // Update existing sample
+                    const { error } = await supabase
+                        .from('samples')
+                        .update(sampleData)
+                        .eq('id', editingId)
+                        .eq('user_id', currentUser.id);
+                    
+                    if (error) throw error;
+                } else {
+                    // Insert new sample with checklist
+                    sampleData.checklist = { filmed: false, edited: false, posted: false };
+                    sampleData.done = false;
+                    sampleData.photos = [];
+                    
+                    const { error } = await supabase
+                        .from('samples')
+                        .insert([sampleData]);
+                    
+                    if (error) throw error;
+                }
+                
+                await loadSamples();
+                closeSampleModal();
+            } catch (error) {
+                alert('Error saving sample: ' + error.message);
+            }
         }
 
         async function deleteSample(id) {
-            triggerHaptic();
-            if (confirm("Delete this sample?")) {
-                samples = samples.filter(s => s.id != id);
-                await saveData(); render(); renderCalendar();
+            if (confirm('Are you sure you want to delete this sample?')) {
+                try {
+                    const { error } = await supabase
+                        .from('samples')
+                        .delete()
+                        .eq('id', id)
+                        .eq('user_id', currentUser.id);
+                    
+                    if (error) throw error;
+                    
+                    await loadSamples();
+                } catch (error) {
+                    alert('Error deleting sample: ' + error.message);
+                }
             }
         }
 
-        // --- UTILS ---
-        function showApp() { document.getElementById('landingPage').classList.add('hidden'); document.getElementById('appContainer').classList.add('active'); document.getElementById('menuSignOutBtn').style.display = 'block'; render(); }
-        function setView(v) { document.getElementById('listView').style.display = v==='list'?'block':'none'; document.getElementById('calendarView').style.display = v==='calendar'?'block':'none'; }
-        function setFilter(f) { currentFilter=f; render(); }
-        function setSort(s) { currentSort=s; render(); }
-        function handleSearch() { searchQuery = document.getElementById('searchBar').value.toLowerCase(); render(); }
-        function openModal(id) { editId=id; tempTags=[]; tempPhotos=[]; document.getElementById('sampleForm').reset(); document.getElementById('dateReceived').valueAsDate=new Date(); document.getElementById('sampleModal').classList.add('active'); }
-        function closeModal() { document.getElementById('sampleModal').classList.remove('active'); }
-        function toggleMenu() { document.getElementById('menuModal').classList.add('active'); }
-        function closeMenu() { document.getElementById('menuModal').classList.remove('active'); }
-        function openSettings() { document.getElementById('settingsModal').classList.add('active'); }
-        function closeSettings() { document.getElementById('settingsModal').classList.remove('active'); }
-        function openInstall() { document.getElementById('installModal').classList.add('active'); }
-        function openHelp() { document.getElementById('helpModal').classList.add('active'); }
-        function openSupport() { document.getElementById('supportModal').classList.add('active'); }
-        function openPrivacy() { document.getElementById('privacyModal').classList.add('active'); }
-        function toggleTheme(isDark) { document.documentElement.setAttribute('data-theme', isDark?'dark':'light'); localStorage.setItem('theme', isDark?'dark':'light'); }
-        function toggleCompact(isC) { isC ? document.body.classList.add('compact-mode') : document.body.classList.remove('compact-mode'); localStorage.setItem('compact', isC); }
-        function toggleHaptic(h) { hapticEnabled=h; localStorage.setItem('haptic', h); }
-        function triggerHaptic() { if(hapticEnabled && navigator.vibrate) navigator.vibrate(10); }
-        function openResetModal() { document.getElementById('resetModal').classList.add('active'); }
-        function closeResetModal() { document.getElementById('resetModal').classList.remove('active'); }
-        function confirmReset() { localStorage.clear(); location.reload(); }
-        function openDeleteAccount() { document.getElementById('deleteAccModal').classList.add('active'); }
-        function closeDeleteAccModal() { document.getElementById('deleteAccModal').classList.remove('active'); }
-        async function confirmDeleteAccount() { await sb_client.from('sample_tracker_data').delete().eq('user_id', currentUser.id); await sb_client.auth.signOut(); localStorage.clear(); location.reload(); }
-        function loadTheme() { if(localStorage.getItem('theme')==='dark') { document.documentElement.setAttribute('data-theme','dark'); document.getElementById('darkModeToggle').checked=true; } if(localStorage.getItem('compact')==='true') { document.body.classList.add('compact-mode'); document.getElementById('compactToggle').checked=true; } if(localStorage.getItem('haptic')==='true') { hapticEnabled=true; document.getElementById('hapticToggle').checked=true; } }
-        function calcDuePreview() { const d=document.getElementById('dateReceived').value, l=parseInt(document.getElementById('daysLimit').value); if(d) document.getElementById('dueCalcDisplay').innerText="Due: "+new Date(new Date(d).getTime()+l*86400000).toLocaleDateString(); }
-        function handlePhotoUpload(e) { const f=e.target.files[0]; if(f) { const r=new FileReader(); r.onload=ev=>{ tempPhotos.push(ev.target.result); renderPhotoGrid(); }; r.readAsDataURL(f); } }
-        function renderPhotoGrid() { document.getElementById('photoGrid').innerHTML = tempPhotos.map((p,i)=>`<div class="photo-upload-item"><img src="${p}"><button class="photo-remove" onclick="tempPhotos.splice(${i},1);renderPhotoGrid()">×</button></div>`).join('') + `<label class="photo-upload-item"><input type="file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)"><span>+</span></label>`; }
-        function renderCalendar() { /* Simplified calendar logic for brevity */ const m=new Date(); document.getElementById('calendarMonth').innerText=m.toLocaleString('default',{month:'long'}); document.getElementById('calendarGrid').innerHTML=Array.from({length:30},(_,i)=>`<div class="calendar-day">${i+1}</div>`).join(''); }
-        function viewPhoto(src) { document.getElementById('photoViewerImg').src=src; document.getElementById('photoViewerModal').classList.add('active'); }
-        function closePhotoViewer() { document.getElementById('photoViewerModal').classList.remove('active'); }
-        function openBrowser(url) { document.getElementById('browserFrame').src=url; document.getElementById('browserOverlay').classList.add('active'); }
-        function closeBrowser() { document.getElementById('browserOverlay').classList.remove('active'); }
-        function exportCSV() { alert("Exporting data..."); }
-        function importData() { alert("Import feature placeholder"); }
-        function clearCompleted() { if(confirm("Clear completed?")) { samples=samples.filter(s=>!s.done); saveData(); render(); } }
-        function openAnalytics() { document.getElementById('analyticsModal').classList.add('active'); }
-        function closeAnalytics() { document.getElementById('analyticsModal').classList.remove('active'); }
-        function changeMonth(d) { calendarDate.setMonth(calendarDate.getMonth()+d); renderCalendar(); }
-        function getStatusInfo(s) { if(s.done) return {status:'completed', text:'Posted'}; return {status:'good', text:'Active'}; }
+        async function toggleCheck(id, field) {
+            const sample = samples.find(s => s.id === id);
+            if (!sample) return;
+            
+            const newChecklist = { ...sample.checklist };
+            newChecklist[field] = !newChecklist[field];
+            
+            // If posted is checked, mark as done and move to posted filter
+            const done = newChecklist.posted;
+            
+            try {
+                const { error } = await supabase
+                    .from('samples')
+                    .update({ 
+                        checklist: newChecklist,
+                        done: done 
+                    })
+                    .eq('id', id)
+                    .eq('user_id', currentUser.id);
+                
+                if (error) throw error;
+                
+                await loadSamples();
+            } catch (error) {
+                console.error('Error updating checklist:', error);
+            }
+        }
+
+        function closeSampleModal() {
+            document.getElementById('sampleModal').classList.remove('active');
+            editingId = null;
+            currentTags = [];
+        }
+
+        // ==================== TAGS ====================
         
-        window.onload = init;
+        function addTag() {
+            const input = document.getElementById('tagInput');
+            const tag = input.value.trim();
+            if (tag && !currentTags.includes(tag)) {
+                currentTags.push(tag);
+                input.value = '';
+                renderTags();
+            }
+        }
+
+        function removeTag(tag) {
+            currentTags = currentTags.filter(t => t !== tag);
+            renderTags();
+        }
+
+        function renderTags() {
+            const container = document.getElementById('tagsContainer');
+            container.innerHTML = currentTags.map(tag => 
+                `<span class="tag-pill" onclick="removeTag('${tag}')">${tag} ×</span>`
+            ).join('');
+        }
+
+        // ==================== PHOTOS ====================
+        
+        async function addPhoto(id) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = async (ev) => {
+                    const sample = samples.find(s => s.id === id);
+                    if (!sample) return;
+                    
+                    const photos = sample.photos || [];
+                    photos.push(ev.target.result);
+                    
+                    try {
+                        const { error } = await supabase
+                            .from('samples')
+                            .update({ photos })
+                            .eq('id', id)
+                            .eq('user_id', currentUser.id);
+                        
+                        if (error) throw error;
+                        
+                        await loadSamples();
+                    } catch (error) {
+                        console.error('Error adding photo:', error);
+                    }
+                };
+                reader.readAsDataURL(file);
+            };
+            input.click();
+        }
+
+        function viewPhoto(photoUrl) {
+            document.getElementById('photoViewerImage').src = photoUrl;
+            document.getElementById('photoViewer').classList.add('active');
+        }
+
+        function closePhotoViewer() {
+            document.getElementById('photoViewer').classList.remove('active');
+        }
+
+        // ==================== FILTERING & RENDERING ====================
+        
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            render();
+        }
+
+        function getStatusInfo(sample) {
+            if (sample.done || sample.checklist.posted) {
+                return { text: 'Posted', class: 'done', days: 0 };
+            }
+            
+            const received = new Date(sample.date);
+            const dueDate = new Date(received.getTime() + sample.limit * 86400000);
+            const today = new Date();
+            const daysLeft = Math.ceil((dueDate - today) / 86400000);
+            
+            if (daysLeft < 0) return { text: `${Math.abs(daysLeft)}d overdue`, class: 'urgent', days: daysLeft };
+            if (daysLeft <= 3) return { text: `${daysLeft}d left`, class: 'urgent', days: daysLeft };
+            if (daysLeft <= 7) return { text: `${daysLeft}d left`, class: 'warning', days: daysLeft };
+            return { text: `${daysLeft}d left`, class: 'ok', days: daysLeft };
+        }
+
+        function filterSamples() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            return samples.filter(sample => {
+                const info = getStatusInfo(sample);
+                
+                switch (currentFilter) {
+                    case 'urgent':
+                        return info.class === 'urgent' && !sample.done;
+                    case 'today':
+                        const dueDate = new Date(sample.date);
+                        dueDate.setDate(dueDate.getDate() + sample.limit);
+                        dueDate.setHours(0, 0, 0, 0);
+                        return dueDate.getTime() === today.getTime() && !sample.done;
+                    case 'week':
+                        const weekFromNow = new Date(today.getTime() + 7 * 86400000);
+                        const sampleDue = new Date(sample.date);
+                        sampleDue.setDate(sampleDue.getDate() + sample.limit);
+                        return sampleDue <= weekFromNow && sampleDue >= today && !sample.done;
+                    case 'posted':
+                        return sample.done || sample.checklist.posted;
+                    default:
+                        return true;
+                }
+            });
+        }
+
+        function render() {
+            const container = document.getElementById('samplesContainer');
+            const filtered = filterSamples();
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📦</div>
+                        <div class="empty-state-text">No samples found</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(sample => {
+                const info = getStatusInfo(sample);
+                const photos = sample.photos || [];
+                
+                return `
+                    <div class="sample-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="days-badge ${info.class}">${info.text}</div>
+                                <div class="product-name">${sample.product}</div>
+                                <div class="brand-name">${sample.brand}</div>
+                            </div>
+                            <button class="delete-btn" onclick="deleteSample(${sample.id})">🗑</button>
+                        </div>
+                        
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <div class="checkbox ${sample.checklist.filmed ? 'checked' : ''}" 
+                                     onclick="toggleCheck(${sample.id}, 'filmed')"></div>
+                                <span>Filmed</span>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checkbox ${sample.checklist.edited ? 'checked' : ''}" 
+                                     onclick="toggleCheck(${sample.id}, 'edited')"></div>
+                                <span>Edited</span>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checkbox ${sample.checklist.posted ? 'checked' : ''}" 
+                                     onclick="toggleCheck(${sample.id}, 'posted')"></div>
+                                <span>Posted</span>
+                            </div>
+                        </div>
+                        
+                        ${photos.length > 0 ? `
+                            <div class="photo-row">
+                                ${photos.map(photo => 
+                                    `<img src="${photo}" class="photo-thumbnail" onclick="viewPhoto('${photo}')">`
+                                ).join('')}
+                                <button class="add-photo-btn" onclick="addPhoto(${sample.id})">+</button>
+                            </div>
+                        ` : `
+                            <div class="photo-row">
+                                <button class="add-photo-btn" onclick="addPhoto(${sample.id})">+</button>
+                            </div>
+                        `}
+                        
+                        ${sample.notes ? `
+                            <div class="notes-section">
+                                <div class="notes-text">${sample.notes}</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${sample.tags && sample.tags.length > 0 ? `
+                            <div class="tags-container">
+                                ${sample.tags.map(tag => `<span class="tag-pill">${tag}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="action-container">
+                            <button class="row-btn secondary" onclick="editSample(${sample.id})">Edit</button>
+                            ${sample.link ? `<button class="row-btn primary" onclick="window.open('${sample.link}', '_blank')">View Link</button>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderCalendar() {
+            // Calendar rendering logic would go here
+            // This is a placeholder for the calendar view
+        }
+
+        // ==================== NAVIGATION ====================
+        
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            
+            if (tab === 'samples') {
+                document.getElementById('samplesContainer').style.display = 'block';
+                render();
+            } else if (tab === 'calendar') {
+                // Switch to calendar view
+                alert('Calendar view coming soon!');
+            } else if (tab === 'settings') {
+                document.getElementById('settingsModal').classList.add('active');
+            }
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+
+        // ==================== MENU ====================
+        
+        function toggleMenu() {
+            document.getElementById('menuModal').classList.add('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('menuModal').classList.remove('active');
+        }
+
+        function openPrivacy() {
+            document.getElementById('privacyModal').classList.add('active');
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacyModal').classList.remove('active');
+        }
+
+        function openHelp() {
+            document.getElementById('helpModal').classList.add('active');
+        }
+
+        function closeHelp() {
+            document.getElementById('helpModal').classList.remove('active');
+        }
+
+        function openInstall() {
+            document.getElementById('installModal').classList.add('active');
+        }
+
+        function closeInstall() {
+            document.getElementById('installModal').classList.remove('active');
+        }
+
+        function openSupport() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function closeSupport() {
+            document.getElementById('supportModal').classList.remove('active');
+        }
+
+        // ==================== UTILITIES ====================
+        
+        function toggleSearch() {
+            alert('Search feature coming soon!');
+        }
+
+        function exportCSV() {
+            const headers = ['Brand', 'Product', 'Received Date', 'Days to Post', 'Due Date', 'Status', 'Link', 'Notes', 'Tags', 'Filmed', 'Edited', 'Posted'];
+            const rows = samples.map(s => {
+                const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                const info = getStatusInfo(s);
+                return [
+                    s.brand,
+                    s.product,
+                    s.date,
+                    s.limit,
+                    dueDate.toISOString().split('T')[0],
+                    s.done ? 'Completed' : info.text,
+                    s.link || '',
+                    s.notes || '',
+                    (s.tags || []).join('; '),
+                    s.checklist.filmed ? 'Yes' : 'No',
+                    s.checklist.edited ? 'Yes' : 'No',
+                    s.checklist.posted ? 'Yes' : 'No'
+                ].map(v => `"${v}"`).join(',');
+            });
+            
+            const csv = [headers.join(','), ...rows].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `samples_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        async function clearCompleted() {
+            if (confirm('Delete all posted samples?')) {
+                try {
+                    const { error } = await supabase
+                        .from('samples')
+                        .delete()
+                        .eq('user_id', currentUser.id)
+                        .eq('done', true);
+                    
+                    if (error) throw error;
+                    
+                    await loadSamples();
+                } catch (error) {
+                    alert('Error clearing completed: ' + error.message);
+                }
+            }
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = async (ev) => {
+                    try {
+                        const imported = JSON.parse(ev.target.result);
+                        if (confirm(`Import ${imported.length} samples? This will add to your current data.`)) {
+                            // Add user_id to each sample
+                            const samplesWithUser = imported.map(s => ({
+                                ...s,
+                                user_id: currentUser.id
+                            }));
+                            
+                            const { error } = await supabase
+                                .from('samples')
+                                .insert(samplesWithUser);
+                            
+                            if (error) throw error;
+                            
+                            await loadSamples();
+                            alert('Data imported successfully!');
+                        }
+                    } catch (e) {
+                        alert('Invalid file format');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // ==================== SETTINGS ====================
+        
+        function toggleDarkMode() {
+            const toggle = document.getElementById('darkModeToggle');
+            toggle.classList.toggle('active');
+            document.documentElement.setAttribute('data-theme', 
+                toggle.classList.contains('active') ? 'dark' : 'light');
+            localStorage.setItem('darkMode', toggle.classList.contains('active'));
+        }
+
+        function toggleCompactMode() {
+            const toggle = document.getElementById('compactToggle');
+            toggle.classList.toggle('active');
+            document.body.classList.toggle('compact-mode');
+            localStorage.setItem('compactMode', toggle.classList.contains('active'));
+        }
+
+        function toggleNotifications() {
+            const toggle = document.getElementById('notificationsToggle');
+            toggle.classList.toggle('active');
+            localStorage.setItem('notifications', toggle.classList.contains('active'));
+            
+            if (toggle.classList.contains('active')) {
+                if ('Notification' in window && Notification.permission === 'default') {
+                    Notification.requestPermission();
+                }
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        
+        window.addEventListener('load', () => {
+            // Load saved preferences
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.getElementById('darkModeToggle').classList.add('active');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            
+            if (localStorage.getItem('compactMode') === 'true') {
+                document.getElementById('compactToggle').classList.add('active');
+                document.body.classList.add('compact-mode');
+            }
+            
+            if (localStorage.getItem('notifications') === 'true') {
+                document.getElementById('notificationsToggle').classList.add('active');
+            }
+            
+            // Check authentication
+            checkAuth();
+        });
     </script>
 </body>
 </html>
