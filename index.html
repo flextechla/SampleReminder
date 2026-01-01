@@ -1132,8 +1132,11 @@
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <button class="row-btn btn-secondary" onclick="goToLanding(); closeMenu()">🏠 Home</button>
                 <button class="row-btn btn-secondary" onclick="openSettings(); closeMenu()">⚙️ Settings</button>
+                <button class="row-btn btn-secondary" onclick="openSupport(); closeMenu()">💬 Support</button>
+                <button class="row-btn btn-secondary" onclick="openPrivacy(); closeMenu()">🔒 Privacy Policy</button>
                 <button class="row-btn btn-secondary" onclick="exportCSV(); closeMenu()">📥 Export CSV</button>
                 <button class="row-btn btn-secondary" onclick="clearCompleted(); closeMenu()">🧹 Clear Completed</button>
+                <button class="row-btn btn-secondary" id="menuSignOutBtn" onclick="signOut(); closeMenu()" style="display: none; background: var(--red); color: white; border-color: var(--red); margin-top: 10px;">🚪 Sign Out</button>
             </div>
         </div>
     </div>
@@ -1359,6 +1362,53 @@
         </div>
     </div>
 
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">💬 Support</h2>
+                <button class="modal-close" onclick="closeSupport()">×</button>
+            </div>
+            <div style="line-height: 1.6; text-align: center;">
+                <div style="background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); padding: 30px; border-radius: 16px; margin-bottom: 25px; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📧</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; font-size: 1.2rem;">Need Help?</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px;">We're here to help you!</p>
+                    <a href="mailto:support@flextechla.com" style="display: inline-block; background: white; color: var(--primary); padding: 12px 24px; border-radius: 25px; font-weight: 700; text-decoration: none; font-size: 1rem;">
+                        📧 Email Support
+                    </a>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">support@flextechla.com</p>
+                </div>
+                
+                <div style="text-align: left;">
+                    <h3 style="font-weight: 700; margin-bottom: 15px; color: var(--dark);">📋 Quick Help</h3>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Can't log in?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using the same email and password you signed up with.</p>
+                    </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Lost your data?</p>
+                        <p style="font-size: 0.85rem; color: #666;">If you're signed in, your data is safely stored in the cloud. Try refreshing the page.</p>
+                    </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">App not installing?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using Chrome (Android) or Safari (iPhone). Check our install guide for help.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button class="row-btn btn-secondary" onclick="closeSupport(); openHelp()">📖 View Full Help Guide</button>
+                </div>
+                
+                <div style="background: #E3F2FD; padding: 15px; border-radius: 12px; margin-top: 20px; text-align: left;">
+                    <p style="font-size: 0.85rem; color: #666;">
+                        <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Help Modal -->
     <div id="helpModal" class="modal">
         <div class="modal-content">
@@ -1508,6 +1558,10 @@
                             <label class="form-label">Password</label>
                             <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
                         </div>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="rememberMe" checked style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem;">Keep me logged in</label>
+                        </div>
                         <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
                         <button class="row-btn btn-full-width" onclick="handleAuth('${mode}')" style="margin-bottom: 10px;">
                             ${mode === 'signup' ? 'Create Account' : 'Sign In'}
@@ -1524,6 +1578,7 @@
         async function handleAuth(mode) {
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
             const errorDiv = document.getElementById('authError');
             
             if (!email || !password) {
@@ -1554,8 +1609,14 @@
                 if (error) throw error;
                 
                 if (data.user) {
-                    localStorage.setItem('user_email', email);
-                    localStorage.setItem('user_password', password);
+                    // Only save credentials if "Keep me logged in" is checked
+                    if (rememberMe) {
+                        localStorage.setItem('user_email', email);
+                        localStorage.setItem('user_password', password);
+                    } else {
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
+                    }
                     
                     currentUser = data.user;
                     useCloud = true;
@@ -1658,6 +1719,7 @@
         function showApp() {
             document.getElementById('landingPage').classList.remove('active');
             document.getElementById('appContainer').classList.add('active');
+            window.scrollTo(0, 0); // Scroll to top
             render();
             renderCalendar();
         }
@@ -2256,6 +2318,7 @@
         function updateCloudStatus() {
             const statusDiv = document.getElementById('cloudStatus');
             const signOutBtn = document.getElementById('signOutBtn');
+            const menuSignOutBtn = document.getElementById('menuSignOutBtn');
             
             if (useCloud && currentUser) {
                 const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
@@ -2266,6 +2329,7 @@
                 `;
                 statusDiv.style.background = '#E8F5E9';
                 if (signOutBtn) signOutBtn.style.display = 'block';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'block';
             } else {
                 statusDiv.innerHTML = `
                     <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
@@ -2274,6 +2338,7 @@
                 `;
                 statusDiv.style.background = '#E3F2FD';
                 if (signOutBtn) signOutBtn.style.display = 'none';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'none';
             }
         }
 
@@ -2402,6 +2467,14 @@
 
         function closeHelp() {
             document.getElementById('helpModal').classList.remove('active');
+        }
+
+        function openSupport() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function closeSupport() {
+            document.getElementById('supportModal').classList.remove('active');
         }
 
         // ==================== UTILITIES ====================
