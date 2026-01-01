@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FE2C55">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23FE2C55'/%3E%3Cg transform='translate(106,80)'%3E%3Crect x='20' y='40' width='260' height='340' rx='20' fill='white' opacity='0.95'/%3E%3Crect x='90' y='20' width='120' height='50' rx='12' fill='white' opacity='0.95'/%3E%3Crect x='100' y='30' width='100' height='30' rx='8' fill='%23FE2C55'/%3E%3Cg transform='translate(50,100)'%3E%3Crect width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 18 L 15 25 L 27 10' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='5' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='20' width='100' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='70' width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 88 L 15 95 L 27 80' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='75' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='90' width='110' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='140' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='145' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='160' width='90' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='210' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='215' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='230' width='120' height='6' rx='3' fill='%23F0F0F0'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='400' cy='112' r='45' fill='white'/%3E%3Ctext x='400' y='130' text-anchor='middle' font-size='50' font-weight='bold' fill='%23FE2C55' font-family='Arial,sans-serif'%3E3%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23FE2C55'/%3E%3Cg transform='translate(106,80)'%3E%3Crect x='20' y='40' width='260' height='340' rx='20' fill='white' opacity='0.95'/%3E%3Crect x='90' y='20' width='120' height='50' rx='12' fill='white' opacity='0.95'/%3E%3Crect x='100' y='30' width='100' height='30' rx='8' fill='%23FE2C55'/%3E%3Cg transform='translate(50,100)'%3E%3Crect width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 18 L 15 25 L 27 10' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='5' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='20' width='100' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='70' width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 88 L 15 95 L 27 80' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='75' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='90' width='110' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='140' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='145' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='160' width='90' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='210' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='215' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='230' width='120' height='6' rx='3' fill='%23F0F0F0'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='400' cy='112' r='45' fill='white'/%3E%3Ctext x='400' y='130' text-anchor='middle' font-size='50' font-weight='bold' fill='%23FE2C55' font-family='Arial,sans-serif'%3E3%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" id="manifest-placeholder">
+    
+    <title>Sample Tracker Pro</title>
+    
+    <script>
+        // Generate manifest dynamically with proper icon
+        const manifestData = {
+            "name": "Sample Tracker Pro",
+            "short_name": "Samples",
+            "description": "Track your PR samples and never miss a deadline",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#FE2C55",
+            "theme_color": "#FE2C55",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23FE2C55'/%3E%3Cg transform='translate(106,80)'%3E%3Crect x='20' y='40' width='260' height='340' rx='20' fill='white' opacity='0.95'/%3E%3Crect x='90' y='20' width='120' height='50' rx='12' fill='white' opacity='0.95'/%3E%3Crect x='100' y='30' width='100' height='30' rx='8' fill='%23FE2C55'/%3E%3Cg transform='translate(50,100)'%3E%3Crect width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 18 L 15 25 L 27 10' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='5' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='20' width='100' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='70' width='35' height='35' rx='7' fill='%2300C853' stroke='white' stroke-width='2'/%3E%3Cpath d='M 8 88 L 15 95 L 27 80' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='50' y='75' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='90' width='110' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='140' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='145' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='160' width='90' height='6' rx='3' fill='%23F0F0F0'/%3E%3Crect y='210' width='35' height='35' rx='7' fill='white' stroke='%23E0E0E0' stroke-width='3'/%3E%3Crect x='50' y='215' width='140' height='8' rx='4' fill='%23E0E0E0'/%3E%3Crect x='50' y='230' width='120' height='6' rx='3' fill='%23F0F0F0'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='400' cy='112' r='45' fill='white'/%3E%3Ctext x='400' y='130' text-anchor='middle' font-size='50' font-weight='bold' fill='%23FE2C55' font-family='Arial,sans-serif'%3E3%3C/text%3E%3C/svg%3E",
+                    "sizes": "512x512",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='43' fill='%23FE2C55'/%3E%3Cg transform='translate(40,30)'%3E%3Crect x='7' y='15' width='98' height='128' rx='8' fill='white' opacity='0.95'/%3E%3Crect x='34' y='7' width='45' height='19' rx='5' fill='white' opacity='0.95'/%3E%3Crect x='38' y='11' width='38' height='11' rx='3' fill='%23FE2C55'/%3E%3Cg transform='translate(19,38)'%3E%3Crect width='13' height='13' rx='3' fill='%2300C853' stroke='white' stroke-width='1'/%3E%3Cpath d='M 3 7 L 6 10 L 10 4' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='19' y='2' width='53' height='3' rx='2' fill='%23E0E0E0'/%3E%3Crect x='19' y='8' width='38' height='2' rx='1' fill='%23F0F0F0'/%3E%3Crect y='26' width='13' height='13' rx='3' fill='%2300C853' stroke='white' stroke-width='1'/%3E%3Cpath d='M 3 33 L 6 36 L 10 30' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='19' y='28' width='53' height='3' rx='2' fill='%23E0E0E0'/%3E%3Crect x='19' y='34' width='42' height='2' rx='1' fill='%23F0F0F0'/%3E%3Crect y='53' width='13' height='13' rx='3' fill='white' stroke='%23E0E0E0' stroke-width='1'/%3E%3Crect x='19' y='55' width='53' height='3' rx='2' fill='%23E0E0E0'/%3E%3Crect x='19' y='60' width='34' height='2' rx='1' fill='%23F0F0F0'/%3E%3Crect y='79' width='13' height='13' rx='3' fill='white' stroke='%23E0E0E0' stroke-width='1'/%3E%3Crect x='19' y='81' width='53' height='3' rx='2' fill='%23E0E0E0'/%3E%3Crect x='19' y='87' width='45' height='2' rx='1' fill='%23F0F0F0'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='150' cy='42' r='17' fill='white'/%3E%3Ctext x='150' y='49' text-anchor='middle' font-size='19' font-weight='bold' fill='%23FE2C55' font-family='Arial,sans-serif'%3E3%3C/text%3E%3C/svg%3E",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml"
+                }
+            ]
+        };
+        
+        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
+    </script>
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root { 
+            --primary: #FE2C55; 
+            --dark: #121212; 
+            --bg: #F8F9FA; 
+            --surface: #FFFFFF; 
+            --green: #00C853; 
+            --yellow: #FFB300; 
+            --red: #FF3B30; 
+            --blue: #2196F3; 
+            --purple: #9C27B0; 
+            --border: #E0E0E0; 
+            --shadow: 0 4px 12px rgba(0,0,0,0.08); 
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg); 
+            color: var(--dark); 
+            overflow-x: hidden; 
+        }
+        
+        /* Landing Page Styles */
+        #landingPage {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        #landingPage.hidden {
+            display: none;
+        }
+        
+        .landing-content {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .landing-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .landing-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        
+        .landing-features {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .feature-icon {
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .landing-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .landing-btn:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .landing-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .landing-link {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        /* App Container */
+        #appContainer {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        #appContainer.active {
+            display: block;
+        }
+        
+        /* Header */
+        .header { 
+            background: var(--surface); 
+            padding: 15px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 1px solid var(--border); 
+        }
+        
+        .header-top { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 10px; 
+        }
+        
+        .header h1 { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+        }
+        
+        .header h1 span { 
+            color: var(--primary); 
+        }
+        
+        .header-actions { 
+            display: flex; 
+            gap: 8px; 
+        }
+        
+        .icon-btn { 
+            background: none; 
+            border: none; 
+            font-size: 1.3rem; 
+            cursor: pointer; 
+            padding: 5px; 
+        }
+        
+        .add-sample-btn { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 25px; 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            margin-bottom: 10px; 
+            width: 100%; 
+            justify-content: center; 
+            box-shadow: var(--shadow); 
+            transition: transform 0.2s; 
+        }
+        
+        .add-sample-btn:active { 
+            transform: scale(0.95); 
+        }
+        
+        .search-bar { 
+            width: 100%; 
+            padding: 10px 15px; 
+            border: 1.5px solid var(--border); 
+            border-radius: 25px; 
+            font-size: 0.9rem; 
+            background: #F9F9F9; 
+            margin-bottom: 10px;
+        }
+        
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 12px;
+            padding-top: 0;
+        }
+        
+        .view-toggle { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 12px; 
+        }
+        
+        .view-btn { 
+            flex: 1; 
+            padding: 12px 20px; 
+            border: 2px solid var(--border); 
+            background: var(--surface); 
+            border-radius: 25px; 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: #666; 
+        }
+        
+        .view-btn:active { 
+            transform: scale(0.95); 
+        }
+        
+        .view-btn.active { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary); 
+        }
+        
+        .control-section { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 15px; 
+            margin-bottom: 12px;
+            margin-top: 12px;
+            box-shadow: var(--shadow); 
+            border: 1px solid var(--border); 
+        }
+        
+        .section-title { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            color: #999; 
+            margin-bottom: 10px; 
+            letter-spacing: 0.5px; 
+        }
+        
+        .filter-btn { 
+            padding: 10px 18px; 
+            border: 2px solid var(--border); 
+            background: var(--surface); 
+            border-radius: 25px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            color: #666; 
+            white-space: nowrap; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+        }
+        
+        .filter-btn:active { 
+            transform: scale(0.95); 
+        }
+        
+        .filter-btn.active { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary); 
+        }
+        
+        .batch-bar { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: var(--dark); 
+            color: white; 
+            padding: 15px; 
+            display: none; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 99; 
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.2); 
+        }
+        
+        .batch-bar.active { 
+            display: flex; 
+        }
+        
+        .batch-actions { 
+            display: flex; 
+            gap: 10px; 
+        }
+        
+        .batch-btn { 
+            padding: 8px 16px; 
+            border-radius: 8px; 
+            border: none; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.85rem; 
+        }
+        
+        .sample-card { 
+            background: var(--surface); 
+            border-radius: 16px; 
+            margin-bottom: 20px; 
+            box-shadow: var(--shadow); 
+            border: 1px solid var(--border); 
+            position: relative; 
+        }
+        
+        .sample-card.selecting { 
+            border: 2px solid var(--primary); 
+        }
+        
+        .card-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            margin-bottom: 8px; 
+        }
+        
+        .card-checkbox { 
+            width: 20px; 
+            height: 20px; 
+            cursor: pointer; 
+        }
+        
+        .card-body { 
+            padding: 16px; 
+            position: relative; 
+            z-index: 2; 
+        }
+        
+        .brand-name { 
+            font-size: 0.75rem; 
+            color: #888; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        
+        .product-name { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--dark); 
+            margin: 4px 0 8px 0; 
+            line-height: 1.2; 
+        }
+        
+        .days-badge { 
+            display: inline-block; 
+            padding: 4px 10px; 
+            border-radius: 12px; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+        }
+        
+        .days-badge.overdue { 
+            background: #FFEBEE; 
+            color: var(--red); 
+        }
+        
+        .days-badge.urgent { 
+            background: #FFF8E1; 
+            color: var(--yellow); 
+        }
+        
+        .days-badge.good { 
+            background: #E8F5E9; 
+            color: var(--green); 
+        }
+        
+        .days-badge.completed { 
+            background: #E0E0E0; 
+            color: #666; 
+        }
+        
+        .tags-row { 
+            display: flex; 
+            gap: 6px; 
+            flex-wrap: wrap; 
+            margin-bottom: 10px; 
+        }
+        
+        .tag { 
+            padding: 3px 8px; 
+            border-radius: 8px; 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            background: #E3F2FD; 
+            color: #1976D2; 
+        }
+        
+        .photo-row { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 10px; 
+            overflow-x: auto; 
+        }
+        
+        .photo-thumb { 
+            width: 60px; 
+            height: 60px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            cursor: pointer; 
+        }
+        
+        .notes-section { 
+            background: #FFFDE7; 
+            padding: 10px; 
+            border-radius: 8px; 
+            font-size: 0.85rem; 
+            margin-bottom: 10px; 
+            border-left: 3px solid var(--yellow); 
+        }
+        
+        .checklist { 
+            background: #F5F5F5; 
+            padding: 12px; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
+        }
+        
+        .checklist-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            margin-bottom: 6px; 
+            font-size: 0.85rem; 
+        }
+        
+        .checklist-item:last-child { 
+            margin-bottom: 0; 
+        }
+        
+        .checklist-checkbox { 
+            width: 18px; 
+            height: 18px; 
+            cursor: pointer; 
+        }
+        
+        .meta-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            background: #FAFAFA; 
+            padding: 12px; 
+            border-radius: 10px; 
+            font-size: 0.85rem; 
+            margin-bottom: 10px; 
+        }
+        
+        .meta-label { 
+            color: #888; 
+            font-size: 0.7rem; 
+            display: block; 
+            margin-bottom: 2px; 
+            font-weight: 600; 
+        }
+        
+        .meta-value { 
+            font-weight: 700; 
+            color: #333; 
+        }
+        
+        .progress-container { 
+            width: 100%; 
+            height: 8px; 
+            background: #eee; 
+            border-radius: 4px; 
+            margin: 10px 0; 
+            overflow: hidden; 
+        }
+        
+        .progress-fill { 
+            height: 100%; 
+            transition: width 0.4s ease; 
+        }
+        
+        .action-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            margin-top: 10px; 
+        }
+        
+        .row-btn { 
+            width: 100%; 
+            padding: 14px; 
+            border-radius: 12px; 
+            border: none; 
+            font-weight: 700; 
+            font-size: 0.95rem; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-decoration: none; 
+            transition: transform 0.2s; 
+        }
+        
+        .row-btn:active { 
+            transform: scale(0.95); 
+        }
+        
+        .btn-full-width { 
+            background: var(--primary); 
+            color: white; 
+        }
+        
+        .btn-completed { 
+            background: #E8F5E9; 
+            color: var(--green); 
+            border: 1.5px solid var(--green); 
+            pointer-events: none; 
+        }
+        
+        .btn-row-2 { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 8px; 
+        }
+        
+        .btn-row-3 { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr 1fr; 
+            gap: 8px; 
+        }
+        
+        .btn-secondary { 
+            background: white; 
+            color: var(--dark); 
+            border: 1.5px solid var(--border); 
+        }
+        
+        .modal { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(4px); 
+            z-index: 1000; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            overflow-y: auto; 
+        }
+        
+        .modal.active { 
+            display: flex; 
+        }
+        
+        .modal-content { 
+            background: white; 
+            width: 100%; 
+            max-width: 500px; 
+            border-radius: 24px; 
+            padding: 24px; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            margin: auto; 
+        }
+        
+        .modal-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+        
+        .modal-title { 
+            font-weight: 800; 
+            font-size: 1.3rem; 
+        }
+        
+        .modal-close { 
+            background: none; 
+            border: none; 
+            font-size: 1.8rem; 
+            cursor: pointer; 
+            color: #999; 
+        }
+        
+        .form-group { 
+            margin-bottom: 16px; 
+        }
+        
+        .form-label { 
+            display: block; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            margin-bottom: 6px; 
+        }
+        
+        .form-input, .form-textarea, .form-select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1.5px solid #eee; 
+            border-radius: 12px; 
+            font-size: 1rem; 
+            background: #F9F9F9; 
+            font-family: inherit; 
+        }
+        
+        .form-textarea { 
+            min-height: 80px; 
+            resize: vertical; 
+        }
+        
+        .form-row { 
+            display: flex; 
+            gap: 12px; 
+        }
+        
+        .form-row > div { 
+            flex: 1; 
+        }
+        
+        .tags-input-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 6px; 
+            padding: 8px; 
+            border: 1.5px solid #eee; 
+            border-radius: 12px; 
+            background: #F9F9F9; 
+            min-height: 45px; 
+        }
+        
+        .tag-input-item { 
+            background: #E3F2FD; 
+            color: #1976D2; 
+            padding: 4px 8px; 
+            border-radius: 8px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center; 
+            gap: 5px; 
+        }
+        
+        .tag-remove { 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        
+        .tag-input-field { 
+            border: none; 
+            background: none; 
+            outline: none; 
+            flex: 1; 
+            min-width: 100px; 
+            font-size: 0.9rem; 
+        }
+        
+        .photo-upload-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+        }
+        
+        .photo-upload-item { 
+            position: relative; 
+            aspect-ratio: 1; 
+            border: 2px dashed var(--border); 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            overflow: hidden; 
+        }
+        
+        .photo-upload-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        
+        .photo-remove { 
+            position: absolute; 
+            top: 5px; 
+            right: 5px; 
+            background: rgba(0,0,0,0.7); 
+            color: white; 
+            border: none; 
+            border-radius: 50%; 
+            width: 25px; 
+            height: 25px; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        
+        .due-calc-text { 
+            font-size: 0.8rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            margin-top: 5px; 
+            display: block; 
+        }
+        
+        .calendar-grid { 
+            display: grid; 
+            grid-template-columns: repeat(7, 1fr); 
+            gap: 5px; 
+            margin-top: 10px; 
+        }
+        
+        .calendar-header { 
+            text-align: center; 
+            font-weight: 700; 
+            font-size: 0.7rem; 
+            color: #666; 
+            padding: 8px 0; 
+        }
+        
+        .calendar-day { 
+            aspect-ratio: 1; 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.75rem; 
+            cursor: pointer; 
+            background: white; 
+            position: relative; 
+        }
+        
+        .calendar-day.other-month { 
+            color: #CCC; 
+        }
+        
+        .calendar-day.has-items { 
+            background: #FFF3E0; 
+            border-color: var(--yellow); 
+        }
+        
+        .calendar-day.has-items.overdue { 
+            background: #FFEBEE; 
+            border-color: var(--red); 
+        }
+        
+        .calendar-day-number { 
+            font-weight: 700; 
+        }
+        
+        .calendar-day-dots { 
+            display: flex; 
+            gap: 2px; 
+            margin-top: 2px; 
+        }
+        
+        .calendar-dot { 
+            width: 4px; 
+            height: 4px; 
+            border-radius: 50%; 
+        }
+        
+        .analytics-section { 
+            background: var(--surface); 
+            border-radius: 16px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            box-shadow: var(--shadow); 
+        }
+        
+        .analytics-title { 
+            font-weight: 800; 
+            font-size: 1.1rem; 
+            margin-bottom: 15px; 
+        }
+        
+        .analytics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+        }
+        
+        .analytics-card { 
+            text-align: center; 
+            padding: 15px; 
+            background: #FAFAFA; 
+            border-radius: 12px; 
+        }
+        
+        .analytics-number { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+        }
+        
+        .analytics-label { 
+            font-size: 0.75rem; 
+            color: #666; 
+            font-weight: 600; 
+            margin-top: 5px; 
+        }
+        
+        .empty-state { 
+            text-align: center; 
+            padding: 60px 20px; 
+            color: #BBB; 
+        }
+        
+        .browser-overlay { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: white; 
+            z-index: 2000; 
+            flex-direction: column; 
+        }
+        
+        .browser-overlay.active { 
+            display: flex; 
+        }
+        
+        .browser-header { 
+            background: var(--primary); 
+            color: white; 
+            padding: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+        
+        .browser-close { 
+            background: none; 
+            border: none; 
+            color: white; 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            width: 40px; 
+            height: 40px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .browser-title { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            flex: 1; 
+            text-align: center; 
+        }
+        
+        .browser-frame { 
+            flex: 1; 
+            border: none; 
+            width: 100%; 
+        }
+        
+        .collapsible-section { 
+            margin-bottom: 15px; 
+        }
+        
+        .collapsible-header { 
+            background: var(--surface); 
+            padding: 15px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-weight: 700; 
+            border: 1px solid var(--border); 
+        }
+        
+        .collapsible-content { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.3s; 
+        }
+        
+        .collapsible-content.active { 
+            max-height: 5000px; 
+        }
+        
+        /* Toggle Switch */
+        .switch { 
+            position: relative; 
+            display: inline-block; 
+            width: 50px; 
+            height: 24px; 
+        }
+        
+        .switch input { 
+            opacity: 0; 
+            width: 0; 
+            height: 0; 
+        }
+        
+        .slider { 
+            position: absolute; 
+            cursor: pointer; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background-color: #ccc; 
+            transition: .4s; 
+            border-radius: 24px; 
+        }
+        
+        .slider:before { 
+            position: absolute; 
+            content: ""; 
+            height: 18px; 
+            width: 18px; 
+            left: 3px; 
+            bottom: 3px; 
+            background-color: white; 
+            transition: .4s; 
+            border-radius: 50%; 
+        }
+        
+        input:checked + .slider { 
+            background-color: var(--green); 
+        }
+        
+        input:checked + .slider:before { 
+            transform: translateX(26px); 
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage" style="min-height: 100vh; background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div class="landing-content" style="max-width: 500px; width: 100%; text-align: center; color: white;">
+            <div class="app-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="15" width="80" height="75" rx="5" fill="#FE2C55" opacity="0.1"/>
+                    <rect x="15" y="5" width="70" height="10" rx="3" fill="#FE2C55"/>
+                    <!-- Checkboxes -->
+                    <rect x="20" y="25" width="10" height="10" rx="2" fill="#00C853"/>
+                    <path d="M 22 30 L 25 33 L 28 27" stroke="white" stroke-width="2" fill="none"/>
+                    <rect x="35" y="26" width="45" height="3" rx="1.5" fill="#E0E0E0"/>
+                    
+                    <rect x="20" y="42" width="10" height="10" rx="2" fill="#00C853"/>
+                    <path d="M 22 47 L 25 50 L 28 44" stroke="white" stroke-width="2" fill="none"/>
+                    <rect x="35" y="43" width="40" height="3" rx="1.5" fill="#E0E0E0"/>
+                    
+                    <rect x="20" y="59" width="10" height="10" rx="2" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+                    <rect x="35" y="60" width="50" height="3" rx="1.5" fill="#E0E0E0"/>
+                    
+                    <rect x="20" y="76" width="10" height="10" rx="2" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+                    <rect x="35" y="77" width="35" height="3" rx="1.5" fill="#E0E0E0"/>
+                </svg>
+            </div>
+            
+            <h1 class="landing-title">Sample Tracker Pro</h1>
+            <p class="landing-subtitle">Never miss a PR deadline again. Track your brand deals, get reminders, and stay organized.</p>
+            
+            <div class="landing-features">
+                <div class="feature-item">
+                    <div class="feature-icon">📦</div>
+                    <div>Track all your PR samples in one place</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⏰</div>
+                    <div>Get reminders before deadlines</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">☁️</div>
+                    <div>Cloud sync across all your devices</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div>Calendar view and analytics</div>
+                </div>
+            </div>
+            
+            <button class="landing-btn btn-primary" onclick="showAuth('signup')">Create Account</button>
+            <button class="landing-btn btn-secondary" onclick="showAuth('signin')">Sign In</button>
+            
+            <div class="landing-links">
+                <a href="#" class="landing-link" onclick="showPrivacyFromLanding(); return false;">Privacy Policy</a>
+                <a href="#" class="landing-link" onclick="showHelpFromLanding(); return false;">Help & Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="appContainer">
+        <div class="header">
+            <div class="header-top">
+                <h1><span>Sample</span> Tracker</h1>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="openAnalytics()" title="Analytics">📊</button>
+                    <button class="icon-btn" onclick="toggleMenu()" title="Menu">⋮</button>
+                </div>
+            </div>
+            <button class="add-sample-btn" onclick="openModal()">
+                <span style="font-size: 1.2rem;">+</span>
+                <span>Add New Sample</span>
+            </button>
+            
+            <div class="view-toggle">
+                <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List View</button>
+                <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
+            </div>
+            
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
+            
+            <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 12px; border: 2px solid var(--border); font-weight: 600; width: 100%;">
+                <option value="dueDate">📅 Sort by: Due Date</option>
+                <option value="brand">🏷️ Sort by: Brand Name</option>
+                <option value="received">📦 Sort by: Received Date</option>
+            </select>
+        </div>
+        
+        <div class="container">
+            <!-- List View -->
+            <div id="listView">
+                <div class="control-section">
+                    <div class="section-title">Filter Samples</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                        <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
+                        <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
+                        <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
+                        <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted</button>
+                    </div>
+                </div>
+
+                <div class="collapsible-section" id="filteredSection" style="display:none;">
+                    <div class="collapsible-header" onclick="toggleFiltered()">
+                        <span id="filteredTitle">Samples (<span id="filteredCount">0</span>)</span>
+                        <span id="filteredArrow">▼</span>
+                    </div>
+                    <div class="collapsible-content" id="filteredContent"></div>
+                </div>
+
+                <div id="sampleGrid"></div>
+            </div>
+
+            <!-- Calendar View -->
+            <div id="calendarView" style="display:none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <button class="icon-btn" onclick="changeMonth(-1)">◀</button>
+                    <h2 id="calendarMonth" style="font-weight: 800;"></h2>
+                    <button class="icon-btn" onclick="changeMonth(1)">▶</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div id="calendarDayDetails" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Actions Bar -->
+    <div class="batch-bar" id="batchBar">
+        <div>
+            <strong><span id="selectedCount">0</span> selected</strong>
+        </div>
+        <div class="batch-actions">
+            <button class="batch-btn" style="background: var(--green); color: white;" onclick="batchMarkDone()">✓ Mark Done</button>
+            <button class="batch-btn" style="background: var(--red); color: white;" onclick="batchDelete()">🗑 Delete</button>
+            <button class="batch-btn" style="background: white; color: var(--dark);" onclick="clearSelection()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Menu Modal -->
+    <div id="menuModal" class="modal">
+        <div class="modal-content" style="max-width: 300px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Menu</h2>
+                <button class="modal-close" onclick="closeMenu()">×</button>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="row-btn btn-secondary" onclick="goToLanding(); closeMenu()">🏠 Home</button>
+                <button class="row-btn btn-secondary" onclick="openSettings(); closeMenu()">⚙️ Settings</button>
+                <button class="row-btn btn-secondary" onclick="openSupport(); closeMenu()">💬 Support</button>
+                <button class="row-btn btn-secondary" onclick="openPrivacy(); closeMenu()">🔒 Privacy Policy</button>
+                <button class="row-btn btn-secondary" onclick="exportCSV(); closeMenu()">📥 Export CSV</button>
+                <button class="row-btn btn-secondary" onclick="clearCompleted(); closeMenu()">🧹 Clear Completed</button>
+                <button class="row-btn btn-secondary" id="menuSignOutBtn" onclick="signOut(); closeMenu()" style="display: none; background: var(--red); color: white; border-color: var(--red); margin-top: 10px;">🚪 Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sample Modal -->
+    <div id="sampleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Add Sample</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <form id="sampleForm" onsubmit="handleSave(event)">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" id="productName" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Brand</label>
+                    <input type="text" id="brandName" class="form-input" required>
+                </div>
+                
+                <div class="form-row">
+                    <div>
+                        <label class="form-label">Received Date</label>
+                        <input type="date" id="dateReceived" class="form-input" required onchange="calcDuePreview()">
+                    </div>
+                    <div>
+                        <label class="form-label">Days to Post</label>
+                        <input type="number" id="daysLimit" class="form-input" value="14" oninput="calcDuePreview()">
+                    </div>
+                </div>
+                <span id="dueCalcDisplay" class="due-calc-text"></span>
+
+                <div class="form-group">
+                    <label class="form-label">Reminder Settings</label>
+                    <select id="sampleReminderDays" class="form-input">
+                        <option value="">Use default reminder (from Settings)</option>
+                        <option value="0">Remind me on due date</option>
+                        <option value="1">Remind me 1 day before</option>
+                        <option value="2">Remind me 2 days before</option>
+                        <option value="3">Remind me 3 days before</option>
+                        <option value="5">Remind me 5 days before</option>
+                        <option value="7">Remind me 7 days before</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Product Link (Optional)</label>
+                    <input type="url" id="shopLink" class="form-input" placeholder="Paste product link here">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Tags (press Enter to add)</label>
+                    <div class="tags-input-container" id="tagsContainer" onclick="document.getElementById('tagInput').focus()">
+                        <input type="text" id="tagInput" class="tag-input-field" placeholder="Add tag..." onkeydown="handleTagInput(event)">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea id="notes" class="form-textarea" placeholder="Add any notes or reminders..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Photos</label>
+                    <div class="photo-upload-grid" id="photoGrid">
+                        <label class="photo-upload-item">
+                            <input type="file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+                            <span style="font-size: 2rem;">+</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="row-btn btn-full-width">Save Sample</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Analytics Modal -->
+    <div id="analyticsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📊 Analytics</h2>
+                <button class="modal-close" onclick="closeAnalytics()">×</button>
+            </div>
+            <div id="analyticsContent"></div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">⚙️ Settings</h2>
+                <button class="modal-close" onclick="closeSettings()">×</button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Account</label>
+                <div id="cloudStatus" style="padding: 15px; background: #F5F5F5; border-radius: 12px; text-align: center; color: #666; margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
+                    <p style="font-size: 0.85rem;">Your data is saved in your browser</p>
+                </div>
+                <button class="row-btn btn-secondary" onclick="showCloudInfo()" style="background: var(--green); color: white; border-color: var(--green); margin-bottom: 10px;">ℹ️ Cloud Storage Info</button>
+                <button class="row-btn btn-secondary" onclick="signOut()" id="signOutBtn" style="display: none; background: var(--red); color: white; border-color: var(--red);">🚪 Sign Out</button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Reminder Notifications</label>
+                <div style="padding: 15px; background: #F5F5F5; border-radius: 12px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: 600;">📱 Push Notifications</span>
+                        <label class="switch">
+                            <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications(this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin-bottom: 12px;">Get reminders when samples are due soon</p>
+                    
+                    <div id="reminderSettings" style="display: none;">
+                        <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Remind me when samples are:</label>
+                        <select id="reminderDays" class="form-input" onchange="saveReminderSettings()" style="padding: 8px; font-size: 0.85rem;">
+                            <option value="0">Due today</option>
+                            <option value="1" selected>Due in 1 day</option>
+                            <option value="2">Due in 2 days</option>
+                            <option value="3">Due in 3 days</option>
+                            <option value="5">Due in 5 days</option>
+                            <option value="7">Due in 7 days</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="notificationStatus" style="font-size: 0.75rem; color: #666; padding: 10px; background: #FFF8E1; border-radius: 8px; display: none;">
+                    Click "Allow" when your browser asks for permission
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Default Days to Post</label>
+                <input type="number" id="defaultDays" class="form-input" value="14" onchange="saveSettings()">
+            </div>
+            
+            <div class="form-group">
+                <button class="row-btn btn-secondary" onclick="importData()">📁 Import Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cloud Info Modal -->
+    <div id="cloudInfoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📦 Cloud Storage Info</h2>
+                <button class="modal-close" onclick="closeCloudInfo()">×</button>
+            </div>
+            <div style="line-height: 1.6; color: #666;">
+                <div style="background: #E8F5E9; padding: 20px; border-radius: 12px; border-left: 3px solid var(--green); margin-bottom: 15px;">
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--green);">✓ Cloud Storage with Multi-Device Sync!</h3>
+                    <p style="font-size: 0.9rem;">Your account syncs automatically across all your devices. Sign in on any phone, tablet, or computer to access your samples.</p>
+                </div>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">How It Works</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px;">
+                    <li>Create one account with your email and password</li>
+                    <li>Sign in on any device to see all your samples</li>
+                    <li>Changes sync instantly across all devices</li>
+                    <li>Your data is encrypted and secure</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Using Multiple Devices</h3>
+                <p style="margin-bottom: 15px;">Simply sign in with the same email and password on any device:</p>
+                <ul style="margin-bottom: 15px; padding-left: 20px;">
+                    <li>Open the app on your new device</li>
+                    <li>Enter your email and password</li>
+                    <li>Click "Sign In" - all your data appears instantly!</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Security & Privacy</h3>
+                <ul style="padding-left: 20px;">
+                    <li>Your data is private - only you can access it</li>
+                    <li>Passwords are encrypted and never stored in plain text</li>
+                    <li>You can sign out from Settings anytime</li>
+                    <li>Export to CSV anytime for local backup</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🔒 Privacy Policy</h2>
+                <button class="modal-close" onclick="closePrivacy()">×</button>
+            </div>
+            <div style="line-height: 1.6; color: #666;">
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Data Storage</h3>
+                <p style="margin-bottom: 15px;">Your data is stored securely in the cloud using Supabase. We do not share your information with third parties.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">What We Store</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px;">
+                    <li>Product and brand information</li>
+                    <li>Dates and deadlines</li>
+                    <li>Notes and tags you create</li>
+                    <li>Photos you upload</li>
+                    <li>Your app settings and preferences</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Your Control</h3>
+                <p style="margin-bottom: 15px;">You have full control over your data. You can export it as CSV, delete individual items, or delete your entire account.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Third-Party Links</h3>
+                <p style="margin-bottom: 15px;">This app may contain links to external websites. We are not responsible for the privacy practices of these sites.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">Updates</h3>
+                <p>This privacy policy may be updated from time to time. Continued use of the app constitutes acceptance of any changes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">💬 Support</h2>
+                <button class="modal-close" onclick="closeSupport()">×</button>
+            </div>
+            <div style="line-height: 1.6; text-align: center;">
+                <div style="background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); padding: 30px; border-radius: 16px; margin-bottom: 25px; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📧</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; font-size: 1.2rem;">Need Help?</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px;">We're here to help you!</p>
+                    <a href="/cdn-cgi/l/email-protection#b6c5c3c6c6d9c4c2f6d0dad3cec2d3d5dedad798d5d9db" style="display: inline-block; background: white; color: var(--primary); padding: 12px 24px; border-radius: 25px; font-weight: 700; text-decoration: none; font-size: 1rem;">
+                        📧 Email Support
+                    </a>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6a5a3a6a6b9a4a296b0bab3aea2b3b5bebab7f8b5b9bb">[email&#160;protected]</a></p>
+                </div>
+                
+                <div style="text-align: left;">
+                    <h3 style="font-weight: 700; margin-bottom: 15px; color: var(--dark);">📋 Quick Help</h3>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Can't log in?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using the same email and password you signed up with.</p>
+                    </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">Lost your data?</p>
+                        <p style="font-size: 0.85rem; color: #666;">If you're signed in, your data is safely stored in the cloud. Try refreshing the page.</p>
+                    </div>
+                    <div style="background: #F5F5F5; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
+                        <p style="font-weight: 600; margin-bottom: 5px; color: var(--dark);">App not installing?</p>
+                        <p style="font-size: 0.85rem; color: #666;">Make sure you're using Chrome (Android) or Safari (iPhone). Check our install guide for help.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button class="row-btn btn-secondary" onclick="closeSupport(); openHelp()">📖 View Full Help Guide</button>
+                </div>
+                
+                <div style="background: #E3F2FD; padding: 15px; border-radius: 12px; margin-top: 20px; text-align: left;">
+                    <p style="font-size: 0.85rem; color: #666;">
+                        <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">❓ Help & Support</h2>
+                <button class="modal-close" onclick="closeHelp()">×</button>
+            </div>
+            <div style="line-height: 1.6;">
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📋 Getting Started</h3>
+                <p style="margin-bottom: 15px; color: #666;">Click <strong>Add New Sample</strong> at the top to add a product. Fill in the product details, received date, and deadline.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🎯 Quick Actions</h3>
+                <ul style="margin-bottom: 15px; padding-left: 20px; color: #666;">
+                    <li><strong>Edit:</strong> Update sample details</li>
+                    <li><strong>Delete:</strong> Remove a sample</li>
+                    <li><strong>Checkbox:</strong> Select multiple samples for batch actions</li>
+                    <li><strong>Mark Posted:</strong> Mark video as completed</li>
+                </ul>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">🔍 Filtering & Sorting</h3>
+                <p style="margin-bottom: 15px; color: #666;">Use the filter buttons to view specific categories. Sort samples by due date, brand, or received date.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">✅ Video Checklist</h3>
+                <p style="margin-bottom: 15px; color: #666;">Track your progress with the Filmed → Edited → Posted checklist on each sample card.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📅 Calendar View</h3>
+                <p style="margin-bottom: 15px; color: #666;">Switch to calendar view to see all your deadlines in a monthly layout.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📊 Analytics</h3>
+                <p style="margin-bottom: 15px; color: #666;">Tap the chart icon in the header to view your completion stats.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">💾 Export & Backup</h3>
+                <p style="margin-bottom: 15px; color: #666;">Export your data as CSV from the menu.</p>
+                
+                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--dark);">📱 Install as App</h3>
+                <p style="margin-bottom: 15px; color: #666;">On iOS: Tap Share → Add to Home Screen<br>On Android: Tap Menu → Install App</p>
+                
+                <div style="background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%); padding: 20px; border-radius: 12px; margin-top: 25px; color: white; text-align: center;">
+                    <p style="font-size: 0.9rem; margin-bottom: 10px; opacity: 0.9;">Need more help?</p>
+                    <p style="font-weight: 700; font-size: 1.1rem;">Contact Support</p>
+                    <a href="/cdn-cgi/l/email-protection#582b2d2828372a2c183e343d202c3d3b303439763b3735" style="display: inline-block; background: white; color: var(--primary); padding: 10px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; margin-top: 10px; font-size: 0.9rem;">
+                        📧 Email Support
+                    </a>
+                    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.9;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02717772726d707642646e677a7667616a6e632c616d6f">[email&#160;protected]</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Browser Overlay -->
+    <div id="browserOverlay" class="browser-overlay">
+        <div class="browser-header">
+            <button class="browser-close" onclick="closeBrowser()">×</button>
+            <div class="browser-title">Product Link</div>
+            <div style="width:40px;"></div>
+        </div>
+        <iframe id="browserFrame" class="browser-frame" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+    </div>
+
+    <!-- Photo Viewer Modal -->
+    <div id="photoViewerModal" class="modal" onclick="closePhotoViewer()">
+        <div class="modal-content" style="max-width: 90%; max-height: 90vh; padding: 0; background: transparent; box-shadow: none;" onclick="event.stopPropagation()">
+            <button class="browser-close" onclick="closePhotoViewer()" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; border-radius: 50%; width: 50px; height: 50px; font-size: 2rem; z-index: 10;">×</button>
+            <img id="photoViewerImg" style="width: 100%; height: auto; max-height: 90vh; object-fit: contain; border-radius: 12px;">
+        </div>
+    </div>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
+        
+        let sb_client = null;
+        let currentUser = null;
+        let useCloud = false;
+
+        // ==================== STATE ====================
+        let samples = [];
+        let settings = { defaultDays: 14 };
+        let currentView = 'list';
+        let currentFilter = 'all';
+        let currentSort = 'dueDate';
+        let searchQuery = '';
+        let selectedSamples = new Set();
+        let editId = null;
+        let tempTags = [];
+        let tempPhotos = [];
+        let calendarDate = new Date();
+
+        // ==================== INITIALIZATION ====================
+        async function initSupabase() {
+            try {
+                sb_client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                await signInAnonymously();
+            } catch (e) {
+                console.log('Supabase init failed, using local storage');
+                useCloud = false;
+                showApp();
+            }
+        }
+
+        // ==================== AUTHENTICATION ====================
+        async function signInAnonymously() {
+            const storedEmail = localStorage.getItem('user_email');
+            
+            if (storedEmail) {
+                try {
+                    const storedPassword = localStorage.getItem('user_password');
+                    const { data, error } = await sb_client.auth.signInWithPassword({
+                        email: storedEmail,
+                        password: storedPassword
+                    });
+                    
+                    if (!error && data.user) {
+                        currentUser = data.user;
+                        useCloud = true;
+                        console.log('✓ Auto-signed in');
+                        await loadFromCloud();
+                        showApp();
+                        return;
+                    } else {
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
+                    }
+                } catch (e) {
+                    console.log('Auto-sign in error, clearing credentials');
+                    localStorage.removeItem('user_email');
+                    localStorage.removeItem('user_password');
+                }
+            }
+            
+            // No credentials or auto-login failed - show landing page
+            showLanding();
+        }
+
+        function showAuth(mode) {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.id = 'authModal';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px;">
+                    <div class="modal-header">
+                        <h2 class="modal-title">${mode === 'signup' ? 'Create Account' : 'Sign In'}</h2>
+                        <button class="modal-close" onclick="closeAuthModal()">×</button>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px; text-align: center;">
+                        ${mode === 'signup' ? 'Create a free account to sync your data across all devices' : 'Sign in to access your samples'}
+                    </p>
+                    
+                    <div id="authForm">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="authEmail" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="rememberMe" checked style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem;">Keep me logged in</label>
+                        </div>
+                        <div id="authError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
+                        <button class="row-btn btn-full-width" onclick="handleAuth('${mode}')" style="margin-bottom: 10px;">
+                            ${mode === 'signup' ? 'Create Account' : 'Sign In'}
+                        </button>
+                        <button class="row-btn btn-secondary" onclick="closeAuthModal(); showAuth('${mode === 'signup' ? 'signin' : 'signup'}')">
+                            ${mode === 'signup' ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        async function handleAuth(mode) {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const errorDiv = document.getElementById('authError');
+            
+            if (!email || !password) {
+                errorDiv.textContent = 'Please enter email and password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                let data, error;
+                
+                if (mode === 'signup') {
+                    const result = await sb_client.auth.signUp({ email, password });
+                    data = result.data;
+                    error = result.error;
+                } else {
+                    const result = await sb_client.auth.signInWithPassword({ email, password });
+                    data = result.data;
+                    error = result.error;
+                }
+                
+                if (error) throw error;
+                
+                if (data.user) {
+                    // Only save credentials if "Keep me logged in" is checked
+                    if (rememberMe) {
+                        localStorage.setItem('user_email', email);
+                        localStorage.setItem('user_password', password);
+                    } else {
+                        // Clear any old credentials if they unchecked it
+                        localStorage.removeItem('user_email');
+                        localStorage.removeItem('user_password');
+                    }
+                    
+                    currentUser = data.user;
+                    useCloud = true;
+                    
+                    if (mode === 'signup') {
+                        await migrateToCloud();
+                    } else {
+                        await loadFromCloud();
+                    }
+                    
+                    closeAuthModal();
+                    showApp();
+                    
+                    console.log(`✓ ${mode === 'signup' ? 'Account created' : 'Signed in'}`);
+                }
+            } catch (e) {
+                console.error('Auth error:', e);
+                errorDiv.textContent = mode === 'signup' ? 'Sign up failed. Email may already be in use.' : 'Invalid email or password';
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('authModal');
+            if (modal) modal.remove();
+        }
+
+        async function signOut() {
+            if (confirm('Sign out? Your data will remain safely in the cloud.')) {
+                await sb_client.auth.signOut();
+                localStorage.removeItem('user_email');
+                localStorage.removeItem('user_password');
+                currentUser = null;
+                useCloud = false;
+                samples = [];
+                window.location.reload();
+            }
+        }
+
+        // ==================== CLOUD SYNC ====================
+        async function migrateToCloud() {
+            if (!useCloud || !currentUser) return;
+            
+            const localSamples = JSON.parse(localStorage.getItem('tiktok_samples') || '[]');
+            const localSettings = JSON.parse(localStorage.getItem('tiktok_settings') || '{}');
+            
+            if (localSamples.length > 0 || Object.keys(localSettings).length > 0) {
+                samples = localSamples;
+                settings = { ...settings, ...localSettings };
+                await saveToCloud();
+            }
+        }
+
+        async function saveToCloud() {
+            if (!useCloud || !currentUser || !sb_client) return;
+            
+            try {
+                const { error } = await sb_client
+                    .from('sample_tracker_data')
+                    .upsert({
+                        user_id: currentUser.id,
+                        samples: samples,
+                        settings: settings,
+                        updated_at: new Date().toISOString()
+                    });
+                
+                if (error) throw error;
+            } catch (e) {
+                console.error('Save to cloud failed:', e);
+            }
+        }
+
+        async function loadFromCloud() {
+            if (!useCloud || !currentUser || !sb_client) return;
+            
+            try {
+                const { data, error } = await sb_client
+                    .from('sample_tracker_data')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .single();
+                
+                if (error && error.code !== 'PGRST116') throw error;
+                
+                if (data) {
+                    samples = data.samples || [];
+                    settings = data.settings || { defaultDays: 14 };
+                }
+            } catch (e) {
+                console.error('Load from cloud failed:', e);
+            }
+        }
+
+        // ==================== UI STATE ====================
+        function showLanding() {
+            document.getElementById('landingPage').classList.remove('hidden');
+            document.getElementById('appContainer').classList.remove('active');
+        }
+
+        function showApp() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('appContainer').classList.add('active');
+            render();
+            renderCalendar();
+            
+            // Show install prompt if not already installed
+            setTimeout(() => {
+                checkAndShowInstallPrompt();
+            }, 2000);
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function checkAndShowInstallPrompt() {
+            // Check if already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                return; // Already installed
+            }
+            
+            // Check if user dismissed before
+            if (localStorage.getItem('install_dismissed')) {
+                return;
+            }
+            
+            // Show custom install prompt
+            showInstallModal();
+        }
+
+        function showInstallModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.id = 'installModal';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px; text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 15px;">📱</div>
+                    <h2 style="font-weight: 800; font-size: 1.5rem; margin-bottom: 10px;">Install Sample Tracker</h2>
+                    <p style="color: #666; margin-bottom: 25px; line-height: 1.5;">
+                        Add this app to your home screen for quick access and offline use. It works just like a native app!
+                    </p>
+                    <button class="row-btn btn-full-width" onclick="installApp()" style="margin-bottom: 10px;">
+                        ⬇️ Install Now
+                    </button>
+                    <button class="row-btn btn-secondary" onclick="dismissInstall()">
+                        Maybe Later
+                    </button>
+                    <p style="font-size: 0.75rem; color: #999; margin-top: 15px;">
+                        You can always install later from your browser menu
+                    </p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+            } else {
+                // Show manual install instructions
+                showManualInstallInstructions();
+            }
+            
+            const modal = document.getElementById('installModal');
+            if (modal) modal.remove();
+        }
+
+        function dismissInstall() {
+            localStorage.setItem('install_dismissed', 'true');
+            const modal = document.getElementById('installModal');
+            if (modal) modal.remove();
+        }
+
+        function showManualInstallInstructions() {
+            const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            
+            let instructions = '';
+            
+            if (isIOS) {
+                instructions = `
+                    <div style="background: #FFF3E0; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 3px solid var(--yellow);">
+                        <p style="font-weight: 700; color: var(--dark); margin-bottom: 8px;">⚠️ Important: Use Safari's Share Button</p>
+                        <p style="font-size: 0.85rem;">Look for the share button at the BOTTOM of your Safari browser (square with arrow pointing up).</p>
+                    </div>
+                    <h3 style="font-weight: 700; margin-bottom: 15px;">Install on iPhone/iPad</h3>
+                    <ol style="text-align: left; padding-left: 20px; line-height: 1.8;">
+                        <li>Look at the <strong>bottom</strong> of your screen in <strong>Safari</strong></li>
+                        <li>Tap the <strong>Share</strong> button<br><span style="font-size: 2rem;">⬆️</span> (square with arrow)</li>
+                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                        <li>Tap <strong>"Add"</strong> in the top right</li>
+                        <li>Done! Check your home screen 🎉</li>
+                    </ol>
+                `;
+            } else if (isAndroid) {
+                instructions = `
+                    <div style="background: #FFF3E0; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 3px solid var(--yellow);">
+                        <p style="font-weight: 700; color: var(--dark); margin-bottom: 8px;">⚠️ Important: Use Chrome's Browser Menu</p>
+                        <p style="font-size: 0.85rem;">Look for the three dots at the TOP RIGHT of your Chrome browser window (NOT in this app).</p>
+                    </div>
+                    <h3 style="font-weight: 700; margin-bottom: 15px;">Install on Android</h3>
+                    <ol style="text-align: left; padding-left: 20px; line-height: 1.8;">
+                        <li>Look at the <strong>top right</strong> of your <strong>Chrome browser</strong></li>
+                        <li>Tap the <strong>⋮</strong> (three vertical dots)</li>
+                        <li>Look for <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
+                        <li>Tap <strong>"Add"</strong> or <strong>"Install"</strong></li>
+                        <li>Done! Check your home screen 🎉</li>
+                    </ol>
+                    <div style="background: #E3F2FD; padding: 12px; border-radius: 8px; margin-top: 15px;">
+                        <p style="font-size: 0.8rem; font-weight: 600;">💡 Pro Tip:</p>
+                        <p style="font-size: 0.8rem;">If you don't see "Install app", try closing this popup first, then open your browser menu.</p>
+                    </div>
+                `;
+            } else {
+                instructions = `
+                    <h3 style="font-weight: 700; margin-bottom: 15px;">Install on Desktop</h3>
+                    <ol style="text-align: left; padding-left: 20px; line-height: 1.8;">
+                        <li>Look for the install icon (⊕ or ⬇️) in your browser's address bar</li>
+                        <li>Or open your browser menu (⋮ three dots)</li>
+                        <li>Select <strong>"Install Sample Tracker"</strong></li>
+                    </ol>
+                `;
+            }
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 450px;">
+                    <div class="modal-header">
+                        <h2 class="modal-title">📱 How to Install</h2>
+                        <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+                    </div>
+                    <div style="color: #666;">
+                        ${instructions}
+                        <div style="background: #E8F5E9; padding: 15px; border-radius: 12px; margin-top: 20px; border-left: 3px solid var(--green);">
+                            <p style="font-size: 0.9rem; font-weight: 600; color: var(--dark);">✓ Why Install?</p>
+                            <ul style="font-size: 0.85rem; margin-top: 10px; padding-left: 20px;">
+                                <li>Quick access from your home screen</li>
+                                <li>Works offline</li>
+                                <li>No browser bars - fullscreen!</li>
+                                <li>Loads instantly</li>
+                            </ul>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <p style="font-size: 0.8rem; color: #999;">Need help? Contact us:</p>
+                            <p style="font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-top: 5px;">support@flextechla.com</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Add install button to menu
+        function addInstallToMenu() {
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                // Not installed, show install option in menu
+                const menuContent = document.querySelector('#menuModal .modal-content > div');
+                if (menuContent && !document.getElementById('installMenuItem')) {
+                    const installBtn = document.createElement('button');
+                    installBtn.id = 'installMenuItem';
+                    installBtn.className = 'row-btn btn-secondary';
+                    installBtn.innerHTML = '📱 Install App';
+                    installBtn.onclick = () => {
+                        closeMenu();
+                        showManualInstallInstructions();
+                    };
+                    menuContent.insertBefore(installBtn, menuContent.firstChild);
+                }
+            }
+        }
+
+        function goToLanding() {
+            showLanding();
+        }
+
+        function showPrivacyFromLanding() {
+            document.getElementById('privacyModal').classList.add('active');
+        }
+
+        function showHelpFromLanding() {
+            document.getElementById('helpModal').classList.add('active');
+        }
+
+        // ==================== STORAGE ====================
+        function saveSamplesLocal() {
+            localStorage.setItem('tiktok_samples', JSON.stringify(samples));
+        }
+
+        async function saveSamples() {
+            if (useCloud) {
+                await saveToCloud();
+            } else {
+                localStorage.setItem('tiktok_samples', JSON.stringify(samples));
+            }
+        }
+
+        async function saveSettings() {
+            settings.defaultDays = parseInt(document.getElementById('defaultDays').value);
+            if (useCloud) {
+                await saveToCloud();
+            } else {
+                localStorage.setItem('tiktok_settings', JSON.stringify(settings));
+            }
+        }
+
+        // ==================== WINDOW LOAD ====================
+        window.onload = async () => {
+            try { 
+                samples = JSON.parse(localStorage.getItem('tiktok_samples')) || []; 
+                settings = JSON.parse(localStorage.getItem('tiktok_settings')) || settings;
+                document.getElementById('defaultDays').value = settings.defaultDays;
+                
+                const savedReminderDays = localStorage.getItem('reminder_days');
+                if (savedReminderDays) {
+                    document.getElementById('reminderDays').value = savedReminderDays;
+                }
+                
+                const notifToggle = document.getElementById('notificationsToggle');
+                if (Notification.permission === 'granted') {
+                    notifToggle.checked = true;
+                    document.getElementById('reminderSettings').style.display = 'block';
+                    scheduleNotifications();
+                }
+            } catch(e) { 
+                samples = []; 
+            }
+            
+            try {
+                await initSupabase();
+            } catch (e) {
+                console.error('Failed to initialize:', e);
+                // Failsafe: Always show landing page if everything else fails
+                showLanding();
+            }
+        };
+
+        // ==================== STATUS INFO ====================
+        function getStatusInfo(s) {
+            if (s.done) return { status: 'completed', days: 0, percent: 100, color: '#E0E0E0', text: 'Posted' };
+            const start = new Date(s.date + 'T00:00:00').getTime();
+            const now = new Date();
+            now.setHours(0,0,0,0);
+            const end = new Date(start + s.limit * 86400000);
+            const total = s.limit;
+            const elapsed = Math.floor((now.getTime() - start) / 86400000);
+            const remaining = total - elapsed;
+            const percent = Math.min(100, Math.max(0, (elapsed / total) * 100));
+            
+            if (remaining < 0) return { status: 'overdue', days: remaining, percent, color: '#FF3B30', text: `${Math.abs(remaining)}d overdue` };
+            if (remaining <= 3) return { status: 'urgent', days: remaining, percent, color: '#FFB300', text: `${remaining}d left` };
+            return { status: 'good', days: remaining, percent, color: '#00C853', text: `${remaining}d left` };
+        }
+
+        function updateStats() {
+            const activeSamples = samples.filter(s => !s.done);
+            const stats = { overdue: 0, urgent: 0, good: 0 };
+            activeSamples.forEach(s => {
+                const info = getStatusInfo(s);
+                if (info.status === 'overdue') stats.overdue++;
+                else if (info.status === 'urgent') stats.urgent++;
+                else stats.good++;
+            });
+            document.getElementById('statOverdue').innerText = stats.overdue;
+            document.getElementById('statUrgent').innerText = stats.urgent;
+            document.getElementById('statGood').innerText = stats.good;
+        }
+
+        // ==================== FILTERING & SORTING ====================
+        function setFilter(f) {
+            currentFilter = f;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('f-' + f).classList.add('active');
+            render();
+        }
+
+        function setSort(s) {
+            currentSort = s;
+            render();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            render();
+        }
+
+        function getFilteredSamples() {
+            let filtered = samples.filter(s => {
+                const matchSearch = !searchQuery || 
+                    s.product.toLowerCase().includes(searchQuery) || 
+                    s.brand.toLowerCase().includes(searchQuery);
+                if (!matchSearch) return false;
+                
+                const info = getStatusInfo(s);
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'completed') return s.done;
+                if (currentFilter === 'overdue') return !s.done && info.status === 'overdue';
+                if (currentFilter === 'urgent') return !s.done && info.status === 'urgent';
+                if (currentFilter === 'good') return !s.done && info.status === 'good';
+                return true;
+            });
+            
+            filtered.sort((a, b) => {
+                if (currentSort === 'brand') return a.brand.localeCompare(b.brand);
+                if (currentSort === 'received') return new Date(b.date) - new Date(a.date);
+                const aInfo = getStatusInfo(a);
+                const bInfo = getStatusInfo(b);
+                if (a.done && !b.done) return 1;
+                if (!a.done && b.done) return -1;
+                return aInfo.days - bInfo.days;
+            });
+            
+            return filtered;
+        }
+
+        // ==================== SELECTION & BATCH ====================
+        function toggleSelection(id) {
+            if (selectedSamples.has(id)) {
+                selectedSamples.delete(id);
+            } else {
+                selectedSamples.add(id);
+            }
+            updateBatchBar();
+            render();
+        }
+
+        function clearSelection() {
+            selectedSamples.clear();
+            updateBatchBar();
+            render();
+        }
+
+        function updateBatchBar() {
+            const bar = document.getElementById('batchBar');
+            const count = document.getElementById('selectedCount');
+            count.innerText = selectedSamples.size;
+            if (selectedSamples.size > 0) {
+                bar.classList.add('active');
+            } else {
+                bar.classList.remove('active');
+            }
+        }
+
+        async function batchMarkDone() {
+            selectedSamples.forEach(id => {
+                samples = samples.map(s => s.id === id ? {...s, done: true} : s);
+            });
+            selectedSamples.clear();
+            await saveSamples();
+            render();
+            updateBatchBar();
+        }
+
+        async function batchDelete() {
+            if (confirm(`Delete ${selectedSamples.size} samples?`)) {
+                samples = samples.filter(s => !selectedSamples.has(s.id));
+                selectedSamples.clear();
+                await saveSamples();
+                render();
+                renderCalendar();
+                updateBatchBar();
+            }
+        }
+
+        // ==================== RENDER ====================
+        function render() {
+            updateStats();
+            updateCloudStatus();
+            const filtered = getFilteredSamples();
+            const grid = document.getElementById('sampleGrid');
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><p style="font-size: 3rem; margin-bottom: 10px;">📦</p><p>No samples yet!</p><p style="font-size: 0.9rem; margin-top: 5px;">Add your first sample to get started</p></div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(s => renderSampleCard(s)).join('');
+        }
+
+        function renderSampleCard(s) {
+            const info = getStatusInfo(s);
+            const isSelected = selectedSamples.has(s.id);
+            const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+            
+            return `
+                <div class="sample-card ${isSelected ? 'selecting' : ''}">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div>
+                                <div class="brand-name">${s.brand}</div>
+                                <div class="product-name">${s.product}</div>
+                            </div>
+                            <input type="checkbox" class="card-checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelection('${s.id}')">
+                        </div>
+                        
+                        <div class="days-badge ${info.status}">${info.text}</div>
+                        
+                        ${s.tags && s.tags.length ? `<div class="tags-row">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+                        
+                        ${s.photos && s.photos.length ? `<div class="photo-row">${s.photos.map(p => `<img src="${p}" class="photo-thumb" onclick="viewPhoto('${p}')">`).join('')}</div>` : ''}
+                        
+                        ${s.notes ? `<div class="notes-section">${s.notes}</div>` : ''}
+                        
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
+                                <span>🎥 Filmed</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
+                                <span>✂️ Edited</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
+                                <span>📱 Posted</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-fill" style="width: ${info.percent}%; background: ${info.color};"></div>
+                        </div>
+                        
+                        <div class="meta-grid">
+                            <div>
+                                <span class="meta-label">Received</span>
+                                <span class="meta-value">${new Date(s.date).toLocaleDateString()}</span>
+                            </div>
+                            <div>
+                                <span class="meta-label">Due Date</span>
+                                <span class="meta-value">${dueDate.toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="action-container">
+                            ${s.done ? 
+                                '<button class="row-btn btn-completed">✓ Posted</button>' :
+                                '<button class="row-btn btn-full-width" onclick="markDone(\''+s.id+'\')">✓ Mark as Posted</button>'
+                            }
+                            ${s.link ? `<button class="row-btn btn-secondary" onclick="openBrowser('${s.link}')">🔗 View Product</button>` : ''}
+                            <div class="btn-row-2">
+                                <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
+                                <button class="row-btn btn-secondary" onclick="deleteSample('${s.id}')">🗑 Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== SAMPLE ACTIONS ====================
+        async function markDone(id) {
+            samples = samples.map(s => s.id === id ? {...s, done: true} : s);
+            await saveSamples();
+            render();
+        }
+
+        async function deleteSample(id) {
+            if (confirm('Delete this sample?')) {
+                samples = samples.filter(s => s.id !== id);
+                await saveSamples();
+                render();
+                renderCalendar();
+            }
+        }
+
+        async function toggleCheckbox(id, field) {
+            samples = samples.map(s => {
+                if (s.id === id) {
+                    return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
+                }
+                return s;
+            });
+            await saveSamples();
+            render();
+        }
+
+        // ==================== MODAL ====================
+        function openModal(id = null) {
+            editId = id;
+            tempTags = [];
+            tempPhotos = [];
+            const form = document.getElementById('sampleForm');
+            form.reset();
+            document.getElementById('dateReceived').valueAsDate = new Date();
+            document.getElementById('daysLimit').value = settings.defaultDays;
+            document.getElementById('sampleReminderDays').value = '';
+            
+            if (id) {
+                const s = samples.find(x => x.id === id);
+                document.getElementById('modalTitle').innerText = 'Edit Sample';
+                document.getElementById('productName').value = s.product;
+                document.getElementById('brandName').value = s.brand;
+                document.getElementById('dateReceived').value = s.date;
+                document.getElementById('daysLimit').value = s.limit;
+                document.getElementById('shopLink').value = s.link || '';
+                document.getElementById('notes').value = s.notes || '';
+                document.getElementById('sampleReminderDays').value = s.reminderDays !== undefined ? s.reminderDays : '';
+                tempTags = s.tags || [];
+                tempPhotos = s.photos || [];
+                renderTags();
+                renderPhotoGrid();
+            } else {
+                document.getElementById('modalTitle').innerText = 'Add Sample';
+                renderTags();
+                renderPhotoGrid();
+            }
+            
+            calcDuePreview();
+            document.getElementById('sampleModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('sampleModal').classList.remove('active');
+        }
+
+        async function handleSave(e) {
+            e.preventDefault();
+            const reminderDaysValue = document.getElementById('sampleReminderDays').value;
+            const newItem = {
+                id: editId || Date.now().toString(),
+                product: document.getElementById('productName').value,
+                brand: document.getElementById('brandName').value,
+                date: document.getElementById('dateReceived').value,
+                limit: parseInt(document.getElementById('daysLimit').value),
+                link: document.getElementById('shopLink').value,
+                notes: document.getElementById('notes').value,
+                tags: tempTags,
+                photos: tempPhotos,
+                reminderDays: reminderDaysValue === '' ? undefined : parseInt(reminderDaysValue),
+                checklist: editId ? samples.find(x => x.id === editId).checklist : { filmed: false, edited: false, posted: false },
+                done: editId ? samples.find(x => x.id === editId).done : false
+            };
+            
+            if (editId) {
+                samples = samples.map(x => x.id === editId ? newItem : x);
+            } else {
+                samples.unshift(newItem);
+            }
+            
+            await saveSamples();
+            render();
+            renderCalendar();
+            
+            // Force close modal
+            setTimeout(() => {
+                closeModal();
+            }, 100);
+        }
+
+        function calcDuePreview() {
+            const date = document.getElementById('dateReceived').value;
+            const days = parseInt(document.getElementById('daysLimit').value);
+            if (date && days) {
+                const dueDate = new Date(new Date(date).getTime() + days * 86400000);
+                document.getElementById('dueCalcDisplay').innerText = `Due: ${dueDate.toLocaleDateString()}`;
+            }
+        }
+
+        // ==================== TAGS ====================
+        function handleTagInput(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const val = e.target.value.trim();
+                if (val && !tempTags.includes(val)) {
+                    tempTags.push(val);
+                    e.target.value = '';
+                    renderTags();
+                }
+            }
+        }
+
+        function removeTag(tag) {
+            tempTags = tempTags.filter(t => t !== tag);
+            renderTags();
+        }
+
+        function renderTags() {
+            const container = document.getElementById('tagsContainer');
+            const input = document.getElementById('tagInput');
+            const existingTags = tempTags.map(t => 
+                `<span class="tag-input-item">${t}<span class="tag-remove" onclick="removeTag('${t}')">×</span></span>`
+            ).join('');
+            container.innerHTML = existingTags;
+            container.appendChild(input);
+        }
+
+        // ==================== PHOTOS ====================
+        function handlePhotoUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                tempPhotos.push(ev.target.result);
+                renderPhotoGrid();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removePhoto(index) {
+            tempPhotos.splice(index, 1);
+            renderPhotoGrid();
+        }
+
+        function renderPhotoGrid() {
+            const grid = document.getElementById('photoGrid');
+            const items = tempPhotos.map((p, i) => 
+                `<div class="photo-upload-item">
+                    <img src="${p}">
+                    <button class="photo-remove" onclick="removePhoto(${i})">×</button>
+                </div>`
+            ).join('');
+            grid.innerHTML = items + `
+                <label class="photo-upload-item">
+                    <input type="file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+                    <span style="font-size: 2rem;">+</span>
+                </label>
+            `;
+        }
+
+        function viewPhoto(src) {
+            document.getElementById('photoViewerImg').src = src;
+            document.getElementById('photoViewerModal').classList.add('active');
+        }
+
+        function closePhotoViewer() {
+            document.getElementById('photoViewerModal').classList.remove('active');
+        }
+
+        // ==================== CALENDAR ====================
+        function setView(v) {
+            currentView = v;
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('view-' + v).classList.add('active');
+            if (v === 'list') {
+                document.getElementById('listView').style.display = 'block';
+                document.getElementById('calendarView').style.display = 'none';
+            } else {
+                document.getElementById('listView').style.display = 'none';
+                document.getElementById('calendarView').style.display = 'block';
+                renderCalendar();
+            }
+        }
+
+        function changeMonth(delta) {
+            calendarDate.setMonth(calendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            document.getElementById('calendarMonth').innerText = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const prevMonthDays = new Date(year, month, 0).getDate();
+            
+            let html = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => `<div class="calendar-header">${d}</div>`).join('');
+            
+            for (let i = firstDay - 1; i >= 0; i--) {
+                html += `<div class="calendar-day other-month">${prevMonthDays - i}</div>`;
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dateStr = date.toISOString().split('T')[0];
+                const dueSamples = samples.filter(s => {
+                    const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                    return dueDate.toISOString().split('T')[0] === dateStr && !s.done;
+                });
+                
+                const hasOverdue = dueSamples.some(s => getStatusInfo(s).status === 'overdue');
+                const classes = dueSamples.length ? (hasOverdue ? 'has-items overdue' : 'has-items') : '';
+                
+                html += `<div class="calendar-day ${classes}" onclick="showDayDetails('${dateStr}')">
+                    <span class="calendar-day-number">${day}</span>
+                    ${dueSamples.length ? `<div class="calendar-day-dots">${dueSamples.slice(0, 3).map(() => '<div class="calendar-dot" style="background: var(--primary);"></div>').join('')}</div>` : ''}
+                </div>`;
+            }
+            
+            document.getElementById('calendarGrid').innerHTML = html;
+        }
+
+        function showDayDetails(dateStr) {
+            const dueSamples = samples.filter(s => {
+                const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                return dueDate.toISOString().split('T')[0] === dateStr && !s.done;
+            });
+            
+            const details = document.getElementById('calendarDayDetails');
+            if (dueSamples.length === 0) {
+                details.innerHTML = '';
+                return;
+            }
+            
+            details.innerHTML = `
+                <h3 style="font-weight: 700; margin-bottom: 15px;">Due on ${new Date(dateStr).toLocaleDateString()}</h3>
+                ${dueSamples.map(s => renderSampleCard(s)).join('')}
+            `;
+        }
+
+        // ==================== ANALYTICS ====================
+        function openAnalytics() {
+            const total = samples.length;
+            const completed = samples.filter(s => s.done).length;
+            const active = total - completed;
+            const stats = { overdue: 0, urgent: 0, good: 0 };
+            samples.filter(s => !s.done).forEach(s => {
+                const info = getStatusInfo(s);
+                if (info.status === 'overdue') stats.overdue++;
+                else if (info.status === 'urgent') stats.urgent++;
+                else stats.good++;
+            });
+            
+            const content = `
+                <div class="analytics-section">
+                    <div class="analytics-title">Overview</div>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="analytics-number">${total}</div>
+                            <div class="analytics-label">Total Samples</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number">${completed}</div>
+                            <div class="analytics-label">Completed</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number">${active}</div>
+                            <div class="analytics-label">Active</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number">${total ? Math.round(completed/total*100) : 0}%</div>
+                            <div class="analytics-label">Completion Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="analytics-section">
+                    <div class="analytics-title">Active Samples</div>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="analytics-number" style="color: var(--red);">${stats.overdue}</div>
+                            <div class="analytics-label">Overdue</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-number" style="color: var(--yellow);">${stats.urgent}</div>
+                            <div class="analytics-label">Due Soon</div>
+                        </div>
+                        <div class="analytics-card" style="grid-column: span 2;">
+                            <div class="analytics-number" style="color: var(--green);">${stats.good}</div>
+                            <div class="analytics-label">On Track</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('analyticsContent').innerHTML = content;
+            document.getElementById('analyticsModal').classList.add('active');
+        }
+
+        function closeAnalytics() {
+            document.getElementById('analyticsModal').classList.remove('active');
+        }
+
+        // ==================== SETTINGS ====================
+        function openSettings() {
+            updateCloudStatus();
+            document.getElementById('settingsModal').classList.add('active');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+
+        function updateCloudStatus() {
+            const statusDiv = document.getElementById('cloudStatus');
+            const signOutBtn = document.getElementById('signOutBtn');
+            const menuSignOutBtn = document.getElementById('menuSignOutBtn');
+            
+            if (useCloud && currentUser) {
+                const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
+                statusDiv.innerHTML = `
+                    <p style="margin-bottom: 5px; font-weight: 700; color: var(--green);">✓ Cloud Storage Active</p>
+                    <p style="font-size: 0.85rem;">Signed in as: <strong>${userEmail}</strong></p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Data syncing across all your devices</p>
+                `;
+                statusDiv.style.background = '#E8F5E9';
+                if (signOutBtn) signOutBtn.style.display = 'block';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'block';
+            } else {
+                statusDiv.innerHTML = `
+                    <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
+                    <p style="font-size: 0.85rem;">Your data is saved in your browser only</p>
+                    <p style="font-size: 0.75rem; margin-top: 5px;">Create an account to sync across devices</p>
+                `;
+                statusDiv.style.background = '#E3F2FD';
+                if (signOutBtn) signOutBtn.style.display = 'none';
+                if (menuSignOutBtn) menuSignOutBtn.style.display = 'none';
+            }
+        }
+
+        function showCloudInfo() {
+            document.getElementById('cloudInfoModal').classList.add('active');
+        }
+
+        function closeCloudInfo() {
+            document.getElementById('cloudInfoModal').classList.remove('active');
+        }
+
+        // ==================== NOTIFICATIONS ====================
+        async function toggleNotifications(enabled) {
+            const reminderSettings = document.getElementById('reminderSettings');
+            
+            if (enabled) {
+                if (!('Notification' in window)) {
+                    alert('Your browser doesn\'t support notifications');
+                    document.getElementById('notificationsToggle').checked = false;
+                    return;
+                }
+                
+                if (Notification.permission === 'granted') {
+                    reminderSettings.style.display = 'block';
+                    scheduleNotifications();
+                    showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
+                } else if (Notification.permission !== 'denied') {
+                    document.getElementById('notificationStatus').style.display = 'block';
+                    const permission = await Notification.requestPermission();
+                    document.getElementById('notificationStatus').style.display = 'none';
+                    
+                    if (permission === 'granted') {
+                        reminderSettings.style.display = 'block';
+                        scheduleNotifications();
+                        showNotification('Reminders Enabled', 'You\'ll get notified when samples are due soon!');
+                    } else {
+                        document.getElementById('notificationsToggle').checked = false;
+                        al}
+        }
+
+        function saveReminderSettings() {
+            const reminderDays = document.getElementById('reminderDays').value;
+            localStorage.setItem('reminder_days', reminderDays);
+            scheduleNotifications();
+        }
+
+        function showNotification(title, body) {
+            if (Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: body,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23FE2C55" width="100" height="100" rx="20"/><text x="50" y="70" font-size="60" text-anchor="middle" fill="white">📦</text></svg>'
+                });
+            }
+        }
+
+        function scheduleNotifications() {
+            const checkInterval = setInterval(() => {
+                checkDueSamples();
+            }, 3600000);
+            
+            localStorage.setItem('notification_interval', checkInterval);
+            checkDueSamples();
+        }
+
+        function clearNotifications() {
+            const intervalId = localStorage.getItem('notification_interval');
+            if (intervalId) {
+                clearInterval(parseInt(intervalId));
+                localStorage.removeItem('notification_interval');
+            }
+        }
+
+        function checkDueSamples() {
+            const globalReminderDays = parseInt(localStorage.getItem('reminder_days') || '1');
+            const activeSamples = samples.filter(s => !s.done);
+            const overdue = activeSamples.filter(s => getStatusInfo(s).status === 'overdue');
+            
+            const dueWithinTimeframe = activeSamples.filter(s => {
+                const info = getStatusInfo(s);
+                const reminderDays = s.reminderDays !== undefined ? s.reminderDays : globalReminderDays;
+                return info.days >= 0 && info.days <= reminderDays;
+            });
+            
+            if (overdue.length > 0) {
+                showNotification(
+                    `⚠️ ${overdue.length} Overdue Sample${overdue.length > 1 ? 's' : ''}!`,
+                    `You have ${overdue.length} sample${overdue.length > 1 ? 's' : ''} past the deadline. Open the app to check.`
+                );
+            } else if (dueWithinTimeframe.length > 0) {
+                showNotification(
+                    `📅 ${dueWithinTimeframe.length} Sample${dueWithinTimeframe.length > 1 ? 's' : ''} Due Soon`,
+                    `${dueWithinTimeframe.length} sample${dueWithinTimeframe.length > 1 ? 's are' : ' is'} due soon.`
+                );
+            }
+        }
+
+        // ==================== MENU ====================
+        function toggleMenu() {
+            document.getElementById('menuModal').classList.add('active');
+            addInstallToMenu();
+        }
+
+        function closeMenu() {
+            document.getElementById('menuModal').classList.remove('active');
+        }
+
+        function openPrivacy() {
+            document.getElementById('privacyModal').classList.add('active');
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacyModal').classList.remove('active');
+        }
+
+        function openHelp() {
+            document.getElementById('helpModal').classList.add('active');
+        }
+
+        function closeHelp() {
+            document.getElementById('helpModal').classList.remove('active');
+        }
+
+        function openSupport() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function closeSupport() {
+            document.getElementById('supportModal').classList.remove('active');
+        }
+
+        // ==================== UTILITIES ====================
+        function openBrowser(url) {
+            document.getElementById('browserFrame').src = url;
+            document.getElementById('browserOverlay').classList.add('active');
+        }
+
+        function closeBrowser() {
+            document.getElementById('browserOverlay').classList.remove('active');
+            document.getElementById('browserFrame').src = '';
+        }
+
+        function exportCSV() {
+            const headers = ['Brand', 'Product', 'Received Date', 'Days to Post', 'Due Date', 'Status', 'Link', 'Notes', 'Tags', 'Filmed', 'Edited', 'Posted'];
+            const rows = samples.map(s => {
+                const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
+                const info = getStatusInfo(s);
+                return [
+                    s.brand,
+                    s.product,
+                    s.date,
+                    s.limit,
+                    dueDate.toISOString().split('T')[0],
+                    s.done ? 'Completed' : info.text,
+                    s.link || '',
+                    s.notes || '',
+                    (s.tags || []).join('; '),
+                    s.checklist.filmed ? 'Yes' : 'No',
+                    s.checklist.edited ? 'Yes' : 'No',
+                    s.checklist.posted ? 'Yes' : 'No'
+                ].map(v => `"${v}"`).join(',');
+            });
+            
+            const csv = [headers.join(','), ...rows].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `samples_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        async function clearCompleted() {
+            if (confirm('Delete all completed samples?')) {
+                samples = samples.filter(s => !s.done);
+                await saveSamples();
+                render();
+                renderCalendar();
+            }
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = async (ev) => {
+                    try {
+                        const imported = JSON.parse(ev.target.result);
+                        if (confirm(`Import ${imported.length} samples? This will replace your current data.`)) {
+                            samples = imported;
+                            await saveSamples();
+                            render();
+                            renderCalendar();
+                            alert('Data imported successfully!');
+                        }
+                    } catch (e) {
+                        alert('Invalid file format');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function toggleFiltered() {
+            const content = document.getElementById('filteredContent');
+            const arrow = document.getElementById('filteredArrow');
+            content.classList.toggle('active');
+            arrow.innerText = content.classList.contains('active') ? '▲' : '▼';
+        }
+    </script>
+</body>
+</html>
