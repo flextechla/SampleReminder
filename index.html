@@ -87,6 +87,20 @@
         body.compact-mode .photo-row, body.compact-mode .notes-section { display: none; }
         body.compact-mode .days-badge { margin-bottom: 5px; font-size: 0.65rem; padding: 2px 8px; }
         body.compact-mode .product-name { font-size: 1rem; margin: 2px 0 4px 0; }
+        body.compact-mode .checklist-item { font-size: 0.75rem; margin-bottom: 2px; }
+        body.compact-mode .row-btn { padding: 10px; font-size: 0.85rem; }
+        body.compact-mode .action-container { gap: 6px; margin-top: 6px; }
+        
+        /* Landing Page Styles */
+        #landingPage {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%);
+            /* FIX: Visible by default to prevent blank screen, hidden by class later */
+            display: flex;
+            flex-direction: column;
+            /* FIX: Increased bottom padding so text clears the sticky footer */
+            padding: 20px 20px 140px 20px; 
+        }
         
         #landingPage.hidden {
             display: none !important;
@@ -330,6 +344,10 @@
         }
         
         .view-btn.active { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary); 
+        }
         
         .dropdown-panel {
             background: var(--surface);
@@ -342,10 +360,6 @@
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-            background: var(--primary); 
-            color: white; 
-            border-color: var(--primary); 
         }
         
         .control-section { 
@@ -607,9 +621,6 @@
             50% { transform: scale(1.2); }
             100% { transform: scale(1); opacity: 1; }
         }
-        
-        
-        .checklist-item:last-child { margin-bottom: 0; }
         
         .meta-grid { 
             display: grid; 
@@ -916,19 +927,19 @@
                 <span>Add New Sample</span>
             </button>
             
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
+            
             <div class="view-toggle">
                 <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List View</button>
                 <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
             </div>
-            
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
             
             <div class="view-toggle" style="margin-top: 12px;">
                 <button class="view-btn" id="filterToggleBtn" onclick="toggleFilterDropdown()">🔍 Filter</button>
                 <button class="view-btn" id="sortToggleBtn" onclick="toggleSortDropdown()">📊 Sort</button>
             </div>
             
-            <div id="filterDropdown" class="dropdown-panel" style="display: none;">
+            <div id="filterDropdown" class="dropdown-panel" style="display: none; margin-top: 8px;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <button class="filter-btn active" id="f-all" onclick="setFilter('all')">📦 All (<span id="statAll">0</span>)</button>
                     <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
@@ -938,7 +949,7 @@
                 </div>
             </div>
             
-            <div id="sortDropdown" class="dropdown-panel" style="display: none;">
+            <div id="sortDropdown" class="dropdown-panel" style="display: none; margin-top: 8px;">
                 <button class="filter-btn" onclick="setSort('dueDate')">📅 Due Date</button>
                 <button class="filter-btn" onclick="setSort('brand')">🏷️ Brand Name</button>
                 <button class="filter-btn" onclick="setSort('received')">📦 Received Date</button>
@@ -947,8 +958,6 @@
         
         <div class="container">
             <div id="listView">
-
-
                 <div id="sampleGrid"></div>
             </div>
 
@@ -1235,14 +1244,14 @@
                     <div style="font-size: 4rem; margin-bottom: 15px;">📧</div>
                     <h3 style="font-weight: 700; margin-bottom: 15px; font-size: 1.3rem;">Need Help?</h3>
                     <p style="font-size: 1rem; opacity: 0.95; margin-bottom: 25px;">Click below to email our support team</p>
-                    <a href="/cdn-cgi/l/email-protection#770402070718050337111b120f0312141f1b165914181a" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <a href="mailto:support@flextechla.com" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
                         📧 Email Support
                     </a>
                 </div>
                 
                 <div style="background: #E3F2FD; padding: 20px; border-radius: 12px; text-align: left;">
                     <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">
-                        <strong style="color: var(--dark);">Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="285b5d5858475a5c684e444d505c4d4b404449064b4745">[email&#160;protected]</a>
+                        <strong style="color: var(--dark);">Email:</strong> support@flextechla.com
                     </p>
                     <p style="font-size: 0.9rem; color: #666;">
                         <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays
@@ -1324,7 +1333,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ==================== CONFIGURATION ====================
         const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
@@ -1823,7 +1832,6 @@
         }
 
         // ==================== FILTERING & SORTING ====================
-
         function toggleFilterDropdown() {
             const dropdown = document.getElementById('filterDropdown');
             const sortDropdown = document.getElementById('sortDropdown');
@@ -1859,13 +1867,14 @@
                 sortBtn.classList.add('active');
             }
         }
+
         function setFilter(f) {
             triggerHaptic();
             currentFilter = f;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('f-' + f).classList.add('active');
             document.getElementById('filterDropdown').style.display = 'none';
             document.getElementById('filterToggleBtn').classList.remove('active');
-            document.getElementById('f-' + f).classList.add('active');
             render();
         }
 
@@ -2631,4 +2640,11 @@
         }
 
         function toggleFiltered() {
-            const content = document.get
+            const content = document.getElementById("filteredContent");
+            const arrow = document.getElementById("filteredArrow");
+            content.classList.toggle("active");
+            arrow.innerText = content.classList.contains("active") ? "▲" : "▼";
+        }
+    </script>
+</body>
+</html>
