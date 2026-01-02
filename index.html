@@ -1563,6 +1563,11 @@
             if (modal) modal.remove();
         }
 
+
+        // Make auth functions globally accessible for onclick handlers
+        window.showAuth = showAuth;
+        window.closeAuthModal = closeAuthModal;
+        window.handleAuth = handleAuth;
         async function signOut() {
             if (confirm('Sign out? Your data will remain safely in the cloud.')) {
                 await sb_client.auth.signOut();
