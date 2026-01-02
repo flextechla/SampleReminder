@@ -878,7 +878,7 @@
                 <div class="control-section">
                     <div class="section-title">Filter Samples</div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                        <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All (<span id="statAll">0</span>)</button>
+                        <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
                         <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
                         <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
                     </div>
@@ -1753,8 +1753,8 @@
         }
 
         function updateStats() {
-            const activeSamples = samples.filter(s => !s.done);
             const completedSamples = samples.filter(s => s.done);
+            const activeSamples = samples.filter(s => !s.done);
             const stats = { overdue: 0, urgent: 0, good: 0 };
             activeSamples.forEach(s => {
                 const info = getStatusInfo(s);
@@ -1981,7 +1981,6 @@
                 return s;
             });
             await saveSamples();
-            console.log("Toggle - field:", field, "done samples:", samples.filter(s => s.done).length, "Sample:", samples.find(s => s.id === id));
             render();
         }
 
