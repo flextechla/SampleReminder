@@ -1435,7 +1435,7 @@
                 <p style="margin-bottom: 12px; color: var(--text-secondary);">Use the tabs at the top to filter samples by urgency or posting status.</p>
                 
                 <h4 style="margin: 16px 0 8px; color: var(--text-main);">Need More Help?</h4>
-                <p style="margin-bottom: 12px; color: var(--text-secondary);">Contact us at support@sampletracker.app</p>
+                <p style="margin-bottom: 12px; color: var(--text-secondary);">Contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80f3f5f0f0eff2f4c0f3e1edf0ece5f4f2e1e3ebe5f2aee1f0f0">[email&#160;protected]</a></p>
             </div>
         </div>
     </div>
@@ -1474,7 +1474,7 @@
             </div>
             <div style="line-height: 1.6; text-align: center; padding: 20px;">
                 <p style="margin-bottom: 20px; color: var(--text-secondary); font-size: 1.1rem;">We're here to help!</p>
-                <p style="margin-bottom: 12px; color: var(--text-main); font-size: 1.2rem; font-weight: 600;">support@sampletracker.app</p>
+                <p style="margin-bottom: 12px; color: var(--text-main); font-size: 1.2rem; font-weight: 600;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e3d3b3e3e213c3a0e3d2f233e222b3a3c2f2d252b3c602f3e3e">[email&#160;protected]</a></p>
                 <p style="margin-bottom: 20px; color: var(--text-secondary);">We typically respond within 24 hours</p>
             </div>
         </div>
@@ -1487,6 +1487,19 @@
     </div>
 
     <script>
+        // ==================== GLOBAL BUTTON HANDLERS (defined first) ====================
+        window.openSignUp = function() {
+            document.getElementById('signUpModal').classList.add('active');
+            const errorDiv = document.getElementById('signUpError');
+            if (errorDiv) errorDiv.classList.remove('active');
+        };
+
+        window.openSignIn = function() {
+            document.getElementById('signInModal').classList.add('active');
+            const errorDiv = document.getElementById('signInError');
+            if (errorDiv) errorDiv.classList.remove('active');
+        };
+
         // ==================== SUPABASE SETUP ====================
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
@@ -1543,12 +1556,7 @@
             document.getElementById('app').classList.remove('active');
         }
 
-        // Sign Up
-        function openSignUp() {
-            document.getElementById('signUpModal').classList.add('active');
-            document.getElementById('signUpError').classList.remove('active');
-        }
-
+        // Sign Up handlers
         function switchToSignIn() {
             document.getElementById('signUpModal').classList.remove('active');
             openSignIn();
@@ -1593,12 +1601,7 @@
             }
         }
 
-        // Sign In
-        function openSignIn() {
-            document.getElementById('signInModal').classList.add('active');
-            document.getElementById('signInError').classList.remove('active');
-        }
-
+        // Sign In handlers
         function switchToSignUp() {
             document.getElementById('signInModal').classList.remove('active');
             openSignUp();
@@ -2283,16 +2286,3 @@
             
             if (localStorage.getItem('compactMode') === 'true') {
                 document.getElementById('compactToggle').classList.add('active');
-                document.body.classList.add('compact-mode');
-            }
-            
-            if (localStorage.getItem('notifications') === 'true') {
-                document.getElementById('notificationsToggle').classList.add('active');
-            }
-            
-            // Check authentication
-            checkAuth();
-        });
-    </script>
-</body>
-</html>
