@@ -1,8 +1,3 @@
-Almost there. When you are signed in, you should be able to go back to your work area without signing in again. Maybe when you close the app, you will have to sign in. On the sample cards there is a box in the top right corner and when that is checked, it brings up 2 buttons below, one for mark done which is checked and green and one for delete and cancel. If I hit mark done, it seems to actually delete it. It probably shouldn't even have a box for that or it should just say delete next to the box and confirm before you actually delete. You could put a done field separately if you think taht would be good, but when they check off posted, that should be the same result and should go under a done the Posted tab for filtering purposes. I'm not sure if taptic feedback is working on Android anyway, but I'm not certain. Finally, should we should have an option for forgot password and an option to delete account.
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1014,7 +1009,8 @@ Almost there. When you are signed in, you should be able to go back to your work
             <!-- Filter Dropdown Panel -->
             <div id="filterDropdown" class="dropdown-panel" style="display: none;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All</button>
+                    <button class="filter-btn active" id="f-active" onclick="setFilter('active')">📋 Active</button>
+                    <button class="filter-btn" id="f-all" onclick="setFilter('all')">📦 All</button>
                     <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
                     <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
                     <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
@@ -1433,7 +1429,7 @@ Almost there. When you are signed in, you should be able to go back to your work
         let samples = [];
         let settings = { defaultDays: 14 };
         let currentView = 'list';
-        let currentFilter = 'all';
+        let currentFilter = 'active';
         let currentSort = 'dueDate';
         let searchQuery = '';
         let selectedSamples = new Set();
@@ -2047,6 +2043,7 @@ Almost there. When you are signed in, you should be able to go back to your work
         function setFilter(f) {
             triggerHaptic();
             currentFilter = f;
+            console.log("Filter changed to:", f, "Total samples:", samples.length, "Done samples:", samples.filter(s => s.done).length);
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('f-' + f).classList.add('active');
             render();
@@ -2063,7 +2060,6 @@ Almost there. When you are signed in, you should be able to go back to your work
             searchQuery = document.getElementById('searchBar').value.toLowerCase();
             render();
         }
-
         function getFilteredSamples() {
             let filtered = samples.filter(s => {
                 const matchSearch = !searchQuery || 
@@ -2072,8 +2068,9 @@ Almost there. When you are signed in, you should be able to go back to your work
                 if (!matchSearch) return false;
                 
                 const info = getStatusInfo(s);
-                if (currentFilter === 'all') return true;
-                if (currentFilter === 'completed') return s.done;
+                if (currentFilter === 'active') return !s.done; // Show only active (not done)
+                if (currentFilter === 'all') return true; // Show everything
+                if (currentFilter === 'completed') return s.done; // Show only posted/done
                 if (currentFilter === 'overdue') return !s.done && info.status === 'overdue';
                 if (currentFilter === 'urgent') return !s.done && info.status === 'urgent';
                 if (currentFilter === 'good') return !s.done && info.status === 'good';
@@ -2091,6 +2088,7 @@ Almost there. When you are signed in, you should be able to go back to your work
             });
             
             return filtered;
+        }
         }
 
         // ==================== SELECTION & BATCH ====================
@@ -2254,6 +2252,7 @@ Almost there. When you are signed in, you should be able to go back to your work
                 if (s.id === id) {
                     const newChecklist = {...s.checklist, [field]: !s.checklist[field]};
                     // If "posted" is being checked, mark the sample as done
+                    console.log("Toggle checkbox - ID:", id, "Field:", field, "New done status:", isDone, "Posted status:", newChecklist.posted);
                     const isDone = field === 'posted' ? newChecklist.posted : s.done;
                     return {...s, checklist: newChecklist, done: isDone};
                 }
