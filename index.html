@@ -345,31 +345,11 @@
         
         .view-btn.active { 
         
-        .dropdown-btn {
-            flex: 1;
-            padding: 12px 20px;
-            border: 2px solid var(--border);
-            background: var(--surface);
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-        }
-        
-        .dropdown-btn:active {
-            transform: scale(0.98);
-        }
-        
         .dropdown-panel {
             background: var(--surface);
             border: 2px solid var(--border);
             border-radius: 10px;
             padding: 12px;
-            margin-top: 8px;
             animation: slideDown 0.2s ease;
         }
         
@@ -568,78 +548,11 @@
         }
         [data-theme="dark"] .notes-section { background: rgba(255, 255, 255, 0.05); color: #ddd; border-left-color: var(--yellow); }
         
-        .checklist {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .progress-toggle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            padding: 12px 8px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            position: relative;
-        }
-        
-        .progress-toggle:active {
-            transform: scale(0.96);
-        }
-        
-        .progress-toggle.active {
-            background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
-            border-color: #00C853;
-            box-shadow: 0 4px 12px rgba(0, 200, 83, 0.3);
-        }
-        
-        .toggle-icon {
-            font-size: 1.3rem;
-            transition: transform 0.25s ease;
-        }
-        
-        .progress-toggle.active .toggle-icon {
-            transform: scale(1.1);
-        }
-        
-        .toggle-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: color 0.25s ease;
-        }
-        
-        .progress-toggle.active .toggle-label {
-            color: white;
-        }
-        
-        .toggle-check {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            color: #00C853;
-            font-weight: bold;
-            animation: checkPop 0.3s ease;
-        }
-        
-        @keyframes checkPop {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
+        .checklist { 
+            background: var(--bg); 
+            padding: 12px; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
         }
         
         .checklist-item { 
@@ -711,11 +624,13 @@
         }
         [data-theme="dark"] .btn-completed { background: rgba(0, 200, 83, 0.2); }
         
-            
-            <div class="view-toggle" style="margin-top: 12px;">
-                <button class="view-btn" id="filterToggleBtn" onclick="toggleFilterDropdown()">🔍 Filter</button>
-                <button class="view-btn" id="sortToggleBtn" onclick="toggleSortDropdown()">📊 Sort</button>
-            </div>
+        .btn-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .btn-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        
+        .btn-secondary { 
+            background: var(--surface); 
+            color: var(--text-main); 
+            border: 1.5px solid var(--border); 
         }
         
         .modal { 
@@ -957,24 +872,16 @@
                 <span>Add New Sample</span>
             </button>
             
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
-            
             <div class="view-toggle">
                 <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List View</button>
                 <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
             </div>
-                <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
-            </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;">
-                <button class="dropdown-btn" onclick="toggleFilterDropdown()" id="filterDropdownBtn">
-                    🔍 Filter
-                    <span style="margin-left: auto;">▼</span>
-                </button>
-                <button class="dropdown-btn" onclick="toggleSortDropdown()" id="sortDropdownBtn">
-                    📊 Sort
-                    <span style="margin-left: auto;">▼</span>
-                </button>
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
+            
+            <div class="view-toggle" style="margin-top: 12px;">
+                <button class="view-btn" id="filterToggleBtn" onclick="toggleFilterDropdown()">🔍 Filter</button>
+                <button class="view-btn" id="sortToggleBtn" onclick="toggleSortDropdown()">📊 Sort</button>
             </div>
             
             <div id="filterDropdown" class="dropdown-panel" style="display: none;">
@@ -992,12 +899,12 @@
                 <button class="filter-btn" onclick="setSort('brand')">🏷️ Brand Name</button>
                 <button class="filter-btn" onclick="setSort('received')">📦 Received Date</button>
             </div>
+        </div>
             
         </div>
         
         <div class="container">
             <div id="listView">
-                </div>
 
                 <div class="collapsible-section" id="filteredSection" style="display:none;">
                     <div class="collapsible-header" onclick="toggleFiltered()">
@@ -1007,7 +914,6 @@
                     <div class="collapsible-content" id="filteredContent"></div>
                 </div>
 
-                <h2 id="filterHeading" style="font-weight: 700; margin-bottom: 15px; color: var(--text-main); display: none;"></h2>
                 <div id="sampleGrid"></div>
             </div>
 
@@ -1883,7 +1789,6 @@
 
         // ==================== FILTERING & SORTING ====================
 
-
         function toggleFilterDropdown() {
             const dropdown = document.getElementById('filterDropdown');
             const sortDropdown = document.getElementById('sortDropdown');
@@ -1919,8 +1824,12 @@
                 sortBtn.classList.add('active');
             }
         }
+        function setFilter(f) {
+            triggerHaptic();
+            currentFilter = f;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('filterDropdown').style.display = 'none';
+            document.getElementById('filterToggleBtn').classList.remove('active');
             document.getElementById('f-' + f).classList.add('active');
             render();
         }
@@ -1930,7 +1839,6 @@
             document.getElementById('sortDropdown').style.display = 'none';
             document.getElementById('sortToggleBtn').classList.remove('active');
             render();
-        }
         }
 
         function handleSearch() {
@@ -2062,21 +1970,18 @@
                         ${s.notes ? `<div class="notes-section">${s.notes}</div>` : ''}
                         
                         <div class="checklist">
-                            <button class="progress-toggle ${s.checklist.filmed ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'filmed')">
-                                <span class="toggle-icon">🎥</span>
-                                <span class="toggle-label">Filmed</span>
-                                ${s.checklist.filmed ? '<span class="toggle-check">✓</span>' : ''}
-                            </button>
-                            <button class="progress-toggle ${s.checklist.edited ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'edited')">
-                                <span class="toggle-icon">✂️</span>
-                                <span class="toggle-label">Edited</span>
-                                ${s.checklist.edited ? '<span class="toggle-check">✓</span>' : ''}
-                            </button>
-                            <button class="progress-toggle ${s.checklist.posted ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'posted')">
-                                <span class="toggle-icon">📱</span>
-                                <span class="toggle-label">Posted</span>
-                                ${s.checklist.posted ? '<span class="toggle-check">✓</span>' : ''}
-                            </button>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
+                                <span>🎥 Filmed</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
+                                <span>✂️ Edited</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
+                                <span>📱 Posted</span>
+                            </div>
                         </div>
                         
                         <div class="progress-container">
