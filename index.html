@@ -1488,22 +1488,36 @@
 
     <script>
         // ==================== GLOBAL BUTTON HANDLERS (defined first) ====================
-        window.openSignUp = function() {
+        function openSignUp() {
             document.getElementById('signUpModal').classList.add('active');
             const errorDiv = document.getElementById('signUpError');
             if (errorDiv) errorDiv.classList.remove('active');
-        };
+        }
 
-        window.openSignIn = function() {
+        function openSignIn() {
             document.getElementById('signInModal').classList.add('active');
             const errorDiv = document.getElementById('signInError');
             if (errorDiv) errorDiv.classList.remove('active');
-        };
+        }
+
+        // Make them available on window too
+        window.openSignUp = openSignUp;
+        window.openSignIn = openSignIn;
 
         // ==================== SUPABASE SETUP ====================
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let supabase;
+        
+        try {
+            if (window.supabase) {
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            } else {
+                console.warn('Supabase library not loaded');
+            }
+        } catch (error) {
+            console.error('Error initializing Supabase:', error);
+        }
 
         // ==================== STATE ====================
         let samples = [];
