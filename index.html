@@ -1,3 +1,8 @@
+Almost there. When you are signed in, you should be able to go back to your work area without signing in again. Maybe when you close the app, you will have to sign in. On the sample cards there is a box in the top right corner and when that is checked, it brings up 2 buttons below, one for mark done which is checked and green and one for delete and cancel. If I hit mark done, it seems to actually delete it. It probably shouldn't even have a box for that or it should just say delete next to the box and confirm before you actually delete. You could put a done field separately if you think taht would be good, but when they check off posted, that should be the same result and should go under a done the Posted tab for filtering purposes. I'm not sure if taptic feedback is working on Android anyway, but I'm not certain. Finally, should we should have an option for forgot password and an option to delete account.
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,6 +349,38 @@
         }
         
         .view-btn.active { 
+        
+        .dropdown-btn {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+        
+        .dropdown-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .dropdown-panel {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 8px;
+            animation: slideDown 0.2s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
             background: var(--primary); 
             color: white; 
             border-color: var(--primary); 
@@ -864,28 +901,38 @@
                 <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
             </div>
             
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;">
+                <button class="dropdown-btn" onclick="toggleFilterDropdown()" id="filterDropdownBtn">
+                    🔍 Filter
+                    <span style="margin-left: auto;">▼</span>
+                </button>
+                <button class="dropdown-btn" onclick="toggleSortDropdown()" id="sortDropdownBtn">
+                    📊 Sort
+                    <span style="margin-left: auto;">▼</span>
+                </button>
+            </div>
             
-            <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 12px; border: 2px solid var(--border); font-weight: 600; width: 100%;">
-                <option value="dueDate">📅 Sort by: Due Date</option>
-                <option value="brand">🏷️ Sort by: Brand Name</option>
-                <option value="received">📦 Sort by: Received Date</option>
-            </select>
+            <div id="filterDropdown" class="dropdown-panel" style="display: none;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <button class="filter-btn active" id="f-all" onclick="setFilter('all')">📦 All (<span id="statAll">0</span>)</button>
+                    <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
+                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
+                    <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
+                    <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted (<span id="statCompleted">0</span>)</button>
+                </div>
+            </div>
+            
+            <div id="sortDropdown" class="dropdown-panel" style="display: none;">
+                <button class="filter-btn" onclick="setSort('dueDate')">📅 Due Date</button>
+                <button class="filter-btn" onclick="setSort('brand')">🏷️ Brand Name</button>
+                <button class="filter-btn" onclick="setSort('received')">📦 Received Date</button>
+            </div>
+            
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()" style="margin-top: 12px;">
         </div>
         
         <div class="container">
             <div id="listView">
-                <div class="control-section">
-                    <div class="section-title">Filter Samples</div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                        <button class="filter-btn active" id="f-all" onclick="setFilter('all')">📦 All (<span id="statAll">0</span>)</button>
-                        <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
-                        <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                        <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
-                        <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted (<span id="statCompleted">0</span>)</button>
-                    </div>
                 </div>
 
                 <div class="collapsible-section" id="filteredSection" style="display:none;">
@@ -1770,16 +1817,32 @@
         }
 
         // ==================== FILTERING & SORTING ====================
+
+        function toggleFilterDropdown() {
+            const dropdown = document.getElementById('filterDropdown');
+            const sortDropdown = document.getElementById('sortDropdown');
+            sortDropdown.style.display = 'none';
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleSortDropdown() {
+            const dropdown = document.getElementById('sortDropdown');
+            const filterDropdown = document.getElementById('filterDropdown');
+            filterDropdown.style.display = 'none';
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
         function setFilter(f) {
             triggerHaptic();
             currentFilter = f;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('filterDropdown').style.display = 'none';
             document.getElementById('f-' + f).classList.add('active');
             render();
         }
 
         function setSort(s) {
             currentSort = s;
+            document.getElementById('sortDropdown').style.display = 'none';
             render();
         }
 
