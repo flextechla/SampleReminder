@@ -349,38 +349,6 @@
             border-color: var(--primary); 
         }
         
-        .dropdown-btn {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            color: var(--text-main);
-            transition: all 0.2s;
-        }
-        
-        .dropdown-btn:active {
-            transform: scale(0.98);
-        }
-        
-        .dropdown-panel {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 8px;
-            animation: slideDown 0.2s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         .control-section { 
             background: var(--surface); 
             border-radius: 12px; 
@@ -477,9 +445,11 @@
             margin-bottom: 8px; 
         }
         
-        .delete-icon-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 4px; opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
-        .delete-icon-btn:hover { opacity: 1; }
-        .delete-icon-btn:active { transform: scale(0.9); }
+        .card-checkbox { 
+            width: 20px; 
+            height: 20px; 
+            cursor: pointer; 
+        }
         
         .card-body { 
             padding: 16px; 
@@ -566,79 +536,23 @@
         [data-theme="dark"] .notes-section { background: rgba(255, 255, 255, 0.05); color: #ddd; border-left-color: var(--yellow); }
         
         .checklist { 
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
+            background: var(--bg); 
+            padding: 12px; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
         }
         
-        .progress-toggle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            padding: 12px 8px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            position: relative;
+        .checklist-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            margin-bottom: 6px; 
+            font-size: 0.85rem; 
+            color: var(--text-main);
         }
         
-        .progress-toggle:active {
-            transform: scale(0.96);
-        }
-        
-        .progress-toggle.active {
-            background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
-            border-color: #00C853;
-            box-shadow: 0 4px 12px rgba(0, 200, 83, 0.3);
-        }
-        
-        .toggle-icon {
-            font-size: 1.3rem;
-            transition: transform 0.25s ease;
-        }
-        
-        .progress-toggle.active .toggle-icon {
-            transform: scale(1.1);
-        }
-        
-        .toggle-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: color 0.25s ease;
-        }
-        
-        .progress-toggle.active .toggle-label {
-            color: white;
-        }
-        
-        .toggle-check {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            color: #00C853;
-            font-weight: bold;
-            animation: checkPop 0.3s ease;
-        }
-        
-        @keyframes checkPop {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
+        .checklist-item:last-child { margin-bottom: 0; }
+        .checklist-checkbox { width: 18px; height: 18px; cursor: pointer; }
         
         .meta-grid { 
             display: grid; 
@@ -950,39 +864,29 @@
                 <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar View</button>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;">
-                <button class="dropdown-btn" onclick="toggleFilterDropdown()" id="filterDropdownBtn">
-                    🔍 Filter
-                    <span style="margin-left: auto;">▼</span>
-                </button>
-                <button class="dropdown-btn" onclick="toggleSortDropdown()" id="sortDropdownBtn">
-                    📊 Sort
-                    <span style="margin-left: auto;">▼</span>
-                </button>
-            </div>
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
             
-            <div id="filterDropdown" class="dropdown-panel" style="display: none;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <button class="filter-btn" id="f-active" onclick="setFilter('active')">📋 Active (<span id="statActive">0</span>)</button>
-                    <button class="filter-btn active" id="f-all" onclick="setFilter('all')">📦 All (<span id="statAll">0</span>)</button>
-                    <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
-                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
-                    <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
-                    <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted (<span id="statCompleted">0</span>)</button>
-                </div>
-            </div>
-            
-            <div id="sortDropdown" class="dropdown-panel" style="display: none;">
-                <button class="filter-btn" onclick="setSort('dueDate')">📅 Due Date</button>
-                <button class="filter-btn" onclick="setSort('brand')">🏷️ Brand Name</button>
-                <button class="filter-btn" onclick="setSort('received')">📦 Received Date</button>
-            </div>
-            
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()" style="margin-top: 12px;">
+            <select id="sortSelect" class="form-input" onchange="setSort(this.value)" style="padding: 12px; border: 2px solid var(--border); font-weight: 600; width: 100%;">
+                <option value="dueDate">📅 Sort by: Due Date</option>
+                <option value="brand">🏷️ Sort by: Brand Name</option>
+                <option value="received">📦 Sort by: Received Date</option>
+            </select>
         </div>
         
         <div class="container">
             <div id="listView">
+                <div class="control-section">
+                    <div class="section-title">Filter Samples</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                        <button class="filter-btn active" id="f-all" onclick="setFilter('all')">All (<span id="statAll">0</span>)</button>
+                        <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
+                        <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
+                        <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted (<span id="statCompleted">0</span>)</button>
+                    </div>
+                </div>
 
                 <div class="collapsible-section" id="filteredSection" style="display:none;">
                     <div class="collapsible-header" onclick="toggleFiltered()">
@@ -1278,14 +1182,14 @@
                     <div style="font-size: 4rem; margin-bottom: 15px;">📧</div>
                     <h3 style="font-weight: 700; margin-bottom: 15px; font-size: 1.3rem;">Need Help?</h3>
                     <p style="font-size: 1rem; opacity: 0.95; margin-bottom: 25px;">Click below to email our support team</p>
-                    <a href="/cdn-cgi/l/email-protection#483b3d3838273a3c082e242d303c2d2b202429662b2725" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <a href="mailto:support@flextechla.com" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
                         📧 Email Support
                     </a>
                 </div>
                 
                 <div style="background: #E3F2FD; padding: 20px; border-radius: 12px; text-align: left;">
                     <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">
-                        <strong style="color: var(--dark);">Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="463533363629343206202a233e3223252e2a276825292b">[email&#160;protected]</a>
+                        <strong style="color: var(--dark);">Email:</strong> support@flextechla.com
                     </p>
                     <p style="font-size: 0.9rem; color: #666;">
                         <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays
@@ -1367,7 +1271,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ==================== CONFIGURATION ====================
         const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
@@ -1563,11 +1467,6 @@
             if (modal) modal.remove();
         }
 
-
-        // Make auth functions globally accessible for onclick handlers
-        window.showAuth = showAuth;
-        window.closeAuthModal = closeAuthModal;
-        window.handleAuth = handleAuth;
         async function signOut() {
             if (confirm('Sign out? Your data will remain safely in the cloud.')) {
                 await sb_client.auth.signOut();
@@ -1863,41 +1762,24 @@
                 else if (info.status === 'urgent') stats.urgent++;
                 else stats.good++;
             });
-            document.getElementById('statActive').innerText = activeSamples.length;
-            document.getElementById('statAll').innerText = samples.length;
-            document.getElementById('statCompleted').innerText = completedSamples.length;
             document.getElementById('statOverdue').innerText = stats.overdue;
             document.getElementById('statUrgent').innerText = stats.urgent;
             document.getElementById('statGood').innerText = stats.good;
+            document.getElementById('statAll').innerText = samples.length;
+            document.getElementById('statCompleted').innerText = completedSamples.length;
         }
 
         // ==================== FILTERING & SORTING ====================
-
-        function toggleFilterDropdown() {
-            const dropdown = document.getElementById('filterDropdown');
-            const sortDropdown = document.getElementById('sortDropdown');
-            sortDropdown.style.display = 'none';
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function toggleSortDropdown() {
-            const dropdown = document.getElementById('sortDropdown');
-            const filterDropdown = document.getElementById('filterDropdown');
-            filterDropdown.style.display = 'none';
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
         function setFilter(f) {
             triggerHaptic();
             currentFilter = f;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('f-' + f).classList.add('active');
             render();
-            document.getElementById('filterDropdown').style.display = 'none';
         }
 
         function setSort(s) {
             currentSort = s;
-            document.getElementById('sortDropdown').style.display = 'none';
             render();
         }
 
@@ -1914,7 +1796,6 @@
                 if (!matchSearch) return false;
                 
                 const info = getStatusInfo(s);
-                if (currentFilter === 'active') return !s.done;
                 if (currentFilter === 'all') return true;
                 if (currentFilter === 'completed') return s.done;
                 if (currentFilter === 'overdue') return !s.done && info.status === 'overdue';
@@ -1993,7 +1874,6 @@
             updateStats();
             updateCloudStatus();
             const filtered = getFilteredSamples();
-            console.log("Render - Current filter:", currentFilter, "Total samples:", samples.length, "Filtered samples:", filtered.length, "Done samples:", samples.filter(s => s.done).length);
             const grid = document.getElementById('sampleGrid');
             
             if (filtered.length === 0) {
@@ -2017,7 +1897,7 @@
                                 <div class="brand-name">${s.brand}</div>
                                 <div class="product-name">${s.product}</div>
                             </div>
-                            <button class="delete-icon-btn" onclick="deleteSample('${s.id}')" title="Delete">🗑️</button>
+                            <input type="checkbox" class="card-checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelection('${s.id}')">
                         </div>
                         
                         <div class="days-badge ${info.status}">${info.text}</div>
@@ -2029,21 +1909,18 @@
                         ${s.notes ? `<div class="notes-section">${s.notes}</div>` : ''}
                         
                         <div class="checklist">
-                            <button class="progress-toggle ${s.checklist.filmed ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'filmed')">
-                                <span class="toggle-icon">🎥</span>
-                                <span class="toggle-label">Filmed</span>
-                                ${s.checklist.filmed ? '<span class="toggle-check">✓</span>' : ''}
-                            </button>
-                            <button class="progress-toggle ${s.checklist.edited ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'edited')">
-                                <span class="toggle-icon">✂️</span>
-                                <span class="toggle-label">Edited</span>
-                                ${s.checklist.edited ? '<span class="toggle-check">✓</span>' : ''}
-                            </button>
-                            <button class="progress-toggle ${s.checklist.posted ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'posted')">
-                                <span class="toggle-icon">📱</span>
-                                <span class="toggle-label">Posted</span>
-                                ${s.checklist.posted ? '<span class="toggle-check">✓</span>' : ''}
-                            </button>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
+                                <span>🎥 Filmed</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
+                                <span>✂️ Edited</span>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
+                                <span>📱 Posted</span>
+                            </div>
                         </div>
                         
                         <div class="progress-container">
@@ -2062,6 +1939,10 @@
                         </div>
                         
                         <div class="action-container">
+                            ${s.done ? 
+                                '<button class="row-btn btn-completed">✓ Posted</button>' :
+                                '<button class="row-btn btn-full-width" onclick="markDone(\''+s.id+'\')">✓ Mark as Posted</button>'
+                            }
                             ${s.link ? `<button class="row-btn btn-secondary" onclick="openBrowser('${s.link}')">🔗 View Product</button>` : ''}
                             <div class="btn-row-2">
                                 <button class="row-btn btn-secondary" onclick="openModal('${s.id}')">✏️ Edit</button>
@@ -2095,14 +1976,12 @@
             triggerHaptic();
             samples = samples.map(s => {
                 if (s.id === id) {
-                    const newChecklist = {...s.checklist, [field]: !s.checklist[field]};
-                    const isDone = field === 'posted' ? newChecklist.posted : s.done;
-                    return {...s, checklist: newChecklist, done: isDone};
+                    return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
                 }
                 return s;
             });
             await saveSamples();
-            console.log("After toggle - field:", field, "Total samples:", samples.length, "Done samples:", samples.filter(s => s.done).length, "Sample data:", samples.find(s => s.id === id));
+            console.log("Toggle - field:", field, "done samples:", samples.filter(s => s.done).length, "Sample:", samples.find(s => s.id === id));
             render();
         }
 
@@ -2654,4 +2533,11 @@
         }
 
         function toggleFiltered() {
-            const content = document.get
+            const content = document.getElementById("filteredContent");
+            const arrow = document.getElementById("filteredArrow");
+            content.classList.toggle("active");
+            arrow.innerText = content.classList.contains("active") ? "▲" : "▼";
+        }
+    </script>
+</body>
+</html>
