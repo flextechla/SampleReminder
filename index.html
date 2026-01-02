@@ -87,20 +87,6 @@
         body.compact-mode .photo-row, body.compact-mode .notes-section { display: none; }
         body.compact-mode .days-badge { margin-bottom: 5px; font-size: 0.65rem; padding: 2px 8px; }
         body.compact-mode .product-name { font-size: 1rem; margin: 2px 0 4px 0; }
-        body.compact-mode .checklist-item { font-size: 0.75rem; margin-bottom: 2px; }
-        body.compact-mode .row-btn { padding: 10px; font-size: 0.85rem; }
-        body.compact-mode .action-container { gap: 6px; margin-top: 6px; }
-        
-        /* Landing Page Styles */
-        #landingPage {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #FE2C55 0%, #FF6B8A 100%);
-            /* FIX: Visible by default to prevent blank screen, hidden by class later */
-            display: flex;
-            flex-direction: column;
-            /* FIX: Increased bottom padding so text clears the sticky footer */
-            padding: 20px 20px 140px 20px; 
-        }
         
         #landingPage.hidden {
             display: none !important;
@@ -548,24 +534,82 @@
         }
         [data-theme="dark"] .notes-section { background: rgba(255, 255, 255, 0.05); color: #ddd; border-left-color: var(--yellow); }
         
-        .checklist { 
-            background: var(--bg); 
-            padding: 12px; 
-            border-radius: 10px; 
-            margin-bottom: 10px; 
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
-        .checklist-item { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            margin-bottom: 6px; 
-            font-size: 0.85rem; 
-            color: var(--text-main);
+        .progress-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 8px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
         }
+        
+        .progress-toggle:active {
+            transform: scale(0.96);
+        }
+        
+        .progress-toggle.active {
+            background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+            border-color: #00C853;
+            box-shadow: 0 4px 12px rgba(0, 200, 83, 0.3);
+        }
+        
+        .toggle-icon {
+            font-size: 1.3rem;
+            transition: transform 0.25s ease;
+        }
+        
+        .progress-toggle.active .toggle-icon {
+            transform: scale(1.1);
+        }
+        
+        .toggle-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: color 0.25s ease;
+        }
+        
+        .progress-toggle.active .toggle-label {
+            color: white;
+        }
+        
+        .toggle-check {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #00C853;
+            font-weight: bold;
+            animation: checkPop 0.3s ease;
+        }
+        
+        @keyframes checkPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
         
         .checklist-item:last-child { margin-bottom: 0; }
-        .checklist-checkbox { width: 18px; height: 18px; cursor: pointer; }
         
         .meta-grid { 
             display: grid; 
@@ -900,19 +944,10 @@
                 <button class="filter-btn" onclick="setSort('received')">📦 Received Date</button>
             </div>
         </div>
-            
-        </div>
         
         <div class="container">
             <div id="listView">
 
-                <div class="collapsible-section" id="filteredSection" style="display:none;">
-                    <div class="collapsible-header" onclick="toggleFiltered()">
-                        <span id="filteredTitle">Samples (<span id="filteredCount">0</span>)</span>
-                        <span id="filteredArrow">▼</span>
-                    </div>
-                    <div class="collapsible-content" id="filteredContent"></div>
-                </div>
 
                 <div id="sampleGrid"></div>
             </div>
@@ -1200,14 +1235,14 @@
                     <div style="font-size: 4rem; margin-bottom: 15px;">📧</div>
                     <h3 style="font-weight: 700; margin-bottom: 15px; font-size: 1.3rem;">Need Help?</h3>
                     <p style="font-size: 1rem; opacity: 0.95; margin-bottom: 25px;">Click below to email our support team</p>
-                    <a href="mailto:support@flextechla.com" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <a href="/cdn-cgi/l/email-protection#770402070718050337111b120f0312141f1b165914181a" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
                         📧 Email Support
                     </a>
                 </div>
                 
                 <div style="background: #E3F2FD; padding: 20px; border-radius: 12px; text-align: left;">
                     <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">
-                        <strong style="color: var(--dark);">Email:</strong> support@flextechla.com
+                        <strong style="color: var(--dark);">Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="285b5d5858475a5c684e444d505c4d4b404449064b4745">[email&#160;protected]</a>
                     </p>
                     <p style="font-size: 0.9rem; color: #666;">
                         <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays
@@ -1289,7 +1324,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ==================== CONFIGURATION ====================
         const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
@@ -1970,18 +2005,21 @@
                         ${s.notes ? `<div class="notes-section">${s.notes}</div>` : ''}
                         
                         <div class="checklist">
-                            <div class="checklist-item">
-                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.filmed ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'filmed')">
-                                <span>🎥 Filmed</span>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.edited ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'edited')">
-                                <span>✂️ Edited</span>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" class="checklist-checkbox" ${s.checklist.posted ? 'checked' : ''} onchange="toggleCheckbox('${s.id}', 'posted')">
-                                <span>📱 Posted</span>
-                            </div>
+                            <button class="progress-toggle ${s.checklist.filmed ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'filmed')">
+                                <span class="toggle-icon">🎥</span>
+                                <span class="toggle-label">Filmed</span>
+                                ${s.checklist.filmed ? '<span class="toggle-check">✓</span>' : ''}
+                            </button>
+                            <button class="progress-toggle ${s.checklist.edited ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'edited')">
+                                <span class="toggle-icon">✂️</span>
+                                <span class="toggle-label">Edited</span>
+                                ${s.checklist.edited ? '<span class="toggle-check">✓</span>' : ''}
+                            </button>
+                            <button class="progress-toggle ${s.checklist.posted ? 'active' : ''}" onclick="toggleCheckbox('${s.id}', 'posted')">
+                                <span class="toggle-icon">📱</span>
+                                <span class="toggle-label">Posted</span>
+                                ${s.checklist.posted ? '<span class="toggle-check">✓</span>' : ''}
+                            </button>
                         </div>
                         
                         <div class="progress-container">
@@ -2593,11 +2631,4 @@
         }
 
         function toggleFiltered() {
-            const content = document.getElementById("filteredContent");
-            const arrow = document.getElementById("filteredArrow");
-            content.classList.toggle("active");
-            arrow.innerText = content.classList.contains("active") ? "▲" : "▼";
-        }
-    </script>
-</body>
-</html>
+            const content = document.get
