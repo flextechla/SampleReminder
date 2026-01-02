@@ -1612,7 +1612,7 @@
             const modal = document.getElementById('authModal');
             if (modal) modal.remove();
         }
-
+        window.closeAuthModal = closeAuthModal; // Make globally accessible
         async function signOut() {
             if (confirm('Sign out? Your data will remain safely in the cloud.')) {
                 await sb_client.auth.signOut();
@@ -1727,6 +1727,14 @@
                 }
             }
         }
+
+        // Make auth functions globally accessible
+        window.showAuth = showAuth;
+        window.closeAuthModal = closeAuthModal;
+        window.handleAuth = handleAuth;
+        window.showForgotPassword = showForgotPassword;
+        window.closeForgotPasswordModal = closeForgotPasswordModal;
+        window.handlePasswordReset = handlePasswordReset;
 
         // ==================== CLOUD SYNC ====================
         async function migrateToCloud() {
