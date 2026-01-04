@@ -1426,22 +1426,22 @@
             const modal = document.getElementById('upgradeModal');
             if (modal) modal.remove();
         }
-
         function startUpgrade(tier) {
-        const checkoutUrls = {
-        basic: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/1192468',
-        pro: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/1192498'
+            const checkoutUrls = {
+              basic: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/a921ce0f-6637-4263-a5d7-2cf1f648b9bf',
+              pro: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/d324fe3e-0a61-4d6c-bffd-25e7a92d1ef0'
         };
     
         // Add user email to checkout if signed in
         let url = checkoutUrls[tier];
         if (currentUser && currentUser.email) {
-           url += `?checkout[email]=${encodeURIComponent(currentUser.email)}&checkout[custom][user_id]=${currentUser.id}`;
+            url += `?checkout[email]=${encodeURIComponent(currentUser.email)}&checkout[custom][user_id]=${currentUser.id}`;
         }
     
-    // Redirect to checkout
-    window.location.href = url;
+        // Redirect to checkout
+        window.location.href = url;
 }
+       
 
         // ==================== READY TO FILM (PRO FEATURE) ====================
         function readyToFilm(id) {
