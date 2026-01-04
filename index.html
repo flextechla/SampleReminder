@@ -1428,10 +1428,20 @@
         }
 
         function startUpgrade(tier) {
-            // TODO: Add Lemon Squeezy checkout URL here
-            alert(`Upgrade to ${tier}!\n\nLemon Squeezy integration coming soon.\n\nFor now, manually update your tier in Supabase users table.`);
-            closeUpgradeModal();
+        const checkoutUrls = {
+        basic: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/1192468',
+        pro: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/1192498'
+        };
+    
+        // Add user email to checkout if signed in
+        let url = checkoutUrls[tier];
+        if (currentUser && currentUser.email) {
+           url += `?checkout[email]=${encodeURIComponent(currentUser.email)}&checkout[custom][user_id]=${currentUser.id}`;
         }
+    
+    // Redirect to checkout
+    window.location.href = url;
+}
 
         // ==================== READY TO FILM (PRO FEATURE) ====================
         function readyToFilm(id) {
