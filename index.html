@@ -956,7 +956,7 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <button class="filter-btn active" id="f-all" onclick="setFilter('all')">📦 All (<span id="statAll">0</span>)</button>
                     <button class="filter-btn" id="f-overdue" onclick="setFilter('overdue')">🔥 Overdue (<span id="statOverdue">0</span>)</button>
-                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⚠️ Due Soon (<span id="statUrgent">0</span>)</button>
+                    <button class="filter-btn" id="f-urgent" onclick="setFilter('urgent')">⏳ Due Soon (<span id="statUrgent">0</span>)</button>
                     <button class="filter-btn" id="f-good" onclick="setFilter('good')">✅ On Track (<span id="statGood">0</span>)</button>
                     <button class="filter-btn" id="f-completed" onclick="setFilter('completed')">🏁 Posted (<span id="statCompleted">0</span>)</button>
                 </div>
@@ -2090,7 +2090,7 @@ function updateUIForTier() {
             const headings = {
                 'all': '📦 All Samples',
                 'overdue': '🔥 Overdue Samples',
-                'urgent': '⚠️ Due Soon',
+                'urgent': '⏳ Due Soon',
                 'good': '✅ On Track',
                 'completed': '🏁 Posted Samples'
             };
