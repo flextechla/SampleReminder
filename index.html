@@ -2308,19 +2308,17 @@ function updateUIForTier() {
                 renderCalendar();
             }
         }
-
         async function toggleCheckbox(id, field) {
-            triggerHaptic();
-            samples = samples.map(s => {
-                if (s.id === id) {
-                    return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
-                }
-                return s;
-            });
-            await saveSamples();
-            render();
+    triggerHaptic();
+    samples = samples.map(s => {
+        if (s.id === id) {
+            return {...s, checklist: {...s.checklist, [field]: !s.checklist[field]}};
         }
-
+        return s;
+    });
+    render();       // ← Update UI FIRST (instant!)
+    saveSamples();  // ← Save in background (no await)
+}
         // ==================== MODAL ====================
         function openModal(id = null) {
     // Check sample limit for free users
