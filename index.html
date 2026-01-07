@@ -2982,10 +2982,7 @@ if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.
     // Running in browser - this is fine for development
     console.log('Running in browser mode - install as app for full experience');
 }
-    // Initialize app on page load
-window.addEventListener('DOMContentLoaded', async () => {
-    await initSupabase();
-});    
+   
     // ==================== SCRIPT GENERATOR ====================
 async function generateScript(sampleId) {
     const sample = samples.find(s => s.id === sampleId);
