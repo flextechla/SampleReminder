@@ -869,7 +869,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-
+    @keyframes loading {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+}
     </style>
 </head>
 <body>
@@ -2330,6 +2333,10 @@ async function checkExistingSession() {
                                 '<button class="row-btn" style="background: linear-gradient(135deg, #FE2C55, #FF6B8A); color: white; margin-bottom: 8px;" onclick="readyToFilm(\''+s.id+'\')">🎥 Ready to Film</button>' 
                                 : ''
                             }
+                            ${(userTier === 'basic' || userTier === 'pro') && !s.done ? 
+                                '<button class="row-btn" style="background: linear-gradient(135deg, #9C27B0, #BA68C8); color: white; margin-bottom: 8px;" onclick="generateScript(\''+s.id+'\')">✨ Generate Script</button>' 
+                                : ''
+                            }
                             ${s.done ? 
                                 '<button class="row-btn btn-completed">✓ Posted</button>' :
                                 '<button class="row-btn btn-full-width" onclick="markDone(\''+s.id+'\')">✓ Mark as Posted</button>'
@@ -2979,6 +2986,122 @@ if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.
 window.addEventListener('DOMContentLoaded', async () => {
     await initSupabase();
 });    
+    // ==================== SCRIPT GENERATOR ====================
+async function generateScript(sampleId) {
+    const sample = samples.find(s => s.id === sampleId);
+    if (!sample) return;
+    
+    // Show loading state
+    const loadingModal = document.createElement('div');
+    loadingModal.className = 'modal active';
+    loadingModal.innerHTML = `
+        <div class="modal-content" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 20px;">✨</div>
+            <h2 style="margin-bottom: 10px;">Generating Your Script...</h2>
+            <p style="color: var(--text-secondary);">AI is crafting the perfect TikTok script for ${sample.brand} ${sample.product}</p>
+            <div style="margin-top: 20px;">
+                <div style="width: 100%; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                    <div style="width: 100%; height: 100%; background: var(--primary); animation: loading 1.5s ease-in-out infinite;"></div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(loadingModal);
+    
+    try {
+        // Call Edge Function to generate script
+        const response = await fetch('https://eiigbmrjtwndanywrcqp.supabase.co/functions/v1/generate-script', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON_KEY
+            },
+            body: JSON.stringify({
+                product: sample.product,
+                brand: sample.brand,
+                notes: sample.notes || '',
+                userId: currentUser.id,
+                sampleId: sample.id
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            loadingModal.remove();
+            
+            if (response.status === 429) {
+                // Daily limit reached
+                const dailyLimit = userTier === 'pro' ? 5 : 1;
+                showUpgradeModal(
+                    `Daily Script Limit Reached!`,
+                    `You've used all ${dailyLimit} script${dailyLimit > 1 ? 's' : ''} for today. ${userTier === 'basic' ? 'Upgrade to Pro for 5 scripts per day!' : 'Come back tomorrow for more!'}`,
+                    'pro'
+                );
+            } else if (response.status === 403) {
+                // Not subscribed
+                showUpgradeModal(
+                    'Script Generator is a Premium Feature!',
+                    'Get AI-powered TikTok scripts for your products',
+                    'basic'
+                );
+            } else {
+                alert('Failed to generate script: ' + (data.error || 'Unknown error'));
+            }
+            return;
+        }
+        
+        // Remove loading modal
+        loadingModal.remove();
+        
+        // Show script in modal
+        showScriptModal(sample, data.script);
+        
+    } catch (error) {
+        loadingModal.remove();
+        alert('Failed to generate script. Please try again.');
+        console.error('Script generation error:', error);
+    }
+}
+
+function showScriptModal(sample, script) {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">✨ Your TikTok Script</h2>
+                <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+            </div>
+            <div style="margin-bottom: 15px; padding: 10px; background: var(--bg); border-radius: 8px;">
+                <strong>${sample.brand} - ${sample.product}</strong>
+            </div>
+            <div style="white-space: pre-wrap; line-height: 1.6; padding: 15px; background: var(--surface); border-radius: 8px; margin-bottom: 15px; max-height: 400px; overflow-y: auto; border: 1px solid var(--border);">
+${script}
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="row-btn" style="background: var(--primary); color: white; flex: 1;" onclick="copyScript(\`${script.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">📋 Copy Script</button>
+                <button class="row-btn btn-secondary" style="flex: 1;" onclick="this.closest('.modal').remove(); setTimeout(() => generateScript('${sample.id}'), 100);">🔄 Generate New</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function copyScript(script) {
+    navigator.clipboard.writeText(script).then(() => {
+        alert('Script copied to clipboard! 📋');
+    }).catch(() => {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = script;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('Script copied to clipboard! 📋');
+    });
+}
     </script>
 </body>
 </html>
