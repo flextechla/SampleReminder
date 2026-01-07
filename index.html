@@ -1278,6 +1278,30 @@
                     📧 Email Support
                 </a>
             </div>
+            <div id="changePasswordModal" class="modal">
+    <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-header">
+            <h2 class="modal-title">🔒 Change Password</h2>
+            <button class="modal-close" onclick="closeChangePassword()">×</button>
+        </div>
+        <div class="form-group">
+            <label class="form-label">New Password</label>
+            <div style="position: relative;">
+                <input type="password" id="newPassword" class="form-input" placeholder="Min 6 characters" style="padding-right: 45px;">
+                <button type="button" onclick="togglePasswordVisibility('newPassword', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2rem;">👁️</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <div style="position: relative;">
+                <input type="password" id="confirmNewPassword" class="form-input" placeholder="Confirm password" style="padding-right: 45px;">
+                <button type="button" onclick="togglePasswordVisibility('confirmNewPassword', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2rem;">👁️</button>
+            </div>
+        </div>
+        <div id="changePasswordError" style="color: var(--red); font-size: 0.85rem; margin-bottom: 10px; display: none;"></div>
+        <button class="row-btn btn-full-width" onclick="handleChangePassword()">Update Password</button>
+    </div>
+</div>
 
             <div style="background: #E3F2FD; padding: 20px; border-radius: 12px; text-align: left;">
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">
@@ -1458,7 +1482,113 @@
         // Redirect to checkout
         window.location.href = url;
 }
-       
+       // ==================== CHANGE PASSWORD ====================
+function openChangePassword() {
+    if (!useCloud || !currentUser) {
+        alert('You must be signed in to change your password');
+        return;
+    }
+    document.getElementById('changePasswordModal').classList.add('active');
+}
+
+function closeChangePassword() {
+    document.getElementById('changePasswordModal').classList.remove('active');
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmNewPassword').value = '';
+    document.getElementById('changePasswordError').style.display = 'none';
+}
+
+async function handleChangePassword() {
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmNewPassword').value;
+    const errorDiv = document.getElementById('changePasswordError');
+    
+    if (!newPassword || newPassword.length < 6) {
+        errorDiv.textContent = 'Password must be at least 6 characters';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    
+    if (newPassword !== confirmPassword) {
+        errorDiv.textContent = 'Passwords do not match';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    
+    try {
+        const { error } = await sb_client.auth.updateUser({
+            password: newPassword
+        });
+        
+        if (error) throw error;
+        
+        // Update stored password if "Keep me logged in" was checked
+        if (localStorage.getItem('user_password')) {
+            localStorage.setItem('user_password', newPassword);
+        }
+        
+        alert('Password updated successfully!');
+        closeChangePassword();
+    } catch (e) {
+        errorDiv.textContent = 'Failed to update password: ' + e.message;
+        errorDiv.style.display = 'block';
+    }
+}
+        function openChangePassword() {
+    if (!useCloud || !currentUser) {
+        alert('You must be signed in to change your password');
+        return;
+    }
+    document.getElementById('changePasswordModal').classList.add('active');
+}
+
+function closeChangePassword() {
+    document.getElementById('changePasswordModal').classList.remove('active');
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmNewPassword').value = '';
+    document.getElementById('changePasswordError').style.display = 'none';
+}
+
+async function handleChangePassword() {
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmNewPassword').value;
+    const errorDiv = document.getElementById('changePasswordError');
+    
+    if (!newPassword || newPassword.length < 6) {
+        errorDiv.textContent = 'Password must be at least 6 characters';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    
+    if (newPassword !== confirmPassword) {
+        errorDiv.textContent = 'Passwords do not match';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    
+    try {
+        const { error } = await sb_client.auth.updateUser({
+            password: newPassword
+        });
+        
+        if (error) throw error;
+        
+        // Update stored password if "Keep me logged in" was checked
+        if (localStorage.getItem('user_password')) {
+            localStorage.setItem('user_password', newPassword);
+        }
+        
+        alert('Password updated successfully!');
+        closeChangePassword();
+    } catch (e) {
+        errorDiv.textContent = 'Failed to update password: ' + e.message;
+        errorDiv.style.display = 'block';
+    }
+}
+// ==================== READY TO FILM (PRO FEATURE) ====================
+function readyToFilm(id) {
+    // ... existing code ...
+}
 
         // ==================== READY TO FILM (PRO FEATURE) ====================
         function readyToFilm(id) {
@@ -1637,19 +1767,18 @@ function updateUIForTier() {
                     
                     <div id="authForm">
                         <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" id="authEmail" class="form-input" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
                             <label class="form-label">Password</label>
                             <input type="password" id="authPassword" class="form-input" placeholder="Min 6 characters" required>
                         </div>
-                        ${mode === 'signup' ? `
-                        <div class="form-group">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" id="authConfirm" class="form-input" placeholder="Confirm your password" required>
-                        </div>
-                        ` : ''}
+                       ${mode === 'signup' ? `
+<div class="form-group">
+    <label class="form-label">Confirm Password</label>
+    <div style="position: relative;">
+        <input type="password" id="authConfirm" class="form-input" placeholder="Confirm your password" required style="padding-right: 45px;">
+        <button type="button" onclick="togglePasswordVisibility('authConfirm', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2rem;">👁️</button>
+    </div>
+</div>
+` : ''}
                         <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
                             <input type="checkbox" id="rememberMe" checked style="width: 18px; height: 18px; cursor: pointer;">
                             <label for="rememberMe" style="margin: 0; cursor: pointer; font-size: 0.9rem; color: var(--text-main);">Keep me logged in</label>
@@ -1848,7 +1977,11 @@ function showApp() {
     });
 }
 function goToLanding() {
-    showLanding();
+    if (confirm('Return to home screen? You will remain signed in.')) {
+        document.getElementById('appContainer').classList.remove('active');
+        document.getElementById('landingPage').classList.remove('hidden');
+        document.getElementById('landingPage').classList.add('active');
+    }
 }
 // Check for existing session on page load (STAY SIGNED IN)
 async function checkExistingSession() {
@@ -2727,12 +2860,43 @@ async function checkExistingSession() {
             document.getElementById('settingsModal').classList.remove('active');
         }
 
-        function updateCloudStatus() {
-            const statusDiv = document.getElementById('cloudStatus');
-            const signOutBtn = document.getElementById('signOutBtn');
-            const menuSignOutBtn = document.getElementById('menuSignOutBtn');
-            
-            if (useCloud && currentUser) {
+      function updateCloudStatus() {
+    const statusDiv = document.getElementById('cloudStatus');
+    const signOutBtn = document.getElementById('signOutBtn');
+    const menuSignOutBtn = document.getElementById('menuSignOutBtn');
+    const manageSubBtn = document.getElementById('manageSubBtn');
+    
+    if (useCloud && currentUser) {
+        const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
+        statusDiv.innerHTML = `
+            <p style="margin-bottom: 5px; font-weight: 700; color: var(--green);">✓ Cloud Storage Active</p>
+            <p style="font-size: 0.85rem;">Signed in as: <strong>${userEmail}</strong></p>
+            <p style="font-size: 0.75rem; margin-top: 5px;">Data syncing across all your devices</p>
+        `;
+        statusDiv.style.background = '#E8F5E9';
+        if (signOutBtn) signOutBtn.style.display = 'block';
+        if (menuSignOutBtn) menuSignOutBtn.style.display = 'block';
+        
+        // Show/hide manage subscription button based on tier
+        if (manageSubBtn) {
+            if (userTier === 'basic' || userTier === 'pro') {
+                manageSubBtn.style.display = 'block';
+            } else {
+                manageSubBtn.style.display = 'none';
+            }
+        }
+    } else {
+        statusDiv.innerHTML = `
+            <p style="margin-bottom: 5px; font-weight: 700;">💾 Using Local Storage</p>
+            <p style="font-size: 0.85rem;">Your data is saved in your browser only</p>
+            <p style="font-size: 0.75rem; margin-top: 5px;">Create an account to sync across devices</p>
+        `;
+        statusDiv.style.background = '#E3F2FD';
+        if (signOutBtn) signOutBtn.style.display = 'none';
+        if (menuSignOutBtn) menuSignOutBtn.style.display = 'none';
+        if (manageSubBtn) manageSubBtn.style.display = 'none';
+    }
+}
                 const userEmail = localStorage.getItem('user_email') || currentUser.email || 'Unknown';
                 statusDiv.innerHTML = `
                     <p style="margin-bottom: 5px; font-weight: 700; color: var(--green);">✓ Cloud Storage Active</p>
@@ -3099,6 +3263,16 @@ function copyScript(script) {
         alert('Script copied to clipboard! 📋');
     });
 }
+    function togglePasswordVisibility(inputId, button) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        button.textContent = '🙈';
+    } else {
+        input.type = 'password';
+        button.textContent = '👁️';
+    }
+}   
     </script>
 </body>
 </html>
