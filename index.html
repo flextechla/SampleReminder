@@ -1009,15 +1009,17 @@
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <button class="row-btn btn-secondary" onclick="goToLanding(); closeMenu()">🏠 Home</button>
+                
+                <button class="row-btn btn-secondary" id="manageSubBtn" onclick="manageSubscription(); closeMenu()" style="display: none; background: linear-gradient(135deg, #FFD700, #FFA500); color: white; border: none; font-weight: 700;">
+                    ⭐ Manage Subscription
+                </button>
+                
                 <button class="row-btn btn-secondary" onclick="openSettings(); closeMenu()">⚙️ Settings</button>
                 <button class="row-btn btn-secondary" id="installBtnMenu" onclick="openInstall(); closeMenu()">📲 Install App</button>
                 <button class="row-btn btn-secondary" onclick="openSupport(); closeMenu()">💬 Contact Support</button>
                 <button class="row-btn btn-secondary" onclick="openHelp(); closeMenu()">❓ Help</button>
-                <button class="row-btn btn-secondary" onclick="window.open('privacy.html', '_blank'); closeHamburger()">🔒 Privacy Policy</button>
-                <button class="row-btn btn-secondary" onclick="window.open('terms.html', '_blank'); closeHamburger()">📄 Terms of Service</button>
-                <button class="row-btn btn-secondary" onclick="exportCSV(); closeMenu()">📥 Export Data</button>
-                <button class="row-btn btn-secondary" onclick="importData(); closeMenu()">📁 Import Data</button>
-                <button class="row-btn btn-secondary" onclick="clearCompleted(); closeMenu()">🧹 Clear Completed</button>
+                <button class="row-btn btn-secondary" onclick="window.open('privacy.html', '_blank'); closeMenu()">🔒 Privacy Policy</button>
+                <button class="row-btn btn-secondary" onclick="window.open('terms.html', '_blank'); closeMenu()">📄 Terms of Service</button>
                 <button class="row-btn btn-secondary" id="menuSignOutBtn" onclick="signOut(); closeMenu()" style="display: none; background: var(--red); color: white; border-color: var(--red); margin-top: 10px;">🚪 Sign Out</button>
             </div>
         </div>
@@ -1433,9 +1435,9 @@
         }
         function startUpgrade(tier) {
             const checkoutUrls = {
-              basic: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/a921ce0f-6637-4263-a5d7-2cf1f648b9bf',
-              pro: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/d324fe3e-0a61-4d6c-bffd-25e7a92d1ef0'
-        };
+    basic: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/a921ce0f-6637-4263-a5d7-2cf1f648b9bf?checkout[custom][return_url]=https://sampleflow.lazybstudios.com',
+    pro: 'https://lazybstudios.lemonsqueezy.com/checkout/buy/d324fe3e-0a61-4d6c-bffd-25e7a92d1ef0?checkout[custom][return_url]=https://sampleflow.lazybstudios.com'
+};
     
         // Add user email to checkout if signed in
         let url = checkoutUrls[tier];
