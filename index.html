@@ -1185,6 +1185,13 @@
                 <input type="number" id="defaultDays" class="form-input" value="14" onchange="saveSettings()">
             </div>
 
+            <div class="form-group" style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
+                <label class="form-label">Data Management</label>
+                <button class="row-btn btn-secondary" onclick="exportCSV(); closeSettings();" style="margin-bottom: 10px;">📥 Export to CSV</button>
+                <button class="row-btn btn-secondary" onclick="importData(); closeSettings();" style="margin-bottom: 10px;">📁 Import Data</button>
+                <button class="row-btn btn-secondary" onclick="clearCompleted(); closeSettings();">🧹 Clear Completed Samples</button>
+            </div>
+
             <div class="form-group" style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
                 <label class="form-label" style="color: var(--red);">Danger Zone</label>
                 <button class="row-btn btn-secondary" onclick="openResetModal()" style="color: var(--red); border-color: var(--red);">⚠️ Reset App</button>
@@ -2939,6 +2946,31 @@ async function checkExistingSession() {
             };
             input.click();
         }
+        // ==================== SUBSCRIPTION MANAGEMENT ====================
+function manageSubscription() {
+    // LemonSqueezy customer portal URL
+    const customerPortalUrl = 'https://lazybstudios.lemonsqueezy.com/billing';
+    
+    if (currentUser && currentUser.email) {
+        window.open(`${customerPortalUrl}?email=${encodeURIComponent(currentUser.email)}`, '_blank');
+    } else {
+        window.open(customerPortalUrl, '_blank');
+    }
+}
+
+function updateUIForTier() {
+    const manageSubBtn = document.getElementById('manageSubBtn');
+    
+    if (manageSubBtn) {
+        if (userTier === 'basic' || userTier === 'pro') {
+            manageSubBtn.style.display = 'block';
+        } else {
+            manageSubBtn.style.display = 'none';
+        }
+    }
+    
+    console.log('UI updated for tier:', userTier);
+}
     </script>
 </body>
 </html>
