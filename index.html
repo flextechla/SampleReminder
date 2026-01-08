@@ -16,26 +16,7 @@
 
     <link rel="manifest" href="/manifest.json">
     
-    <script>
-        const manifestData = {
-            "name": "SampleFlow",
-            "short_name": "SampleFlow",
-            "start_url": "./",
-            "display": "standalone",
-            "background_color": "#FFFFFF",
-            "theme_color": "#FE2C55",
-            "icons": [
-                {
-                    "src": "data:image/svg+xml,%3Csvg width='1024' height='1024' viewBox='0 0 1024 1024' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1024' height='1024' fill='%23FE2C55'/%3E%3Cpath d='M213.333 426.667L106.667 640V853.333C106.667 876.667 128 896 149.333 896H874.667C896 896 917.333 876.667 917.333 853.333V640L810.667 426.667H213.333Z' fill='white' fill-opacity='0.9'/%3E%3Cpath d='M106.667 640L213.333 426.667H810.667L917.333 640' stroke='%23FE2C55' stroke-width='40' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M213.333 640V896' stroke='%23FE2C55' stroke-width='40' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M810.667 640V896' stroke='%23FE2C55' stroke-width='40' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M320 512L470 662L720 260' stroke='%2300C853' stroke-width='120' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
-                    "sizes": "512x512",
-                    "type": "image/svg+xml"
-                }
-            ]
-        };
-        const manifestBlob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
-        const manifestURL = URL.createObjectURL(manifestBlob);
-        document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
-    </script>
+   
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
