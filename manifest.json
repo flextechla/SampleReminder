@@ -7,9 +7,11 @@
   "start_url": "https://sampleflow.lazybstudios.com/?utm_source=pwa",
   "scope": "https://sampleflow.lazybstudios.com/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#000000",
   "theme_color": "#000000",
   "orientation": "portrait",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "https://sampleflow.lazybstudios.com/icon.svg",
