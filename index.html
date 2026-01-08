@@ -3106,14 +3106,13 @@ ${script}
             }
         }   
     </script>
-   <script>
+  <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
         .then(reg => {
           console.log('Service Worker registered!', reg);
-          // Run the subscription check immediately after registration
-          checkSubscriptionStatus();
+          checkSubscriptionStatus(); // Run check immediately
         })
         .catch(err => console.log('Service Worker failed:', err));
     });
@@ -3121,14 +3120,14 @@ ${script}
 
   async function checkSubscriptionStatus() {
     // 1. Ensure Supabase is initialized
-    if (typeof supabase === 'undefined') return;
+    if (typeof sb_client === 'undefined' || !sb_client) return;
 
     // 2. Get the current logged-in user
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user } } = await sb_client.auth.getUser();
 
     if (user) {
       // 3. Check your Supabase 'subscriptions' table
-      const { data, error } = await supabase
+      const { data, error } = await sb_client
         .from('subscriptions') 
         .select('status')
         .eq('user_id', user.id)
@@ -3137,8 +3136,13 @@ ${script}
       // 4. Update the UI based on status
       if (data && data.status === 'active') {
         console.log("Subscription Active. Access Granted.");
-        // Hide paywall elements and show app content
-        // Example: document.getElementById('paywall').style.display = 'none';
+        
+        // This is the specific fix for your HTML:
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('appContainer').classList.add('active');
+        
+        // Also run your existing showApp function to load data
+        if (typeof showApp === 'function') showApp();
       } else {
         console.log("No active subscription found.");
       }
@@ -3147,7 +3151,6 @@ ${script}
 
   // Handle the "v=update" cache-buster
   if (window.location.search.includes('v=update')) {
-    // Clear the URL for a clean look after the update is forced
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 </script>
