@@ -1,4 +1,29 @@
 {
+  "name": "SampleFlow: TikTok Affiliate Tool",
+  "short_name": "SampleFlow",
+  "description": "The ultimate workflow tool for TikTok affiliates to manage samples and generate AI scripts.",
+  "start_url": "./index.html?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "scope": "./",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}{
   "short_name": "SampleFlow",
   "name": "SampleFlow: TikTok Affiliate Tool",
   "description": "Manage your free samples, generate AI scripts, and track your TikTok affiliate workflow.",
