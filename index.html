@@ -1600,11 +1600,7 @@
 
         // ==================== SUBSCRIPTION TIER ====================
         async function loadUserTier() {
-    console.log('🔍 loadUserTier() called');
-    console.log('   useCloud:', useCloud);
-    console.log('   currentUser:', currentUser);
-    
-    if (!useCloud || !currentUser) {
+        if (!useCloud || !currentUser) {
         console.log('❌ No cloud or no user, defaulting to free');
         userTier = 'free';
         return;
