@@ -3609,5 +3609,42 @@ ${script}
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     </script>
+
+
+    <script>
+// TEMPORARY ADMIN FUNCTION - Remove after fixing your tier
+async function fixMyTier() {
+    if (!useCloud || !currentUser) {
+        alert('You must be signed in first!');
+        return;
+    }
+    
+    try {
+        const { error } = await sb_client
+            .from('users')
+            .update({ subscription_tier: 'pro' })
+            .eq('id', currentUser.id);
+        
+        if (error) throw error;
+        
+        alert('✓ Tier updated to PRO! Refreshing page...');
+        setTimeout(() => window.location.reload(), 1000);
+    } catch (e) {
+        alert('Error: ' + e.message);
+        console.error('Tier update error:', e);
+    }
+}
+
+// Run this on page load if signed in
+setTimeout(() => {
+    if (useCloud && currentUser) {
+        console.log('Current tier:', userTier);
+        console.log('Run fixMyTier() in console to update to PRO');
+    }
+}, 2000);
+</script>
+
+
+    
 </body>
 </html>
