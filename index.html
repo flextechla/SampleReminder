@@ -1488,41 +1488,90 @@
         </div>
     </div>
 
-    <div id="helpModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">❓ Help</h2>
-                <button class="modal-close" onclick="closeHelp()">×</button>
+    <!-- Help Modal -->
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">💡 Help & Guide</h2>
+            <button class="modal-close" onclick="closeHelp()">×</button>
+        </div>
+        
+        <div style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+            
+            <!-- Getting Started -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 1.1rem;">🚀 Getting Started</h3>
+                <div style="background: var(--surface); padding: 15px; border-radius: 8px; border-left: 3px solid var(--primary);">
+                    <p style="margin-bottom: 8px;"><strong>Add a Sample:</strong> Tap the + button, enter brand name, product, and posting deadline.</p>
+                    <p style="margin-bottom: 8px;"><strong>Track Progress:</strong> Check off tasks as you film, edit, and post content.</p>
+                    <p style="margin-bottom: 0;"><strong>Mark Complete:</strong> Tap ✓ when you've posted to move samples to your archive.</p>
+                </div>
             </div>
-            <div style="line-height: 1.6;">
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">📋 Getting Started</h3>
-                <p style="margin-bottom: 15px; color: var(--text-secondary);">Click <strong>Add New Sample</strong> at the top to add a product. Fill in the product details, received date, and deadline.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">🎯 Quick Actions</h3>
-                <ul style="margin-bottom: 15px; padding-left: 20px; color: var(--text-secondary);">
-                    <li><strong>Edit:</strong> Update sample details</li>
-                    <li><strong>Delete:</strong> Remove a sample</li>
-                    <li><strong>Checkbox:</strong> Select multiple samples for batch actions</li>
-                    <li><strong>Mark Posted:</strong> Mark video as completed</li>
-                </ul>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">🔍 Filtering & Sorting</h3>
-                <p style="margin-bottom: 15px; color: var(--text-secondary);">Use the filter buttons to view specific categories. Sort samples by due date, brand, or received date.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">✅ Video Checklist</h3>
-                <p style="margin-bottom: 15px; color: var(--text-secondary);">Track your progress with the Filmed → Edited → Posted checklist on each sample card.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">📅 Calendar View</h3>
-                <p style="margin-bottom: 15px; color: var(--text-secondary);">Switch to calendar view to see all your deadlines in a monthly layout.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">📊 Analytics</h3>
-                <p style="margin-bottom: 15px; color: var(--text-secondary);">Tap the chart icon in the header to view your completion stats.</p>
-                
-                <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">💾 Export & Backup</h3>
-                <p style="margin-bottom: 15px; color: var(--text-secondary);">Export your data as CSV from the menu.</p>
+            
+            <!-- Pro Features -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 1.1rem;">⭐ Pro Features</h3>
+                <div style="background: var(--surface); padding: 15px; border-radius: 8px; border-left: 3px solid var(--primary);">
+                    <p style="margin-bottom: 8px;"><strong>📱 Ready to Film:</strong> One-tap access to TikTok camera. Returns you to the app with back button (2 taps).</p>
+                    <p style="margin-bottom: 8px;"><strong>✨ AI Script Generator:</strong> Get custom TikTok scripts written for each product (5 per day).</p>
+                    <p style="margin-bottom: 8px;"><strong>📸 Photo Attachments:</strong> Add unlimited product photos to each sample.</p>
+                    <p style="margin-bottom: 8px;"><strong>📊 Export CSV:</strong> Download all your data as a spreadsheet.</p>
+                    <p style="margin-bottom: 0;"><strong>☁️ Cloud Sync:</strong> Access your samples on any device automatically.</p>
+                </div>
             </div>
+            
+            <!-- Account Management -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 1.1rem;">👤 Account Management</h3>
+                <div style="background: var(--surface); padding: 15px; border-radius: 8px; border-left: 3px solid var(--primary);">
+                    <p style="margin-bottom: 8px;"><strong>Settings → Account Info:</strong> View your email and subscription tier.</p>
+                    <p style="margin-bottom: 8px;"><strong>Change Email:</strong> Update your email address (requires password confirmation).</p>
+                    <p style="margin-bottom: 8px;"><strong>Change Password:</strong> Request a password reset link via email.</p>
+                    <p style="margin-bottom: 0;"><strong>Delete Account:</strong> Permanently remove all your data and account access.</p>
+                </div>
+            </div>
+            
+            <!-- Status Indicators -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 1.1rem;">🚦 Status Indicators</h3>
+                <div style="background: var(--surface); padding: 15px; border-radius: 8px; border-left: 3px solid var(--primary);">
+                    <p style="margin-bottom: 8px;"><span style="color: var(--red); font-weight: 600;">● Overdue:</span> Posting deadline has passed</p>
+                    <p style="margin-bottom: 8px;"><span style="color: var(--orange); font-weight: 600;">● Due Soon:</span> Less than 7 days remaining</p>
+                    <p style="margin-bottom: 8px;"><span style="color: var(--green); font-weight: 600;">● On Track:</span> 7+ days remaining</p>
+                    <p style="margin-bottom: 0;"><span style="color: var(--blue); font-weight: 600;">✓ Done:</span> Content posted successfully</p>
+                </div>
+            </div>
+            
+            <!-- Troubleshooting -->
+            <div style="margin-bottom: 10px;">
+                <h3 style="color: var(--orange); margin-bottom: 12px; font-size: 1.1rem;">🔧 Troubleshooting</h3>
+                <div style="background: #FFF3E0; padding: 15px; border-radius: 8px; border-left: 3px solid var(--orange);">
+                    
+                    <p style="font-weight: 600; margin-bottom: 8px;">TikTok Won't Open:</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 12px; color: #666;">• Make sure TikTok app is installed<br>• Try tapping "Ready to Film" again<br>• If still not working, manually open TikTok camera</p>
+                    
+                    <p style="font-weight: 600; margin-bottom: 8px;">Can't Return to SampleFlow:</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 12px; color: #666;">• Tap your phone's back button 2 times<br>• Or swipe up and select SampleFlow from recent apps<br>• On desktop, just close the TikTok tab</p>
+                    
+                    <p style="font-weight: 600; margin-bottom: 8px;">Cloud Sync Not Working:</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 12px; color: #666;">• Check you're signed in (look for cloud icon)<br>• Refresh the page<br>• Sign out and sign back in</p>
+                    
+                    <p style="font-weight: 600; margin-bottom: 8px;">Photos Won't Upload:</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 12px; color: #666;">• Check file is under 5MB<br>• Use JPG, PNG, or HEIC format<br>• Try a different photo</p>
+                    
+                    <p style="font-weight: 600; margin-bottom: 8px;">Script Generator Not Working:</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 0; color: #666;">• Check your daily limit (Free: 1/day, Pro: 5/day)<br>• Make sure you're signed in<br>• Try again in a few minutes</p>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); text-align: center;">
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Need more help? <a href="#" onclick="openSupport(); return false;" style="color: var(--primary);">Contact Support</a></p>
         </div>
     </div>
+</div>
 
     <div id="installModal" class="modal">
         <div class="modal-content">
