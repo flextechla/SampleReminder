@@ -1600,42 +1600,51 @@
 
         // ==================== SUBSCRIPTION TIER ====================
         async function loadUserTier() {
-            if (!useCloud || !currentUser) {
-                userTier = 'free';
-                return;
-            }
-            
-            try {
-                const { data, error } = await sb_client
-                    .from('users')
-                    .select('subscription_tier')
-                    .eq('id', currentUser.id)
-                    .single();
-                
-                if (error && error.code === 'PGRST116') {
-                    await sb_client
-                        .from('users')
-                        .insert({
-                            id: currentUser.id,
-                            email: currentUser.email,
-                            subscription_tier: 'free'
-                        });
-                    userTier = 'free';
-                } else if (error) {
-                    console.error('Load tier error:', error);
-                    userTier = 'free';
-                } else {
-                    userTier = data?.subscription_tier || 'free';
-                }
-                
-                console.log('✓ User tier loaded:', userTier);
-                updateUIForTier();
-            } catch (e) {
-                console.error('Load tier failed:', e);
-                userTier = 'free';
-            }
+    console.log('🔍 loadUserTier() called');
+    console.log('   useCloud:', useCloud);
+    console.log('   currentUser:', currentUser);
+    
+    if (!useCloud || !currentUser) {
+        console.log('❌ No cloud or no user, defaulting to free');
+        userTier = 'free';
+        return;
+    }
+    
+    try {
+        console.log('📡 Querying database for user:', currentUser.id);
+        
+        const { data, error } = await sb_client
+            .from('users')
+            .select('subscription_tier')
+            .eq('id', currentUser.id)
+            .single();
+        
+        console.log('📊 Database response:', { data, error });
+        
+        if (error && error.code === 'PGRST116') {
+            console.log('⚠️ User not in database, creating...');
+            await sb_client
+                .from('users')
+                .insert({
+                    id: currentUser.id,
+                    email: currentUser.email,
+                    subscription_tier: 'free'
+                });
+            userTier = 'free';
+        } else if (error) {
+            console.error('❌ Load tier error:', error);
+            userTier = 'free';
+        } else {
+            userTier = data?.subscription_tier || 'free';
+            console.log('✓ User tier loaded:', userTier);
         }
-
+        
+        updateUIForTier();
+    } catch (e) {
+        console.error('💥 Load tier failed:', e);
+        userTier = 'free';
+    }
+}
         function updateUIForTier() {
             const calendarBtn = document.getElementById('view-calendar');
             if (calendarBtn && userTier === 'free') {
