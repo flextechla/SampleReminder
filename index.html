@@ -3276,7 +3276,7 @@
             
             if (useCloud && currentUser) {
                 const userEmail = localStorage.getItem('user_email') || current
-                User.email || 'Unknown';
+               currentUser.email || 'Unknown';
                 statusDiv.innerHTML = `
                     <p style="margin-bottom: 5px; font-weight: 700; color: var(--green);">✓ Cloud Storage Active</p>
                     <p style="font-size: 0.85rem;">Signed in as: <strong>${userEmail}</strong></p>
