@@ -3784,13 +3784,17 @@ ${script}
         }
         
         // 4. Register the Service Worker file
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => console.log('PWA Service Worker Registered'))
-                .catch(err => console.error('PWA Service Worker Failed', err));
-            });
-        }
+      if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => {
+            console.log('✅ PWA Service Worker Registered!');
+        })
+        .catch(err => {
+            console.log('❌ Service Worker registration failed:', err);
+        });
+    });
+}
     </script>
 </body>
 </html>
