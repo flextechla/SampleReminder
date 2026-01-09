@@ -1916,28 +1916,6 @@
 }
 }
 
-function launchTikTok() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-        // Try TikTok app
-        window.location.href = 'tiktok://camera';
-        
-        // Fallback to web if app not installed (after 2 seconds)
-        setTimeout(() => {
-            window.location.href = 'https://www.tiktok.com/upload';
-        }, 2000);
-    } else {
-        // Desktop
-        window.open('https://www.tiktok.com/creator-tools/upload', '_blank');
-        closeTikTokLauncher();
-    }
-}
-
-function closeTikTokLauncher() {
-    const modal = document.getElementById('tiktokLauncherModal');
-    if (modal) modal.remove();
-}
 
         function showToast(message, duration = 3000) {
             const toast = document.createElement('div');
