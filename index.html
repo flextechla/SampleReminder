@@ -1888,36 +1888,46 @@
 
         // ==================== READY TO FILM (PRO FEATURE) ====================
         function readyToFilm(id) {
-            if (userTier !== 'pro') {
-                showUpgradeModal(
-                    'Ready-to-Film is a Pro feature!',
-                    'One-tap access to TikTok camera saves you time on every video',
-                    'pro'
-                );
-                return;
+    if (userTier !== 'pro') {
+        showUpgradeModal(
+            'Ready-to-Film is a Pro feature!',
+            'One-tap access to TikTok camera saves you time on every video',
+            'pro'
+        );
+        return;
+    }
+    
+    // Detect if mobile or desktop
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Create a temporary link element for better mobile behavior
+        const link = document.createElement('a');
+        link.href = 'tiktok://camera';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        
+        // Try to open TikTok app
+        link.click();
+        document.body.removeChild(link);
+        
+        // Fallback: If TikTok isn't installed, open web version after 2 seconds
+        setTimeout(() => {
+            if (document.hasFocus()) {
+                // Still on this page, TikTok probably not installed
+                window.open('https://www.tiktok.com/upload', '_blank');
             }
-            
-            // Detect if mobile or desktop
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                // Try to open TikTok app in new tab (keeps app open)
-                window.open('tiktok://camera', '_blank');
-                
-                // Fallback to TikTok mobile web if app not installed
-                setTimeout(() => {
-                    window.open('https://www.tiktok.com/upload', '_blank');
-                }, 1500);
-            } else {
-                // Desktop - open TikTok upload page in new tab
-                window.open('https://www.tiktok.com/creator-tools/upload', '_blank');
-            }
-            
-            // Show feedback message
-            if (typeof showToast === 'function') {
-                showToast('✓ TikTok opened! Your app is still here.');
-            }
-        }
+        }, 2000);
+    } else {
+        // Desktop - open TikTok upload page in new tab
+        window.open('https://www.tiktok.com/creator-tools/upload', '_blank');
+    }
+    
+    // Show feedback message
+    if (typeof showToast === 'function') {
+        showToast('✓ TikTok opened! Use your back button to return to SampleFlow.');
+    }
+}
 
         function showToast(message, duration = 3000) {
             const toast = document.createElement('div');
@@ -3609,42 +3619,6 @@ ${script}
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     </script>
-
-
-    <script>
-// TEMPORARY ADMIN FUNCTION - Remove after fixing your tier
-async function fixMyTier() {
-    if (!useCloud || !currentUser) {
-        alert('You must be signed in first!');
-        return;
-    }
-    
-    try {
-        const { error } = await sb_client
-            .from('users')
-            .update({ subscription_tier: 'pro' })
-            .eq('id', currentUser.id);
-        
-        if (error) throw error;
-        
-        alert('✓ Tier updated to PRO! Refreshing page...');
-        setTimeout(() => window.location.reload(), 1000);
-    } catch (e) {
-        alert('Error: ' + e.message);
-        console.error('Tier update error:', e);
-    }
-}
-
-// Run this on page load if signed in
-setTimeout(() => {
-    if (useCloud && currentUser) {
-        console.log('Current tier:', userTier);
-        console.log('Run fixMyTier() in console to update to PRO');
-    }
-}, 2000);
-</script>
-
-
-    
+  
 </body>
 </html>
