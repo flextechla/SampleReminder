@@ -428,106 +428,6 @@
             border: 2px solid var(--primary); 
         }
         
-        /* Collapsed Card Styles */
-        .sample-card.collapsed {
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .sample-card.collapsed:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-            transform: translateY(-2px);
-        }
-        
-        .sample-summary {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-        }
-        
-        .summary-thumbnail {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            object-fit: cover;
-            flex-shrink: 0;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-        
-        .summary-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .summary-brand {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        
-        .summary-product {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-main);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 2px 0;
-        }
-        
-        .summary-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-        }
-        
-        .summary-badge {
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-        
-        .summary-date {
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-        
-        .card-expand-icon {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            transition: transform 0.3s;
-        }
-        
-        .sample-card.collapsed .card-expand-icon {
-            transform: rotate(0deg);
-        }
-        
-        .sample-card:not(.collapsed) .card-expand-icon {
-            transform: rotate(180deg);
-        }
-        
-        .card-details {
-            display: none;
-        }
-        
-        .sample-card:not(.collapsed) .card-details {
-            display: block;
-        }
-        
-        .sample-card.collapsed .card-details {
-            display: none;
-        }
-        
         .card-header { 
             display: flex; 
             justify-content: space-between; 
@@ -1033,15 +933,6 @@
                 <button class="view-btn" id="sortToggleBtn" onclick="toggleSortDropdown()">📊 Sort</button>
             </div>
             
-            <div class="view-toggle" style="margin-top: 12px;">
-                <button class="view-btn" id="condensedViewBtn" onclick="toggleCondensedView()">
-                    <span id="condensedViewIcon">📋</span> Condensed
-                </button>
-                <button class="view-btn" id="expandAllBtn" onclick="toggleExpandAll()" style="display: none;">
-                    <span id="expandAllIcon">📂</span> <span id="expandAllText">Expand All</span>
-                </button>
-            </div>
-            
             <div id="filterDropdown" class="dropdown-panel" style="display: none; margin-top: 8px;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <button class="filter-btn active" id="f-all" onclick="setFilter('all')">📦 All (<span id="statAll">0</span>)</button>
@@ -1365,14 +1256,14 @@
                     <div style="font-size: 4rem; margin-bottom: 15px;">📧</div>
                     <h3 style="font-weight: 700; margin-bottom: 15px; font-size: 1.3rem;">Need Help?</h3>
                     <p style="font-size: 1rem; opacity: 0.95; margin-bottom: 25px;">Click below to email our support team</p>
-                    <a href="/cdn-cgi/l/email-protection#35464045455a47417559544f4c57464140515c5a461b565a580a4640575f5056410866545845595073595a4215664045455a47411567504440504641" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <a href="mailto:support@lazybstudios.com?subject=SampleFlow Support Request" style="display: inline-block; background: white; color: var(--primary); padding: 15px 30px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
                         📧 Email Support
                     </a>
                 </div>
 
                 <div style="background: #E3F2FD; padding: 20px; border-radius: 12px; text-align: left;">
                     <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">
-                        <strong style="color: var(--dark);">Email:</strong> <a href="/cdn-cgi/l/email-protection#4e3d3b3e3e213c3a0e222f34372c3d3a3b2a27213d602d2123"><span class="__cf_email__" data-cfemail="0d7e787d7d627f794d616c77746f7e79786964627e236e6260">[email&#160;protected]</span></a>
+                        <strong style="color: var(--dark);">Email:</strong> <a href="mailto:support@lazybstudios.com">support@lazybstudios.com</a>
                     </p>
                     <p style="font-size: 0.9rem; color: #666;">
                         <strong style="color: var(--dark);">Response Time:</strong> We typically respond within 24 hours on weekdays
@@ -1475,7 +1366,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ==================== UPGRADE MODAL ====================
         function showUpgradeModal(title, message, targetTier) {
             const modal = document.createElement('div');
@@ -1694,8 +1585,6 @@
         };
         let hapticEnabled = false;
         let compactMode = false;
-        let condensedView = false;
-        let expandedCards = new Set();
 
         // ==================== INITIALIZATION ====================
         async function initSupabase() {
@@ -1711,42 +1600,47 @@
 
         // ==================== SUBSCRIPTION TIER ====================
         async function loadUserTier() {
-            if (!useCloud || !currentUser) {
-                userTier = 'free';
-                return;
-            }
-            
-            try {
-                const { data, error } = await sb_client
-                    .from('users')
-                    .select('subscription_tier')
-                    .eq('id', currentUser.id)
-                    .single();
-                
-                if (error && error.code === 'PGRST116') {
-                    await sb_client
-                        .from('users')
-                        .insert({
-                            id: currentUser.id,
-                            email: currentUser.email,
-                            subscription_tier: 'free'
-                        });
-                    userTier = 'free';
-                } else if (error) {
-                    console.error('Load tier error:', error);
-                    userTier = 'free';
-                } else {
-                    userTier = data?.subscription_tier || 'free';
-                }
-                
-                console.log('✓ User tier loaded:', userTier);
-                updateUIForTier();
-            } catch (e) {
-                console.error('Load tier failed:', e);
-                userTier = 'free';
-            }
+        if (!useCloud || !currentUser) {
+        console.log('❌ No cloud or no user, defaulting to free');
+        userTier = 'free';
+        return;
+    }
+    
+    try {
+        console.log('📡 Querying database for user:', currentUser.id);
+        
+        const { data, error } = await sb_client
+            .from('users')
+            .select('subscription_tier')
+            .eq('id', currentUser.id)
+            .single();
+        
+        console.log('📊 Database response:', { data, error });
+        
+        if (error && error.code === 'PGRST116') {
+            console.log('⚠️ User not in database, creating...');
+            await sb_client
+                .from('users')
+                .insert({
+                    id: currentUser.id,
+                    email: currentUser.email,
+                    subscription_tier: 'free'
+                });
+            userTier = 'free';
+        } else if (error) {
+            console.error('❌ Load tier error:', error);
+            userTier = 'free';
+        } else {
+            userTier = data?.subscription_tier || 'free';
+            console.log('✓ User tier loaded:', userTier);
         }
-
+        
+        updateUIForTier();
+    } catch (e) {
+        console.error('💥 Load tier failed:', e);
+        userTier = 'free';
+    }
+}
         function updateUIForTier() {
             const calendarBtn = document.getElementById('view-calendar');
             if (calendarBtn && userTier === 'free') {
@@ -2010,31 +1904,33 @@
             });
         }
 
-        async function checkExistingSession() {
-            try {
-                const { data: { session }, error } = await sb_client.auth.getSession();
-                
-                if (session && session.user) {
-                    currentUser = {
-                        id: session.user.id,
-                        email: session.user.email
-                    };
-                    
-                    console.log('Auto-signed in:', currentUser.email);
-                    
-                    await loadUserTier();
-                    await loadFromCloud();
-                    showApp();
-                    
-                    return true;
-                }
-                
-                return false;
-            } catch (error) {
-                console.error('Session check error:', error);
-                return false;
-            }
+       async function checkExistingSession() {
+    try {
+        const { data: { session }, error } = await sb_client.auth.getSession();
+        
+        if (session && session.user) {
+            currentUser = {
+                id: session.user.id,
+                email: session.user.email
+            };
+            
+            useCloud = true;  // ← ADD THIS LINE
+            
+            console.log('Auto-signed in:', currentUser.email);
+            
+            await loadUserTier();
+            await loadFromCloud();
+            showApp();
+            
+            return true;
         }
+        
+        return false;
+    } catch (error) {
+        console.error('Session check error:', error);
+        return false;
+    }
+}
 
         // ==================== THEME HANDLING ====================
         function toggleTheme(isDark) {
@@ -2398,61 +2294,6 @@
         }
 
         // ==================== RENDER ====================
-        // ==================== CONDENSED VIEW FUNCTIONS ====================
-        function toggleCondensedView() {
-            triggerHaptic();
-            condensedView = !condensedView;
-            const btn = document.getElementById('condensedViewBtn');
-            const expandBtn = document.getElementById('expandAllBtn');
-            const icon = document.getElementById('condensedViewIcon');
-            
-            if (condensedView) {
-                btn.classList.add('active');
-                icon.textContent = '📄';
-                expandBtn.style.display = 'block';
-            } else {
-                btn.classList.remove('active');
-                icon.textContent = '📋';
-                expandBtn.style.display = 'none';
-                expandedCards.clear();
-            }
-            
-            render();
-        }
-        
-        function toggleExpandAll() {
-            triggerHaptic();
-            const filtered = getFilteredSamples();
-            const expandBtn = document.getElementById('expandAllBtn');
-            const expandIcon = document.getElementById('expandAllIcon');
-            const expandText = document.getElementById('expandAllText');
-            
-            if (expandedCards.size === filtered.length) {
-                // Collapse all
-                expandedCards.clear();
-                expandIcon.textContent = '📂';
-                expandText.textContent = 'Expand All';
-            } else {
-                // Expand all
-                filtered.forEach(s => expandedCards.add(s.id));
-                expandIcon.textContent = '📁';
-                expandText.textContent = 'Collapse All';
-            }
-            
-            render();
-        }
-        
-        function toggleCard(id) {
-            triggerHaptic();
-            if (expandedCards.has(id)) {
-                expandedCards.delete(id);
-            } else {
-                expandedCards.add(id);
-            }
-            render();
-        }
-        
-        // ==================== RENDER ====================
         function render() {
             updateStats();
             updateCloudStatus();
@@ -2472,53 +2313,10 @@
             const info = getStatusInfo(s);
             const isSelected = selectedSamples.has(s.id);
             const dueDate = new Date(new Date(s.date).getTime() + s.limit * 86400000);
-            const isExpanded = expandedCards.has(s.id);
-            const isCollapsed = condensedView && !isExpanded;
             
-            // Condensed view (summary only)
-            if (isCollapsed) {
-                const thumbnail = s.photos && s.photos.length > 0 
-                    ? `<img src="${s.photos[0]}" class="summary-thumbnail" onclick="event.stopPropagation(); viewPhoto('${s.photos[0]}')" alt="${s.product}">` 
-                    : `<div class="summary-thumbnail">📦</div>`;
-                
-                return `
-                    <div class="sample-card collapsed ${isSelected ? 'selecting' : ''}" onclick="toggleCard('${s.id}')">
-                        <div class="sample-summary">
-                            ${thumbnail}
-                            <div class="summary-info">
-                                <div class="summary-brand">${s.brand}</div>
-                                <div class="summary-product">${s.product}</div>
-                                <div class="summary-meta">
-                                    <span class="summary-badge ${info.status}">${info.text}</span>
-                                    <span class="summary-date">Due: ${dueDate.toLocaleDateString()}</span>
-                                </div>
-                            </div>
-                            <div class="card-expand-icon">▼</div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // Expanded view (full details)
             return `
-                <div class="sample-card ${isSelected ? 'selecting' : ''}" ${condensedView ? `onclick="toggleCard('${s.id}')"` : ''}>
-                    ${condensedView ? `
-                        <div class="sample-summary">
-                            ${s.photos && s.photos.length > 0 
-                                ? `<img src="${s.photos[0]}" class="summary-thumbnail" onclick="event.stopPropagation(); viewPhoto('${s.photos[0]}')" alt="${s.product}">` 
-                                : `<div class="summary-thumbnail">📦</div>`}
-                            <div class="summary-info">
-                                <div class="summary-brand">${s.brand}</div>
-                                <div class="summary-product">${s.product}</div>
-                                <div class="summary-meta">
-                                    <span class="summary-badge ${info.status}">${info.text}</span>
-                                    <span class="summary-date">Due: ${dueDate.toLocaleDateString()}</span>
-                                </div>
-                            </div>
-                            <div class="card-expand-icon">▼</div>
-                        </div>
-                    ` : ''}
-                    <div class="card-body card-details" onclick="event.stopPropagation()">
+                <div class="sample-card ${isSelected ? 'selecting' : ''}">
+                    <div class="card-body">
                         <div class="card-header">
                             <div>
                                 <div class="brand-name">${s.brand}</div>
@@ -3304,39 +3102,10 @@ ${script}
         }   
     </script>
   <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(reg => {
-          console.log('Service Worker registered!', reg);
-          checkSubscriptionStatus(); // Run check immediately
-        })
-        .catch(err => console.log('Service Worker failed:', err));
-    });
+  // Handle cache-buster
+  if (window.location.search.includes('v=update')) {
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
-
-  async function checkSubscriptionStatus() {
-    // 1. Ensure Supabase is initialized
-    if (typeof sb_client === 'undefined' || !sb_client) return;
-
-    // 2. Get the current logged-in user
-    const { data: { user } } = await sb_client.auth.getUser();
-
-    if (user) {
-      // 3. Check your Supabase 'subscriptions' table
-      const { data, error } = await sb_client
-        .from('subscriptions') 
-        .select('status')
-        .eq('user_id', user.id)
-        .single();
-
-      // 4. Update the UI based on status
-      if (data && data.status === 'active') {
-        console.log("Subscription Active. Access Granted.");
-        
-        // This is the specific fix for your HTML:
-        document.getElementById('landingPage').classList.add('hidden');
-        document.getElementById('appContainer').classList.add('active');
-        
-        // Also run your existing showApp function to load data
-        i
+</script>
+</body>
+</html>
