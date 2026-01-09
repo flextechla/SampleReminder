@@ -1886,7 +1886,7 @@
             }
         }
 
-     function readyToFilm(id) {
+    function readyToFilm(id) {
     if (userTier !== 'pro') {
         showUpgradeModal(
             'Ready-to-Film is a Pro feature!',
@@ -1896,15 +1896,56 @@
         return;
     }
     
+    // Show launch instructions modal
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.id = 'tiktokLaunchModal';
+    modal.innerHTML = `
+        <div class="modal-content" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🎬</div>
+            <h2 style="margin-bottom: 15px;">Ready to Film!</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">TikTok will open in a new window</p>
+            
+            <div style="background: #E3F2FD; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left;">
+                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 8px;">📱 To Return to SampleFlow:</p>
+                <p style="font-size: 0.85rem; color: #666; margin: 0;">• Tap your back button 2 times</p>
+                <p style="font-size: 0.85rem; color: #666; margin: 0;">• Or swipe up and select SampleFlow</p>
+            </div>
+            
+            <button onclick="launchTikTokNow()" style="
+                width: 100%;
+                padding: 18px;
+                font-size: 1.1rem;
+                background: linear-gradient(135deg, #ff0050 0%, #00f2ea 100%);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-bottom: 12px;
+            ">
+                🎥 Continue to TikTok
+            </button>
+            
+            <button onclick="closeTikTokLaunchModal()" class="row-btn btn-secondary" style="width: 100%;">
+                ← Stay in App
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function launchTikTokNow() {
+    closeTikTokLaunchModal();
+    
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // Direct navigation - one back button press to return
+        // Direct navigation
         window.location.href = 'tiktok://camera';
         
-        // Fallback to web if app not installed (after 1.5 seconds)
+        // Fallback to web if app not installed
         setTimeout(() => {
-            // Only redirect if still on this page (TikTok app didn't open)
             if (document.hasFocus()) {
                 window.location.href = 'https://www.tiktok.com/upload';
             }
@@ -1913,6 +1954,11 @@
         // Desktop - open in new tab
         window.open('https://www.tiktok.com/creator-tools/upload', '_blank');
     }
+}
+
+function closeTikTokLaunchModal() {
+    const modal = document.getElementById('tiktokLaunchModal');
+    if (modal) modal.remove();
 }
 
         function showToast(message, duration = 3000) {
