@@ -1,9 +1,11 @@
-const CACHE_NAME = 'sampleflow-v6'; // Change this number every time you update the app
+const CACHE_NAME = 'sampleflow-v7'; // Increment this from v6 to v7
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon.svg'
+  '/icon.svg',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 // 1. Install & Force Activation
