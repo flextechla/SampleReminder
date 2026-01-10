@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sampleflow-v7'; // Increment this from v6 to v7
+const CACHE_NAME = 'sampleflow-v8'; // Increment this from v6 to v7
 const ASSETS = [
   '/',
   '/index.html',
