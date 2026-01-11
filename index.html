@@ -1054,7 +1054,7 @@
             </div>
             <button class="add-sample-btn" onclick="openModal()">
                 <span style="font-size: 1.2rem;">+</span>
-                <span>Add New Sample</span>
+                <span>Add New Sample123</span>
             </button>
             
             <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
@@ -3832,27 +3832,31 @@ window.addEventListener('appinstalled', () => {
     if (installBtnMenu) installBtnMenu.style.display = 'none';
 });
 
+// ==================== PWA INSTALL ====================
 
-
-// Simple PWA install logic
-
+// Keep the browser's install event here (when available)
 let deferredPrompt = null;
+
+// Get button elements
+const installBtnFloating = document.getElementById('floatingInstallBtn');
+const installBtnMenu = document.getElementById('installBtnMenu');
 
 // Save the browser's install event, if it fires
 window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt fired');
   e.preventDefault();
   deferredPrompt = e;
 });
 
+// Respond when the app is actually installed
+window.addEventListener('appinstalled', () => {
+  console.log('✅ App installed successfully!');
+  if (installBtnFloating) installBtnFloating.style.display = 'none';
+  if (installBtnMenu) installBtnMenu.style.display = 'none';
+});
+
 // Called when the user taps 📱 Install App
-async function installApp() {
-  // If the browser gave us a real install prompt
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const choiceResult = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    return;
-  }
+
 
   // If no prompt is available, show your instructions popup
   showInstallInstructions();
