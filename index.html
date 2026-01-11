@@ -13,7 +13,7 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="manifest" href="manifest.json">
     
-    <title>SampleFlow</title>
+    <title>SampleFlow123</title>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
@@ -1454,7 +1454,7 @@
             </div>
             <div style="line-height: 1.6; color: var(--text-secondary);">
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">Data Storage</h3>
-                <p style="margin-bottom: 15px;">Your data is stored securely in the cloud using Supabase. We do not share your information with third parties.</p>
+                <p style="margin-bottom: 15px;">Your data is stored securely in the cloud using . We do not share your information with third parties.</p>
                 
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">What We Store</h3>
                 <ul style="margin-bottom: 15px; padding-left: 20px;">
@@ -2075,13 +2075,46 @@ function closeTikTokLaunchModal() {
     </script>
     
     <script>
-        // ==================== CONFIGURATION ====================
-        const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
-        
-        let sb_client = null;
-        let currentUser = null;
-        let useCloud = false;
+      // ==================== CONFIGURATION ====================
+const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
+
+let sb_client = null;
+let currentUser = null;
+let useCloud = false;
+
+// ==================== GLOBAL PWA INSTALL LOGIC ====================
+// This MUST be here at the top so the button can see it immediately
+window.deferredPrompt = null;
+
+window.installApp = async function() {
+    console.log("👆 Global Install Function Triggered");
+    if (window.deferredPrompt) {
+        window.deferredPrompt.prompt();
+        const { outcome } = await window.deferredPrompt.userChoice;
+        console.log(`User choice: ${outcome}`);
+        window.deferredPrompt = null;
+    } else {
+        console.log("Native prompt null. Triggering manual instructions.");
+        // We call the instructions function which is defined at the bottom of the file
+        if (typeof showInstallInstructions === 'function') {
+            showInstallInstructions();
+        } else {
+            alert('To install: Open browser menu (⋮) and select "Install App"');
+        }
+    }
+};
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+    console.log('✅ PWA Install Prompt Captured');
+    // Show the buttons now that we know they will work
+    const fBtn = document.getElementById('floatingInstallBtn');
+    const mBtn = document.getElementById('installBtnMenu');
+    if (fBtn) fBtn.style.display = 'block';
+    if (mBtn) mBtn.style.display = 'block';
+});
 
         // ==================== STATE ====================
         let samples = [];
