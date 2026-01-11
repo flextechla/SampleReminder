@@ -1056,7 +1056,7 @@
             </div>
             <button class="add-sample-btn" onclick="openModal()">
                 <span style="font-size: 1.2rem;">+</span>
-                <span>Add New Sample123</span>
+                <span>Add New Sample</span>
             </button>
             
             <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
@@ -3831,6 +3831,47 @@ function showInstallInstructions() {
             if (floatingBtn) floatingBtn.style.display = 'none';
             if (menuBtn) menuBtn.style.display = 'none';
         });
+    // ==================== PWA INSTALL ====================
+
+let deferredPrompt = null;
+
+const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+
+const installBtnFloating = document.getElementById('floatingInstallBtn');
+const installBtnMenu = document.getElementById('installBtnMenu');
+
+// Always show the buttons after a short delay if NOT installed
+if (!isStandalone) {
+    setTimeout(() => {
+        if (installBtnFloating) installBtnFloating.style.display = 'block';
+        if (installBtnMenu) installBtnMenu.style.display = 'block';
+    }, 3000);
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('beforeinstallprompt fired');
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+async function installApp() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+
+        if (choiceResult.outcome === 'accepted') {
+            if (installBtnFloating) installBtnFloating.style.display = 'none';
+            if (installBtnMenu) installBtnMenu.style.display = 'none';
+        }
+        deferredPrompt = null;
+        return;
+    }
+
+    showInstallInstructions(); // your existing fallback
+}
+
     </script>
     
 </body>
