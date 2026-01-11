@@ -3725,12 +3725,19 @@ ${script}
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
 // Show floating button if NOT installed
+    //added console logic temporarily
+    // Show floating button if NOT installed
 if (!isStandalone) {
+    console.log('About to set timeout for install button');
     setTimeout(() => {
+        console.log('Timeout fired!');
         const btn = document.getElementById('floatingInstallBtn');
+        console.log('Button found:', btn);
         if (btn) btn.style.display = 'block';
     }, 3000);
 }
+
+    
         // Listen for Chrome/Android install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('🎉 Install prompt ready!');
