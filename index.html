@@ -3721,20 +3721,16 @@ ${script}
 
         // ==================== PWA INSTALLATION (IMPROVED) ====================
         let deferredPrompt;
-        const floatingBtn = document.getElementById('floatingInstallBtn');
-        const menuBtn = document.getElementById('installBtnMenu');
+       // Check if already installed
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
-        // Check if already installed
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-        // Show floating button if NOT installed
-        if (!isStandalone) {
-            setTimeout(() => {
-                if (floatingBtn) floatingBtn.style.display = 'block';
-            }, 3000);
-        }
-
+// Show floating button if NOT installed
+if (!isStandalone) {
+    setTimeout(() => {
+        const btn = document.getElementById('floatingInstallBtn');
+        if (btn) btn.style.display = 'block';
+    }, 3000);
+}
         // Listen for Chrome/Android install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('🎉 Install prompt ready!');
