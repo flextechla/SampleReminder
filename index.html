@@ -954,7 +954,7 @@
         }
         /* Floating Install Button */
 #floatingInstallBtn {
-   position: fixed;
+    position: fixed;
     bottom: 90px;
     right: 20px;
     background: linear-gradient(135deg, #FE2C55, #FF6B8A);
@@ -966,7 +966,7 @@
     box-shadow: 0 4px 20px rgba(254, 44, 85, 0.4);
     cursor: pointer;
     z-index: 9999;
-    border: 2px solid white; /* <--- ADD THIS LINE HERE */
+    border: none;
     animation: pulse 2s infinite;
 }
 
@@ -988,14 +988,10 @@
     onclick="installApp()"
 >
     📱 Install App
-    <span 
-        onclick="event.stopPropagation(); dismissInstall()" 
-        style="margin-left: 12px; padding: 4px 8px; background: rgba(0,0,0,0.2); border-radius: 50%; font-size: 1.1rem; line-height: 1;"
-    >×</span>
 </button>
 
-<div id="landingPage">
-    <div class="landing-content">
+    <div id="landingPage">
+        <div class="landing-content">
             <div class="app-icon">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <rect x="10" y="15" width="80" height="75" rx="5" fill="#FE2C55" opacity="0.1"/>
@@ -1458,7 +1454,7 @@
             </div>
             <div style="line-height: 1.6; color: var(--text-secondary);">
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">Data Storage</h3>
-                <p style="margin-bottom: 15px;">Your data is stored securely in the cloud using . We do not share your information with third parties.</p>
+                <p style="margin-bottom: 15px;">Your data is stored securely in the cloud using Supabase. We do not share your information with third parties.</p>
                 
                 <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--text-main);">What We Store</h3>
                 <ul style="margin-bottom: 15px; padding-left: 20px;">
@@ -2079,15 +2075,13 @@ function closeTikTokLaunchModal() {
     </script>
     
     <script>
-      // ==================== CONFIGURATION ====================
-const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
-
-let sb_client = null;
-let currentUser = null;
-let useCloud = false;
-
-
+        // ==================== CONFIGURATION ====================
+        const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
+        
+        let sb_client = null;
+        let currentUser = null;
+        let useCloud = false;
 
         // ==================== STATE ====================
         let samples = [];
@@ -3729,82 +3723,147 @@ ${script}
 // ... your existing app code ends here ...
 
 
-      // ... (This should be at the very bottom of your script, right before </script>)
+       
+  // ==================== PWA INSTALL ====================
 
-// ==================== GLOBAL PWA INSTALL LOGIC ====================
-window.deferredPrompt = null;
+let deferredPrompt = null;
 
-// 1. Capture the browser's install event
+// Detect if already installed (standalone)
+const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+
+const installBtnFloating = document.getElementById('floatingInstallBtn');
+const installBtnMenu = document.getElementById('installBtnMenu');
+
+// Always show buttons after a short delay if NOT installed
+if (!isStandalone) {
+    setTimeout(() => {
+        if (installBtnFloating) installBtnFloating.style.display = 'block';
+        if (installBtnMenu) installBtnMenu.style.display = 'block';
+    }, 3000);
+}
+
+
+
+// Capture Chrome/Android install event
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-    window.deferredPrompt = e;
-    console.log('✅ PWA install event captured');
-    
-    // Only show if user hasn't dismissed it this session
-    if (!localStorage.getItem('install_dismissed')) {
-        const fBtn = document.getElementById('floatingInstallBtn');
-        const mBtn = document.getElementById('installBtnMenu');
-        if (fBtn) fBtn.style.display = 'block';
-        if (mBtn) mBtn.style.display = 'block';
-    }
+    deferredPrompt = e;
+
+    // Show install buttons when prompt is available
+    if (installBtnFloating) installBtnFloating.style.display = 'block';
+    if (installBtnMenu) installBtnMenu.style.display = 'block';
+
+    console.log('PWA install prompt available');
 });
 
-// 2. Install Function
-window.installApp = async function() {
-    if (window.deferredPrompt) {
-        window.deferredPrompt.prompt();
-        await window.deferredPrompt.userChoice;
-        window.deferredPrompt = null;
-    } else {
-        window.showInstallInstructions();
+// Main install function used by both buttons
+async function installApp() {
+    // If we have a real prompt (Android/Chrome)
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+
+        const choiceResult = await deferredPrompt.userChoice;
+
+        if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+
+            if (installBtnFloating) installBtnFloating.style.display = 'none';
+            if (installBtnMenu) installBtnMenu.style.display = 'none';
+        } else {
+            console.log('User dismissed the install prompt');
+        }
+
+        deferredPrompt = null;
+        return;
     }
-};
 
-// 3. NEW: Dismiss Function
-window.dismissInstall = function() {
-    if (typeof triggerHaptic === 'function') triggerHaptic();
-    localStorage.setItem('install_dismissed', 'true'); // Save preference
-    const btn = document.getElementById('floatingInstallBtn');
-    if (btn) btn.style.display = 'none';
-};
+    // Fallback for iOS / desktop / no prompt available
+    showInstallInstructions();
+}
 
-// 4. Manual Instructions (Mentioning SampleFlow)
-window.showInstallInstructions = function() {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+// Simple fallback instructions modal
+function showInstallInstructions() {
     const existing = document.getElementById('installInstructionsModal');
     if (existing) existing.remove();
 
     const modal = document.createElement('div');
     modal.className = 'modal active';
     modal.id = 'installInstructionsModal';
-    
-    let instructionsHtml = isIOS ? `
-        <p><strong>1.</strong> Tap the <span style="font-size: 1.3rem;">⎋</span> <strong>Share</strong> button.</p>
-        <p><strong>2.</strong> Tap <strong>Add to Home Screen</strong>.</p>` : `
-        <p><strong>1.</strong> Tap the browser menu (⋮).</p>
-        <p><strong>2.</strong> Select <strong>Install App</strong>.</p>`;
-
     modal.innerHTML = `
         <div class="modal-content" style="max-width: 400px; text-align: center;">
             <div style="font-size: 3rem; margin-bottom: 15px;">📲</div>
-            <h2 class="modal-title">Get SampleFlow</h2>
-            <div style="text-align: left; margin-bottom: 20px;">${instructionsHtml}</div>
-            <button class="row-btn btn-full-width" onclick="document.getElementById('installInstructionsModal').remove()">Got it</button>
-        </div>`;
+            <h2 class="modal-title" style="margin-bottom: 10px;">Install SampleFlow</h2>
+            <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                For the best experience, add SampleFlow to your home screen.
+            </p>
+            <div style="text-align: left; font-size: 0.9rem; color: var(--text-main); margin-bottom: 20px;">
+                <p style="margin-bottom: 8px;">
+                    <strong>iOS (Safari):</strong> Tap the Share button, then “Add to Home Screen”.
+                </p>
+                <p style="margin-bottom: 8px;">
+                    <strong>Android (Chrome):</strong> Open the browser menu and choose “Install app” or “Add to Home Screen”.
+                </p>
+            </div>
+            <button class="row-btn btn-full-width" onclick="document.getElementById('installInstructionsModal').remove()">
+                Got it
+            </button>
+        </div>
+    `;
     document.body.appendChild(modal);
-};
-
-// 5. Final Service Worker Registration
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(reg => {
-                // This confirms your bottom code is running
-                console.log('🚀 SampleFlow PWA Version: 1.0.1 - (Consolidated Bottom)');
-            })
-            .catch(err => console.error('❌ SW Failed', err));
-    });
 }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.log('❌ SW registration failed:', err));
+            });
+        }
+
+      // Hide install button when app is installed
+window.addEventListener('appinstalled', () => {
+    console.log('✅ App installed successfully!');
+    const installBtnFloating = document.getElementById('floatingInstallBtn');
+    const installBtnMenu = document.getElementById('installBtnMenu');
+    if (installBtnFloating) installBtnFloating.style.display = 'none';
+    if (installBtnMenu) installBtnMenu.style.display = 'none';
+});
+
+
+
+// Simple PWA install logic
+
+let deferredPrompt = null;
+
+// Save the browser's install event, if it fires
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+// Called when the user taps 📱 Install App
+async function installApp() {
+  // If the browser gave us a real install prompt
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    return;
+  }
+
+  // If no prompt is available, show your instructions popup
+  showInstallInstructions();
+}
+
 </script>
 </body>
 </html>
+
+
+
+       
+
+   
