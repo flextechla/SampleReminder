@@ -3723,144 +3723,91 @@ ${script}
 // ... your existing app code ends here ...
 
 
-       
-  // ==================== PWA INSTALL ====================
+      // ... (This should be at the very bottom of your script, right before </script>)
 
-let deferredPrompt = null;
+        // ==================== PWA INSTALL ====================
+        // We define this at the TOP LEVEL so the HTML button can find it.
+        
+        let deferredPrompt = null;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const installBtnFloating = document.getElementById('floatingInstallBtn');
+        const installBtnMenu = document.getElementById('installBtnMenu');
 
-// Detect if already installed (standalone)
-const isStandalone =
-    window.matchMedia('(display-mode: standalone)').matches ||
-    window.navigator.standalone === true;
+        // Capture the native install prompt (Android/Chrome/Edge)
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('✅ PWA install event captured!');
+            if (!isStandalone) {
+                if (installBtnFloating) installBtnFloating.style.display = 'block';
+                if (installBtnMenu) installBtnMenu.style.display = 'block';
+            }
+        });
 
-const installBtnFloating = document.getElementById('floatingInstallBtn');
-const installBtnMenu = document.getElementById('installBtnMenu');
+        // Show button for iOS manually since it doesn't support the event above
+        if (isIOS && !isStandalone) {
+            setTimeout(() => {
+                if (installBtnFloating) installBtnFloating.style.display = 'block';
+                if (installBtnMenu) installBtnMenu.style.display = 'block';
+            }, 1000);
+        }
 
-// Always show buttons after a short delay if NOT installed
-if (!isStandalone) {
-    setTimeout(() => {
-        if (installBtnFloating) installBtnFloating.style.display = 'block';
-        if (installBtnMenu) installBtnMenu.style.display = 'block';
-    }, 3000);
-}
+        // THIS IS THE GLOBAL FUNCTION CALLED BY YOUR HTML BUTTON
+        window.installApp = async function() {
+            console.log("👆 Install button clicked");
+            if (deferredPrompt) {
+                console.log("🚀 Launching native prompt...");
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null; // Clear prompt after use
+            } else {
+                console.log("⚠️ No native prompt found. Showing instructions.");
+                showInstallInstructions(); 
+            }
+        };
 
+        function showInstallInstructions() {
+            const existing = document.getElementById('installInstructionsModal');
+            if (existing) existing.remove();
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.id = 'installInstructionsModal';
+            
+            let instructionsHtml = isIOS ? `
+                <p style="margin-bottom: 8px;"><strong>1.</strong> Tap the <span style="font-size: 1.3rem;">⎋</span> <strong>Share</strong> button.</p>
+                <p style="margin-bottom: 8px;"><strong>2.</strong> Scroll down and tap <strong>Add to Home Screen</strong>.</p>` : `
+                <p style="margin-bottom: 8px;"><strong>1.</strong> Tap the browser menu (⋮).</p>
+                <p style="margin-bottom: 8px;"><strong>2.</strong> Select <strong>Install App</strong> or <strong>Add to Home Screen</strong>.</p>`;
 
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📲</div>
+                    <h2 class="modal-title" style="margin-bottom: 10px;">Install App</h2>
+                    <div style="text-align: left; font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.5;">
+                        ${instructionsHtml}
+                    </div>
+                    <button class="row-btn btn-full-width" onclick="document.getElementById('installInstructionsModal').remove()">Got it</button>
+                </div>`;
+            document.body.appendChild(modal);
+        }
 
-// Capture Chrome/Android install event
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    // Show install buttons when prompt is available
-    if (installBtnFloating) installBtnFloating.style.display = 'block';
-    if (installBtnMenu) installBtnMenu.style.display = 'block';
-
-    console.log('PWA install prompt available');
-});
-
-// Main install function used by both buttons
-async function installApp() {
-    // If we have a real prompt (Android/Chrome)
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-
-        const choiceResult = await deferredPrompt.userChoice;
-
-        if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the install prompt');
-
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ App installed successfully');
             if (installBtnFloating) installBtnFloating.style.display = 'none';
             if (installBtnMenu) installBtnMenu.style.display = 'none';
-        } else {
-            console.log('User dismissed the install prompt');
-        }
+        });
 
-        deferredPrompt = null;
-        return;
-    }
-
-    // Fallback for iOS / desktop / no prompt available
-    showInstallInstructions();
-}
-
-// Simple fallback instructions modal
-function showInstallInstructions() {
-    const existing = document.getElementById('installInstructionsModal');
-    if (existing) existing.remove();
-
-    const modal = document.createElement('div');
-    modal.className = 'modal active';
-    modal.id = 'installInstructionsModal';
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 15px;">📲</div>
-            <h2 class="modal-title" style="margin-bottom: 10px;">Install SampleFlow</h2>
-            <p style="margin-bottom: 20px; color: var(--text-secondary);">
-                For the best experience, add SampleFlow to your home screen.
-            </p>
-            <div style="text-align: left; font-size: 0.9rem; color: var(--text-main); margin-bottom: 20px;">
-                <p style="margin-bottom: 8px;">
-                    <strong>iOS (Safari):</strong> Tap the Share button, then “Add to Home Screen”.
-                </p>
-                <p style="margin-bottom: 8px;">
-                    <strong>Android (Chrome):</strong> Open the browser menu and choose “Install app” or “Add to Home Screen”.
-                </p>
-            </div>
-            <button class="row-btn btn-full-width" onclick="document.getElementById('installInstructionsModal').remove()">
-                Got it
-            </button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-        // Register service worker
+        // PWA DEBUGGER
+        console.log("🔍 PWA DEBUGGER STARTED");
+        if (!window.isSecureContext) console.error("❌ ERROR: App is not running on HTTPS!");
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(reg => console.log('✅ Service Worker registered'))
-                    .catch(err => console.log('❌ SW registration failed:', err));
-            });
+            navigator.serviceWorker.ready.then(() => console.log("✅ Service Worker is Active"));
         }
-
-      // Hide install button when app is installed
-window.addEventListener('appinstalled', () => {
-    console.log('✅ App installed successfully!');
-    const installBtnFloating = document.getElementById('floatingInstallBtn');
-    const installBtnMenu = document.getElementById('installBtnMenu');
-    if (installBtnFloating) installBtnFloating.style.display = 'none';
-    if (installBtnMenu) installBtnMenu.style.display = 'none';
-});
-
-
-
-// Simple PWA install logic
-
-let deferredPrompt = null;
-
-// Save the browser's install event, if it fires
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-});
-
-// Called when the user taps 📱 Install App
-async function installApp() {
-  // If the browser gave us a real install prompt
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const choiceResult = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    return;
-  }
-
-  // If no prompt is available, show your instructions popup
-  showInstallInstructions();
-}
-
-</script>
+    </script>
 </body>
-</html>
+</html> 
 
 
 
