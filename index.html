@@ -952,6 +952,33 @@
             0%, 100% { transform: translateX(-100%); }
             50% { transform: translateX(100%); }
         }
+        /* Floating Install Button */
+#floatingInstallBtn {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background: linear-gradient(135deg, #FE2C55, #FF6B8A);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 20px rgba(254, 44, 85, 0.4);
+    cursor: pointer;
+    z-index: 9999;
+    display: none;
+    border: none;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#floatingInstallBtn:active {
+    transform: scale(0.95);
+}
     </style>
 </head>
 <body>
@@ -3765,20 +3792,86 @@ ${script}
         if (isIOS && !isStandalone) {
             setTimeout(showIOSTip, 3000);
         }
-        
-        // 4. Register the Service Worker file
-      if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-        .then(reg => {
-            console.log('✅ PWA Service Worker Registered!');
-        })
-        .catch(err => {
-            console.log('❌ Service Worker registration failed:', err);
+        // ==================== PWA INSTALLATION (IMPROVED) ====================
+        let deferredPrompt;
+        const floatingBtn = document.getElementById('floatingInstallBtn');
+        const menuBtn = document.getElementById('installBtnMenu');
+
+        // Check if already installed
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        // Show floating button if NOT installed
+        if (!isStandalone) {
+            setTimeout(() => {
+                if (floatingBtn) floatingBtn.style.display = 'block';
+            }, 3000);
+        }
+
+        // Listen for Chrome/Android install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('🎉 Install prompt ready!');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            if (floatingBtn) floatingBtn.style.display = 'block';
+            if (menuBtn) menuBtn.style.display = 'block';
         });
-    });
-}
-        
+
+        // Master install function
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log('Install outcome:', outcome);
+                
+                if (outcome === 'accepted') {
+                    if (floatingBtn) floatingBtn.style.display = 'none';
+                    if (menuBtn) menuBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            } else {
+                showInstallInstructions();
+            }
+        }
+
+        function showInstallInstructions() {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.innerHTML = `
+                <div class="modal-content" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📱</div>
+                    <h2 style="margin-bottom: 15px;">Install SampleFlow</h2>
+                    ${isIOS ? `
+                        <p style="margin-bottom: 20px;">Tap the <strong>Share</strong> button in Safari and select <strong>"Add to Home Screen"</strong></p>
+                        <div style="font-size: 4rem; margin: 20px 0;">⎋</div>
+                    ` : `
+                        <p style="margin-bottom: 20px;">Tap your browser menu (⋮) and select <strong>"Add to Home screen"</strong></p>
+                    `}
+                    <button class="row-btn btn-full-width" onclick="this.closest('.modal').remove()">Got it!</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.log('❌ SW registration failed:', err));
+            });
+        }
+
+        // Hide install button when app is installed
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ App installed successfully!');
+            if (floatingBtn) floatingBtn.style.display = 'none';
+            if (menuBtn) menuBtn.style.display = 'none';
+        });
     </script>
 </body>
 </html>
+       
+
+   
