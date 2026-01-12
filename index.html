@@ -319,13 +319,14 @@
         
         /* Header */
         .header { 
-            background: var(--surface); 
-            padding: 15px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            border-bottom: 1px solid var(--border); 
-        }
+    background: var(--surface); 
+    /* This adds padding only if a notch/status bar exists */
+    padding: calc(15px + env(safe-area-inset-top)) 15px 15px 15px; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    border-bottom: 1px solid var(--border); 
+}
         
         .header-top { 
             display: flex; 
@@ -3812,92 +3813,7 @@ ${script}
 
       // ... (This should be at the very bottom of your script, right before </script>)
 
-     // ==================== GLOBAL PWA INSTALL LOGIC ====================
-// We attach this to 'window' to ensure the HTML button can ALWAYS see it.
-window.deferredPrompt = null;
-
-// 1. Capture the browser's install event
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    window.deferredPrompt = e;
-    console.log('✅ PWA install event captured and ready');
-    
-    // Force show the buttons now that we know the prompt is ready
-    const fBtn = document.getElementById('floatingInstallBtn');
-    const mBtn = document.getElementById('installBtnMenu');
-    if (fBtn) fBtn.style.display = 'block';
-    if (mBtn) mBtn.style.display = 'block';
-});
-
-// 2. The Primary Install Function (FAIL-SAFE)
-window.installApp = async function() {
-    console.log("👆 Install button clicked");
-
-    if (window.deferredPrompt) {
-        console.log("🚀 Launching native prompt...");
-        window.deferredPrompt.prompt();
-        const { outcome } = await window.deferredPrompt.userChoice;
-        console.log(`User response: ${outcome}`);
-        window.deferredPrompt = null; // Prompt can only be used once
-    } else {
-        console.log("ℹ️ Native prompt unavailable. Opening instructions.");
-        // Try to call your instructions modal
-        if (typeof showInstallInstructions === 'function') {
-            showInstallInstructions();
-        } else {
-            alert('To install: Open your browser menu (⋮) and select "Install App" or "Add to Home Screen".');
-        }
     }
-};
-
-// 3. Manual Instructions Fallback
-window.showInstallInstructions = function() {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    
-    const existing = document.getElementById('installInstructionsModal');
-    if (existing) existing.remove();
-
-    const modal = document.createElement('div');
-    modal.className = 'modal active';
-    modal.id = 'installInstructionsModal';
-    
-    // Custom logic to mention SampleFlow specifically
-    let instructionsHtml = isIOS ? `
-        <p style="margin-bottom: 12px; font-weight: 600;">To add SampleFlow to your iPhone:</p>
-        <p style="margin-bottom: 8px;"><strong>1.</strong> Tap the <span style="font-size: 1.3rem;">⎋</span> <strong>Share</strong> button at the bottom of Safari.</p>
-        <p style="margin-bottom: 8px;"><strong>2.</strong> Scroll down and tap <strong>Add to Home Screen</strong>.</p>
-        <p style="margin-bottom: 0;"><strong>3.</strong> Confirm the name "SampleFlow" and tap <strong>Add</strong>.</p>` : `
-        <p style="margin-bottom: 12px; font-weight: 600;">To install SampleFlow as an app:</p>
-        <p style="margin-bottom: 8px;"><strong>1.</strong> Tap the browser menu (⋮) in the top right.</p>
-        <p style="margin-bottom: 8px;"><strong>2.</strong> Select <strong>Install App</strong> or <strong>Add to Home Screen</strong>.</p>`;
-
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 15px;">📲</div>
-            <h2 class="modal-title" style="margin-bottom: 10px;">Get the App</h2>
-            <div style="text-align: left; font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.6; background: var(--bg); padding: 15px; border-radius: 12px;">
-                ${instructionsHtml}
-            </div>
-            <button class="row-btn btn-full-width" onclick="document.getElementById('installInstructionsModal').remove()">Got it</button>
-        </div>`;
-    document.body.appendChild(modal);
-};
-// 4. Cleanup on success
-window.addEventListener('appinstalled', () => {
-    console.log('✅ App installed successfully');
-    const fBtn = document.getElementById('floatingInstallBtn');
-    const mBtn = document.getElementById('installBtnMenu');
-    if (fBtn) fBtn.style.display = 'none';
-    if (mBtn) mBtn.style.display = 'none';
-});
-
-// 5. Final Service Worker Registration
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(reg => console.log('✅ SW Registered'))
-            .catch(err => console.error('❌ SW Failed', err));
-    });
 }
 </script>
 </body>
