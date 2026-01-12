@@ -989,6 +989,12 @@
     onclick="installApp()"
 >
     📱 Install App
+    <span
+      style="margin-left: 8px; font-size: 0.9rem;"
+      onclick="event.stopPropagation(); dismissInstallButton();"
+    >
+      ✕
+    </span>
 </button>
 
     <div id="landingPage">
@@ -1643,7 +1649,8 @@
     </div>
 
     <script>
-          // ==================== GLOBAL PWA INSTALL LOGIC ====================
+
+    // ==================== GLOBAL PWA INSTALL LOGIC ====================
 // We attach this to 'window' to ensure the HTML button can ALWAYS see it.
 window.deferredPrompt = null;
 
@@ -1681,7 +1688,37 @@ window.installApp = async function() {
     }
 };
 
-// 3. Manual Instructions Fallback
+// 3. Decide when to auto-show the install buttons
+(function () {
+    const installBtnFloating = document.getElementById('floatingInstallBtn');
+    const installBtnMenu = document.getElementById('installBtnMenu');
+
+    // Detect if already running as installed app
+    const isStandalone =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+
+    // Check flags in localStorage
+    const alreadyInstalled = localStorage.getItem('sampleflow_installed') === 'true';
+    const dismissedAt = parseInt(localStorage.getItem('sampleflow_install_dismissed_at') || '0', 10);
+
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    const canShowAgain = !dismissedAt || (Date.now() - dismissedAt) > ONE_DAY_MS;
+
+    // Only auto-show if: not standalone, not marked installed, and not dismissed in last day
+    if (!isStandalone && !alreadyInstalled && canShowAgain) {
+        setTimeout(() => {
+            if (installBtnFloating) installBtnFloating.style.display = 'block';
+            if (installBtnMenu) installBtnMenu.style.display = 'block';
+        }, 3000);
+    } else {
+        // Otherwise, keep them hidden
+        if (installBtnFloating) installBtnFloating.style.display = 'none';
+        if (installBtnMenu) installBtnMenu.style.display = 'none';
+    }
+})();
+
+// 4. Manual Instructions Fallback
 window.showInstallInstructions = function() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     
@@ -1713,14 +1750,28 @@ window.showInstallInstructions = function() {
         </div>`;
     document.body.appendChild(modal);
 };
-// 4. Cleanup on success
+
+// 5. Hide install buttons when app is installed
 window.addEventListener('appinstalled', () => {
-    console.log('✅ App installed successfully');
-    const fBtn = document.getElementById('floatingInstallBtn');
-    const mBtn = document.getElementById('installBtnMenu');
-    if (fBtn) fBtn.style.display = 'none';
-    if (mBtn) mBtn.style.display = 'none';
+    console.log('✅ App installed successfully!');
+    const installBtnFloating = document.getElementById('floatingInstallBtn');
+    const installBtnMenu = document.getElementById('installBtnMenu');
+    if (installBtnFloating) installBtnFloating.style.display = 'none';
+    if (installBtnMenu) installBtnMenu.style.display = 'none';
+
+    // Remember that the app is installed on this device
+    localStorage.setItem('sampleflow_installed', 'true');
 });
+
+// 6. Dismiss Install button
+function dismissInstallButton() {
+    const installBtnFloating = document.getElementById('floatingInstallBtn');
+    if (installBtnFloating) installBtnFloating.style.display = 'none';
+
+    // Remember when the user dismissed it
+    localStorage.setItem('sampleflow_install_dismissed_at', Date.now().toString());
+}
+       
 
 // 5. Final Service Worker Registration
 if ('serviceWorker' in navigator) {
@@ -2640,12 +2691,6 @@ function closeTikTokLaunchModal() {
                 expandedCards.add(id);
             }
             render();
-        }
-
-        function checkAndShowInstallPrompt() {
-            if (window.matchMedia('(display-mode: standalone)').matches) return;
-            if (localStorage.getItem('install_dismissed')) return;
-            showInstallModal();
         }
 
         function showInstallModal() {
