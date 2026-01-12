@@ -971,6 +971,14 @@
     animation: pulse 2s infinite;
 }
 
+        /* Hide the install button when running as an installed PWA */
+@media (display-mode: standalone), (display-mode: minimal-ui) {
+    #floatingInstallBtn {
+        display: none !important;
+    }
+}
+
+
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
