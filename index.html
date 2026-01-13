@@ -3284,7 +3284,7 @@ async function submitBetaFeedback() {
         }
 
         // ==================== CLOUD SYNC ====================
-        async function migrateToCloud() {
+     async function migrateToCloud() {
             if (!useCloud || !currentUser) return;
             
             const localSamples = JSON.parse(localStorage.getItem('tiktok_samples') || '[]');
@@ -3297,23 +3297,26 @@ async function submitBetaFeedback() {
             }
         }
 
-      const { error } = await sb_client
-    .from('sample_tracker_data')
-    .upsert({
-        user_id: currentUser.id,
-        samples: samples,
-        settings: settings,
-        updated_at: new Date().toISOString()
-    }, { 
-        onConflict: 'user_id' 
-    });
+        async function saveToCloud() {
+            if (!useCloud || !currentUser || !sb_client) return;
+            
+            try {
+                const { error } = await sb_client
+                    .from('sample_tracker_data')
+                    .upsert({
+                        user_id: currentUser.id,
+                        samples: samples,
+                        settings: settings,
+                        updated_at: new Date().toISOString()
+                    }, { 
+                        onConflict: 'user_id' 
+                    });
                 
                 if (error) throw error;
             } catch (e) {
                 console.error('Save to cloud failed:', e);
             }
         }
-
         async function loadFromCloud() {
             if (!useCloud || !currentUser || !sb_client) return;
             
