@@ -2421,7 +2421,7 @@ function closeTikTokLaunchModal() {
             document.body.appendChild(modal);
         }
 
-      async function handleAuth(mode) {
+     async function handleAuth(mode) {
     const email = document.getElementById('authEmail').value;
     const password = document.getElementById('authPassword').value;
     const rememberMe = document.getElementById('rememberMe').checked;
@@ -2456,9 +2456,7 @@ function closeTikTokLaunchModal() {
             data = result.data;
             error = result.error;
             
-            // Check if user was actually created (even if Supabase returns an error)
             if (error && data?.user) {
-                // User exists but got an error - likely already registered, try signing in
                 console.log('User may exist, attempting sign in...');
                 const signInResult = await sb_client.auth.signInWithPassword({ email, password });
                 data = signInResult.data;
@@ -2475,7 +2473,43 @@ function closeTikTokLaunchModal() {
         if (data.user) {
             if (rememberMe) {
                 localStorage.setItem('user_email', email);
-                localStor
+                localStorage.setItem('user_password', password);
+            } else {
+                localStorage.removeItem('user_email');
+                localStorage.removeItem('user_password');
+            }
+            
+            currentUser = data.user;
+            useCloud = true;
+            
+            closeAuthModal();
+            
+            if (mode === 'signup') {
+                await migrateToCloud();
+            }
+            
+            await loadUserTier();
+            await loadFromCloud();
+            showApp();
+            render();
+            renderCalendar();
+            
+            if (mode === 'signup') {
+                setTimeout(() => {
+                    const btn = document.getElementById('floatingInstallBtn');
+                    if (btn && !window.matchMedia('(display-mode: standalone)').matches) {
+                        btn.style.display = 'block';
+                    }
+                }, 3000);
+            }
+        }
+    } catch (e) {
+        console.error('Auth error:', e);
+        errorDiv.textContent = mode === 'signup' ? 'Sign up failed. Email may already be in use.' : 'Invalid email or password';
+        errorDiv.style.display = 'block';
+    }
+}
+        
         async function signOut() {
             if (confirm('Sign out? Your data will remain safely in the cloud.')) {
                 await sb_client.auth.signOut();
