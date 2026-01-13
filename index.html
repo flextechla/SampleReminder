@@ -1378,7 +1378,10 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="row-btn btn-full-width">Save Sample</button>
+               <div style="display: flex; gap: 10px;">
+    <button type="button" class="row-btn btn-secondary" style="flex: 1;" onclick="closeModal()">Cancel</button>
+    <button type="submit" class="row-btn btn-full-width" style="flex: 2;">Save Sample</button>
+</div>
             </form>
         </div>
     </div>
@@ -3272,18 +3275,16 @@ async function submitBetaFeedback() {
             }
         }
 
-        async function saveToCloud() {
-            if (!useCloud || !currentUser || !sb_client) return;
-            
-            try {
-                const { error } = await sb_client
-                    .from('sample_tracker_data')
-                    .upsert({
-                        user_id: currentUser.id,
-                        samples: samples,
-                        settings: settings,
-                        updated_at: new Date().toISOString()
-                    });
+      const { error } = await sb_client
+    .from('sample_tracker_data')
+    .upsert({
+        user_id: currentUser.id,
+        samples: samples,
+        settings: settings,
+        updated_at: new Date().toISOString()
+    }, { 
+        onConflict: 'user_id' 
+    });
                 
                 if (error) throw error;
             } catch (e) {
