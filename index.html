@@ -2056,89 +2056,84 @@ if ('serviceWorker' in navigator) {
             document.getElementById('deleteAccountModal').classList.remove('active');
         }
 
-        async function confirmDeleteAccount() {
-            const confirmText = document.getElementById('deleteConfirmInput').value.trim().toUpperCase();
-            const errorDiv = document.getElementById('deleteAccountError');
-            
-            if (confirmText !== 'DELETE') {
-                errorDiv.textContent = 'Please type DELETE to confirm';
-                errorDiv.style.display = 'block';
-                return;
-            }
-            
-            if (!confirm('Are you absolutely sure? This will delete all your data and you will need to contact support to complete account deletion.')) {
-                return;
-            }
-            
-            try {
-                errorDiv.textContent = 'Deleting your data...';
-                errorDiv.style.color = 'var(--text-secondary)';
-                errorDiv.style.display = 'block';
-                
-                const userEmail = localStorage.getItem('user_email') || currentUser.email;
-                
-                if (useCloud && currentUser) {
-                    try {
-                        await sb_client
-                            .from('sample_tracker_data')
-                            .delete()
-                            .eq('user_id', currentUser.id);
-                        
-                        await sb_client
-                            .from('users')
-                            .delete()
-                            .eq('id', currentUser.id);
-                            
-                        console.log('All user data deleted from database');
-                    } catch (dbError) {
-                        console.error('Database cleanup error:', dbError);
-                        throw new Error('Failed to delete data. Please try again or contact support.');
-                    }
-                }
-                
-                await sb_client.auth.signOut();
-                localStorage.clear();
-                
-                currentUser = null;
-                useCloud = false;
-                samples = [];
-                settings = { defaultDays: 14 };
-                
-                closeDeleteAccountModal();
-                
-                const successModal = document.createElement('div');
-                successModal.className = 'modal active';
-                successModal.innerHTML = `
-                    <div class="modal-content" style="max-width: 500px;">
-                        <div class="modal-header">
-                            <h2 class="modal-title">✓ Data Deleted Successfully</h2>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 20px;">
-                            <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
-                            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Your data has been deleted</p>
-                            <p style="margin-bottom: 20px; color: var(--text-secondary);">All your samples, photos, and settings have been permanently removed.</p>
-                            
-                            <div style="background: #E3F2FD; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: left;">
-                                <p style="font-weight: 600; margin-bottom: 10px;">Final Step: Complete Account Deletion</p>
-                                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">To fully delete your account authentication:</p>
-                                <p style="font-size: 0.9rem; color: #666;">Email: <strong>${userEmail}</strong></p>
-                                <p style="font-size: 0.9rem; color: #666;">To: <a href="mailto:support@lazybstudios.com?subject=Account Deletion Request - ${encodeURIComponent(userEmail)}&body=Please delete my SampleFlow account." style="color: var(--primary);">support@lazybstudios.com</a></p>
-                            </div>
-                            
-                            <button class="row-btn btn-full-width" onclick="window.location.reload()">Return to Home</button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(successModal);
-                
-            } catch (e) {
-                console.error('Delete account error:', e);
-                errorDiv.textContent = 'Error: ' + e.message;
-                errorDiv.style.color = 'var(--red)';
-                errorDiv.style.display = 'block';
-            }
+async function confirmDeleteAccount() {
+    const confirmText = document.getElementById('deleteConfirmInput').value.trim().toUpperCase();
+    const errorDiv = document.getElementById('deleteAccountError');
+    
+    if (confirmText !== 'DELETE') {
+        errorDiv.textContent = 'Please type DELETE to confirm';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    
+    if (!confirm('Are you absolutely sure? This will permanently delete your account and all data. This action cannot be undone.')) {
+        return;
+    }
+    
+    try {
+        errorDiv.textContent = 'Deleting your account...';
+        errorDiv.style.color = 'var(--text-secondary)';
+        errorDiv.style.display = 'block';
+        
+        // Get the current session token
+        const { data: { session }, error: sessionError } = await sb_client.auth.getSession();
+        
+        if (sessionError || !session) {
+            throw new Error('You must be signed in to delete your account');
         }
+        
+        // Call the Edge Function to delete the account completely
+        const response = await fetch('https://eiigbmrjtwndanywrcqp.supabase.co/functions/v1/delete-account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${session.access_token}`,
+                'apikey': SUPABASE_ANON_KEY
+            }
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(result.error || 'Failed to delete account');
+        }
+        
+        // Clear all local data
+        localStorage.clear();
+        
+        // Reset app state
+        currentUser = null;
+        useCloud = false;
+        samples = [];
+        settings = { defaultDays: 14 };
+        
+        closeDeleteAccountModal();
+        
+        // Show success message
+        const successModal = document.createElement('div');
+        successModal.className = 'modal active';
+        successModal.innerHTML = `
+            <div class="modal-content" style="max-width: 400px;">
+                <div class="modal-header">
+                    <h2 class="modal-title" style="color: var(--green);">✓ Account Deleted</h2>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
+                    <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Your account has been completely deleted</p>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">All your data and login credentials have been permanently removed.</p>
+                    <button class="row-btn btn-full-width" onclick="window.location.reload()">Return to Home</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(successModal);
+        
+    } catch (e) {
+        console.error('Delete account error:', e);
+        errorDiv.textContent = 'Error: ' + e.message;
+        errorDiv.style.color = 'var(--red)';
+        errorDiv.style.display = 'block';
+    }
+}
 
     function readyToFilm(id) {
     if (userTier !== 'pro') {
