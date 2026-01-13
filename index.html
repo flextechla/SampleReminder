@@ -1174,7 +1174,7 @@
                 <button class="row-btn btn-secondary" id="manageSubBtn" onclick="manageSubscription(); closeMenu()" style="display: none; background: linear-gradient(135deg, #FFD700, #FFA500); color: white; border: none; font-weight: 700;">
                     ⭐ Manage Subscription
                 </button>
-                
+                <button class="row-btn btn-secondary" onclick="openBetaFeedback(); closeMenu();" style="background: linear-gradient(135deg, #9C27B0, #BA68C8); color: white; border: none;">🧪 Beta Feedback</button>
                 <button class="row-btn btn-secondary" onclick="openSettings(); closeMenu()">⚙️ Settings</button>
                 <button class="row-btn btn-secondary" id="installBtnMenu" onclick="installApp(); closeMenu()" style="display: none;">📲 Install App</button>
                 <button class="row-btn btn-secondary" onclick="openSupport(); closeMenu()">💬 Contact Support</button>
@@ -2239,6 +2239,428 @@ function closeTikTokLaunchModal() {
     </script>
     
     <script>
+
+// ==================== BETA FEEDBACK ====================
+const BETA_TEST_SECTIONS = [
+    {
+        id: "account",
+        title: "1. Account & Authentication",
+        items: [
+            { id: "account_create", label: "Create new account" },
+            { id: "account_signin", label: "Sign in with existing account" },
+            { id: "account_signout", label: "Sign out successfully" },
+            { id: "account_remember", label: "'Keep me logged in' works" },
+            { id: "account_autosign", label: "Auto sign-in on return visit" },
+            { id: "account_change_email", label: "Change email address" },
+            { id: "account_change_password", label: "Change password" },
+            { id: "account_delete", label: "Delete account completely" },
+            { id: "account_cloud_sync", label: "Cloud sync across devices" },
+        ]
+    },
+    {
+        id: "samples",
+        title: "2. Sample Management",
+        items: [
+            { id: "sample_add", label: "Add new sample" },
+            { id: "sample_edit", label: "Edit existing sample" },
+            { id: "sample_delete", label: "Delete sample" },
+            { id: "sample_mark_posted", label: "Mark as Posted (via checklist)" },
+            { id: "sample_auto_archive", label: "Posted samples auto-archive" },
+            { id: "sample_search_brand", label: "Search by brand name" },
+            { id: "sample_search_product", label: "Search by product name" },
+            { id: "sample_batch_select", label: "Batch select samples" },
+            { id: "sample_batch_done", label: "Batch archive selected" },
+            { id: "sample_batch_delete", label: "Batch delete" },
+        ]
+    },
+    {
+        id: "fields",
+        title: "3. Sample Fields",
+        items: [
+            { id: "field_product", label: "Product name saves" },
+            { id: "field_brand", label: "Brand name saves" },
+            { id: "field_date", label: "Date picker works" },
+            { id: "field_days", label: "Days to post works" },
+            { id: "field_due_preview", label: "Due date calculates correctly" },
+            { id: "field_link", label: "Product link saves" },
+            { id: "field_tags_add", label: "Add tags (Enter key)" },
+            { id: "field_tags_remove", label: "Remove tags" },
+            { id: "field_notes", label: "Notes save" },
+            { id: "field_photo_upload", label: "Upload photos" },
+            { id: "field_photo_remove", label: "Remove photos" },
+            { id: "field_photo_view", label: "View photo fullscreen" },
+            { id: "field_reminder", label: "Per-sample reminder setting" },
+            { id: "field_checklist_filmed", label: "Filmed checkbox works" },
+            { id: "field_checklist_edited", label: "Edited checkbox works" },
+            { id: "field_checklist_posted", label: "Posted checkbox works" },
+        ]
+    },
+    {
+        id: "filters",
+        title: "4. Filters & Sorting",
+        items: [
+            { id: "filter_all", label: "Filter: All" },
+            { id: "filter_overdue", label: "Filter: Overdue" },
+            { id: "filter_urgent", label: "Filter: Due Soon" },
+            { id: "filter_good", label: "Filter: On Track" },
+            { id: "filter_completed", label: "Filter: Posted" },
+            { id: "filter_counts", label: "Filter counts update correctly" },
+            { id: "sort_due", label: "Sort by Due Date" },
+            { id: "sort_brand", label: "Sort by Brand" },
+            { id: "sort_received", label: "Sort by Received" },
+        ]
+    },
+    {
+        id: "views",
+        title: "5. Views & Display",
+        items: [
+            { id: "view_list", label: "List view works" },
+            { id: "view_calendar", label: "Calendar view works (Basic+)" },
+            { id: "view_calendar_nav", label: "Calendar month navigation" },
+            { id: "view_calendar_details", label: "Calendar day details popup" },
+            { id: "view_condensed", label: "Condensed view toggle" },
+            { id: "view_expand_collapse", label: "Expand/Collapse cards" },
+            { id: "view_expand_all", label: "Expand All / Collapse All" },
+            { id: "view_dark_mode", label: "Dark mode displays correctly" },
+            { id: "view_compact", label: "Compact mode works" },
+            { id: "view_progress_bar", label: "Progress bar accurate" },
+            { id: "view_status_badges", label: "Status badges show correctly" },
+        ]
+    },
+    {
+        id: "tiers",
+        title: "6. Subscription & Tiers",
+        items: [
+            { id: "tier_free_limit", label: "Free: 5 sample limit enforced" },
+            { id: "tier_free_photo", label: "Free: 1 photo limit enforced" },
+            { id: "tier_upgrade_modal", label: "Upgrade modal appears" },
+            { id: "tier_basic_unlock", label: "Basic features unlock" },
+            { id: "tier_pro_unlock", label: "Pro features unlock" },
+            { id: "tier_manage_sub", label: "Manage Subscription button" },
+        ]
+    },
+    {
+        id: "pro",
+        title: "7. Pro Features",
+        items: [
+            { id: "pro_film", label: "Ready to Film button" },
+            { id: "pro_film_tiktok", label: "TikTok opens from Ready to Film" },
+            { id: "pro_script", label: "AI Script Generator works" },
+            { id: "pro_script_copy", label: "Copy script to clipboard" },
+            { id: "pro_script_regenerate", label: "Generate new script" },
+            { id: "pro_analytics", label: "Analytics dashboard" },
+            { id: "pro_export", label: "Export to CSV" },
+            { id: "pro_import", label: "Import data (JSON)" },
+        ]
+    },
+    {
+        id: "settings",
+        title: "8. Settings",
+        items: [
+            { id: "setting_dark_toggle", label: "Dark mode toggle" },
+            { id: "setting_dark_persist", label: "Dark mode persists on reload" },
+            { id: "setting_haptic", label: "Haptic feedback toggle" },
+            { id: "setting_compact", label: "Compact mode toggle" },
+            { id: "setting_notifications", label: "Push notifications permission" },
+            { id: "setting_reminder_days", label: "Reminder days setting" },
+            { id: "setting_default_days", label: "Default days to post" },
+            { id: "setting_clear_completed", label: "Clear completed samples" },
+            { id: "setting_reset", label: "Reset app data" },
+            { id: "setting_account_info", label: "Account info displays" },
+        ]
+    },
+    {
+        id: "pwa",
+        title: "9. PWA & Installation",
+        items: [
+            { id: "pwa_floating_btn", label: "Floating install button appears" },
+            { id: "pwa_menu_btn", label: "Menu install button appears" },
+            { id: "pwa_install_prompt", label: "Install prompt works" },
+            { id: "pwa_dismiss", label: "Dismiss install button (X)" },
+            { id: "pwa_instructions", label: "Manual install instructions" },
+            { id: "pwa_hidden_standalone", label: "Install hidden when installed" },
+        ]
+    },
+    {
+        id: "ui",
+        title: "10. General UI",
+        items: [
+            { id: "ui_landing", label: "Landing page displays" },
+            { id: "ui_modals_open", label: "Modals open correctly" },
+            { id: "ui_modals_close", label: "Modals close (X and outside)" },
+            { id: "ui_menu", label: "Menu opens/closes" },
+            { id: "ui_help", label: "Help modal content" },
+            { id: "ui_support", label: "Contact support link" },
+            { id: "ui_privacy", label: "Privacy Policy opens" },
+            { id: "ui_terms", label: "Terms of Service opens" },
+            { id: "ui_photo_viewer", label: "Photo viewer modal" },
+            { id: "ui_product_link", label: "Product link browser" },
+            { id: "ui_toast", label: "Toast notifications appear" },
+            { id: "ui_no_errors", label: "No console errors" },
+        ]
+    },
+];
+
+let betaFeedbackData = {
+    test_results: {},
+    bugs: [],
+    suggestions: [],
+    overall_rating: null,
+    would_recommend: null,
+    additional_comments: ''
+};
+
+let betaFeedbackId = null;
+
+async function openBetaFeedback() {
+    if (!useCloud || !currentUser) {
+        alert('Please sign in to submit beta feedback');
+        return;
+    }
+    await loadBetaFeedback();
+    renderBetaFeedbackContent();
+    document.getElementById('betaFeedbackModal').classList.add('active');
+}
+
+function closeBetaFeedback() {
+    document.getElementById('betaFeedbackModal').classList.remove('active');
+}
+
+async function loadBetaFeedback() {
+    try {
+        const { data, error } = await sb_client
+            .from('beta_feedback')
+            .select('*')
+            .eq('user_id', currentUser.id)
+            .single();
+        
+        if (data) {
+            betaFeedbackId = data.id;
+            betaFeedbackData = {
+                test_results: data.test_results || {},
+                bugs: data.bugs || [],
+                suggestions: data.suggestions || [],
+                overall_rating: data.overall_rating,
+                would_recommend: data.would_recommend,
+                additional_comments: data.additional_comments || ''
+            };
+        }
+    } catch (e) {
+        console.log('No existing beta feedback found');
+    }
+}
+
+function renderBetaFeedbackContent() {
+    const container = document.getElementById('betaFeedbackContent');
+    const totalTests = BETA_TEST_SECTIONS.reduce((sum, s) => sum + s.items.length, 0);
+    const completedTests = Object.keys(betaFeedbackData.test_results).length;
+    const progressPercent = Math.round((completedTests / totalTests) * 100);
+    
+    let html = `
+        <div style="background: var(--bg); padding: 12px; border-radius: 10px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-weight: 600;">Testing Progress</span>
+                <span style="font-weight: 700; color: var(--primary);">${completedTests}/${totalTests} (${progressPercent}%)</span>
+            </div>
+            <div style="height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;">
+                <div style="height: 100%; width: ${progressPercent}%; background: var(--primary); transition: width 0.3s;"></div>
+            </div>
+        </div>
+    `;
+    
+    BETA_TEST_SECTIONS.forEach(section => {
+        const sectionCompleted = section.items.filter(item => betaFeedbackData.test_results[item.id]).length;
+        html += `
+            <div class="collapsible-section">
+                <div class="collapsible-header" onclick="toggleBetaSection('${section.id}')">
+                    <span>${section.title}</span>
+                    <span style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">${sectionCompleted}/${section.items.length}</span>
+                        <span id="beta-arrow-${section.id}">▼</span>
+                    </span>
+                </div>
+                <div class="collapsible-content" id="beta-section-${section.id}">
+                    <div style="padding: 10px 0;">
+        `;
+        section.items.forEach(item => {
+            const result = betaFeedbackData.test_results[item.id] || null;
+            html += `
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid var(--border);">
+                    <span style="font-size: 0.9rem; flex: 1;">${item.label}</span>
+                    <div style="display: flex; gap: 6px;">
+                        <button onclick="setBetaResult('${item.id}', 'pass')" style="padding: 6px 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; background: ${result === 'pass' ? 'var(--green)' : 'var(--bg)'}; color: ${result === 'pass' ? 'white' : 'var(--text-secondary)'};">✓</button>
+                        <button onclick="setBetaResult('${item.id}', 'fail')" style="padding: 6px 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; background: ${result === 'fail' ? 'var(--red)' : 'var(--bg)'}; color: ${result === 'fail' ? 'white' : 'var(--text-secondary)'};">✗</button>
+                        <button onclick="setBetaResult('${item.id}', 'na')" style="padding: 6px 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; background: ${result === 'na' ? 'var(--yellow)' : 'var(--bg)'}; color: ${result === 'na' ? 'white' : 'var(--text-secondary)'};">N/A</button>
+                    </div>
+                </div>
+            `;
+        });
+        html += `</div></div></div>`;
+    });
+    
+    html += `
+        <div style="margin-top: 25px;">
+            <h3 style="font-weight: 700; margin-bottom: 12px; color: var(--red);">🐛 Bug Reports</h3>
+            <div id="bugsList">${renderBugsList()}</div>
+            <button onclick="addBug()" class="row-btn btn-secondary" style="margin-top: 10px;">+ Add Bug Report</button>
+        </div>
+        <div style="margin-top: 25px;">
+            <h3 style="font-weight: 700; margin-bottom: 12px; color: var(--green);">💡 Suggestions</h3>
+            <div id="suggestionsList">${renderSuggestionsList()}</div>
+            <button onclick="addSuggestion()" class="row-btn btn-secondary" style="margin-top: 10px;">+ Add Suggestion</button>
+        </div>
+        <div style="margin-top: 25px; padding: 20px; background: var(--bg); border-radius: 12px;">
+            <h3 style="font-weight: 700; margin-bottom: 15px;">Overall Experience</h3>
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: 600; display: block; margin-bottom: 8px;">Rating (1-5 stars)</label>
+                <div style="display: flex; gap: 10px;">
+                    ${[1,2,3,4,5].map(n => `<button onclick="setBetaRating(${n})" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); background: ${betaFeedbackData.overall_rating === n ? 'var(--primary)' : 'var(--surface)'}; color: ${betaFeedbackData.overall_rating === n ? 'white' : 'var(--text-main)'}; font-weight: 700; font-size: 1.1rem; cursor: pointer;">${n}</button>`).join('')}
+                </div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: 600; display: block; margin-bottom: 8px;">Would you recommend SampleFlow?</label>
+                <div style="display: flex; gap: 10px;">
+                    ${['Yes', 'No', 'Maybe'].map(opt => `<button onclick="setBetaRecommend('${opt}')" style="padding: 10px 20px; border-radius: 10px; border: 2px solid var(--border); background: ${betaFeedbackData.would_recommend === opt ? 'var(--primary)' : 'var(--surface)'}; color: ${betaFeedbackData.would_recommend === opt ? 'white' : 'var(--text-main)'}; font-weight: 600; cursor: pointer;">${opt}</button>`).join('')}
+                </div>
+            </div>
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 8px;">Additional Comments</label>
+                <textarea id="betaComments" class="form-textarea" style="min-height: 100px;" onchange="setBetaComments(this.value)" placeholder="Any other thoughts or feedback...">${betaFeedbackData.additional_comments}</textarea>
+            </div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button onclick="submitBetaFeedback()" class="row-btn btn-full-width" style="background: var(--green);">✓ Save Feedback</button>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); text-align: center; margin-top: 10px;">Your progress is saved automatically as you test</p>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+function renderBugsList() {
+    if (betaFeedbackData.bugs.length === 0) return '<p style="color: var(--text-secondary); font-size: 0.9rem;">No bugs reported yet</p>';
+    return betaFeedbackData.bugs.map((bug, i) => `
+        <div style="background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--red); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div style="flex: 1;"><p style="font-weight: 600; margin-bottom: 5px;">${bug.description || 'No description'}</p><p style="font-size: 0.8rem; color: var(--text-secondary);">Severity: ${bug.severity || 'Not set'}</p></div>
+                <button onclick="removeBug(${i})" style="background: none; border: none; color: var(--red); cursor: pointer; font-size: 1.2rem;">×</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderSuggestionsList() {
+    if (betaFeedbackData.suggestions.length === 0) return '<p style="color: var(--text-secondary); font-size: 0.9rem;">No suggestions yet</p>';
+    return betaFeedbackData.suggestions.map((sug, i) => `
+        <div style="background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div style="flex: 1;"><p style="font-weight: 600; margin-bottom: 5px;">${sug.description || 'No description'}</p><p style="font-size: 0.8rem; color: var(--text-secondary);">Priority: ${sug.priority || 'Not set'}</p></div>
+                <button onclick="removeSuggestion(${i})" style="background: none; border: none; color: var(--red); cursor: pointer; font-size: 1.2rem;">×</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function toggleBetaSection(sectionId) {
+    const content = document.getElementById(`beta-section-${sectionId}`);
+    const arrow = document.getElementById(`beta-arrow-${sectionId}`);
+    if (content.classList.contains('active')) {
+        content.classList.remove('active');
+        arrow.textContent = '▼';
+    } else {
+        content.classList.add('active');
+        arrow.textContent = '▲';
+    }
+}
+
+async function setBetaResult(itemId, result) {
+    betaFeedbackData.test_results[itemId] = result;
+    renderBetaFeedbackContent();
+    await saveBetaFeedback();
+}
+
+async function setBetaRating(rating) {
+    betaFeedbackData.overall_rating = rating;
+    renderBetaFeedbackContent();
+    await saveBetaFeedback();
+}
+
+async function setBetaRecommend(value) {
+    betaFeedbackData.would_recommend = value;
+    renderBetaFeedbackContent();
+    await saveBetaFeedback();
+}
+
+async function setBetaComments(value) {
+    betaFeedbackData.additional_comments = value;
+    await saveBetaFeedback();
+}
+
+function addBug() {
+    const description = prompt('Describe the bug:');
+    if (!description) return;
+    const severity = prompt('Severity (Low, Medium, High):') || 'Medium';
+    betaFeedbackData.bugs.push({ description, severity });
+    renderBetaFeedbackContent();
+    saveBetaFeedback();
+}
+
+function removeBug(index) {
+    betaFeedbackData.bugs.splice(index, 1);
+    renderBetaFeedbackContent();
+    saveBetaFeedback();
+}
+
+function addSuggestion() {
+    const description = prompt('Describe your suggestion:');
+    if (!description) return;
+    const priority = prompt('Priority (Nice to have, Want, Need):') || 'Want';
+    betaFeedbackData.suggestions.push({ description, priority });
+    renderBetaFeedbackContent();
+    saveBetaFeedback();
+}
+
+function removeSuggestion(index) {
+    betaFeedbackData.suggestions.splice(index, 1);
+    renderBetaFeedbackContent();
+    saveBetaFeedback();
+}
+
+async function saveBetaFeedback() {
+    if (!useCloud || !currentUser) return;
+    const feedbackData = {
+        user_id: currentUser.id,
+        user_email: currentUser.email || localStorage.getItem('user_email'),
+        device_info: navigator.userAgent,
+        test_results: betaFeedbackData.test_results,
+        bugs: betaFeedbackData.bugs,
+        suggestions: betaFeedbackData.suggestions,
+        overall_rating: betaFeedbackData.overall_rating,
+        would_recommend: betaFeedbackData.would_recommend,
+        additional_comments: betaFeedbackData.additional_comments,
+        updated_at: new Date().toISOString()
+    };
+    try {
+        if (betaFeedbackId) {
+            await sb_client.from('beta_feedback').update(feedbackData).eq('id', betaFeedbackId);
+        } else {
+            const { data } = await sb_client.from('beta_feedback').insert(feedbackData).select().single();
+            if (data) betaFeedbackId = data.id;
+        }
+    } catch (e) {
+        console.error('Error saving beta feedback:', e);
+    }
+}
+
+async function submitBetaFeedback() {
+    await saveBetaFeedback();
+    const totalTests = BETA_TEST_SECTIONS.reduce((sum, s) => sum + s.items.length, 0);
+    const completedTests = Object.keys(betaFeedbackData.test_results).length;
+    closeBetaFeedback();
+    showToast(`✓ Feedback saved! (${completedTests}/${totalTests} tests completed)`);
+}
+
+
+        
         // ==================== CONFIGURATION ====================
         const SUPABASE_URL = 'https://eiigbmrjtwndanywrcqp.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpaWdibXJqdHduZGFueXdyY3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcyMDQyMzQsImV4cCI6MjA4Mjc4MDIzNH0.bHCDscs-aeSukDeXAf9kuRC12WBC3zSqIQia-8cIc3s';
@@ -3915,5 +4337,25 @@ ${script}
     }
 }
 </script>
+
+    <!-- Beta Feedback Modal -->
+<div id="betaFeedbackModal" class="modal">
+    <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-header">
+            <h2 class="modal-title">🧪 Beta Feedback</h2>
+            <button class="modal-close" onclick="closeBetaFeedback()">×</button>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #FE2C55, #FF6B8A); color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+            <p style="font-weight: 600; margin-bottom: 5px;">Thank you for beta testing SampleFlow!</p>
+            <p style="font-size: 0.85rem; opacity: 0.9;">Your feedback helps us improve. Progress is saved automatically.</p>
+        </div>
+        
+        <div id="betaFeedbackContent">
+            <!-- Content loaded dynamically -->
+        </div>
+    </div>
+</div>
+    
 </body>
 </html>
