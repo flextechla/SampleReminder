@@ -2633,23 +2633,23 @@ const BETA_TEST_SECTIONS = [
             { id: "sort_received", label: "Sort by Received" },
         ]
     },
-    {
-        id: "views",
-        title: "5. Views & Display",
-        items: [
-            { id: "view_list", label: "List view works" },
-            { id: "view_calendar", label: "Calendar view works (Basic+)" },
-            { id: "view_calendar_nav", label: "Calendar month navigation" },
-            { id: "view_calendar_details", label: "Calendar day details popup" },
-            { id: "view_condensed", label: "Condensed view toggle" },
-            { id: "view_expand_collapse", label: "Expand/Collapse cards" },
-            { id: "view_expand_all", label: "Expand All / Collapse All" },
-            { id: "view_dark_mode", label: "Dark mode displays correctly" },
-            { id: "view_compact", label: "Compact mode works" },
-            { id: "view_progress_bar", label: "Progress bar accurate" },
-            { id: "view_status_badges", label: "Status badges show correctly" },
-        ]
-    },
+   {
+    id: "views",
+    title: "5. Views & Display",
+    items: [
+        { id: "view_list", label: "List view works" },
+        { id: "view_calendar", label: "Calendar view works (Basic+)" },
+        { id: "view_calendar_nav", label: "Calendar month navigation" },
+        { id: "view_calendar_details", label: "Calendar day details popup" },
+        { id: "view_full", label: "Full view button works" },
+        { id: "view_compact_btn", label: "Compact view button works" },
+        { id: "view_card_tap", label: "Tap card to expand in Compact view" },
+        { id: "view_dark_mode", label: "Dark mode displays correctly" },
+        { id: "view_compact_setting", label: "Compact mode in Settings" },
+        { id: "view_progress_bar", label: "Progress bar accurate" },
+        { id: "view_status_badges", label: "Status badges show correctly" },
+    ]
+},
     {
         id: "notifications",
         title: "6. In-App Notifications",
@@ -2740,6 +2740,9 @@ const BETA_TEST_SECTIONS = [
     },
 ];
 
+        let betaFeedbackId = null;
+let openBetaSections = new Set();  // Add this line
+
 let betaFeedbackData = {
     test_results: {},
     bugs: [],
@@ -2815,10 +2818,10 @@ function renderBetaFeedbackContent() {
                     <span>${section.title}</span>
                     <span style="display: flex; align-items: center; gap: 10px;">
                         <span style="font-size: 0.8rem; color: var(--text-secondary);">${sectionCompleted}/${section.items.length}</span>
-                        <span id="beta-arrow-${section.id}">▼</span>
+                        <span id="beta-arrow-${section.id}">${openBetaSections.has(section.id) ? '▲' : '▼'}</span>
                     </span>
                 </div>
-                <div class="collapsible-content" id="beta-section-${section.id}">
+                <div class="collapsible-content ${openBetaSections.has(section.id) ? 'active' : ''}" id="beta-section-${section.id}">
                     <div style="padding: 10px 0;">
         `;
         section.items.forEach(item => {
@@ -2902,15 +2905,16 @@ function renderSuggestionsList() {
 function toggleBetaSection(sectionId) {
     const content = document.getElementById(`beta-section-${sectionId}`);
     const arrow = document.getElementById(`beta-arrow-${sectionId}`);
-    if (content.classList.contains('active')) {
+    if (openBetaSections.has(sectionId)) {
+        openBetaSections.delete(sectionId);
         content.classList.remove('active');
         arrow.textContent = '▼';
     } else {
+        openBetaSections.add(sectionId);
         content.classList.add('active');
         arrow.textContent = '▲';
     }
 }
-
 async function setBetaResult(itemId, result) {
     betaFeedbackData.test_results[itemId] = result;
     renderBetaFeedbackContent();
