@@ -1218,11 +1218,23 @@
             
             <input type="text" class="search-bar" id="searchBar" placeholder="Search brands or products..." oninput="handleSearch()">
             
-            <div class="view-toggle">
-    <button class="view-btn active" id="view-list" onclick="setView('list')">📋 List</button>
-    <button class="view-btn" id="view-calendar" onclick="setView('calendar')">📅 Calendar</button>
-    <button class="view-btn active" id="expandedViewBtn" onclick="setCardView('expanded')">📂 Full</button>
-    <button class="view-btn" id="condensedViewBtn" onclick="setCardView('condensed')">📄 Compact</button>
+            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;">
+    <button class="progress-toggle active" id="view-list" onclick="setView('list')" style="flex: 1; max-width: 80px;">
+        <span class="toggle-icon">📋</span>
+        <span class="toggle-label">List</span>
+    </button>
+    <button class="progress-toggle" id="view-calendar" onclick="setView('calendar')" style="flex: 1; max-width: 80px;">
+        <span class="toggle-icon">📅</span>
+        <span class="toggle-label">Calendar</span>
+    </button>
+    <button class="progress-toggle active" id="expandedViewBtn" onclick="setCardView('expanded')" style="flex: 1; max-width: 80px;">
+        <span class="toggle-icon">📂</span>
+        <span class="toggle-label">Full</span>
+    </button>
+    <button class="progress-toggle" id="condensedViewBtn" onclick="setCardView('condensed')" style="flex: 1; max-width: 80px;">
+        <span class="toggle-icon">📄</span>
+        <span class="toggle-label">Compact</span>
+    </button>
 </div>
 
 <div class="view-toggle" style="margin-top: 12px;">
@@ -4107,30 +4119,31 @@ async function submitBetaFeedback() {
         }
 
         // ==================== CALENDAR ====================
-        function setView(v) {
-            if (v === 'calendar' && userTier === 'free') {
-                showUpgradeModal(
-                    'Calendar View is a Basic feature!',
-                    'Upgrade to see all your deadlines in a monthly calendar view',
-                    'basic'
-                );
-                return;
-            }
-            
-            triggerHaptic();
-            currentView = v;
-            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('view-' + v).classList.add('active');
-            if (v === 'list') {
-                document.getElementById('listView').style.display = 'block';
-                document.getElementById('calendarView').style.display = 'none';
-            } else {
-                document.getElementById('listView').style.display = 'none';
-                document.getElementById('calendarView').style.display = 'block';
-                renderCalendar();
-            }
-        }
-
+       function setView(v) {
+    if (v === 'calendar' && userTier === 'free') {
+        showUpgradeModal(
+            'Calendar View is a Basic feature!',
+            'Upgrade to see all your deadlines in a monthly calendar view',
+            'basic'
+        );
+        return;
+    }
+    
+    triggerHaptic();
+    currentView = v;
+    
+    document.getElementById('view-list').classList.toggle('active', v === 'list');
+    document.getElementById('view-calendar').classList.toggle('active', v === 'calendar');
+    
+    if (v === 'list') {
+        document.getElementById('listView').style.display = 'block';
+        document.getElementById('calendarView').style.display = 'none';
+    } else {
+        document.getElementById('listView').style.display = 'none';
+        document.getElementById('calendarView').style.display = 'block';
+        renderCalendar();
+    }
+}
         function changeMonth(delta) {
             calendarDate.setMonth(calendarDate.getMonth() + delta);
             renderCalendar();
