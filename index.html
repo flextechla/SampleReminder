@@ -2309,7 +2309,7 @@ async function confirmDeleteAccount() {
     }
 }
 
-    function readyToFilm(id) {
+   function readyToFilm(id) {
     if (userTier !== 'pro') {
         showUpgradeModal(
             'Ready-to-Film is a Pro feature!',
@@ -2318,6 +2318,11 @@ async function confirmDeleteAccount() {
         );
         return;
     }
+    
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const returnInstructions = isIOS 
+        ? 'Swipe up from bottom → Tap SampleFlow'
+        : 'Tap ◻️ (recent apps) → Tap SampleFlow';
     
     const modal = document.createElement('div');
     modal.className = 'modal active';
@@ -2330,7 +2335,7 @@ async function confirmDeleteAccount() {
             
             <div style="background: #E8F5E9; padding: 15px; border-radius: 8px; margin-bottom: 12px; text-align: left; border-left: 4px solid var(--green);">
                 <p style="font-size: 0.95rem; font-weight: 700; margin-bottom: 5px;">✅ Fastest Way Back:</p>
-                <p style="font-size: 0.85rem; color: #333; margin: 0;">Swipe up from bottom → Tap SampleFlow</p>
+                <p style="font-size: 0.85rem; color: #333; margin: 0;">${returnInstructions}</p>
             </div>
             
             <div style="background: var(--bg); padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: left;">
